@@ -20,5 +20,14 @@ function createPackageConfig(barrelList: string[]): any {
 export const config: any = {
   packages: Object.assign({
     // Add your custom SystemJS packages here.
-  }, createPackageConfig(barrels))
+    angularfire2: {
+    defaultExtension: 'js',
+    main: 'angularfire2.js'
+    }
+  }, createPackageConfig(barrels)),
+  map: {
+    'moment': 'vendor/moment/moment.js',
+    'firebase': 'vendor/firebase/lib/firebase-web.js',
+    'angularfire2': 'vendor/angularfire2'
+  }
 };
