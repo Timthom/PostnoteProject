@@ -7,6 +7,7 @@ import {MenuComponent} from './menu.component';
 import {GroupComponent} from './group.component';
 import {DataService} from './data.service';
 import {OnInit} from 'angular2/core';
+import {CreatorComponent} from './creator.component';
 
 @Component({
   moduleId: __moduleName,
@@ -14,7 +15,7 @@ import {OnInit} from 'angular2/core';
   providers: [ROUTER_PROVIDERS, DataService],
   templateUrl: 'postnote2.component.html',
   styleUrls: ['postnote2.component.css'],
-  directives: [ROUTER_DIRECTIVES, NoteComponent, MenuComponent, GroupComponent],
+  directives: [ROUTER_DIRECTIVES, NoteComponent, MenuComponent, GroupComponent, CreatorComponent],
   pipes: []
 })
 @RouteConfig([
