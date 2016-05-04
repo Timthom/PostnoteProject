@@ -22,13 +22,8 @@ import {OnInit} from 'angular2/core';
 export class Postnote2App implements OnInit {
   constructor(private _dataService: DataService) {}
   
-  ngOnInit() {
+ ngOnInit() {
     
  }
   
-  defaultMeaning: number = 42;
-
-  meaningOfLife(meaning?: number) {
-    return `The meaning of life is ${meaning || this.defaultMeaning}`;
-  }
 }
