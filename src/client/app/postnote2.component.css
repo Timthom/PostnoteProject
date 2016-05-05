@@ -7,9 +7,23 @@ html, body  {
 	position: relative;
 	font-family: 'Open Sans', Verdana, Geneva, Arial, Helvetica, sans-serif;
 	background-color: #FFFFFF;
+
 }
 h1 {
     text-align: center;
     color: #999999;
     font-size: 5em;
+}
+creator{
+	float: left;
+}
+menu{
+	float: left;
+	padding: 0px;
+	margin: 0px;
+	
+}
+.container{
+	padding: 0px;
+	margin: 0px;
 }
