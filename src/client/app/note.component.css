@@ -1,0 +1,18 @@
+#container {
+   overflow: auto;
+   background-color: #EEF66C ;
+   box-shadow: 0px 2px 5px gray;
+   height: 300px;
+   width: 300px;
+   margin: 5;
+}
+input {
+    background-color:rgba(0, 0, 0, 0);
+    color:white;
+    border: none;
+    outline:none;
+    height:30px;
+    width: 250px;
+    transition:height 1s;
+    -webkit-transition:height 1s;
+}
