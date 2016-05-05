@@ -4,13 +4,15 @@ import {AngularFire} from 'angularfire2';
 import {FirebaseListObservable} from 'angularfire2';
 import {DataService} from './data.service';
 import {OnInit} from 'angular2/core';
+import {Note} from './note';
+import {NoteComponent} from './note.component';
 
 @Component({
   moduleId: __moduleName,
   selector: 'creator',
   templateUrl: 'creator.component.html',
   styleUrls: ['creator.component.css'],
-  directives: [ROUTER_DIRECTIVES],
+  directives: [ROUTER_DIRECTIVES, NoteComponent],
   pipes: []
 })
 @RouteConfig([
@@ -19,10 +21,9 @@ import {OnInit} from 'angular2/core';
 export class CreatorComponent {
     title: string = ""; 
     text: string = ""; 
-    //notes: Note[] = []; 
-    
-    notes: String[] = []; 
-    /*
+    note: Note;
+    notes: Note[]; 
+   
     constructor(private _dataService: DataService) {
         
     }
@@ -32,20 +33,23 @@ export class CreatorComponent {
     }
     
     getNotes() {
-        this.notes = this._dataService.getNotes();
+        this._dataService.getAllNotes().then(notes => this.notes = notes);
     }
-    */
     
     save() {
+        
+        this.note = new Note (this.title, this.text);
+        
+        //add to database
+        
         if(this.title !== ""){
             console.log(this.title);
             console.log(this.text);
-            this.notes.splice(0,0, this.title);
+            this.notes.splice(0,0, this.note);
             
             console.log(this.notes);
             this.title = ""; 
             this.text = "";
         }
     }
-    
 }

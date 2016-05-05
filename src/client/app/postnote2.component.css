@@ -16,6 +16,7 @@ h1 {
 }
 creator{
 	float: left;
+	width: 100%;
 }
 menu{
 	float: left;

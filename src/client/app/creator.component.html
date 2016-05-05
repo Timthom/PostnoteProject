@@ -5,8 +5,13 @@
     <button id="save" (click)="save()">+</button><br>
     <input type="text" [(ngModel)]="text" class="inputText" placeholder="Your notes">
     </div>
-    <div *ngFor="#note of notes">
-        <span class="creator">{{note}}</span>
-    </div>
+    <!--<div *ngFor="#note of notes">
+        <span class="creator">{{note.title}}<br>{{note.text}}</span>
+    </div> -->
+    
+    <note *ngFor="#note of notes">
+         <!-- <note *ngFor="#note of notes" [noteInNote]="note"> -->
+         
+    </note>
     
 </div>
