@@ -17,7 +17,7 @@ export class DataService {
     
     
     getAllNotes(){
-        return notes;
+        return Promise.resolve(notes);
     }
     
 }

@@ -21,9 +21,9 @@ menu{
 	float: left;
 	padding: 0px;
 	margin: 0px;
-	
 }
 .container{
+	width: 100%;
 	padding: 0px;
 	margin: 0px;
 }
