@@ -16,6 +16,23 @@ import {FirebaseListObservable} from 'angularfire2';
 ])
 
 export class CreatorComponent {
+    title: string = ""; 
+    text: string = ""; 
+    //notes: Note[] = []; 
     
+    notes: String[] = []; 
+    
+    save() {
+        if(this.title !== ""){
+            console.log(this.title);
+            console.log(this.text);
+            this.notes.splice(0,0, this.title);
+            
+            
+            console.log(this.notes);
+            this.title = ""; 
+            this.text = "";
+        }
+    }
     
 }

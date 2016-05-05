@@ -1,0 +1,12 @@
+#container {
+    height: 600px; 
+}
+
+.creator {
+    width: 200px;
+    height: 200px;
+    background-color: yellow;
+    float: left;
+    margin: 100px; 
+}
+

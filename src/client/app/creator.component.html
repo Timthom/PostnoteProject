@@ -1,3 +1,12 @@
-<h1>
-  Creator
-</h1>
+<div id="container">
+    
+    <div class="creator">
+    <input type="text" [(ngModel)]="title" class="inputTitle" placeholder="Title"> 
+    <button id="save" (click)="save()">+</button><br>
+    <input type="text" [(ngModel)]="text" class="inputText" placeholder="Your notes">
+    </div>
+    <div *ngFor="#note of notes">
+        <span class="creator">{{note}}</span>
+    </div>
+    
+</div>
