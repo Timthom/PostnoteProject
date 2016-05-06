@@ -7,14 +7,12 @@ Klassen kommer egentligen bara vara en array väl?
 */
 
 export var notes: Note[] = [
-  { "id": "11", "title": "title 11", "text": "text 11" },
-  { "id": "12", "title": "title 12", "text": "text 12" },
-  { "id": "13", "title": "title 13", "text": "text 13" },
-  { "id": "14", "title": "title 14", "text": "text 14" },
-  { "id": "15", "title": "title 15", "text": "text 15" },
-  { "id": "16", "title": "title 16", "text": "text 16" },
-  { "id": "17", "title": "title 17", "text": "text 17" },
-  { "id": "18", "title": "title 18", "text": "text 18" },
-  { "id": "19", "title": "title 19", "text": "text 19" },
-  { "id": "20", "title": "title 20", "text": "text 20" }
+  new Note("title11", "text11"),
+  new Note("title12", "text12"),
+  new Note("title13", "text13"),
+  new Note("title14", "text14"),
+  new Note("title15", "text15"),
+  new Note("title16", "text16"),
+  new Note("title17", "text17"),
+  new Note("title18", "text18"),
 ];
