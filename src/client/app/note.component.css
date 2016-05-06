@@ -4,9 +4,8 @@
   box-shadow: 0px 2px 5px gray;
   height: 300px;
   width: 300px;
-  margin: 5;
+  margin: 5px;
   display: table-cell;
-  
 }
 
 #container:hover #edit_button{
@@ -60,10 +59,10 @@
    resize: none;
    border: none;
    outline: none;
-   font
 }
 
 #text_field:focus {
    border: dashed 1px black;
    width: 278px;
 }
+

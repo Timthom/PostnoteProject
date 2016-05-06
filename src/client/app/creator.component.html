@@ -1,9 +1,9 @@
 <div id="container">
     
     <div class="creator">
-    <input type="text" [(ngModel)]="title" class="inputTitle" placeholder="Title"> 
-    <button id="save" (click)="save()">+</button><br>
-    <input type="text" [(ngModel)]="text" class="inputText" placeholder="Your notes">
+    <input type="text" [(ngModel)]="title" class="inputTitle" placeholder="enter title.."> 
+    <button id="saveButton" (click)="save()">+</button><br>
+    <textarea class="inputText" [(ngModel)]="text" placeholder="Your notes.." name="inputText" cols="30" rows="10"></textarea>
     </div>
     <!--<div *ngFor="#note of notes">
         <span class="creator">{{note.title}}<br>{{note.text}}</span>

@@ -1,9 +1,62 @@
 
 .creator {
-    width: 200px;
-    height: 200px;
-    background-color: yellow;
-    float: left;
-    margin: 10px; 
+  overflow: auto;
+  background-color: #EEF66C  ;
+  box-shadow: 0px 2px 5px gray;
+  height: 300px;
+  width: 300px;
+  margin-right: 5px;
+  margin-left: 5px;
+  display: table-cell; 
+  float: left;
+  
 }
 
+.inputTitle {
+   height: 28px;
+   width: 200px;
+   font-size: 25px;
+   margin-left: 50px;
+   margin-top: 5px;
+   text-align: center;
+   background-color: #EEF66C;
+   border: none;
+   outline: none;
+}
+
+.inputTitle:focus {
+  border: dashed 1px black;
+}
+
+.inputText {
+   width: 280px;
+   height: 230px;
+   margin: 10px;
+   padding: 5px;
+   background-color: #EEF66C;
+   overflow: scroll;
+   resize: none;
+   border: none;
+   outline: none;
+}
+
+.inputText:focus {
+   border: dashed 1px black;
+   width: 278px;
+}
+
+#saveButton {
+   float: right;
+   width: 25px;
+   height: 25px;
+   padding: 2px;
+   margin-right: 5px;
+   margin-top: 5px;
+   text-align: center;
+}
+
+note {
+    margin: 5px;
+    width: 300px;
+    height: 300px;
+}
