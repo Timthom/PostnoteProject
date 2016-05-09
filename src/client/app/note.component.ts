@@ -20,6 +20,6 @@ import {Note} from './note';
 
 export class NoteComponent {
    @Input()
-   noteInNote :Note; 
+   noteInNote; 
     
 }
