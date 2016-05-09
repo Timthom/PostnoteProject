@@ -1,4 +1,4 @@
-import {Component} from 'angular2/core';
+import {Component, Inject} from 'angular2/core';
 import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from 'angular2/router';
 import {AngularFire} from 'angularfire2';
 import {FirebaseListObservable} from 'angularfire2';
@@ -6,6 +6,7 @@ import {DataService} from './data.service';
 import {OnInit} from 'angular2/core';
 import {Note} from './note';
 import {NoteComponent} from './note.component';
+import {Postnote2App} from './postNote2.component';
 
 @Component({
   moduleId: __moduleName,
@@ -13,7 +14,8 @@ import {NoteComponent} from './note.component';
   templateUrl: 'creator.component.html',
   styleUrls: ['creator.component.css'],
   directives: [ROUTER_DIRECTIVES, NoteComponent],
-  pipes: []
+  pipes: [],
+  providers: []
 })
 @RouteConfig([
 ])
@@ -24,8 +26,9 @@ export class CreatorComponent {
     note: Note;
     notes: FirebaseListObservable<any[]>; 
    
-    constructor(private _dataService: DataService, private _af: AngularFire) {
+    constructor(private _af: AngularFire) {
         this.notes = this._af.list('/Notes');
+        
     }
     
     ngOnInit() {
@@ -34,6 +37,7 @@ export class CreatorComponent {
     
     getNotes() {
         //this._dataService.getAllNotes().then(notes => this.notes = notes);
+        ;
     }
     
     save() {
