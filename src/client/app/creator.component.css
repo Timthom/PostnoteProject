@@ -38,6 +38,8 @@
    resize: none;
    border: none;
    outline: none;
+   overflow: auto;
+
 }
 
 .inputText:focus {
