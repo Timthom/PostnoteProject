@@ -13,7 +13,7 @@ export class DataComponent {
     }
     
     getAllNotes() {
-        return this._notesList;
+      
     }
     
     //adds a new note(FirebaseListObservable with random id) to the database. 

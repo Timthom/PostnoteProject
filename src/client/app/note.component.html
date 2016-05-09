@@ -1,6 +1,6 @@
 <div id="container">
-  <input [(ngModel)]="noteInNote.Title" id="title" type="text" placeholder="Title" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Title'">
+  <input value="{{noteInNote.Title}}" id="title" type="text" placeholder="Title" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Title'">
   <input id="edit_button" type="image" src="icon_edit.png" alt="Submit" width="25" height="25">
   <br>
-  <textarea [(ngModel)]="noteInNote.Text" id="text_field" name="inputText" cols="30" rows="10"></textarea>
+  <textarea value="{{noteInNote.Text}}" id="text_field" name="inputText" cols="30" rows="10"></textarea>
 </div>
