@@ -9,9 +9,14 @@
         <span class="creator">{{note.title}}<br>{{note.text}}</span>
     </div> -->
     
-    <note *ngFor="#note of notes">
+
          <!-- <note *ngFor="#note of notes" [noteInNote]="note"> -->
-         
-    </note>
+    
+    <ul>
+        <li *ngFor="#note of notes | async">
+            {{ item | json }}
+        </li>
+            
+    </ul>
     
 </div>

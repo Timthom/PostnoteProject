@@ -22,10 +22,10 @@ export class CreatorComponent {
     title: string = ""; 
     text: string = ""; 
     note: Note;
-    notes: Note[]; 
+    notes: FirebaseListObservable<any[]>; 
    
-    constructor(private _dataService: DataService) {
-        
+    constructor(private _dataService: DataService, private _af: AngularFire) {
+        this.notes = this._af.list('/Notes');
     }
     
     ngOnInit() {
@@ -33,7 +33,7 @@ export class CreatorComponent {
     }
     
     getNotes() {
-        this._dataService.getAllNotes().then(notes => this.notes = notes);
+        //this._dataService.getAllNotes().then(notes => this.notes = notes);
     }
     
     save() {
@@ -45,9 +45,8 @@ export class CreatorComponent {
         if(this.title !== ""){
             console.log(this.title);
             console.log(this.text);
-            this.notes.splice(0,0, this.note);
-            
-            console.log(this.notes);
+            //this.notes.splice(0,0, this.note);
+           
             this.title = ""; 
             this.text = "";
         }

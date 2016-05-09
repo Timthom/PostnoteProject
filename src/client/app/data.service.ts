@@ -1,5 +1,7 @@
 import { Injectable } from 'angular2/core';
 import { notes } from './data-base';
+import { AngularFire, defaultFirebase, FirebaseRef, FirebaseListObservable } from 'angularFire2';
+import { Observable } from 'rxjs/Observable';
 
 /*
 Denna klassen kommer fungera som en länk mellan datan och componenterna...
@@ -15,6 +17,9 @@ ETC...
 @Injectable()
 export class DataService {
     
+    constructor (){
+        
+    }
     
     getAllNotes(){
         return Promise.resolve(notes);
