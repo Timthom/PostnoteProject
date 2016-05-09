@@ -2,6 +2,9 @@ import {Component} from 'angular2/core';
 import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from 'angular2/router';
 import {AngularFire} from 'angularfire2';
 import {FirebaseListObservable} from 'angularfire2';
+//added
+import {Input} from 'angular2/core';
+import {Note} from './note';
 
 @Component({
   moduleId: __moduleName,
@@ -16,6 +19,7 @@ import {FirebaseListObservable} from 'angularfire2';
 ])
 
 export class NoteComponent {
-    
+   @Input()
+   noteInNote :Note; 
     
 }

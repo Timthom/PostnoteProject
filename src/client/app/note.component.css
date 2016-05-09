@@ -59,6 +59,7 @@
    resize: none;
    border: none;
    outline: none;
+   overflow: auto;
 }
 
 #text_field:focus {
