@@ -19,32 +19,31 @@ export class DataService {
     
     constructor (private _ref: Firebase, private _notes: Firebase){
         this._ref = new Firebase('https://dazzling-fire-7472.firebaseio.com');
-        this._notes = this._ref.child('Notes')
+        this._notes = this._ref.child('notes')
     }
     
-    
      //adds a new note(FirebaseListObservable with random id) to the database. 
-    addNoteToNotes(title: string, text: string) {
+    public addNoteToNotes(title: string, text: string) {
         this._notes.push({Title: title, Text: text});
     }
     
     //updates the notes title with the chosen id...
-    updateNoteTitle(id: string, newTitle: string) {
-        this._notes.child(id).update({'Title': newTitle});
+    public updateNoteTitle(id: string, newTitle: string) {
+        this._notes.child(id).update({'title': newTitle});
     }
     
     //updates the notes text with the chosen id...
-    updateNoteText(id: string, newText: string) {
-        this._notes.child(id).update({'Text': newText});
+    public updateNoteText(id: string, newText: string) {
+        this._notes.child(id).update({'text': newText});
     }
     
     //deletes the note with the chosen id...
-    deleteNote(id: string) {
+    public deleteNote(id: string) {
         this._notes.child(id).remove();
     }
     
     //returns every Note based on category
-    getNotesInCategory(category: string) {
+    public getNotesInCategory(category: string) {
         
     }
     
