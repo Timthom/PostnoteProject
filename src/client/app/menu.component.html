@@ -19,18 +19,9 @@
       </form>
   
                 <br/><br/><br/><br/>
-              <ul class="sidebar-nav">
-                  <li class="sidebar-brand"><a href="#">Start Postnote </a></li>
-                    <h3>Components</h3>
-                    <h3>Components</h3>
-                    <h3>Components</h3>
-                    <h3>Components</h3>
-                    <h3>Components</h3>
-                    <h3>Components</h3>
-                    <h3>Components</h3>
-                    <h3>Components</h3>
-                    <h3>Components</h3>
-              </ul>
+                <ul *ngFor="#note of titles | async" (click)="jumpToNote(note)">
+                  {{note.title}}
+                </ul>
         </div>
     </div> 
 </nav>

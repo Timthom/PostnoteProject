@@ -2,6 +2,7 @@ import {Component} from 'angular2/core';
 import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from 'angular2/router';
 import {AngularFire} from 'angularfire2';
 import {FirebaseListObservable} from 'angularfire2';
+import {Note}from './note';
 
 
 @Component({
@@ -18,5 +19,13 @@ import {FirebaseListObservable} from 'angularfire2';
 
 export class MenuComponent {
     
-    
+    titles :FirebaseListObservable<Note[]>;
+
+    constructor(private _af:AngularFire){
+      this.titles = this._af.list('/notes');
+
+    }
+    jumpToNote(note:Note){
+      console.log("Loggar ut note ",note);
+    }
 }
