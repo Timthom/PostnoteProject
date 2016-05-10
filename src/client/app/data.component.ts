@@ -7,6 +7,7 @@ import { Observable } from 'rxjs/Observable';
 export class DataComponent {
         
     constructor(private _ref: Firebase, private _notes: Firebase, private _angularFire: AngularFire, private _notesList: FirebaseListObservable<any[]>) {
+        console.log("inne i datacomponent konstruktor");
         this._ref = new Firebase('https://dazzling-fire-7472.firebaseio.com');
         this._notes = this._ref.child('Notes')
         this._notesList = this._angularFire.list('/Notes');
