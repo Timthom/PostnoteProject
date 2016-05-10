@@ -11,11 +11,15 @@
   display: block;
 }
 
+#container:hover #delete_button{
+  display: block;
+}
+
 #title {
+  float: left;
    height: 28px;
-   width: 200px;
+   width: 150px;
    font-size: 25px;
-   margin-left: 50px;
    margin-top: 5px;
    text-align: center;
    background-color: #EEF66C;
@@ -31,6 +35,19 @@
   border: dashed 1px black;
 }
 
+#delete_button {
+  display: none;
+  float: left;
+   width: 25px;
+   height: 25px;
+   padding: 2px;
+   margin-left: 5px;
+   margin-top: 5px;
+   border: none;
+   outline: none;
+   background-color:rgba(0, 0, 0, 0);
+}
+
 #edit_button {
    display: none;
    float: right;
@@ -40,7 +57,7 @@
    margin-right: 5px;
    margin-top: 5px;
    border: none;
-   outline:none;
+   outline: none;
    background-color:rgba(0, 0, 0, 0);
 }
 
