@@ -19,44 +19,42 @@ import {Note} from './note';
 @RouteConfig([
 ])
 
-export class NoteComponent {
-  
-  constructor(private _ds: DataService) {
-    console.log('in constructor');  
-  }
-  
+export class NoteComponent{
    @Input()
    noteInNote; 
   
-  //title: string = this.noteInNote.title;
-  //text: string = this.noteInNote.text;
+  @Input()
+  title;
+  
+  @Input()
+  text;
+  
+  
+  constructor(private _ds: DataService) {
+    console.log('in constructor'); 
+  }
+
+
+  
+
   isEditable: boolean = false;
     
     editClick() {
-      console.log(this.isEditable);
-      var titleField = document.getElementById('title');
-      var textField = document.getElementById('text_field');
+      console.log(this.isEditable); 
       
       if(this.isEditable) {
-        console.log('updating');
-        titleField.style.border = "";
-        textField.style.border = "";
         
-        console.log('title text: '+ titleField.innerText);
-        console.log('text text: '+ textField.innerText);
-        //this._ds.updateNoteTitle(this.noteInNote.$key, titleField.innerHTML);
-        //this._ds.updateNoteText(this.noteInNote.$key, textField.innerHTML);
+        this._ds.updateNoteTitle(this.noteInNote.$key, this.title);
+        this._ds.updateNoteText(this.noteInNote.$key, this.text);
       } else {
         console.log('notdating');
-        titleField.style.border = "dashed 1px black";
-        textField.style.border = "dashed 1px black";
-        textField.focus();
+
       }
       this.isEditable = !this.isEditable;  
-      var x = document.activeElement.tagName;
-      console.log(x);
-      console.log('key: ' + this.noteInNote.$key);
-      console.log(this.noteInNote.title);
+    }
+    
+    deleteClick() {
+      this._ds.deleteNote(this.noteInNote.$key);
     }
     
 }
