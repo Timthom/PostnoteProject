@@ -16,10 +16,11 @@
 }
 
 #title {
-  float: left;
+   display: block;
    height: 28px;
-   width: 150px;
+   width: 50%;
    font-size: 25px;
+   margin: auto;
    margin-top: 5px;
    text-align: center;
    background-color: #EEF66C;
@@ -32,29 +33,19 @@
 }
 
 #delete_button {
-  display: none;
-  float: left;
-   width: 25px;
-   height: 25px;
-   padding: 2px;
-   margin-left: 5px;
-   margin-top: 5px;
-   border: none;
-   outline: none;
-   background-color:rgba(0, 0, 0, 0);
+    display: none;
+    float: left;
+    margin-left: 6px;
+    margin-top: 6px;
+    outline: none;
 }
 
 #edit_button {
    display: none;
    float: right;
-   width: 25px;
-   height: 25px;
-   padding: 2px;
-   margin-right: 5px;
-   margin-top: 5px;
-   border: none;
+   margin-right: 6px;
+   margin-top: 6px;
    outline: none;
-   background-color:rgba(0, 0, 0, 0);
 }
 
 #edit_button:hover {

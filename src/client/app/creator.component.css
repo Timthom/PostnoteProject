@@ -20,12 +20,18 @@
    background-color: #EEF66C;
    border: none;
    outline: none;
+   border: dashed 1px black;
 }
 
+.inputTitle::-webkit-input-placeholder {
+    color: black;
+}
+
+/*
 .inputTitle:focus {
   border: dashed 1px black;
 }
-
+*/
 .inputText {
    width: 280px;
    height: 230px;
@@ -37,22 +43,25 @@
    border: none;
    outline: none;
    overflow: auto;
-
+   border: dashed 1px black;
 }
 
+.inputText::-webkit-input-placeholder {
+    color: black;
+}
+
+/*
 .inputText:focus {
    border: dashed 1px black;
    width: 278px;
 }
+*/
 
 #saveButton {
    float: right;
-   width: 25px;
-   height: 25px;
-   padding: 2px;
-   margin-right: 5px;
-   margin-top: 5px;
-   text-align: center;
+   margin-right: 13px;
+   margin-top: 7px;
+   outline: none;
 }
 
 note {
