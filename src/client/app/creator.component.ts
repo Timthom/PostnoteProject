@@ -28,7 +28,6 @@ export class CreatorComponent {
    
     constructor(private _af: AngularFire) {
         this.notes = this._af.list('/Notes');
-        
     }
     
     ngOnInit() {
