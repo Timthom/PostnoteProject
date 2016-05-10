@@ -19,13 +19,18 @@ import {Note}from './note';
 
 export class MenuComponent {
     
-    titles :FirebaseListObservable<Note[]>;
+    titles :FirebaseListObservable<any[]>;
 
     constructor(private _af:AngularFire){
       this.titles = this._af.list('/notes');
 
     }
-    jumpToNote(note:Note){
-      console.log("Loggar ut note ",note);
+    jumpToNote(note:string){
+      
+      var element = document.getElementById(note);
+      
+      element.scrollIntoView(true);
+      
+      console.log("Loggar ut note ", element);
     }
 }
