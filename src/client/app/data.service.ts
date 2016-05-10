@@ -16,15 +16,23 @@ ETC...
 
 @Injectable()
 export class DataService {
+    _notes: Firebase;
     
-    constructor (private _ref: Firebase, private _notes: Firebase){
-        this._ref = new Firebase('https://dazzling-fire-7472.firebaseio.com');
-        this._notes = this._ref.child('notes')
+    constructor (){
+        var _ref: Firebase = new Firebase('https://dazzling-fire-7472.firebaseio.com');
+        this._notes = _ref.child('notes');
+        console.log("inne i dataservice konstruktor");
+    }
+    
+     getAllNotes() {
+      console.log("getAllNotes i DataService");
+      return Promise.resolve(this._notes);
     }
     
      //adds a new note(FirebaseListObservable with random id) to the database. 
     public addNoteToNotes(title: string, text: string) {
-        this._notes.push({Title: title, Text: text});
+        console.log("inne i addnotetonotes");
+        this._notes.push({'title': title, 'text': text});
     }
     
     //updates the notes title with the chosen id...

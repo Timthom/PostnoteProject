@@ -21,10 +21,12 @@ import {CreatorComponent} from './creator.component';
 @RouteConfig([
 ])
 export class Postnote2App implements OnInit {
-  constructor() {}
+  constructor() {
+    console.log("inne i postnote2app konstruktor");
+  }
   
  ngOnInit() {
-    
+    console.log("inne i onInit i postnoteapp2");
  }
   
 }
