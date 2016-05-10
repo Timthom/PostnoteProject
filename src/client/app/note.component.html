@@ -1,6 +1,6 @@
 <div id="container">
-  <input value="{{noteInNote.title}}" id="title" type="text" placeholder="Title" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Title'">
-  <input id="edit_button" type="image" src="icon_edit.png" alt="Submit" width="25" height="25">
+  <input value="{{noteInNote.title}}" id="title"  type="text" placeholder="Title" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Title'">
+  <input id="edit_button" type="image" src="icon_edit.png" alt="Submit" width="25" height="25" (click)="editClick()">
   <br>
-  <textarea value="{{noteInNote.text}}" id="text_field" name="inputText" cols="30" rows="10"></textarea>
+  <textarea value="{{noteInNote.text}}" id="text_field"  name="inputText" cols="30" rows="10"></textarea>
 </div>
