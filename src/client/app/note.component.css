@@ -31,10 +31,6 @@
     color: black;
 }
 
-#title:focus {
-  border: dashed 1px black;
-}
-
 #delete_button {
   display: none;
   float: left;
@@ -76,10 +72,5 @@
    border: none;
    outline: none;
    overflow: auto;
-}
-
-#text_field:focus {
-   border: dashed 1px black;
-   width: 278px;
 }
 

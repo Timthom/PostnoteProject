@@ -34,23 +34,27 @@ export class NoteComponent{
     console.log('in constructor'); 
   }
 
-
-  
-
   isEditable: boolean = false;
     
     editClick() {
-      console.log(this.isEditable); 
+      
+      var titleField = document.getElementById('title');
+      var textField = document.getElementById('text_field');
       
       if(this.isEditable) {
-        
+        console.log('updating');
+        titleField.style.border = "";
+        textField.style.border = "";
         this._ds.updateNoteTitle(this.noteInNote.$key, this.title);
         this._ds.updateNoteText(this.noteInNote.$key, this.text);
       } else {
         console.log('notdating');
-
+        titleField.style.border = "dashed 1px black";
+        textField.style.border = "dashed 1px black";
+        textField.style.width = "278px";
       }
       this.isEditable = !this.isEditable;  
+      
     }
     
     deleteClick() {
