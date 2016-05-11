@@ -8,20 +8,22 @@
 }
 
 #container:hover #edit_button{
-  display: block;
+  visibility: visible;
 }
 
 #container:hover #delete_button{
-  display: block;
+  visibility: visible;
 }
 
 #title {
    display: block;
    height: 28px;
-   width: 50%;
+   width: 200px;
    font-size: 25px;
-   margin: auto;
+   float: left;
    margin-top: 5px;
+   margin-left: 19px;
+   margin-right: 19px;
    text-align: center;
    background-color: #EEF66C;
    border: none;
@@ -33,15 +35,20 @@
 }
 
 #delete_button {
-    display: none;
+    visibility: hidden;
     float: left;
     margin-left: 6px;
     margin-top: 6px;
     outline: none;
 }
 
+#delete_button:hover {
+   box-shadow: 0px 1px 5px #5A5A5A;
+   background-color: #EFF58A;
+}
+
 #edit_button {
-   display: none;
+   visibility: hidden;
    float: right;
    margin-right: 6px;
    margin-top: 6px;
@@ -49,7 +56,8 @@
 }
 
 #edit_button:hover {
-   background-color: gray;
+   box-shadow: 0px 1px 5px #5A5A5A; 
+   background-color: #EFF58A;
 }
 
 #text_field {
