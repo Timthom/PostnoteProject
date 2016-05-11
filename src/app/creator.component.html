@@ -5,13 +5,13 @@
     <button id="saveButton" (click)="save()">+</button><br>
     <textarea class="inputText" [(ngModel)]="text" placeholder="Your notes.." name="inputText" cols="30" rows="10"></textarea>
     </div>
-    <!--<div *ngFor="#note of notes">
+    <!--<div *ngFor="let note of notes">
         <span class="creator">{{note.title}}<br>{{note.text}}</span>
     </div> -->
 
     <!-- Draws all notes in the notes array, assigning the Note-object to the Note components noteInNote property-->
 
-    <note class="col-xs-4" *ngFor="#note of notes | async" [noteInNote]="note" [text]="note.text" [title]="note.title" id="{{note.$key}}">
+    <note class="col-xs-4" *ngFor="let note of notes | async" [noteInNote]="note" [text]="note.text" [title]="note.title" id="{{note.$key}}">
     </note>
 
 </div>

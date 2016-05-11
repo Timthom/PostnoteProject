@@ -1,6 +1,6 @@
-import { Injectable } from 'angular2/core';
+import { Injectable, Inject } from '@angular/core';
 import { Note } from './note';
-import { AngularFire, defaultFirebase, FirebaseRef, FirebaseListObservable } from 'angularFire2';
+import { AngularFire, defaultFirebase, FirebaseRef, FirebaseListObservable } from 'angularfire2';
 import { Observable } from 'rxjs/Observable';
 
 /*
@@ -18,8 +18,7 @@ ETC...
 export class DataService {
     _notes: Firebase;
     
-    constructor (){
-        var _ref: Firebase = new Firebase('https://dazzling-fire-7472.firebaseio.com');
+    constructor (@Inject(FirebaseRef) private _ref: Firebase){
         this._notes = _ref.child('notes');
         console.log("inne i dataservice konstruktor");
     }

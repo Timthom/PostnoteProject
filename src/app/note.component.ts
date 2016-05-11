@@ -1,14 +1,14 @@
-import {Component} from 'angular2/core';
-import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from 'angular2/router';
+import {Component} from '@angular/core';
+import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from '@angular/router-deprecated';
 import {AngularFire} from 'angularfire2';
 import {FirebaseListObservable} from 'angularfire2';
 import {DataService} from './data.service';
 //added
-import {Input} from 'angular2/core';
+import {Input} from '@angular/core';
 import {Note} from './note';
 
 @Component({
-  moduleId: __moduleName,
+  moduleId: module.id,
   selector: 'note',
   providers: [ROUTER_PROVIDERS],
   templateUrl: 'note.component.html',
@@ -29,9 +29,10 @@ export class NoteComponent{
   @Input()
   text;
   
-  
   constructor(private _ds: DataService) {
     console.log('in constructor'); 
+    //varför undefined här?...
+    console.log(this.noteInNote);
   }
 
   isEditable: boolean = false;
