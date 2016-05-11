@@ -16,3 +16,70 @@ input {
     transition:height 1s;
     -webkit-transition:height 1s;
 }
+
+#container:hover #edit_button{
+  display: block;
+}
+
+#container:hover #delete_button{
+  display: block;
+}
+
+#title {
+  float: left;
+   height: 28px;
+   width: 150px;
+   font-size: 25px;
+   margin-top: 5px;
+   text-align: center;
+   background-color: #EEF66C;
+   border: none;
+   outline: none;
+}
+
+#title::-webkit-input-placeholder {
+    color: black;
+}
+
+#delete_button {
+  display: none;
+  float: left;
+   width: 25px;
+   height: 25px;
+   padding: 2px;
+   margin-left: 5px;
+   margin-top: 5px;
+   border: none;
+   outline: none;
+   background-color:rgba(0, 0, 0, 0);
+}
+
+#edit_button {
+   display: none;
+   float: right;
+   width: 25px;
+   height: 25px;
+   padding: 2px;
+   margin-right: 5px;
+   margin-top: 5px;
+   border: none;
+   outline: none;
+   background-color:rgba(0, 0, 0, 0);
+}
+
+#edit_button:hover {
+   background-color: gray;
+}
+
+#text_field {
+   width: 280px;
+   height: 230px;
+   margin: 10px;
+   padding: 5px;
+   background-color: #EEF66C;
+   overflow: scroll;
+   resize: none;
+   border: none;
+   outline: none;
+   overflow: auto;
+}

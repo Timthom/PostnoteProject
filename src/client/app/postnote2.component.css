@@ -7,9 +7,37 @@ html, body  {
 	position: relative;
 	font-family: 'Open Sans', Verdana, Geneva, Arial, Helvetica, sans-serif;
 	background-color: #FFFFFF;
+
 }
 h1 {
     text-align: center;
     color: #999999;
     font-size: 5em;
+}
+creator{
+	margin-top: 15px;
+	float: left;
+	width: 100%;
+	margin-top: 10px;
+}
+menu{
+	width: 100%;
+	float: left;
+	padding: 0px;
+	margin: 0px;
+}
+.container{
+	width: 100%;
+	padding: 0px;
+	margin: 0px;
+}
+
+.col-xs-9 {
+	padding-right: 10px;
+}
+
+.col-xs-3 {
+	padding-left: 5px;
+	height: 100%;
+>>>>>>> master
 }

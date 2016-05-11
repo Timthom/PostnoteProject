@@ -1,4 +1,7 @@
 <div id="container">
-<input type="text" placeholder="Text here!"><br>
-<input type="text" placeholder="Text here!">
+  <input id="delete_button" type="image" src="icon_delete.png" alt="Submit" width="25" height="25" (click)="deleteClick()">
+  <input  [(ngModel)]="title" id="title">
+  <input id="edit_button" type="image" src="icon_edit.png" alt="Submit" width="25" height="25" (click)="editClick()">
+  <br>
+  <textarea [(ngModel)]="text" id="text_field"></textarea>
 </div>

@@ -12,7 +12,7 @@ import {CreatorComponent} from './creator.component';
 @Component({
   moduleId: __moduleName,
   selector: 'postnote2-app',
-  providers: [ROUTER_PROVIDERS, DataService],
+  providers: [ROUTER_PROVIDERS, DataService, AngularFire],
   templateUrl: 'postnote2.component.html',
   styleUrls: ['postnote2.component.css'],
   directives: [ROUTER_DIRECTIVES, NoteComponent, MenuComponent, GroupComponent, CreatorComponent],
@@ -21,10 +21,12 @@ import {CreatorComponent} from './creator.component';
 @RouteConfig([
 ])
 export class Postnote2App implements OnInit {
-  constructor(private _dataService: DataService) {}
+  constructor() {
+    console.log("inne i postnote2app konstruktor");
+  }
   
  ngOnInit() {
-    
+    console.log("inne i onInit i postnoteapp2");
  }
   
 }
