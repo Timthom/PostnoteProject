@@ -1,0 +1,27 @@
+label {
+    display: block;
+}
+
+input {
+    width: 200px;
+    font-size: inherit;
+}
+
+button {
+    position: relative;
+    left: 325px;
+    margin: 10px 0;
+    font-size: inherit;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #eee;
+    cursor: pointer;
+}
+
+button:not([disabled]):hover {
+    background-color: #bbb;
+}
+
+.validation-error {
+    color: red;
+}

@@ -1,25 +1,21 @@
-
-
+<div>
+  <a [routerLink]="['AllNotes']">Post it lappar</a> 
+  <a [routerLink]="['CreateUserAccount']">Skapa konto</a>
+  <a [routerLink]="['Login']">Logga in</a>   
+</div>
 <div class="container">
   <div class="row">
-    <div class="col-xs-3">
+    <div class="col-xs-3">  
       <menu></menu>
     </div>
-    <div class="col-xs-9">
-      <div class="row">
-        <creator></creator>
-      </div>
-      
-      <br><br><br>
-      
-      <div class="row">
-         <group></group>
-      </div>
+      <router-outlet></router-outlet>
     </div>
-  </div>
 </div>
 
 
 
 
-<router-outlet></router-outlet>
+
+
+
+
