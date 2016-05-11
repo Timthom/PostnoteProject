@@ -21,6 +21,8 @@ import {CreatorComponent} from './creator.component';
 @RouteConfig([
 ])
 export class Postnote2App implements OnInit {
+  showSideBar:boolean = true;
+  
   constructor() {
     console.log("inne i postnote2app konstruktor");
   }
@@ -28,5 +30,8 @@ export class Postnote2App implements OnInit {
  ngOnInit() {
     console.log("inne i onInit i postnoteapp2");
  }
-  
+ 
+  toogleSideBar(){
+    console.log("Testar våran button");
+  }
 }

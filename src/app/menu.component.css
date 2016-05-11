@@ -23,7 +23,9 @@ ul :hover{
    bottom: 0px;
    color: white;
 }
-
+#sidebar_menu{
+    width: 100%;
+}
 
 
 
