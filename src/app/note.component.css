@@ -16,24 +16,34 @@
 }
 
 .delete_button {
-  visibility: hidden;
+   visibility: hidden;
    float: left;
    margin-left: 6px;
    margin-top: 6px;
    outline: none;
+   transition: box-shadow 100ms ease-in-out, background-color 100ms ease-in-out;
+}
+
+.delete_button:hover {
+  box-shadow: 0px 1px 5px #5A5A5A ;
+  background-color: #F44336 ;
 }
 
 .edit_button {
-   visibility: hidden;
+  visibility: hidden;
+  background-image: url('icon_edit.png');
+  background-size: 25px 25px;
+  height: 25px;
+  width: 25px;
   float: right;
   margin-right: 6px;
   margin-top: 6px;
-  outline: none;
+  transition: box-shadow 100ms ease-in-out, background-color 100ms ease-in-out;
 }
 
 .edit_button:hover {
-   box-shadow: 0px 1px 5px #5A5A5A ; 
-  background-color: #EFF58A ;
+  box-shadow: 0px 1px 5px #5A5A5A ; 
+  background-color: #4CAF50;
 }
 
 .title {
@@ -42,6 +52,7 @@
   width: 200px;
   font-size: 25px;
   float: left;
+  padding-bottom: 4px;
   margin-top: 5px;
   margin-left: 19px;
   margin-right: 19px;
@@ -69,11 +80,17 @@
   
 }
 
-.delete_button:hover {
-  box-shadow: 0px 1px 5px #5A5A5A ;
-  background-color: #EFF58A ;
+.selectedNoteTitle {
+  border: dashed 1px black;
 }
 
-.selectedNote {
+.selectedNoteText {
   border: dashed 1px black;
+  padding-top: 4px;
+  padding-left: 4px;
+}
+
+.savable {
+  background-image: url('icon_save.png');
+  visibility: visible;
 }

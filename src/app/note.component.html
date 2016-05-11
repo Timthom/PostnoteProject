@@ -1,7 +1,7 @@
 <div class="noteContainer">
   <input class="delete_button" type="image" src="icon_delete.png" alt="Submit" width="25" height="25" (click)="deleteClick()">
-  <input [attr.disabled]="enabledIfNull" [class.selectedNote]="isEditable" [(ngModel)]="title" class="title">
-  <input class="edit_button" type="image" src="icon_edit.png" alt="Submit" width="25" height="25" (click)="editClick()">
+  <input [attr.disabled]="enabledIfNull" [class.selectedNoteTitle]="isEditable" [(ngModel)]="title" class="title">
+  <div class="edit_button" [class.savable]="isEditable" (click)="editClick()"></div>
   <br>
-  <textarea [attr.disabled]="enabledIfNull" [class.selectedNote]="isEditable" [(ngModel)]="text" class="text_field"></textarea>
+  <textarea [attr.disabled]="enabledIfNull" [class.selectedNoteText]="isEditable" [(ngModel)]="text" class="text_field"></textarea>
 </div>

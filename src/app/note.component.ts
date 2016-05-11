@@ -20,8 +20,8 @@ import {Note} from './note';
 ])
 
 export class NoteComponent{
-   @Input()
-   noteInNote; 
+  @Input()
+  noteInNote; 
   
   @Input()
   title;
