@@ -1,4 +1,4 @@
-#container {
+.noteContainer {
    overflow: auto;
    background-color: #EEF66C ;
    box-shadow: 0px 2px 5px gray;
@@ -6,42 +6,16 @@
    width: 300px;
    display: table-cell;
 }
-input {
-    background-color:rgba(0, 0, 0, 0);
-    color:white;
-    border: none;
-    outline:none;
-    height:30px;
-    width: 250px;
-    transition:height 1s;
-    -webkit-transition:height 1s;
-}
 
-#container:hover #edit_button{
+.noteContainer:hover .edit_button{
   display: block;
 }
 
-#container:hover #delete_button{
+.noteContainer:hover .delete_button{
   display: block;
 }
 
-#title {
-  float: left;
-   height: 28px;
-   width: 150px;
-   font-size: 25px;
-   margin-top: 5px;
-   text-align: center;
-   background-color: #EEF66C;
-   border: none;
-   outline: none;
-}
-
-#title::-webkit-input-placeholder {
-    color: black;
-}
-
-#delete_button {
+.delete_button {
   display: none;
   float: left;
    width: 25px;
@@ -54,7 +28,7 @@ input {
    background-color:rgba(0, 0, 0, 0);
 }
 
-#edit_button {
+.edit_button {
    display: none;
    float: right;
    width: 25px;
@@ -67,11 +41,28 @@ input {
    background-color:rgba(0, 0, 0, 0);
 }
 
-#edit_button:hover {
+.edit_button:hover {
    background-color: gray;
 }
 
-#text_field {
+.title {
+  float: left;
+   height: 28px;
+   width: 150px;
+   font-size: 25px;
+   margin-top: 5px;
+   text-align: center;
+   background-color: #EEF66C;
+   border: none;
+   outline: none;
+   pointer-events: none;
+}
+
+.title::-webkit-input-placeholder {
+    color: black;
+}
+
+.text_field {
    width: 280px;
    height: 230px;
    margin: 10px;
@@ -82,4 +73,5 @@ input {
    border: none;
    outline: none;
    overflow: auto;
+   pointer-events: none;
 }

@@ -29,22 +29,26 @@ export class NoteComponent{
   @Input()
   text;
   
-  
   constructor(private _ds: DataService) {
-    console.log('in constructor'); 
+    console.log('in constructor');
   }
 
   isEditable: boolean = false;
     
     editClick() {
       
-      var titleField = document.getElementById('title');
-      var textField = document.getElementById('text_field');
+      var titleField = document.getElementsByClassName[0]('title');
+      var textField = document.getElementsByClassName[0]('text_field');
+      
+      console.log(titleField);
+      console.log(textField);
       
       if(this.isEditable) {
         console.log('updating');
         titleField.style.border = "";
         textField.style.border = "";
+        titleField.style.pointerEvents = "none";
+        textField.style.pointerEvents = "none";
         this._ds.updateNoteTitle(this.noteInNote.$key, this.title);
         this._ds.updateNoteText(this.noteInNote.$key, this.text);
       } else {
@@ -52,6 +56,8 @@ export class NoteComponent{
         titleField.style.border = "dashed 1px black";
         textField.style.border = "dashed 1px black";
         textField.style.width = "278px";
+        titleField.style.pointerEvents = "auto";
+        textField.style.pointerEvents = "auto";
       }
       this.isEditable = !this.isEditable;  
       
