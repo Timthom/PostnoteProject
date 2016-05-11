@@ -16,6 +16,5 @@ import {FirebaseListObservable} from 'angularfire2';
 ])
 
 export class GroupComponent {
-    
-    
+
 }

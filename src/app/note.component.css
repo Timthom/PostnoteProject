@@ -1,66 +1,64 @@
-#container {
-  overflow: auto;
-  background-color: #EEF66C  ;
-  box-shadow: 0px 2px 5px gray;
-  height: 300px;
-  width: 300px;
-  display: table-cell;
+.noteContainer {
+   overflow: auto;
+   background-color: #EEF66C ;
+   box-shadow: 0px 2px 5px gray;
+   height: 300px;
+   width: 300px;
+   display: table-cell;
 }
 
-#container:hover #edit_button{
-  visibility: visible;
+.noteContainer:hover .edit_button{
+  display: block;
 }
 
-#container:hover #delete_button{
-  visibility: visible;
+.noteContainer:hover .delete_button{
+  display: block;
 }
 
-#title {
-   display: block;
-   height: 28px;
-   width: 200px;
-   font-size: 25px;
-   float: left;
+.delete_button {
+  display: none;
+  float: left;
+   width: 25px;
+   height: 25px;
+   padding: 2px;
+   margin-left: 5px;
    margin-top: 5px;
-   margin-left: 19px;
-   margin-right: 19px;
-   text-align: center;
-   background-color: #EEF66C;
    border: none;
    outline: none;
+   background-color:rgba(0, 0, 0, 0);
 }
 
-#title::-webkit-input-placeholder {
-    color: black;
-}
-
-#delete_button {
-    visibility: hidden;
-    float: left;
-    margin-left: 6px;
-    margin-top: 6px;
-    outline: none;
-}
-
-#delete_button:hover {
-   box-shadow: 0px 1px 5px #5A5A5A;
-   background-color: #EFF58A;
-}
-
-#edit_button {
-   visibility: hidden;
+.edit_button {
+   display: none;
    float: right;
    margin-right: 6px;
    margin-top: 6px;
    outline: none;
 }
 
-#edit_button:hover {
-   box-shadow: 0px 1px 5px #5A5A5A; 
-   background-color: #EFF58A;
+
+.edit_button:hover {
+   background-color: gray;
 }
 
-#text_field {
+.title {
+  float: left;
+   height: 28px;
+   width: 150px;
+   font-size: 25px;
+   margin-top: 5px;
+   text-align: center;
+   background-color: #EEF66C;
+   border: none;
+   outline: none;
+   pointer-events: none;
+}
+
+.title::-webkit-input-placeholder {
+    color: black;
+}
+
+.text_field {
    width: 280px;
    height: 230px;
    margin: 10px;
@@ -71,5 +69,5 @@
    border: none;
    outline: none;
    overflow: auto;
+   pointer-events: none;
 }
-
