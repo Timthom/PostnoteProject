@@ -1,7 +1,32 @@
 .navbar {
     border-radius: 0px;
+    position: fixed;
+    display: block;
+    height: 100%; 
 }
 ul{
     color: white;
 }
+ul :hover{
+    background-color: darkgray;
+}
+.navbar-brand{
+    padding-left: 40%;
+}
+#menu-toggle{
+    color: white;
+}
+.footer{
+   position: fixed;
+   text-align: center;
+   left: 20px;
+   bottom: 0px;
+   color: white;
+}
+
+
+
+
+
+
 
