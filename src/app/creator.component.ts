@@ -1,4 +1,4 @@
-import {Component, Inject} from '@angular/core';
+import {Component, Inject, Pipe} from '@angular/core';
 import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from '@angular/router-deprecated';
 import {AngularFire} from 'angularfire2';
 import {FirebaseListObservable} from 'angularfire2';
@@ -8,8 +8,9 @@ import {Note} from './note';
 import {NoteComponent} from './note.component';
 import {Postnote2App} from './postNote2.component';
 import { Injectable } from '@angular/core';
-import { defaultFirebase, FirebaseRef } from 'angularFire2';
+import { defaultFirebase, FirebaseRef } from 'angularfire2';
 import { Observable } from 'rxjs/Observable';
+import { Reverse } from './reverse.pipe';
 
 @Component({
   moduleId: module.id,
@@ -17,7 +18,7 @@ import { Observable } from 'rxjs/Observable';
   templateUrl: 'creator.component.html',
   styleUrls: ['creator.component.css'],
   directives: [ROUTER_DIRECTIVES, NoteComponent],
-  pipes: [],
+  pipes: [Reverse],
   providers: []
 })
 @RouteConfig([
@@ -26,30 +27,20 @@ export class CreatorComponent {
     title: string = ""; 
     text: string = ""; 
     note: Note;
-    notes: FirebaseListObservable<Note[]>; 
+    notes: FirebaseListObservable<any[]>; 
     
     constructor(private _af: AngularFire, private _ds: DataService) {
         console.log("inne i creatorcomponents konstruktor");
-
-        this.notes = this._af.list('/notes', {
-            query: {
-             orderByChild: 'l'   
-            }
-        });
-        console.log(this.notes);
-        //console.log(this.notes.count);
     }
     
     ngOnInit() {
         console.log("inne i OnInit i creatorcomponent");
         this.getNotes();
-        console.log(this.notes);
     }
     
     getNotes() {
         console.log("inne i getNotes i creatorcomponent");
-        //this._dataService.getAllNotes().then(notes => this.notes = notes);
-        console.log(this.notes);
+        this._ds.getAllNotes().then(notes => this.notes = notes);
     }
     
     save() {

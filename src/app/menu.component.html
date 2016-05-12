@@ -20,7 +20,7 @@
           <button type="submit" class="btn btn-default btn-sm">Submit</button>
         </form>
         <br/><br/><br/><br/>
-        <ul *ngFor="#note of titles | async" (click)="jumpToNote(note.$key)">
+        <ul *ngFor="let note of titles | async" (click)="jumpToNote(note.$key)">
           {{note.title}}
         </ul>
         
