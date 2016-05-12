@@ -7,13 +7,11 @@
       <div class="row">
         <creator></creator>
       </div>
-      
-      <br>
-      
-      <div class="row">
-         <group></group>
+
+      <group class="row" *ngFor="let group of allGroups | async" [group]="group" [groupName]="group.name">
+           
+      </group>
       </div>
-    </div>
   </div>
 </div>
 
