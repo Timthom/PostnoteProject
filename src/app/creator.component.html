@@ -3,17 +3,11 @@
     <div class="creator">
     <input type="text" [(ngModel)]="title" class="inputTitle" placeholder="Enter title ..."> 
     
-    <!-- <button id="saveButton" (click)="save()">+</button><br> -->
-    
     <input id="saveButton" type="image" src="icon_post.png" alt="Submit" width="25" height="25" (click)="save()">
     <textarea class="inputText" [(ngModel)]="text" placeholder="Your notes ..." name="inputText" cols="30" rows="10"></textarea>
+    <dropdown></dropdown>
     </div>
-    <!--<div *ngFor="let note of notes">
-        <span class="creator">{{note.title}}<br>{{note.text}}</span>
-    </div> -->
-
-    <!-- Draws all notes in the notes array, assigning the Note-object to the Note components noteInNote property-->
-
+ 
     <note class="col-xs-4" *ngFor="let note of notes | async" [noteInNote]="note" [text]="note.text" [title]="note.title" id="{{note.$key}}">
     </note>
 

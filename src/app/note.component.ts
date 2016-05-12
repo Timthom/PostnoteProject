@@ -31,8 +31,6 @@ export class NoteComponent{
   
   constructor(private _ds: DataService) {
     console.log('in constructor'); 
-    //varför undefined här?...
-    console.log(this.noteInNote);
   }
 
   isEditable: boolean = false;

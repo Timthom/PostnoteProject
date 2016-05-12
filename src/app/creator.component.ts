@@ -11,13 +11,14 @@ import { Injectable } from '@angular/core';
 import { defaultFirebase, FirebaseRef } from 'angularfire2';
 import { Observable } from 'rxjs/Observable';
 import { Reverse } from './reverse.pipe';
+import {DropdownComponent} from './dropdown.component';
 
 @Component({
   moduleId: module.id,
   selector: 'creator',
   templateUrl: 'creator.component.html',
   styleUrls: ['creator.component.css'],
-  directives: [ROUTER_DIRECTIVES, NoteComponent],
+  directives: [ROUTER_DIRECTIVES, NoteComponent, DropdownComponent],
   pipes: [Reverse],
   providers: []
 })
@@ -34,7 +35,7 @@ export class CreatorComponent {
     }
     
     ngOnInit() {
-        console.log("inne i OnInit i creatorcomponent");
+        console.log("inne i OnInit i creatorcomponent...");
         this.getNotes();
     }
     

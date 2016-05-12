@@ -68,8 +68,9 @@
 
 .text_field {
    width: 280px;
-  height: 230px;
+  height: 220px;
   margin: 10px;
+  margin-bottom: 0;
   padding: 5px;
   background-color: #EEF66C ;
   overflow: scroll;
