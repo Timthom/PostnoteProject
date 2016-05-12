@@ -1,8 +1,9 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from '@angular/router-deprecated';
 import {AngularFire} from 'angularfire2';
 import {FirebaseListObservable} from 'angularfire2';
 import {Note}from './note';
+import {DataService} from './data.service';
 
 
 @Component({
@@ -17,14 +18,20 @@ import {Note}from './note';
 @RouteConfig([
 ])
 
-export class MenuComponent {
+export class MenuComponent implements OnInit {
+  
+    titles :FirebaseListObservable<any[]>;  
+  
+    constructor(private _ds: DataService) {}
     
-    titles :FirebaseListObservable<any[]>;
-
-    constructor(private _af:AngularFire){
-      this.titles = this._af.list('/notes');
-
+    ngOnInit() {
+        this.getTitles();
     }
+    
+    getTitles() {
+        this._ds.getAllNotes().then(titles => this.titles = titles);
+    }
+    
     jumpToNote(note:string){
       
       var element = document.getElementById(note);

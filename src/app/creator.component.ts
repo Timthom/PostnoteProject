@@ -29,7 +29,7 @@ export class CreatorComponent {
     note: Note;
     notes: FirebaseListObservable<any[]>; 
     
-    constructor(private _af: AngularFire, private _ds: DataService) {
+    constructor(private _ds: DataService) {
         console.log("inne i creatorcomponents konstruktor");
     }
     
