@@ -21,12 +21,17 @@ import {CreatorComponent} from './creator.component';
 @RouteConfig([
 ])
 export class Postnote2App implements OnInit {
-  constructor() {
-    console.log("inne i postnote2app konstruktor");
-  }
   
- ngOnInit() {
-    console.log("inne i onInit i postnoteapp2");
- }
+  allGroups :FirebaseListObservable<any[]>;
+  
+   constructor(private _ds: DataService) {}
+    
+    ngOnInit() {
+        this.getGroups();
+    }
+    
+    getGroups() {
+        this._ds.getAllGroups().then(groups => this.allGroups = groups);
+    }
   
 }
