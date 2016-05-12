@@ -52,19 +52,11 @@ export class CreatorComponent {
     }
     
     save() {
-        this.note = new Note (this.title, this.text);
-        //add to database
-        
-        this._ds.addNoteToNotes(this.title, this.text);
-        
-        if(this.title !== ""){
-            console.log(this.title);
-            console.log(this.text);
-            //this.notes.splice(0,0, this.note);
-           
-         
-            this.title = ""; 
-            this.text = "";
+        if(this.title !== '') {
+            //add to database
+            this._ds.addNoteToNotes(this.title, this.text);
+            this.title = '';
+            this.text = '';
         }
     }
 }

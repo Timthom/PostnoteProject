@@ -40,36 +40,13 @@ export class NoteComponent{
     
     editClick() {
       
-      /*
-      var titleField = document.getElementsByClassName[0]('title');
-      var textField = document.getElementsByClassName[0]('text_field');*/
-      
       if(this.isEditable) {
         console.log('updating');
-        
-        
-        
-        
-        /*
-        titleField.style.border = "";
-        textField.style.border = "";
-        titleField.style.pointerEvents = "none";
-        textField.style.pointerEvents = "none";*/
         this._ds.updateNoteTitle(this.noteInNote.$key, this.title);
         this._ds.updateNoteText(this.noteInNote.$key, this.text);
         this.enabledIfNull = "";
       } else {
         console.log('notdating');
-        
-        
-        
-        
-        /*
-        titleField.style.border = "dashed 1px black";
-        textField.style.border = "dashed 1px black";
-        textField.style.width = "278px";
-        titleField.style.pointerEvents = "auto";
-        textField.style.pointerEvents = "auto";*/
         this.enabledIfNull = null;
       }
       this.isEditable = !this.isEditable;  
