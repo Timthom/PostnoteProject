@@ -22,4 +22,12 @@ export class GroupComponent {
   
   @Input()
   groupName;
+  
+  constructor(){
+    
+  }
+  
+  deleteGroup(){
+    
+  }
 }

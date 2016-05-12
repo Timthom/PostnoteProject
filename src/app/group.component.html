@@ -1,3 +1,6 @@
-<h3 class="group_title">{{groupName}}</h3>
+<div class="groupContainer">
+<span class="group_name" type="text" [(ngModel)]="groupName" style="direction: ltr;" maxlength="20" contenteditable="true">
+<input class="delete_button" type="image" src="icon_delete.png" alt="submit" width="30" height="30" (click)="deleteGroup()" style="direction: ltr;"><br>
 <hr class="line">
 <note></note>
+</div>
