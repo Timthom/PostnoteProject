@@ -28,12 +28,13 @@ export class CreatorComponent {
     note: Note;
     notes: FirebaseListObservable<Note[]>; 
     
-   
     constructor(private _af: AngularFire, private _ds: DataService) {
         console.log("inne i creatorcomponents konstruktor");
 
         this.notes = this._af.list('/notes', {
-            
+            query: {
+             orderByChild: 'l'   
+            }
         });
         console.log(this.notes);
         //console.log(this.notes.count);
