@@ -28,6 +28,7 @@ export class CreatorComponent {
     title: string = ""; 
     text: string = "";
     notes: FirebaseListObservable<any[]>; 
+    selectedGroup: string = "noGroup";
     
     constructor(private _ds: DataService) {
         console.log("inne i creatorcomponents konstruktor");
@@ -43,10 +44,14 @@ export class CreatorComponent {
         this._ds.getAllNotesInGroup('noGroup').then(notes => this.notes = notes);
     }
     
+    groupChanged(event) {
+        this.selectedGroup = event;        
+    }
+    
     save() {
         if(this.title !== '') {
             let time = new Date().getTime();            
-            this._ds.addNoteToNotes(this.title, this.text, 'noGroup', time);
+            this._ds.addNoteToNotes(this.title, this.text, this.selectedGroup, time);
             this.title = '';
             this.text = '';
         }

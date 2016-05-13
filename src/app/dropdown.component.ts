@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from '@angular/router-deprecated';
 import {AngularFire} from 'angularfire2';
 import {FirebaseListObservable} from 'angularfire2';
@@ -21,6 +21,8 @@ import {Note}from './note';
 ])
 
 export class DropdownComponent implements OnInit {
+    @Input() group: string;
+    @Output() changeGroup = new EventEmitter();
     public disabled:boolean = false;
     public status:{isopen:boolean} = {isopen: false};
     public items:Array<string> = ['The first choice!',
@@ -49,7 +51,7 @@ export class DropdownComponent implements OnInit {
     }
     
     selectGroup(group: string){
-        
+      this.changeGroup.emit(group);
         
       var buttonText: HTMLElement = document.getElementById('group_name');
       buttonText.innerHTML = group;

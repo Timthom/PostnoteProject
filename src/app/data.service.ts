@@ -11,15 +11,6 @@ export class DataService {
     _afGroups: FirebaseListObservable<any[]>;
     
     constructor (@Inject(FirebaseRef) private _ref: Firebase, private _af: AngularFire){
-       
-/*       
-       this._afNotes = _af.database.list('/groups/grupp1', {
-           query: {
-              orderChildBy: 'title',
-              equalTo: 'title2'
-           }
-       });
-*/  
         this._afNotes = _af.database.list('/notes');
         this._afGroups = _af.database.list('/groups', {
             query: {
@@ -69,8 +60,9 @@ export class DataService {
         return Promise.resolve(tempObservable);        
     }
     
+    //returns all groups in the DB...
     getAllGroups() {
-      return Promise.resolve(this._afGroups);
+        return Promise.resolve(this._afGroups);
     }
     
      //adds a new group(FirebaseListObservable with random id) to the database. 
@@ -79,10 +71,12 @@ export class DataService {
     }
     
     //updates the group name with the chosen id...
-    updateGroupName(id: string, newTitle: string) {
+    updateGroupName(id: string, name: string) {
+        this._groups.child(id).update({'name': name});
     }
     
     //deletes the group with the chosen id...
     deleteGroup(id: string) {
+        this._groups.child(id).remove();
     }
 }

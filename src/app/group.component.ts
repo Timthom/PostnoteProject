@@ -24,6 +24,8 @@ export class GroupComponent {
   @Input()
   groupName;
   
+  
+  
   notes: FirebaseListObservable<any[]>;
   
   constructor(private _ds: DataService) {
