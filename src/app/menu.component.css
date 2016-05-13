@@ -3,13 +3,12 @@
     position: fixed;
     display: block;
     height: 100%; 
+    overflow:scroll;
 }
 ul{
     color: white;
 }
-ul :hover{
-    background-color: darkgray;
-}
+
 .navbar-brand{
     padding-left: 40%;
 }
@@ -17,9 +16,38 @@ ul :hover{
     color: white;
 }
 .footer{
-   position: fixed;
+   
    text-align: center;
    left: 20px;
-   bottom: 0px;
-   color: white;
+   
+}
+
+.footerContainer {
+    color: white;
+     bottom: 0px;
+     position: absolute;
+     
+}
+#sidebar_menu{
+    width: 100%;
+}
+
+#addBtn{
+    width: 90%;
+    margin-left: 5%;
+    margin-right :5%;
+}
+
+#categoryInput{
+    margin: 10px;
+    width: 80%;
+    float:left;
+    margin-right: 0px;
+}
+
+#plusBtn{
+    float:right;
+    margin-top: 10px;
+    width: 15%;
+    
 }

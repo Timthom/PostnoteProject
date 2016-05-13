@@ -18,16 +18,24 @@ import {DataService} from './data.service';
 @RouteConfig([
 ])
 
+<<<<<<< HEAD
 export class MenuComponent implements OnInit {
-  
+    adding: boolean =false;
     titles :FirebaseListObservable<any[]>;  
-  
+    buttonText: string ="Add category";
+    groups: String[] = ["Food", "Work", "Cleaning", "Shopping"]; 
+ 
     constructor(private _ds: DataService) {}
+    
+    //Vet ej om den behövs
+    //constructor(private _af:AngularFire){
+      //this.titles = this._af.list('/notes');
+    //}
     
     ngOnInit() {
         this.getTitles();
     }
-    
+
     getTitles() {
         this._ds.getAllNotes().then(titles => this.titles = titles);
     }
@@ -38,6 +46,15 @@ export class MenuComponent implements OnInit {
       
       element.scrollIntoView(true);
       
-      console.log("Loggar ut note ", element);
+    }
+    
+    toggleInput(){
+      this.adding = !this.adding;
+      if(this.adding){
+        this.buttonText = "Cancel";
+      }
+      else{
+        this.buttonText ="Add category";
+      }
     }
 }

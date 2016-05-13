@@ -22,8 +22,9 @@ import {CreatorComponent} from './creator.component';
 ])
 export class Postnote2App implements OnInit {
   
-  allGroups :FirebaseListObservable<any[]>;
   
+  allGroups :FirebaseListObservable<any[]>;
+  showSideBar:boolean = true;
    constructor(private _ds: DataService) {}
     
     ngOnInit() {
@@ -32,6 +33,10 @@ export class Postnote2App implements OnInit {
     
     getGroups() {
         this._ds.getAllGroups().then(groups => this.allGroups = groups);
+    }
+    
+    toogleSideBar(){
+        this.showSideBar = !this.showSideBar;
     }
   
 }
