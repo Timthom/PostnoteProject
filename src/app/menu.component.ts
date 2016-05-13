@@ -18,7 +18,7 @@ import {DataService} from './data.service';
 @RouteConfig([
 ])
 
-<<<<<<< HEAD
+
 export class MenuComponent implements OnInit {
     adding: boolean =false;
     titles :FirebaseListObservable<any[]>;  
