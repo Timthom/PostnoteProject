@@ -21,17 +21,22 @@ export class DataService {
        });
 */  
         this._afNotes = _af.database.list('/notes');
-        this._afGroups = _af.database.list('/groups/groups');
+        this._afGroups = _af.database.list('/groups', {
+            query: {
+                orderByChild: 'timeStamp'
+            }
+        });
         this._notes = _ref.child('notes');
         this._groups = _ref.child('groups');
         console.log("inne i dataservice konstruktor");
     }
     
+    //returns all notes in the DB...
      getAllNotes() {
       return Promise.resolve(this._afNotes);
     }
     
-     //adds a new note(FirebaseListObservable with random id) to the database. 
+     //adds a new note(FirebaseListObservable with random id) to the database...
     addNoteToNotes(title: string, text: string, group: string, time: number) {
         console.log("inne i addnotetonotes");
         this._notes.push({'title': title, 'text': text, 'group': group, 'timeStamp': (time * -1)});
@@ -69,7 +74,8 @@ export class DataService {
     }
     
      //adds a new group(FirebaseListObservable with random id) to the database. 
-    addGroupToGroups(title: string, text: string) {
+    addGroupToGroups(name: string, time: number) {
+        this._groups.push({'name': name, 'timeStamp': (time * -1)});
     }
     
     //updates the group name with the chosen id...
