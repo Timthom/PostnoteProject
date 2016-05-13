@@ -26,8 +26,7 @@ import {DropdownComponent} from './dropdown.component';
 ])
 export class CreatorComponent {
     title: string = ""; 
-    text: string = ""; 
-    note: Note;
+    text: string = "";
     notes: FirebaseListObservable<any[]>; 
     
     constructor(private _ds: DataService) {
@@ -41,13 +40,13 @@ export class CreatorComponent {
     
     getNotes() {
         console.log("inne i getNotes i creatorcomponent");
-        this._ds.getAllNotes().then(notes => this.notes = notes);
+        this._ds.getAllNotesInGroup('noGroup').then(notes => this.notes = notes);
     }
     
     save() {
         if(this.title !== '') {
-            //add to database
-            this._ds.addNoteToNotes(this.title, this.text);
+            let time = new Date().getTime();            
+            this._ds.addNoteToNotes(this.title, this.text, 'noGroup', time);
             this.title = '';
             this.text = '';
         }

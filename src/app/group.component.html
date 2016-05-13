@@ -1,3 +1,3 @@
 <h3 class="group_title">{{groupName}}</h3>
 <hr class="line">
-<note></note>
+<note class="col-xs-4" *ngFor="let note of notes | async" [noteInNote]="note" [text]="note.text" [title]="note.title" id="{{note.$key}}">

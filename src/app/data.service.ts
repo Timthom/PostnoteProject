@@ -11,8 +11,17 @@ export class DataService {
     _afGroups: FirebaseListObservable<any[]>;
     
     constructor (@Inject(FirebaseRef) private _ref: Firebase, private _af: AngularFire){
+       
+/*       
+       this._afNotes = _af.database.list('/groups/grupp1', {
+           query: {
+              orderChildBy: 'title',
+              equalTo: 'title2'
+           }
+       });
+*/  
         this._afNotes = _af.database.list('/notes');
-        this._afGroups = _af.database.list('/groups');
+        this._afGroups = _af.database.list('/groups/groups');
         this._notes = _ref.child('notes');
         this._groups = _ref.child('groups');
         console.log("inne i dataservice konstruktor");
@@ -23,9 +32,9 @@ export class DataService {
     }
     
      //adds a new note(FirebaseListObservable with random id) to the database. 
-    addNoteToNotes(title: string, text: string) {
+    addNoteToNotes(title: string, text: string, group: string, time: number) {
         console.log("inne i addnotetonotes");
-        this._notes.push({'title': title, 'text': text, 'group': 'noGroup'});
+        this._notes.push({'title': title, 'text': text, 'group': group, 'timeStamp': (time * -1)});
     }
     
     //updates the notes title with the chosen id...
@@ -44,8 +53,15 @@ export class DataService {
     }
     
     //returns every Note based on category
-    getNotesInCategory(category: string) {
-        
+    getAllNotesInGroup(groupName: string) {
+        let tempObservable: FirebaseListObservable<any[]> = this._af.database.list('/notes', {
+           query: {
+              orderByChild: 'group',
+              equalTo: groupName
+           }
+        });
+       
+        return Promise.resolve(tempObservable);        
     }
     
     getAllGroups() {
