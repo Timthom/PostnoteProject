@@ -32,6 +32,6 @@ export class Postnote2App implements OnInit {
  }
  
   toogleSideBar(){
-    console.log("Testar våran button");
+    this.showSideBar = !this.showSideBar;
   }
 }

@@ -18,8 +18,10 @@ import {Note}from './note';
 ])
 
 export class MenuComponent {
-    
+    adding: boolean =false;
     titles :FirebaseListObservable<any[]>;
+    buttonText: string ="Add category";
+    groups: String[] = ["Food", "Work", "Cleaning", "Shopping"]; 
 
     constructor(private _af:AngularFire){
       this.titles = this._af.list('/notes');
@@ -31,6 +33,15 @@ export class MenuComponent {
       
       element.scrollIntoView(true);
       
-      console.log("Loggar ut note ", element);
+    }
+    
+    toggleInput(){
+      this.adding = !this.adding;
+      if(this.adding){
+        this.buttonText = "Cancel";
+      }
+      else{
+        this.buttonText ="Add category";
+      }
     }
 }

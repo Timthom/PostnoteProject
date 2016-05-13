@@ -9,7 +9,7 @@
     <div id="wrapper">
       <!-- Sidebar -->
       <div id="sidebar-wrapper" >
-        <div id="sidebar_menu" class="sidebar-nav">
+        <!--<div id="sidebar_menu" class="sidebar-nav">
           <li class="sidebar-brand">
             <a id="menu-toggle" href="#">
               <span id="main_icon" class="navbar-icon fa fa-bars icon">
@@ -18,7 +18,7 @@
               </span>
             </a>
           </li>
-        </div>
+        </div>-->
         <form class="navbar-form navbar-left" role="search">
           <div class="form-group">
             <input type="text" class="form-control input-sm" id="inputsm" placeholder="Search">
@@ -27,16 +27,32 @@
           <button type="submit" class="btn btn-default btn-sm">Submit</button>
         </form>
         <br/><br/><br/><br/>
-        <ul *ngFor="#note of titles | async" (click)="jumpToNote(note.$key)">
+        <ul *ngFor="let note of titles | async" (click)="jumpToNote(note.$key)">
           {{note.title}}
         </ul>
-        
-        <div class="footer">
-         <hr>          
-          <p>Hello footer du visar fel</p>
-        </div>
+        <hr>
+       
+       <button id="addBtn" class="btn btn-info btn-xs" (click)="toggleInput()">
+         {{buttonText}}
+       </button>
+       <form *ngIf="adding"> 
+        <input *ngIf="adding" type="text" id="categoryInput" placeholder="Name">
+        <button *ngIf="adding" id="plusBtn" type="button">+</button>
+       </form>
+       <br>
+       <br>
+       <hr>
+       
+      
+       
       </div>
     </div> 
+    <!--<div class="footerContainer">
+        <hr>   
+        <div class="footer">       
+          <p>Hello footer du visar fel</p>
+        </div>
+    </div>-->
 </nav>
 
  

@@ -2,7 +2,7 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-xs-3" *ngif="showSideBar == true">
+    <div class="col-xs-2" *ngIf="showSideBar == true">
       <menu></menu>
     </div>
     <div class="col-xs-1">
@@ -13,7 +13,7 @@
         </span>
       </a>
     </div>
-    <div class="col-xs-8">
+    <div [ngClass]="{'col-xs-9': showSideBar, 'col-xs-11': !showSideBar}">
       <div class="row">
         <creator></creator>
       </div>
