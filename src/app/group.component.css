@@ -9,3 +9,7 @@ hr {
     height: 1px;
     background-image: linear-gradient(to right, #808080, #FFFFFF);
 }
+
+.col-xs-4 {
+  padding: 0px;
+}
