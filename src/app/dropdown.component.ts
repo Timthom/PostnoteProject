@@ -23,6 +23,8 @@ import {Note}from './note';
 export class DropdownComponent implements OnInit {
     @Input() group: string;
     @Output() changeGroup = new EventEmitter();
+    @Input() noteGroup: string;
+    @Output() changeNoteGroup = new EventEmitter();    
     public disabled:boolean = false;
     public status:{isopen:boolean} = {isopen: false};
     public items:Array<string> = ['The first choice!',
@@ -52,6 +54,7 @@ export class DropdownComponent implements OnInit {
     
     selectGroup(group: string){
       this.changeGroup.emit(group);
+      this.changeNoteGroup.emit(group);
         
       var buttonText: HTMLElement = document.getElementById('group_name');
       buttonText.innerHTML = group;

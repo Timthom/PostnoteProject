@@ -15,6 +15,10 @@
   visibility: visible;
 }
 
+.noteContainer:hover dropdown{
+  visibility: visible;
+}
+
 .delete_button {
    visibility: hidden;
    float: left;
@@ -78,7 +82,6 @@
   border: none;
   outline: none;
   overflow: auto;
-  
 }
 
 .selectedNoteTitle {
@@ -94,4 +97,8 @@
 .savable {
   background-image: url('icon_save.png');
   visibility: visible;
+}
+
+dropdown {
+  visibility: hidden;
 }

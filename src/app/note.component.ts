@@ -6,6 +6,7 @@ import {DataService} from './data.service';
 //added
 import {Input} from '@angular/core';
 import {Note} from './note';
+import {DropdownComponent} from './dropdown.component';
 
 @Component({
   moduleId: module.id,
@@ -13,7 +14,7 @@ import {Note} from './note';
   providers: [ROUTER_PROVIDERS],
   templateUrl: 'note.component.html',
   styleUrls: ['note.component.css'],
-  directives: [ROUTER_DIRECTIVES],
+  directives: [ROUTER_DIRECTIVES, DropdownComponent],
   pipes: []
 })
 @RouteConfig([
@@ -29,12 +30,17 @@ export class NoteComponent{
   @Input()
   text;
   
+  @Input()
+  group;
+  
   constructor(private _ds: DataService) {
     console.log('in constructor'); 
   }
 
   isEditable: boolean = false;
   enabledIfNull: string = "";
+  noteSelectedGroup: string = this.group;
+  
     
     editClick() {
       
@@ -50,6 +56,11 @@ export class NoteComponent{
       this.isEditable = !this.isEditable;  
       
     }
+
+    noteGroupChanged(event) {
+        this.noteSelectedGroup = event;
+        this._ds.changeNoteGroup(this.noteInNote.$key, this.noteSelectedGroup);        
+    }    
     
     deleteClick() {
       this._ds.deleteNote(this.noteInNote.$key);

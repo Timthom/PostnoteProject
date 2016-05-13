@@ -23,7 +23,7 @@ export class DataService {
     }
     
     //returns all notes in the DB...
-     getAllNotes() {
+    getAllNotes() {
       return Promise.resolve(this._afNotes);
     }
     
@@ -78,5 +78,10 @@ export class DataService {
     //deletes the group with the chosen id...
     deleteGroup(id: string) {
         this._groups.child(id).remove();
+    }
+    
+    //changes the notes group resident...
+    changeNoteGroup(id: string, group: string) {
+        this._notes.child(id).update({'group': group});
     }
 }
