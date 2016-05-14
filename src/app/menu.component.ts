@@ -21,25 +21,26 @@ import {DataService} from './data.service';
 
 export class MenuComponent implements OnInit {
     adding: boolean =false;
+    groupName: string ="";
     titles :FirebaseListObservable<any[]>;  
     buttonText: string ="Add category";
-    groups: String[] = ["Food", "Work", "Cleaning", "Shopping"]; 
- 
+    myGroups: FirebaseListObservable<any[]>;
     constructor(private _ds: DataService) {}
-    
-    //Vet ej om den behövs
-    //constructor(private _af:AngularFire){
-      //this.titles = this._af.list('/notes');
-    //}
     
     ngOnInit() {
         this.getTitles();
+        this.getGroups();
     }
 
     getTitles() {
         this._ds.getAllNotes().then(titles => this.titles = titles);
     }
     
+    getGroups() {
+      this._ds.getAllGroups().then(groups => this.myGroups = groups);
+    }
+   
+  
     jumpToNote(note:string){
       
       var element = document.getElementById(note);
@@ -55,6 +56,15 @@ export class MenuComponent implements OnInit {
       }
       else{
         this.buttonText ="Add category";
+      }
+    }
+    
+    addGroup(){
+      if(this.groupName.trim().length > 0){
+        let time = new Date().getTime();  
+        this._ds.addGroupToGroups(this.groupName, time);
+        this.groupName = "";
+     
       }
     }
 }

@@ -52,8 +52,10 @@ export class DataService {
       return Promise.resolve(this._afGroups);
     }
     
-     //adds a new group(FirebaseListObservable with random id) to the database. 
-    addGroupToGroups(title: string, text: string) {
+    
+    //adds a new group(FirebaseListObservable with random id) to the database. 
+    addGroupToGroups(name: string, time: number) {
+        this._groups.push({'name': name, 'timeStamp': (time * -1)});
     }
     
     //updates the group name with the chosen id...

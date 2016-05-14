@@ -35,13 +35,16 @@
          {{buttonText}}
        </button>
        <form *ngIf="adding"> 
-        <input *ngIf="adding" type="text" id="categoryInput" placeholder="Name">
-        <button *ngIf="adding" id="plusBtn" type="button">+</button>
+        <input [(ngModel)]="groupName" type="text" id="categoryInput" placeholder="Name">
+        <button id="plusBtn" type="button" (click)="addGroup()" >+</button>
        </form>
        <br>
        <br>
        <hr>
-       
+       <!-- Den här ngFor kan inte ha async den också, vad göra?-->
+       <ul *ngFor="let group of myGroups | async">
+         {{group.name}}
+       </ul>
       
        
       </div>
