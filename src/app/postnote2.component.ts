@@ -18,8 +18,7 @@ import {CreatorComponent} from './creator.component';
   directives: [ROUTER_DIRECTIVES, NoteComponent, MenuComponent, GroupComponent, CreatorComponent],
   pipes: []
 })
-@RouteConfig([
-])
+
 export class Postnote2App implements OnInit {
   
   
