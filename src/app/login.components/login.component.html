@@ -1,0 +1,12 @@
+<h2>Logga in</h2>
+        <form [ngFormModel]="myForm" (ngSubmit)="onLoggedIn()">
+            <div class="input-group">
+                <label for="email">E-Post</label>
+                <input [ngFormControl]="myForm.find('email')" type="email" id="email">
+            </div>
+            <div class="input-group">
+                <label for="password">Lösenord</label>
+                <input [ngFormControl]="myForm.find('password')" type="password" id="password">
+            </div>
+            <button type="submit" [disabled]="!myForm.valid">Bekräfta</button>
+        </form>
