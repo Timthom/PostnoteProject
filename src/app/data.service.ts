@@ -24,13 +24,36 @@ export class DataService {
     
     //returns all notes in the DB...
     getAllNotes() {
+        const token = localStorage.getItem('token');
+        this._notes.authWithCustomToken(token, function(error, authData) {
+        if (error) {
+            console.log("Authentication Failed!", error);
+        } else {
+            console.log("Authenticated successfully with payload:", authData);
+        }
+    });
+        console.log(token);
       return Promise.resolve(this._afNotes);
     }
     
      //adds a new note(FirebaseListObservable with random id) to the database...
     addNoteToNotes(title: string, text: string, group: string, time: number) {
+        
+        const token = localStorage.getItem('token');
+        this._notes.authWithCustomToken(token, function(error, authData) {
+        
+        if (error) {
+            console.log("Authentication Failed!", error);
+        } else {
+            console.log("Authenticated successfully with payload:", authData);
+        }    
+    }, { remember: "sessionOnly"
+});
+        console.log(token);
+        
         console.log("inne i addnotetonotes");
         this._notes.push({'title': title, 'text': text, 'group': group, 'timeStamp': (time * -1)});
+        console.log(Firebase);
     }
     
     //updates the notes title with the chosen id...

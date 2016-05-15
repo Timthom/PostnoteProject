@@ -5,7 +5,6 @@ import {FirebaseListObservable} from 'angularfire2';
 import {Note}from './note';
 import {DataService} from './data.service';
 
-
 @Component({
   moduleId: module.id,
   selector: 'menu',
@@ -15,9 +14,9 @@ import {DataService} from './data.service';
   directives: [ROUTER_DIRECTIVES],
   pipes: []
 })
+
 @RouteConfig([
 ])
-
 
 export class MenuComponent implements OnInit {
     adding: boolean =false;

@@ -3,7 +3,7 @@
             <div class="input-group">
                 <label for="email">E-Post</label>
                 <input [ngFormControl]="myForm.find('email')" type="email" id="email" #email="ngForm">
-                <span *ngIf="!email.pristine && email.errors != null && email.errors['noEmail']">Felaktig e-post adress</span>
+               
             </div>
             <div class="input-group">
                 <label for="password">Lösenord</label>
