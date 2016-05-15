@@ -1,0 +1,18 @@
+<h2>Skapa konto</h2>
+        <form [ngFormModel]="myForm" (ngSubmit)="onCreateAccount()">
+            <div class="input-group">
+                <label for="email">E-Post</label>
+                <input [ngFormControl]="myForm.find('email')" type="email" id="email" #email="ngForm">
+                <span *ngIf="!email.pristine && email.errors != null && email.errors['noEmail']">Felaktig e-post adress</span>
+            </div>
+            <div class="input-group">
+                <label for="password">Lösenord</label>
+                <input [ngFormControl]="myForm.find('password')" type="password" id="password">
+            </div>
+            <div class="input-group">
+                <label for="confirm-password">Bekräfta lösenord</label>
+                <input [ngFormControl]="myForm.find('confirmPassword')" type="password" id="confirm-password" #confirmPassword="ngForm">
+                <span *ngIf="!confirmPassword.pristine && confirmPassword.errors != null && confirmPassword.errors['passwordsNotMatch']">Lösenorden stämmer ej överens!</span>
+            </div>
+            <button type="submit" [disabled]="!myForm.valid">Bekräfta</button>
+        </form>
