@@ -15,19 +15,15 @@ ul{
 #menu-toggle{
     color: white;
 }
-.footer{
-   
-   text-align: center;
-   left: 20px;
-   
+#menu-toggle span{
+      font-size: 1.5em;
+      margin-top: 15px;
+}
+hr{
+    align:left;
+    width: 90%;
 }
 
-.footerContainer {
-    color: white;
-     bottom: 0px;
-     position: absolute;
-     
-}
 #sidebar_menu{
     width: 100%;
 }

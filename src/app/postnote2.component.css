@@ -35,8 +35,21 @@ menu{
 .col-xs-9 {
 	padding-right: 10px;
 }
+#slideButton{
+	background-color:#222;
+	display: block;
+	position: fixed;
+	outline: none;
+	border-radius: 0px;
+}
+#menu-toggle img{
+	width: 15px;
+	height: 15px;
+}
 
 .col-xs-3 {
 	padding-left: 5px;
 	height: 100%;
 }
+
+
