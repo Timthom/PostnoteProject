@@ -1,1 +1,14 @@
-<div></div>
+<div id="container">   
+    <input id="arrowBtn" type="image" src={{arrowSrc}} [ngClass] = "{expandedClass : expanded}" width="20" height="20" (click)="toggleExpand()">
+    <input id="title" [attr.readonly]="editingName" [(ngModel)]="group.name" (click)="jumpToGroup(group.name)">
+    <input id="editBtn" type="image" src="icon_edit.png" width="20" height="20">
+    <input id="deleteBtn" type="image" src="icon_delete.png" width="20" height="20">
+    <!--<ul *ngIf="expanded">
+        <li>Expanderad!</li>
+    </ul>-->
+    <ul *ngIf="expanded">
+        <p *ngFor="let note of notes | async" (click)="jumpToNote(note.$key)">
+          {{note.title}}
+        </p>
+    </ul>
+</div>
