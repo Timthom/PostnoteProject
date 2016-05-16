@@ -1,7 +1,3 @@
-.groupContainer {
-    width: 100%;
-}
-
 .groupContainer:hover .delete_button {
     visibility: visible;
 }
@@ -16,12 +12,14 @@ hr {
     border: none;
     outline: none;
     font-size: 28px;
+    display: inline-block;
 }
 
 .delete_button {
     border: none;
     outline: none;
     visibility: hidden;
+    margin-left: 10px;
 }
 
 .delete_button:hover {

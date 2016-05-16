@@ -40,5 +40,16 @@ export class GroupComponent {
     deleteGroup() {
       this._ds.deleteGroup(this.group.$key);
     }
+    
+    editGroupName() {
+      this._ds.updateGroupName(this.group.$key, this.groupName);
+    }
+    
+    enterKey(key) {
+      if(key === 13) {
+        this.editGroupName();
+        document.getElementById('group_name').hideFocus;
+      }
+    }
   
 }
