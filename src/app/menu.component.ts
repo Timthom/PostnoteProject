@@ -4,6 +4,7 @@ import {AngularFire} from 'angularfire2';
 import {FirebaseListObservable} from 'angularfire2';
 import {Note}from './note';
 import {DataService} from './data.service';
+import {MenuGroupComponent} from './menugroup.component';
 
 
 @Component({
@@ -12,7 +13,7 @@ import {DataService} from './data.service';
   providers: [ROUTER_PROVIDERS],
   templateUrl: 'menu.component.html',
   styleUrls: ['menu.component.css'],
-  directives: [ROUTER_DIRECTIVES],
+  directives: [ROUTER_DIRECTIVES, MenuGroupComponent],
   pipes: []
 })
 @RouteConfig([
@@ -64,7 +65,6 @@ export class MenuComponent implements OnInit {
         let time = new Date().getTime();  
         this._ds.addGroupToGroups(this.groupName, time);
         this.groupName = "";
-     
       }
     }
 }
