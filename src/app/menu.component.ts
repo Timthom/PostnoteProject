@@ -5,6 +5,8 @@ import {FirebaseListObservable} from 'angularfire2';
 import {Note}from './note';
 import {DataService} from './data.service';
 import {MenuGroupComponent} from './menugroup.component';
+import {ValueService} from './value.service';
+
 
 
 @Component({
@@ -26,7 +28,9 @@ export class MenuComponent implements OnInit {
     titles :FirebaseListObservable<any[]>;  
     buttonText: string ="Add category";
     myGroups: FirebaseListObservable<any[]>;
-    constructor(private _ds: DataService) {}
+    checkSideBar: boolean = this._vs._showSideBar;
+    constructor(private _ds: DataService, private _vs:ValueService) {}
+    
     
     ngOnInit() {
         this.getTitles();
@@ -47,6 +51,7 @@ export class MenuComponent implements OnInit {
       var element = document.getElementById(note);
       
       element.scrollIntoView(true);
+     
       
     }
     
@@ -66,5 +71,10 @@ export class MenuComponent implements OnInit {
         this._ds.addGroupToGroups(this.groupName, time);
         this.groupName = "";
       }
+    }
+        closeSideBar(){
+        
+        this._vs._showSideBar = !this._vs._showSideBar;
+        console.log('menu innnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn','side button gone');
     }
 }

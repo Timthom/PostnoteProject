@@ -1,17 +1,19 @@
 <div class="container">
   <div class="row">
-    <div class="col-xs-2" *ngIf="showSideBar == true">
+    <div class="col-xs-2" *ngIf="statusCheckSideBar == true">
+      
       <menu></menu>
     </div>
     <div class="col-xs-1">
-      <a id="menu-toggle" (click)="toogleSideBar()">
-        
-        <span id="main_icon" class="navbar-icon fa fa-bars icon">        
-                Testar button
-        </span>
+      <a id="menu-toggle" (click)="openSideBar()">   
+        <button type="button" class="btn btn-lg pull-right" id="slideButton">
+          <span class="pull-right"> 
+            <img src="icon_menu.png" alt="menu">
+          </span>
+        </button>
       </a>
     </div>
-    <div [ngClass]="{'col-xs-9': showSideBar, 'col-xs-11': !showSideBar}">
+    <div class="creator_div" [ngClass]="{'col-xs-9': statusCheckSideBar, 'col-xs-11': !statusCheckSideBar}">
       <div class="row">
         <creator></creator>
       </div>
