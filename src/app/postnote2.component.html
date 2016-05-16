@@ -1,13 +1,21 @@
 <div class="container">
   <div class="row">
-    <div class="col-xs-3">
+    <div class="col-xs-2" *ngIf="showSideBar == true">
       <menu></menu>
     </div>
-    <div class="col-xs-9">
+    <div class="col-xs-1">
+      <a id="menu-toggle" (click)="toogleSideBar()">
+        
+        <span id="main_icon" class="navbar-icon fa fa-bars icon">        
+                Testar button
+        </span>
+      </a>
+    </div>
+    <div [ngClass]="{'col-xs-9': showSideBar, 'col-xs-11': !showSideBar}">
       <div class="row">
         <creator></creator>
       </div>
-
+      
       <group class="row" *ngFor="let group of allGroups | async" [group]="group" [groupName]="group.name">
            
       </group>

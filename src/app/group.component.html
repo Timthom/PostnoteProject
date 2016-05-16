@@ -2,5 +2,5 @@
 <span class="group_name" type="text" [(ngModel)]="groupName" style="direction: ltr;" maxlength="20" contenteditable="true">
 <input class="delete_button" type="image" src="icon_delete.png" alt="submit" width="30" height="30" (click)="deleteGroup()" style="direction: ltr;"><br>
 <hr class="line">
-<note></note>
+<note class="col-xs-4" *ngFor="let note of notes | async" [noteInNote]="note" [text]="note.text" [title]="note.title" [group]="note.group" id="{{note.$key}}"></note>
 </div>

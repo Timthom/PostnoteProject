@@ -18,26 +18,53 @@ import {DataService} from './data.service';
 @RouteConfig([
 ])
 
+
 export class MenuComponent implements OnInit {
-  
+    adding: boolean =false;
+    groupName: string ="";
     titles :FirebaseListObservable<any[]>;  
-  
+    buttonText: string ="Add category";
+    myGroups: FirebaseListObservable<any[]>;
     constructor(private _ds: DataService) {}
     
     ngOnInit() {
         this.getTitles();
+        this.getGroups();
     }
-    
+
     getTitles() {
         this._ds.getAllNotes().then(titles => this.titles = titles);
     }
     
+    getGroups() {
+      this._ds.getAllGroups().then(groups => this.myGroups = groups);
+    }
+   
+  
     jumpToNote(note:string){
       
       var element = document.getElementById(note);
       
       element.scrollIntoView(true);
       
-      console.log("Loggar ut note ", element);
+    }
+    
+    toggleInput(){
+      this.adding = !this.adding;
+      if(this.adding){
+        this.buttonText = "Cancel";
+      }
+      else{
+        this.buttonText ="Add category";
+      }
+    }
+    
+    addGroup(){
+      if(this.groupName.trim().length > 0){
+        let time = new Date().getTime();  
+        this._ds.addGroupToGroups(this.groupName, time);
+        this.groupName = "";
+     
+      }
     }
 }

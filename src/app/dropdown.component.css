@@ -1,0 +1,17 @@
+.group_button {
+    width: 120px;
+    height: 25px;
+    margin-left: 6px;
+    margin-bottom: 6px;
+    padding: 0px;
+}
+
+#group_name {
+    float: left;
+    margin-left: 5px;
+}
+
+.caret {
+    float: right;
+    margin: 8px;
+}

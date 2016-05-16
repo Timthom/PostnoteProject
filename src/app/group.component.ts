@@ -3,6 +3,7 @@ import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from '@angular/router-
 import {AngularFire} from 'angularfire2';
 import {FirebaseListObservable} from 'angularfire2';
 import {NoteComponent} from './note.component';
+import {DataService} from './data.service'
 
 @Component({
   moduleId: module.id,
@@ -23,11 +24,21 @@ export class GroupComponent {
   @Input()
   groupName;
   
-  constructor(){
-    
-  }
+  notes: FirebaseListObservable<any[]>;
   
-  deleteGroup(){
+  constructor(private _ds: DataService) {
+    }
     
-  }
+    ngOnInit() {
+        this.getNotes();
+    }
+    
+    getNotes() {
+        this._ds.getAllNotesInGroup(this.groupName).then(notes => this.notes = notes);
+    }
+    
+    deleteGroup() {
+      this._ds.deleteGroup(this.group.$key);
+    }
+  
 }
