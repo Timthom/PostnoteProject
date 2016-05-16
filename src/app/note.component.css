@@ -15,7 +15,7 @@
   visibility: visible;
 }
 
-.noteContainer:hover dropdown{
+.noteContainer:hover group_dropdown {
   visibility: visible;
 }
 
@@ -99,6 +99,10 @@
   visibility: visible;
 }
 
-dropdown {
+.visible_dropdown {
+  visibility: visible;
+}
+
+group_dropdown {
   visibility: hidden;
 }
