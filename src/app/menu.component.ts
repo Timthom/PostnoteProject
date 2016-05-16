@@ -4,11 +4,9 @@ import {AngularFire} from 'angularfire2';
 import {FirebaseListObservable} from 'angularfire2';
 import {Note}from './note';
 import {DataService} from './data.service';
-<<<<<<< HEAD
 import {MenuGroupComponent} from './menugroup.component';
-=======
 import {ValueService} from './value.service';
->>>>>>> ErminFooter
+
 
 
 @Component({
