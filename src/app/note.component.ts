@@ -48,7 +48,6 @@ export class NoteComponent implements OnInit{
   isEditable: boolean = false;
   enabledIfNull: string = "";
   noteSelectedGroup: string = this.group;
-  colorOfNote: string = "";
   isPink: boolean = false; 
   isMagenta: boolean = false; 
   isOrange: boolean = false; 
