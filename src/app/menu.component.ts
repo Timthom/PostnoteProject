@@ -72,9 +72,5 @@ export class MenuComponent implements OnInit {
         this.groupName = "";
       }
     }
-        closeSideBar(){
         
-        this._vs._showSideBar = !this._vs._showSideBar;
-        console.log('menu innnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn','side button gone');
-    }
 }

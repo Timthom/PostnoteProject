@@ -14,3 +14,26 @@ input {
 p {
     cursor: pointer;
 }
+#container:hover{
+    background-color:#0099ff;  
+}
+
+#container:hover #deleteBtn{
+    visibility: visible;
+}
+#container:hover #editBtn{
+    visibility: visible;
+}
+
+#container{
+    padding-left: 10px;
+}
+
+#editBtn,#deleteBtn{
+    visibility: hidden;
+}
+#title{
+    border-radius: 2px;
+}
+
+
