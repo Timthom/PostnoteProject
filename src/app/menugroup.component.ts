@@ -38,7 +38,28 @@ export class MenuGroupComponent implements OnInit{
         
   }
    
-  
+   deleteGroup() {
+      this._ds.deleteGroup(this.group.$key);
+    }
+    
+    editGroupName() {
+      this._ds.updateGroupName(this.group.$key, this.group.name);
+    }
+    
+    editGroup() {
+      this._ds.updateGroupName(this.group.$key, this.group.name);
+      document.getElementById('title').blur();
+      /*if(this.editingName){
+        console.log("true");
+        //document.getElementById('title').blur();
+        document.getElementById('title').addEventListener('click', focus);
+      } else {
+        console.log("false");
+        //document.getElementById('title').focus();
+        document.getElementById('title').addEventListener('click', blur);
+      }
+      this.editingName = !this.editingName;*/
+    }
   
   toggleExpand() {
     this.expanded = !this.expanded;
