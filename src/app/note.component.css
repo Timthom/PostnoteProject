@@ -5,6 +5,7 @@
  height: 300px;
  width: 300px;
  display: table-cell;
+ position: relative;
 }
 
 .noteContainer:hover .edit_button{
@@ -101,4 +102,14 @@
 
 dropdown {
   visibility: hidden;
+  float: left;
 }
+
+colorpicker {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  padding-bottom: 6px;
+  padding-right: 6px;
+}
+
