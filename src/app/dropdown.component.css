@@ -5,7 +5,7 @@
     margin-bottom: 6px;
     padding: 0px;
     border: none;
-    background-color: #EEF66C;
+    background-color: transparent;
 }
 
 .group_button:focus {

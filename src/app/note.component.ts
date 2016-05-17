@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from '@angular/router-deprecated';
 import {AngularFire} from 'angularfire2';
 import {FirebaseListObservable} from 'angularfire2';
@@ -21,7 +21,7 @@ import {ColorpickerComponent} from './colorpicker.component';
 @RouteConfig([
 ])
 
-export class NoteComponent{
+export class NoteComponent implements OnInit{
   @Input()
   noteInNote; 
   
@@ -34,6 +34,13 @@ export class NoteComponent{
   @Input()
   group;
   
+  @Input()
+  color;
+  
+  ngOnInit() {
+      this.colorChanged(this.color);
+  }
+  
   constructor(private _ds: DataService) {
     console.log('in constructor'); 
   }
@@ -41,6 +48,13 @@ export class NoteComponent{
   isEditable: boolean = false;
   enabledIfNull: string = "";
   noteSelectedGroup: string = this.group;
+  colorOfNote: string = "";
+  isPink: boolean = false; 
+  isMagenta: boolean = false; 
+  isOrange: boolean = false; 
+  isBlue: boolean = false; 
+  isYellow: boolean = true; 
+  isGreen: boolean = false; 
   
     
     editClick() {
@@ -61,7 +75,44 @@ export class NoteComponent{
     noteGroupChanged(event) {
         this.noteSelectedGroup = event;
         this._ds.changeNoteGroup(this.noteInNote.$key, this.noteSelectedGroup);        
-    }    
+    }   
+    
+    colorChanged(event) {
+      this.resetColors();
+      switch (event){
+        case "pink":
+          this.isPink = true; 
+          break; 
+        case "magenta":
+          this.isMagenta = true; 
+          break; 
+        case "orange":
+          this.isOrange = true; 
+          break; 
+        case "blue":
+          this.isBlue = true; 
+          break; 
+        case "yellow": 
+          this.isYellow = true; 
+          break; 
+        case "green":
+          this.isGreen = true; 
+          break; 
+        default: 
+          this.isYellow = true; 
+      }
+      
+      this._ds.updateNoteColor(this.noteInNote.$key, event);
+    } 
+    
+    resetColors() {
+        this.isPink = false; 
+        this.isMagenta = false; 
+        this.isOrange = false; 
+        this.isBlue = false; 
+        this.isYellow = false; 
+        this.isGreen = false; 
+    }
     
     deleteClick() {
         this._ds.deleteNote(this.noteInNote.$key);

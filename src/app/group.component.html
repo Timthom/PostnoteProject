@@ -3,4 +3,4 @@
 <input class="delete_button" type="image" src="icon_delete.png" alt="submit" width="30" height="30" (click)="deleteGroup()">
 <hr class="line">
 </div>
-<note class="col-xs-4" *ngFor="let note of notes | async" [noteInNote]="note" [text]="note.text" [title]="note.title" [group]="note.group" id="{{note.$key}}"></note>
+<note class="col-xs-4" *ngFor="let note of notes | async" [noteInNote]="note" [text]="note.text" [title]="note.title" [group]="note.group" [color]="note.color" id="{{note.$key}}"></note>
