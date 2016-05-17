@@ -24,7 +24,13 @@ export class GroupComponent {
   @Input()
   groupName;
   
+  @Input()
+  note;
+  
   notes: FirebaseListObservable<any[]>;
+  
+  newName: string = "";
+  contentList: string[];
   
   constructor(private _ds: DataService) {
     }
@@ -46,10 +52,34 @@ export class GroupComponent {
     }
     
     enterKey(key) {
+      var groupContent;
+      var newOldName;
+      var newName;
+      this.notes.forEach(function(theGroup){
+        var key = theGroup;
+        groupContent = key;
+        key.forEach(function(notesen){
+          newOldName = notesen.group;
+        });
+        
+      });
+      console.log(this.contentList);
       if(key === 13) {
+        let oldName = newOldName;
         this.editGroupName();
-        document.getElementById('group_name').hideFocus;
+        this.contentList.forEach(function(theGroup){
+          
+        });
+        
+        /*for(var note in this.notes){
+          this._ds.changeNoteGroup(this.note.$key, this.group)
+        }
+        console.log(this.group.$key);
+        console.log(this.groupName);*/
+        document.getElementById('group_name').blur();
       }
+      this.contentList = groupContent;
+      console.log(this.contentList);
     }
   
 }

@@ -1,10 +1,6 @@
-<<<<<<< HEAD
-<div class="groupContainer">
+<div class="groupContainer" id={{groupName}}>
 <input class="group_name" id="group_name" type="text" [(ngModel)]="groupName" maxlength="18" contenteditable="true" (keypress)="enterKey($event.keyCode)">
 <input class="delete_button" type="image" src="icon_delete.png" alt="submit" width="30" height="30" (click)="deleteGroup()">
-=======
-<h3 class="group_title" id={{groupName}}>{{groupName}}</h3>
->>>>>>> 299a187e09d2f09e68ac408db2dcbf79727aecba
 <hr class="line">
 </div>
 <note class="col-xs-4" *ngFor="let note of notes | async" [noteInNote]="note" [text]="note.text" [title]="note.title" [group]="note.group" id="{{note.$key}}"></note>
