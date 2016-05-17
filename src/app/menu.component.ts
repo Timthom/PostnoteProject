@@ -31,7 +31,6 @@ export class MenuComponent implements OnInit {
     checkSideBar: boolean = this._vs._showSideBar;
     constructor(private _ds: DataService, private _vs:ValueService) {}
     
-    @Input() inputClicked: string;
     @Output() clicked = new EventEmitter();
     
     
@@ -75,7 +74,7 @@ export class MenuComponent implements OnInit {
         this.groupName = "";
         this.getGroups();
         this.getTitles();
-        this.clicked.emit(true);
+        this.clicked.emit('');
       }
     }
         closeSideBar(){

@@ -27,20 +27,21 @@ export class Postnote2App implements OnInit {
   allGroups :FirebaseListObservable<any[]>;
    statusCheckSideBar:boolean = this._vs._showSideBar;
    constructor(private _ds: DataService, private _vs:ValueService) {}
-   clickedAddGroup: boolean = false;
-   
     
     ngOnInit() {
         this.getGroups();
     }
     
     getGroups() {
+        console.log('inne i get groups');
         this._ds.getAllGroups().then(groups => this.allGroups = groups);
     }
     
-    addGroup(event) {
+    addGroup() {
+       console.log(event);
        this.getGroups();
     }
+    
     
     openSideBar(){
   
