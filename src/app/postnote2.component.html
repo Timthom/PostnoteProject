@@ -1,10 +1,7 @@
 <div class="container">
   <div class="row">
-    <div class="col-xs-2" *ngIf="statusCheckSideBar == true">
-      <menu (clicked)="addGroup()"></menu>
-    </div>
-    <div class="col-xs-1">
-      <a id="menu-toggle" (click)="openSideBar()">   
+    <div>
+      <a id="menu-toggle" (click)="openSideBar()">
         <button type="button" class="btn btn-lg" id="slideButton">
           <span class="pull-right"> 
             <img src="icon_menu.png" alt="menu">
@@ -12,13 +9,17 @@
         </button>
       </a>
     </div>
+    <div class="col-xs-3" *ngIf="statusCheckSideBar == true">
+      <menu (clicked)="addGroup()"></menu>
+    </div>
+
     <div [ngClass]="{'col-xs-9': statusCheckSideBar, 'col-xs-11': !statusCheckSideBar}">
-      <div class="row">
+      <div >
         <creator></creator>
-      </div>   
-      <group (clickedDelete)="deleteGroup()" class="row" *ngFor="let group of allGroups | async" [group]="group" [groupName]="group.name">         
-      </group>
       </div>
+      <group (clickedDelete)="deleteGroup()" class="row" *ngFor="let group of allGroups | async" [group]="group" [groupName]="group.name">
+      </group>
+    </div>
   </div>
 </div>
 
