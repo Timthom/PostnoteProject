@@ -19,14 +19,9 @@ import {Note}from './note';
 ])
 
 export class ColorpickerComponent implements OnInit {
-    // @Input() group: string;
-    // @Output() changeGroup = new EventEmitter();
-    // @Input() noteGroup: string;
-    // @Output() changeNoteGroup = new EventEmitter();  
+    @Output() changeColor = new EventEmitter();
     
-    showingColors: boolean = false;
-    public disabled:boolean = false;
-    public status:{isopen:boolean} = {isopen: false};   
+    showingColors: boolean = false;  
   
     constructor(private _ds: DataService) {}
     
@@ -34,9 +29,8 @@ export class ColorpickerComponent implements OnInit {
         
     }
     
-    selectColor(){
-      
-      console.log("color selected: ");
+    selectColor(color: string){
+      this.changeColor.emit(color);
     }
     
     colorButtonClick() {

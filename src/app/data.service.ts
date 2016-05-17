@@ -28,9 +28,9 @@ export class DataService {
     }
     
      //adds a new note(FirebaseListObservable with random id) to the database...
-    addNoteToNotes(title: string, text: string, group: string, time: number) {
+    addNoteToNotes(title: string, text: string, group: string, time: number, color: string) {
         console.log("inne i addnotetonotes");
-        this._notes.push({'title': title, 'text': text, 'group': group, 'timeStamp': (time * -1)});
+        this._notes.push({'title': title, 'text': text, 'group': group, 'timeStamp': (time * -1), 'color': color});
     }
     
     //updates the notes title with the chosen id...
@@ -41,6 +41,11 @@ export class DataService {
     //updates the notes text with the chosen id...
     updateNoteText(id: string, newText: string) {
         this._notes.child(id).update({'text': newText});
+    }
+    
+    //updates notes backgroundcolor...
+    updateNoteColor(id: string, color: string){
+        this._notes.child(id).update({'color': color});
     }
     
     //deletes the note with the chosen id...

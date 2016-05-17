@@ -8,7 +8,7 @@
     <dropdown [group]="selectedGroup" (changeGroup)="groupChanged($event)"></dropdown>
     </div>
  
-    <note class="col-xs-4" *ngFor="let note of notes | async" [noteInNote]="note" [text]="note.text" [title]="note.title" [group]="note.group" id="{{note.$key}}">
+    <note class="col-xs-4" *ngFor="let note of notes | async" [noteInNote]="note" [text]="note.text" [title]="note.title" [group]="note.group" id="{{note.$key}}" [color]="note.color">
     </note>
 
 </div>
