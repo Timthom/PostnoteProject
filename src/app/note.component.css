@@ -108,6 +108,7 @@ dropdown {
 }
 
 colorpicker {
+  visibility: hidden;
   position: absolute;
   right: 0;
   bottom: 0;
@@ -115,3 +116,6 @@ colorpicker {
   padding-right: 6px;
 }
 
+.visible_colorpicker {
+  visibility: visible;
+}

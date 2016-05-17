@@ -5,5 +5,5 @@
   <br>
   <textarea [attr.disabled]="enabledIfNull" [class.selectedNoteText]="isEditable" [(ngModel)]="text" class="text_field"></textarea>
   <dropdown class="group_dropdown" [class.visible_dropdown]="isEditable" [noteGroup]="selectedNoteGroup" (changeNoteGroup)="noteGroupChanged($event)"></dropdown>
-  <colorpicker></colorpicker> 
+  <colorpicker [class.visible_colorpicker]="isEditable"></colorpicker> 
 </div>
