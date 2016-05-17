@@ -63,3 +63,10 @@ hr{
 .footer-text{
     color: white;
 }
+
+#wrapper ul{
+    cursor: pointer;
+}
+#wrapper ul:hover{
+    background-color:#0099ff;
+}
