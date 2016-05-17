@@ -38,10 +38,12 @@ export class Postnote2App implements OnInit {
     }
     
     addGroup() {
-       console.log(event);
        this.getGroups();
     }
-    
+     
+    deleteGroup() {
+       this.getGroups();
+    }
     
     openSideBar(){
   

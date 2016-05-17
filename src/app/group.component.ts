@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, Output, EventEmitter} from '@angular/core';
 import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from '@angular/router-deprecated';
 import {AngularFire} from 'angularfire2';
 import {FirebaseListObservable} from 'angularfire2';
@@ -27,6 +27,8 @@ export class GroupComponent {
   @Input()
   note;
   
+  @Output() clickedDelete = new EventEmitter();
+  
   notes: FirebaseListObservable<any[]>;
   
   newName: string = "";
@@ -44,7 +46,19 @@ export class GroupComponent {
     }
     
     deleteGroup() {
+      let doneInLoopArray;
+      let arrayOfKeys: any[] = [];
+      this.notes.forEach(function(result){
+        doneInLoopArray = result;
+      });
+      doneInLoopArray.forEach(function(note){
+        arrayOfKeys.push(note.$key);
+      });
+      for(let key of arrayOfKeys){
+        this._ds.deleteNote(key);
+      }
       this._ds.deleteGroup(this.group.$key);
+      this.clickedDelete.emit('');
     }
     
     editGroupName() {
