@@ -15,10 +15,6 @@
   visibility: visible;
 }
 
-.noteContainer:hover group_dropdown {
-  visibility: visible;
-}
-
 .delete_button {
    visibility: hidden;
    float: left;
@@ -103,6 +99,6 @@
   visibility: visible;
 }
 
-group_dropdown {
+dropdown {
   visibility: hidden;
 }
