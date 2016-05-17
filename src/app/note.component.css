@@ -17,12 +17,13 @@
 }
 
 .delete_button {
+   border-radius: 2px;
    visibility: hidden;
    float: left;
    margin-left: 6px;
    margin-top: 6px;
    outline: none;
-   transition: box-shadow 100ms ease-in-out, background-color 100ms ease-in-out;
+   transition: box-shadow 150ms ease-in-out, background-color 150ms ease-in-out;
 }
 
 .delete_button:hover {
@@ -31,6 +32,7 @@
 }
 
 .edit_button {
+  border-radius: 2px;
   visibility: hidden;
   background-image: url('icon_edit.png');
   background-size: 25px 25px;
@@ -39,7 +41,7 @@
   float: right;
   margin-right: 6px;
   margin-top: 6px;
-  transition: box-shadow 100ms ease-in-out, background-color 100ms ease-in-out;
+  transition: box-shadow 150ms ease-in-out, background-color 150ms ease-in-out;
 }
 
 .edit_button:hover {
@@ -106,6 +108,7 @@ dropdown {
 }
 
 colorpicker {
+  visibility: hidden;
   position: absolute;
   right: 0;
   bottom: 0;
@@ -113,3 +116,6 @@ colorpicker {
   padding-right: 6px;
 }
 
+.visible_colorpicker {
+  visibility: visible;
+}

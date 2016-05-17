@@ -61,10 +61,11 @@
 
 #saveButton {
    float: right;
+   border-radius: 2px;
    margin-right: 6px;
    margin-top: 6px;
    outline: none;
-   transition: box-shadow 100ms ease-in-out, background-color 100ms ease-in-out;
+   transition: box-shadow 150ms ease-in-out, background-color 150ms ease-in-out;
 }
 
 #saveButton:hover {
