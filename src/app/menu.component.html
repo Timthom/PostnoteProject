@@ -39,6 +39,11 @@
        <br>
        <br>
        <hr>
+
+       <!-- Den här ngFor kan inte ha async den också, vad göra?-->
+       <ul *ngFor="let group of myGroups | async">
+         {{group.name}}
+       </ul>
        
        
        <menuGroup *ngFor="let group of myGroups | async" [group]="group"></menuGroup>
@@ -46,4 +51,9 @@
       </div>
     </div> 
 </nav>
+
+       <div class="footer">
+         <hr>
+        <span class="footer-text">© 2016-Group 4 ITHS</span>
+       </div>
 
