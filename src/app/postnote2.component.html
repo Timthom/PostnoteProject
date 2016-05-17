@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col-xs-2" *ngIf="statusCheckSideBar == true">
-      <menu></menu>
+      <menu [inputClicked]="clickedAddGroup" (clicked)="addGroup($event)"></menu>
     </div>
     
     <div class="col-xs-1">

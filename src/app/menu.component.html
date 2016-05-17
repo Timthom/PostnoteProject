@@ -39,12 +39,6 @@
        <br>
        <br>
        <hr>
-
-       <!-- Den här ngFor kan inte ha async den också, vad göra?-->
-       <ul *ngFor="let group of myGroups | async">
-         {{group.name}}
-       </ul>
-       
        
        <menuGroup *ngFor="let group of myGroups | async" [group]="group"></menuGroup>
       
