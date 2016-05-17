@@ -8,7 +8,8 @@ import {GroupComponent} from './group.component';
 import {DataService} from './data.service';
 import {OnInit} from '@angular/core';
 import {CreatorComponent} from './creator.component';
-import{ValueService} from './value.service';
+import {ValueService} from './value.service';
+
 
 @Component({
   moduleId: module.id,
