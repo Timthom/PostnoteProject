@@ -33,8 +33,15 @@ export class Postnote2App implements OnInit {
     }
     
     getGroups() {
+        console.log('inne i get groups');
         this._ds.getAllGroups().then(groups => this.allGroups = groups);
     }
+    
+    addGroup() {
+       console.log(event);
+       this.getGroups();
+    }
+    
     
     openSideBar(){
   

@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from '@angular/router-deprecated';
 import {AngularFire} from 'angularfire2';
 import {FirebaseListObservable} from 'angularfire2';
@@ -30,6 +30,8 @@ export class MenuComponent implements OnInit {
     myGroups: FirebaseListObservable<any[]>;
     checkSideBar: boolean = this._vs._showSideBar;
     constructor(private _ds: DataService, private _vs:ValueService) {}
+    
+    @Output() clicked = new EventEmitter();
     
     
     ngOnInit() {
@@ -70,6 +72,9 @@ export class MenuComponent implements OnInit {
         let time = new Date().getTime();  
         this._ds.addGroupToGroups(this.groupName, time);
         this.groupName = "";
+        this.getGroups();
+        this.getTitles();
+        this.clicked.emit('');
       }
     }
         

@@ -63,7 +63,7 @@ export class NoteComponent{
     }    
     
     deleteClick() {
-      this._ds.deleteNote(this.noteInNote.$key);
+        this._ds.deleteNote(this.noteInNote.$key);
     }
     
 }
