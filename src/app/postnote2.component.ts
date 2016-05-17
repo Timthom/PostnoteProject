@@ -40,7 +40,6 @@ export class Postnote2App implements OnInit {
   
         this._vs._showSideBar = !this._vs._showSideBar;
         this.statusCheckSideBar = this._vs._showSideBar;
-        console.log('Menu in and show only button');
     }
   
 }
