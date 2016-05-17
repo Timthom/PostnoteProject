@@ -8,7 +8,8 @@ import {GroupComponent} from './group.component';
 import {DataService} from './data.service';
 import {OnInit} from '@angular/core';
 import {CreatorComponent} from './creator.component';
-import{ValueService} from './value.service';
+import {ValueService} from './value.service';
+
 
 @Component({
   moduleId: module.id,
@@ -33,14 +34,20 @@ export class Postnote2App implements OnInit {
     }
     
     getGroups() {
+        console.log('inne i get groups');
         this._ds.getAllGroups().then(groups => this.allGroups = groups);
     }
+    
+    addGroup() {
+       console.log(event);
+       this.getGroups();
+    }
+    
     
     openSideBar(){
   
         this._vs._showSideBar = !this._vs._showSideBar;
         this.statusCheckSideBar = this._vs._showSideBar;
-        console.log('Menu in and show only button');
     }
   
 }

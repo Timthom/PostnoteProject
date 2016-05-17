@@ -7,6 +7,7 @@ import {DataService} from './data.service';
 import {Input} from '@angular/core';
 import {Note} from './note';
 import {DropdownComponent} from './dropdown.component';
+import {ColorpickerComponent} from './colorpicker.component';
 
 @Component({
   moduleId: module.id,
@@ -14,7 +15,7 @@ import {DropdownComponent} from './dropdown.component';
   providers: [ROUTER_PROVIDERS],
   templateUrl: 'note.component.html',
   styleUrls: ['note.component.css'],
-  directives: [ROUTER_DIRECTIVES, DropdownComponent],
+  directives: [ROUTER_DIRECTIVES, DropdownComponent, ColorpickerComponent],
   pipes: []
 })
 @RouteConfig([
@@ -63,7 +64,7 @@ export class NoteComponent{
     }    
     
     deleteClick() {
-      this._ds.deleteNote(this.noteInNote.$key);
+        this._ds.deleteNote(this.noteInNote.$key);
     }
     
 }

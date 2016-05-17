@@ -51,35 +51,26 @@ export class GroupComponent {
       this._ds.updateGroupName(this.group.$key, this.groupName);
     }
     
-    enterKey(key) {
-      var groupContent;
-      var newOldName;
-      var newName;
-      this.notes.forEach(function(theGroup){
-        var key = theGroup;
-        groupContent = key;
-        key.forEach(function(notesen){
-          newOldName = notesen.group;
-        });
-        
-      });
-      console.log(this.contentList);
-      if(key === 13) {
-        let oldName = newOldName;
-        this.editGroupName();
-        this.contentList.forEach(function(theGroup){
-          
-        });
-        
-        /*for(var note in this.notes){
-          this._ds.changeNoteGroup(this.note.$key, this.group)
-        }
-        console.log(this.group.$key);
-        console.log(this.groupName);*/
-        document.getElementById('group_name').blur();
-      }
-      this.contentList = groupContent;
-      console.log(this.contentList);
+    changeNotesInTheGroup(id) {
+      this._ds.changeNoteGroup(id, this.groupName); 
     }
-  
+    
+    enterKey(key) {
+        if(key === 13) {
+        let doneInLoopArray;
+        let arrayOfKeys: any[] = [];
+        this.notes.forEach(function(result){
+          doneInLoopArray = result;
+        });
+        doneInLoopArray.forEach(function(note){
+          arrayOfKeys.push(note.$key);
+        });
+        for(let key of arrayOfKeys){
+          console.log('key: '+key);
+          this._ds.changeNoteGroup(key, this.groupName);
+        }
+        this.editGroupName();
+        this.getNotes();
+      }
+    }
 }

@@ -1,9 +1,8 @@
 <div class="container">
   <div class="row">
     <div class="col-xs-2" *ngIf="statusCheckSideBar == true">
-      <menu></menu>
+      <menu (clicked)="addGroup()"></menu>
     </div>
-    
     <div class="col-xs-1">
       <a id="menu-toggle" (click)="openSideBar()">   
         <button type="button" class="btn btn-lg" id="slideButton">
