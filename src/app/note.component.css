@@ -15,10 +15,6 @@
   visibility: visible;
 }
 
-.noteContainer:hover dropdown{
-  visibility: visible;
-}
-
 .delete_button {
    visibility: hidden;
    float: left;
@@ -96,6 +92,10 @@
 
 .savable {
   background-image: url('icon_save.png');
+  visibility: visible;
+}
+
+.visible_dropdown {
   visibility: visible;
 }
 

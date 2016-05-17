@@ -1,0 +1,16 @@
+#title {
+    background-color: white;
+    border: none;
+    margin: 5px;
+    margin-left: 0px;
+    margin-top: 0px;
+    cursor: pointer;
+}
+
+input {
+    outline: none;
+}
+
+p {
+    cursor: pointer;
+}

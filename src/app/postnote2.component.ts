@@ -8,6 +8,7 @@ import {GroupComponent} from './group.component';
 import {DataService} from './data.service';
 import {OnInit} from '@angular/core';
 import {CreatorComponent} from './creator.component';
+import{ValueService} from './value.service';
 
 @Component({
   moduleId: module.id,
@@ -24,8 +25,8 @@ export class Postnote2App implements OnInit {
   
   
   allGroups :FirebaseListObservable<any[]>;
-  showSideBar:boolean = true;
-   constructor(private _ds: DataService) {}
+   statusCheckSideBar:boolean = this._vs._showSideBar;
+   constructor(private _ds: DataService, private _vs:ValueService) {}
     
     ngOnInit() {
         this.getGroups();
@@ -35,8 +36,11 @@ export class Postnote2App implements OnInit {
         this._ds.getAllGroups().then(groups => this.allGroups = groups);
     }
     
-    toogleSideBar(){
-        this.showSideBar = !this.showSideBar;
+    openSideBar(){
+  
+        this._vs._showSideBar = !this._vs._showSideBar;
+        this.statusCheckSideBar = this._vs._showSideBar;
+        console.log('Menu in and show only button');
     }
   
 }
