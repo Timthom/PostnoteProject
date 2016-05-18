@@ -1,12 +1,15 @@
 #title {
-    background-color: white;
+    background: none;
     border: none;
     margin: 5px;
     margin-left: 0px;
     margin-top: 0px;
     cursor: pointer;
+    color: antiquewhite;
 }
-
+#arrowBtn {
+    color: antiquewhite;
+}
 input {
     outline: none;
 }
