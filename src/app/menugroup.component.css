@@ -34,7 +34,7 @@ p:hover {
 }
 
 .title{
-    background: none!important;
+    background: none;
     border: none!important;
     color: white;
     cursor: pointer;
@@ -45,4 +45,11 @@ p:hover {
     cursor: pointer;
 }
 
+.editing {
+    color: gray;
+}
 
+.editing:hover {
+    color: gray;
+    cursor: text;
+}
