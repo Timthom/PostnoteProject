@@ -40,7 +40,8 @@ export class MenuComponent implements OnInit {
     }
 
     getTitles() {
-        this._ds.getAllNotes().then(titles => this.titles = titles);
+        this._ds.getAllNotesInGroup('noGroup').then(notes => this.titles = notes);
+
     }
     
     getGroups() {
@@ -75,6 +76,8 @@ export class MenuComponent implements OnInit {
         this.getGroups();
         this.getTitles();
         this.clicked.emit('');
+        this.adding = false;
+        this.buttonText ="Add category";
       }
     }
         
