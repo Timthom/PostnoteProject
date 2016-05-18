@@ -48,17 +48,19 @@ export class MenuGroupComponent implements OnInit{
     
     editGroup() {
       this._ds.updateGroupName(this.group.$key, this.group.name);
-      document.getElementById('title').blur();
-      /*if(this.editingName){
-        console.log("true");
-        //document.getElementById('title').blur();
-        document.getElementById('title').addEventListener('click', focus);
-      } else {
-        console.log("false");
-        //document.getElementById('title').focus();
-        document.getElementById('title').addEventListener('click', blur);
+    }
+    
+    //When pressing the edit button, it enables editing on the input field
+    editing() {
+      this.editingName = !this.editingName;
+      if(this.editingName){
+        document.getElementById(this.group.$key).removeAttribute("readonly");
+        document.getElementById(this.group.$key).focus();
+
+      }else{
+        document.getElementById(this.group.$key).setAttribute("readonly", "true");
+        this.editGroup();
       }
-      this.editingName = !this.editingName;*/
     }
   
   toggleExpand() {
@@ -73,15 +75,15 @@ export class MenuGroupComponent implements OnInit{
   
   
  jumpToNote(note:string){
-      
       var element = document.getElementById(note);
-      
       element.scrollIntoView(true);  
   
   }
   
   jumpToGroup(groupId :string){
       var element = document.getElementById(groupId);
-      element.scrollIntoView(true);  
+      element.scrollIntoView(true);
+      console.log(element);
   }
+  
 }

@@ -9,6 +9,7 @@
 }
 #arrowBtn {
     color: antiquewhite;
+
 }
 input {
     outline: none;
@@ -35,7 +36,7 @@ p {
 #editBtn,#deleteBtn{
     visibility: hidden;
 }
-#title{
+.title{
     border-radius: 2px;
 }
 
