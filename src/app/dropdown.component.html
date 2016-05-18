@@ -6,6 +6,9 @@
       <li *ngFor="let group of groups | async" (click)="selectGroup(group.name)">
           <a class="dropdown-item" href="#">{{group.name}}</a>
       </li>
+      <li (click)="selectGroup('noGroup')">
+        <a href="#">No group</a>
+      </li>
     </ul>
   </div>
 </div>

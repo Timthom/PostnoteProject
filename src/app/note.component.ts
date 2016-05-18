@@ -38,7 +38,7 @@ export class NoteComponent implements OnInit{
   color;
   
   ngOnInit() {
-      this.colorChanged(this.color);
+      this.colorInit(this.color);
   }
   
   constructor(private _ds: DataService) {
@@ -77,6 +77,25 @@ export class NoteComponent implements OnInit{
     }   
     
     colorChanged(event) {
+      this.colorSwitch(event);
+      this.isEditable = true;
+      this._ds.updateNoteColor(this.noteInNote.$key, event);
+    } 
+    
+    resetColors() {
+        this.isPink = false; 
+        this.isMagenta = false; 
+        this.isOrange = false; 
+        this.isBlue = false; 
+        this.isYellow = false; 
+        this.isGreen = false; 
+    }
+    
+    colorInit(event) {
+      this.colorSwitch(event);
+    }
+    
+    colorSwitch(event) {
       this.resetColors();
       switch (event){
         case "pink":
@@ -100,17 +119,6 @@ export class NoteComponent implements OnInit{
         default: 
           this.isYellow = true; 
       }
-      
-      this._ds.updateNoteColor(this.noteInNote.$key, event);
-    } 
-    
-    resetColors() {
-        this.isPink = false; 
-        this.isMagenta = false; 
-        this.isOrange = false; 
-        this.isBlue = false; 
-        this.isYellow = false; 
-        this.isGreen = false; 
     }
     
     deleteClick() {
