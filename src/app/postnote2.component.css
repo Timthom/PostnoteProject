@@ -20,7 +20,7 @@ menu{
 }
 #slideButton{
 	background-color:#222;
-	position: absolute;
+	position: fixed;
 	z-index: 10000000;
 	outline: none;
 	border-radius: 0px;
