@@ -34,8 +34,6 @@
         <input [(ngModel)]="groupName" type="text" id="categoryInput" placeholder="Name" (keyup.enter)="addGroup()">
         <button id="plusBtn" type="button" (click)="addGroup()">+</button>
       </form>
-      <br>
-      <br>
       <hr>
 
       <menuGroup *ngFor="let group of myGroups | async" [group]="group"></menuGroup>
