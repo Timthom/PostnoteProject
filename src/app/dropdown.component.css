@@ -38,3 +38,7 @@ ul {
 .dropup .dropdown-menu {
     margin-bottom: 4px;
 }
+
+.btn-group.open .dropdown-toggle {
+    box-shadow: none;
+}
