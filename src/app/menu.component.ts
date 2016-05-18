@@ -23,7 +23,8 @@ import {ValueService} from './value.service';
 
 
 export class MenuComponent implements OnInit {
-    adding: boolean =false;
+    showingCancel: boolean = false;
+    adding: boolean = false;
     groupName: string ="";
     titles :FirebaseListObservable<any[]>;  
     buttonText: string ="Add category";
@@ -60,6 +61,7 @@ export class MenuComponent implements OnInit {
     
     toggleInput(){
       this.adding = !this.adding;
+      this.showingCancel = !this.showingCancel;
       if(this.adding){
         this.buttonText = "Cancel";
       }

@@ -4,6 +4,7 @@
 .line {
     border: 0;
     margin-top: 8px;
+    margin-left: 10px;
     height: 1px;
     background-image: linear-gradient(to right, #808080, #FFFFFF);
 }
@@ -18,7 +19,8 @@
 }
 
 .delete_button {
-    padding-top: 6px;
+    border-radius: 2px;
+    margin-bottom: -6px;
     border: none;
     outline: none;
     visibility: hidden;

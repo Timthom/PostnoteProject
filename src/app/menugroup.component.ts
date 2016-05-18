@@ -19,7 +19,7 @@ import { Observable } from 'rxjs/Observable';
 
 
 export class MenuGroupComponent implements OnInit{
-  arrowSrc: string = 'icon_expand.png';
+  arrowSrc: string = 'icon_expand_white.png';
   expanded: boolean = false;
   editingName: boolean = false;
   notes: FirebaseListObservable<any[]>;
@@ -66,10 +66,10 @@ export class MenuGroupComponent implements OnInit{
   toggleExpand() {
     this.expanded = !this.expanded;
     if(this.expanded){
-      this.arrowSrc = 'icon_hide.png';
+      this.arrowSrc = 'icon_hide_white.png';
     }
     else{
-      this.arrowSrc = 'icon_expand.png';
+      this.arrowSrc = 'icon_expand_white.png';
     }
   }
   

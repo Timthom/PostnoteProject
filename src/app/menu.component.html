@@ -21,7 +21,7 @@
           {{note.title}}
         </ul>
         <hr>     
-       <button id="addBtn" class="btn btn-info btn-xs" (click)="toggleInput()">
+       <button class="addBtn btn btn-info btn-xs" [class.cancelable]="showingCancel" (click)="toggleInput()">
          {{buttonText}}
        </button>
       <form *ngIf="adding">
