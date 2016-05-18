@@ -50,18 +50,6 @@ hr{
     width: 15%;  
 }
 
-.footer{
-    text-align: center;
-    bottom: 0px;
-    background-color:#222;
-
-}
-.footer hr{
-    margin-top: 0px;
-}
-.footer-text{
-    color: white;
-}
 
 #wrapper ul{
     cursor: pointer;

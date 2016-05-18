@@ -1,11 +1,10 @@
 #title {
-    background: none;
-    border: none;
+ 
     margin: 5px;
     margin-left: 0px;
     margin-top: 0px;
     cursor: pointer;
-    color: antiquewhite;
+
 }
 #arrowBtn {
     color: antiquewhite;
@@ -38,6 +37,9 @@ p {
 }
 .title{
     border-radius: 2px;
+    background: none!important;
+    border: none!important;
+    color: white!important;
 }
 
 
