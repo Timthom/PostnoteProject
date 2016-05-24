@@ -98,13 +98,9 @@ export class GroupComponent {
       }
     }
   }
-
-  toggleExpand(group:string) {
-    
-    var hideGroup = document.getElementById(group)
-    
-    console.log('test toggle' + hideGroup)
-    
+  
+// Expand category on click arrowBtn
+  toggleExpand() {
     this.expanded = !this.expanded;
     if (this.expanded) {
       this.arrowSrc = 'icon_hide.png';
