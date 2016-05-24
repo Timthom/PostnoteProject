@@ -47,7 +47,7 @@ export class GroupComponent {
         this._ds.getAllNotesInGroup(this.groupName).then(notes => this.notes = notes);
     }
     
-    deleteGroup() {
+    getContent(){
       let doneInLoopArray;
       let arrayOfKeys: any[] = [];
       this.notes.forEach(function(result){
@@ -56,7 +56,12 @@ export class GroupComponent {
       doneInLoopArray.forEach(function(note){
         arrayOfKeys.push(note.$key);
       });
-      for(let key of arrayOfKeys){
+      return arrayOfKeys;
+    }
+    
+    deleteGroup() {
+      let content = this.getContent();
+      for(let key of content){
         this._ds.deleteNote(key);
       }
       this._ds.deleteGroup(this.group.$key);
@@ -73,15 +78,8 @@ export class GroupComponent {
     
     enterKey(key) {
         if(key === 13) {
-        let doneInLoopArray;
-        let arrayOfKeys: any[] = [];
-        this.notes.forEach(function(result){
-          doneInLoopArray = result;
-        });
-        doneInLoopArray.forEach(function(note){
-          arrayOfKeys.push(note.$key);
-        });
-        for(let key of arrayOfKeys){
+        let content = this.getContent();
+        for(let key of content){
           console.log('key: '+key);
           this._ds.changeNoteGroup(key, this.groupName);
         }
