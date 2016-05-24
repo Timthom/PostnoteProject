@@ -1,8 +1,8 @@
 <div id="container">   
-    <input id="arrowBtn" type="image" src={{arrowSrc}} [ngClass] = "{expandedClass : expanded}" width="20" height="20" (click)="toggleExpand()">
-    <input id="title" [(ngModel)]="group.name" (click)="jumpToGroup(group.name)">
-    <input id="editBtn" type="image" src="icon_edit.png" width="20" height="20" (click)="editGroup()">
-    <input id="deleteBtn" type="image" src="icon_delete.png" width="20" height="20" (click)="deleteGroup()">
+    <input id="arrowBtn" type="image" src={{arrowSrc}} [ngClass] = "{expandedClass : expanded}" width="25" height="25" (click)="toggleExpand()">
+    <input readonly class="title" id={{group.$key}} [(ngModel)]="group.name" (click)="jumpToGroup(group.name)" (keyup.enter)="editGroup()" [class.editing]="editingName">
+    <input id="editBtn" type="image" src="icon_edit_white.png" width="20" height="20" (click)="editing()">
+    <input id="deleteBtn" type="image" src="icon_delete_white.png" width="20" height="20" (click)="deleteGroup()">
     <!--<ul *ngIf="expanded">
         <li>Expanderad!</li>
     </ul>-->

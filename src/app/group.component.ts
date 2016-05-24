@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, Output, EventEmitter} from '@angular/core';
 import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from '@angular/router-deprecated';
 import {NoteComponent} from './note.component';
 import {DataService} from './data.service'
@@ -27,6 +27,8 @@ export class GroupComponent {
   @Input()
   note;
   
+  @Output() clickedDelete = new EventEmitter();
+  
   notes: FirebaseListObservable<any[]>;
   
   newName: string = "";
@@ -51,7 +53,23 @@ export class GroupComponent {
     
     deleteGroup() {
       if(this._authData != null) {
-      this._ds.deleteGroup(this.group.$key)
+        
+        let doneInLoopArray;
+        let arrayOfKeys: any[] = [];
+        
+        this.notes.forEach(function(result){
+        doneInLoopArray = result;
+      });
+      
+      doneInLoopArray.forEach(function(note){
+        arrayOfKeys.push(note.$key);
+      });
+      
+      for(let key of arrayOfKeys){
+        this._ds.deleteNote(key);
+      }
+        this._ds.deleteGroup(this.group.$key);
+        this.clickedDelete.emit('');
       };
     }
     
@@ -61,38 +79,33 @@ export class GroupComponent {
       }
     }
     
-    enterKey(key) {
-      var groupContent;
-      var newOldName;
-      var newName;
-      this.notes.forEach(function(theGroup){
-        var key = theGroup;
-        groupContent = key;
-        key.forEach(function(notesen){
-          newOldName = notesen.group;
-        });
-        
-      });
-      if(this._authData != null) {
-      console.log(this.contentList);
-      if(key === 13) {
-        let oldName = newOldName;
-        this.editGroupName();
-        this.contentList.forEach(function(theGroup){
-          
-        });
-        
-        /*for(var note in this.notes){
-          this._ds.changeNoteGroup(this.note.$key, this.group)
-        }
-        console.log(this.group.$key);
-        console.log(this.groupName);*/
-        document.getElementById('group_name').blur();
-      }
-      this.contentList = groupContent;
-      console.log(this.contentList);
+    changeNotesInTheGroup(id) {
+      this._ds.changeNoteGroup(id, this.groupName); 
     }
     
+    enterKey(key) {
+      if(this._authData != null) {
+        
+        if(key === 13) {
+        let doneInLoopArray;
+        let arrayOfKeys: any[] = [];
+        
+        this.notes.forEach(function(result){
+          doneInLoopArray = result;
+        });
+          
+        doneInLoopArray.forEach(function(note){
+          arrayOfKeys.push(note.$key);
+        });
+        
+        for(let key of arrayOfKeys){
+          console.log('key: '+key);
+          this._ds.changeNoteGroup(key, this.groupName);
+        }
+        
+        this.editGroupName();
+        this.getNotes();
+      }
     }
-  
+  }
 }

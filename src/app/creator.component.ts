@@ -63,7 +63,7 @@ export class CreatorComponent {
         console.log("Bör inte köras");
         if(this.title !== '') {
             let time = new Date().getTime();            
-            this._ds.addNoteToNotes(this.title, this.text, this.selectedGroup, time);
+            this._ds.addNoteToNotes(this.title, this.text, this.selectedGroup, time, "yellow");
             this.title = '';
             this.text = '';
         }

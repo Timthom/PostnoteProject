@@ -1,8 +1,10 @@
 .navbar {
     border-radius: 0px;
+    position: relative;
     position: fixed;
     display: block;
-    height: 90%; 
+    height: 100%; 
+    z-index: 10000;
     overflow:scroll;
 }
 ul{
@@ -29,44 +31,58 @@ hr{
     width: 100%;
 }
 
-#addBtn{
+.addBtn{
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 2px;
     width: 90%;
     margin-left: 5%;
-    margin-right :5%;
+    margin-right: 5%;
+    outline: none;
+}
+
+.addBtn:active {
+    background-color: #4CAF50;
+    outline: none;
+}
+
+.cancelable {
+    background-color: #F44336;
+}
+
+.cancelable:active {
+    background-color:  #F44336;
+    outline: none;
 }
 
 #categoryInput{
-    margin: 10px;
-    width: 80%;
-    float:left;
+    border: none;
+    border-radius: 2px;
+    outline: none;
+    margin: 10px 10px 10px 5%;
+    width: 70%;
+    float: left;
     margin-right: 0px;
 }
 
 #plusBtn{
+    border: none;
+    height: 22px;
+    border-radius: 2px;
     float:right;
     margin-top: 10px;
+    margin-right: 5%;
     width: 15%;  
+    outline: none;
 }
 
-.footer{
-    text-align: center;
-    bottom: 0px;
-    position: fixed;
-    background-color:#222;
-    column-rule-width: 100%;
-    height: 10%;
-    width: 19%;
-}
-.footer hr{
-    margin-top: 0px;
-}
-.footer-text{
-    color: white;
+#plusBtn:active {
+    background-color: #A0A0A0;
 }
 
 #wrapper ul{
     cursor: pointer;
 }
 #wrapper ul:hover{
-    background-color:#0099ff;
+    color: gray;
 }

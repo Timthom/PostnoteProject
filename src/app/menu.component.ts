@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from '@angular/router-deprecated';
 import {Note}from './note';
 import {DataService} from './data.service';
@@ -24,6 +24,7 @@ export class MenuComponent implements OnInit, CanReuse  {
         return false;
     }
     
+    showingCancel: boolean = false;
     adding: boolean = false;
     groupName: string ="";
     titles :FirebaseListObservable<any[]>;  
@@ -31,6 +32,8 @@ export class MenuComponent implements OnInit, CanReuse  {
     myGroups: FirebaseListObservable<any[]>;
     checkSideBar: boolean = this._vs._showSideBar;
     _authData;
+    
+    @Output() clicked = new EventEmitter();
     
     constructor(@Inject(FirebaseRef) private _ref: Firebase, private _ds: DataService, private _vs:ValueService) {
       this._authData = this._ref.getAuth();
@@ -46,6 +49,7 @@ export class MenuComponent implements OnInit, CanReuse  {
     getTitles() {
       if(this._authData != null) {
         this._ds.getAllNotes().then(titles => this.titles = titles);
+        this._ds.getAllNotesInGroup('noGroup').then(notes => this.titles = notes);
       }
     }
     
@@ -67,6 +71,7 @@ export class MenuComponent implements OnInit, CanReuse  {
     
     toggleInput(){
       this.adding = !this.adding;
+      this.showingCancel = !this.showingCancel;
       if(this.adding){
         this.buttonText = "Cancel";
       }
@@ -81,12 +86,12 @@ export class MenuComponent implements OnInit, CanReuse  {
           let time = new Date().getTime();  
           this._ds.addGroupToGroups(this.groupName, time);
           this.groupName = "";
+          this.getGroups();
+          this.getTitles();
+          this.clicked.emit('');
+          this.adding = false;
+          this.buttonText ="Add category";
         }
       }
-    }
-        closeSideBar(){
-        
-        this._vs._showSideBar = !this._vs._showSideBar;
-        console.log('menu innnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn','side button gone');
-    }
+    }       
 }

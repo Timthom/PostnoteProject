@@ -19,7 +19,7 @@ import { Observable } from 'rxjs/Observable';
 
 
 export class MenuGroupComponent implements OnInit{
-  arrowSrc: string = 'icon_expand.png';
+  arrowSrc: string = 'icon_expand_white.png';
   expanded: boolean = false;
   editingName: boolean = false;
   notes: FirebaseListObservable<any[]>;
@@ -59,42 +59,48 @@ export class MenuGroupComponent implements OnInit{
     
     editGroup() {
       if(this._authData != null) {
-      this._ds.updateGroupName(this.group.$key, this.group.name);
-      document.getElementById('title').blur();
-      /*if(this.editingName){
-        console.log("true");
-        //document.getElementById('title').blur();
-        document.getElementById('title').addEventListener('click', focus);
-      } else {
-        console.log("false");
-        //document.getElementById('title').focus();
-        document.getElementById('title').addEventListener('click', blur);
-      }
-      this.editingName = !this.editingName;*/
+        this._ds.updateGroupName(this.group.$key, this.group.name);
     }
+    }
+    
+    //When pressing the edit button, it enables editing on the input field
+    editing() {
+      if(this._authData != null) {
+        this.editingName = !this.editingName;
+        
+        if(this.editingName){
+          document.getElementById(this.group.$key).removeAttribute("readonly");
+          document.getElementById(this.group.$key).focus();
+
+      } else {
+        document.getElementById(this.group.$key).setAttribute("readonly", "true");
+        this.editGroup();
+        }
+      }
   }
+
   
   toggleExpand() {
     this.expanded = !this.expanded;
     if(this.expanded){
-      this.arrowSrc = 'icon_hide.png';
+      this.arrowSrc = 'icon_hide_white.png';
     }
     else{
-      this.arrowSrc = 'icon_expand.png';
+      this.arrowSrc = 'icon_expand_white.png';
     }
   }
   
   
  jumpToNote(note:string){
-      
       var element = document.getElementById(note);
-      
       element.scrollIntoView(true);  
   
   }
   
   jumpToGroup(groupId :string){
       var element = document.getElementById(groupId);
-      element.scrollIntoView(true);  
+      element.scrollIntoView(true);
+      console.log(element);
   }
+  
 }

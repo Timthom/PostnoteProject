@@ -65,7 +65,7 @@ export class DataService {
     }
     
      //adds a new note(FirebaseListObservable with random id) to the database...
-    addNoteToNotes(title: string, text: string, group: string, time: number) {
+    addNoteToNotes(title: string, text: string, group: string, time: number, color: string) {
         
         if(this._ref.getAuth() == null) return;
         
@@ -82,7 +82,7 @@ export class DataService {
         
         console.log(this._notes.ref);
         
-        this._notes.push({'title': title, 'text': text, 'group': group, 'timeStamp': (time * -1)});
+        this._notes.push({'title': title, 'text': text, 'group': group, 'timeStamp': (time * -1), 'color': color});
         console.log(Firebase);
     }
     
@@ -120,6 +120,11 @@ export class DataService {
     }, { remember: "sessionOnly"
 });
         this._notes.child(id).update({'text': newText});
+    }
+    
+    //updates notes backgroundcolor...
+    updateNoteColor(id: string, color: string){
+        this._notes.child(id).update({'color': color});
     }
     
     //deletes the note with the chosen id...

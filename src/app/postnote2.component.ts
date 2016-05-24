@@ -11,7 +11,6 @@ import{ValueService} from './value.service';
 import { Injectable, Inject } from '@angular/core';
 import {CanReuse} from "@angular/router-deprecated";
 
-
 @Component({
   moduleId: module.id,
   selector: 'postnote2-app',
@@ -47,16 +46,24 @@ export class Postnote2App implements OnInit, CanReuse {
     
     getGroups() {
         if(this._authData != null) {
-        this._ds.getAllGroups().then(groups => this.allGroups = groups);
-        console.log("Bör inte köras");
+            console.log('inne i get groups');
+            this._ds.getAllGroups().then(groups => this.allGroups = groups);
+            console.log("Bör inte köras");
         }
+    }
+    
+    addGroup() {
+       this.getGroups();
+    }
+     
+    deleteGroup() {
+       this.getGroups();
     }
     
     openSideBar(){
   
         this._vs._showSideBar = !this._vs._showSideBar;
         this.statusCheckSideBar = this._vs._showSideBar;
-        console.log('Menu in and show only button');
     }
   
 }

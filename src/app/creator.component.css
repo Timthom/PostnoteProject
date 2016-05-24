@@ -1,10 +1,10 @@
 
 .creator {
   overflow: auto;
-  background-color: #EEF66C  ;
+  background-color: lightgray;
   box-shadow: 0px 3px 10px gray;
-  height: 300px;
-  width: 300px;
+  max-height: 300px;
+  max-width: 300px;
   margin: 10px;
   display: table-cell; 
   float: left;
@@ -17,54 +17,41 @@
    margin-left: 50px;
    margin-top: 5px;
    text-align: center;
-   background-color: #EEF66C;
+   background-color: rgba(255, 255, 255, 0);
    border: none;
    outline: none;
-   /*border: dashed 1px black;*/
+   padding: 1px 1px 5px 1px;
 }
 
 .inputTitle::-webkit-input-placeholder {
     color: #505050;
 }
 
-/*
-.inputTitle:focus {
-  border: dashed 1px black;
-}
-*/
-
 .inputText {
    width: 280px;
-   height: 220px;
+   height: 221px;
    margin: 10px;
    margin-bottom: 0;
    padding: 5px;
-   background-color: #EEF66C;
+   background-color: rgba(255, 255, 255, 0);
    overflow: scroll;
    resize: none;
    border: none;
    outline: none;
    overflow: auto;
-   /*border: dashed 1px black;*/
 }
 
 .inputText::-webkit-input-placeholder {
     color: #505050;
 }
 
-/*
-.inputText:focus {
-   border: dashed 1px black;
-   width: 278px;
-}
-*/
-
 #saveButton {
    float: right;
+   border-radius: 2px;
    margin-right: 6px;
    margin-top: 6px;
    outline: none;
-   transition: box-shadow 100ms ease-in-out, background-color 100ms ease-in-out;
+   transition: box-shadow 150ms ease-in-out, background-color 150ms ease-in-out;
 }
 
 #saveButton:hover {

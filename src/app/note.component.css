@@ -1,10 +1,10 @@
 .noteContainer {
-   overflow: auto;
- background-color: #EEF66C   ;
+ overflow: auto;
  box-shadow: 0px 2px 5px gray;
  height: 300px;
  width: 300px;
  display: table-cell;
+ position: relative;
 }
 
 .noteContainer:hover .edit_button{
@@ -16,12 +16,13 @@
 }
 
 .delete_button {
+   border-radius: 2px;
    visibility: hidden;
    float: left;
    margin-left: 6px;
    margin-top: 6px;
    outline: none;
-   transition: box-shadow 100ms ease-in-out, background-color 100ms ease-in-out;
+   transition: box-shadow 150ms ease-in-out, background-color 150ms ease-in-out;
 }
 
 .delete_button:hover {
@@ -30,6 +31,7 @@
 }
 
 .edit_button {
+  border-radius: 2px;
   visibility: hidden;
   background-image: url('icon_edit.png');
   background-size: 25px 25px;
@@ -38,7 +40,7 @@
   float: right;
   margin-right: 6px;
   margin-top: 6px;
-  transition: box-shadow 100ms ease-in-out, background-color 100ms ease-in-out;
+  transition: box-shadow 150ms ease-in-out, background-color 150ms ease-in-out;
 }
 
 .edit_button:hover {
@@ -48,7 +50,7 @@
 
 .title {
   display: block;
-  height: 28px;
+  height: 30px;
   width: 200px;
   font-size: 25px;
   float: left;
@@ -57,7 +59,7 @@
   margin-left: 19px;
   margin-right: 19px;
   text-align: center;
-  background-color: #EEF66C ;
+  background-color: transparent;
   border: none;
   outline: none;
 }
@@ -68,11 +70,11 @@
 
 .text_field {
    width: 280px;
-  height: 220px;
+  height: 219px;
   margin: 10px;
   margin-bottom: 0;
   padding: 5px;
-  background-color: #EEF66C ;
+  background-color: transparent ;
   overflow: scroll;
   resize: none;
   border: none;
@@ -101,4 +103,41 @@
 
 dropdown {
   visibility: hidden;
+  float: left;
+}
+
+colorpicker {
+  visibility: hidden;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  padding-bottom: 6px;
+  padding-right: 6px;
+}
+
+.visible_colorpicker {
+  visibility: visible;
+}
+.pink_color {
+    background-color: #F490B7;
+}
+
+.orange_color {
+    background-color: #FFA334;
+}
+
+.magenta_color {
+    background-color: #F56D7E;
+}
+
+.blue_color {
+    background-color: #8FD3CE;
+}
+
+.yellow_color {
+    background-color: #EEF66C;
+}
+
+.green_color {
+    background-color: mediumseagreen;
 }

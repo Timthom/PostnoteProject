@@ -11,6 +11,6 @@ if (environment.production) {
 
 bootstrap(AppComponent, [
  FIREBASE_PROVIDERS, AuthorizationService, 
- defaultFirebase('https://scorching-torch-8126.firebaseio.com/') 
+ defaultFirebase('https://dazzling-fire-7472.firebaseio.com') 
 ]);
 
