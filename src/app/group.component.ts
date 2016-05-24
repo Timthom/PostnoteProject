@@ -33,6 +33,8 @@ export class GroupComponent {
   
   newName: string = "";
   contentList: string[];
+  arrowSrc: string = 'icon_expand.png';
+  expanded: boolean = false;
   
   constructor(private _ds: DataService) {
     }
@@ -87,4 +89,14 @@ export class GroupComponent {
         this.getNotes();
       }
     }
+    
+    toggleExpand() {
+    this.expanded = !this.expanded;
+    if(this.expanded){
+      this.arrowSrc = 'icon_hide.png';
+    }
+    else{
+      this.arrowSrc = 'icon_expand.png';
+    }
+  }
 }
