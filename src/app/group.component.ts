@@ -59,11 +59,9 @@ export class GroupComponent {
       this.notes.forEach(function(result){
         doneInLoopArray = result;
       });
-      
       doneInLoopArray.forEach(function(note){
         arrayOfKeys.push(note.$key);
       });
-<<<<<<< HEAD
       return arrayOfKeys;
     }
     
@@ -74,7 +72,6 @@ export class GroupComponent {
       }
         this._ds.deleteGroup(this.group.$key);
         this.clickedDelete.emit('');
-      };
     }
     
     editGroupName() {
@@ -89,7 +86,6 @@ export class GroupComponent {
     
     enterKey(key) {
       if(this._authData != null) {
-        
         if(key === 13) {
         let content = this.getContent();
         for(let key of content){
@@ -100,6 +96,7 @@ export class GroupComponent {
         this.editGroupName();
         this.getNotes();
       }
+    }
     }
     
     toggleExpand() {
