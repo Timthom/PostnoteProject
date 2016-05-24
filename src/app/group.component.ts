@@ -35,16 +35,22 @@ export class GroupComponent {
   contentList: string[];
   arrowSrc: string = 'icon_expand.png';
   expanded: boolean = false;
+  _authData;
   
-  constructor(private _ds: DataService) {
+  constructor(@Inject(FirebaseRef) private _ref: Firebase, private _ds: DataService) {
+      this._authData = this._ref.getAuth();
     }
     
     ngOnInit() {
+      if(this._authData != null) {
         this.getNotes();
+      }
     }
     
     getNotes() {
+      if(this._authData != null) {
         this._ds.getAllNotesInGroup(this.groupName).then(notes => this.notes = notes);
+      }
     }
     
     getContent(){
@@ -53,9 +59,11 @@ export class GroupComponent {
       this.notes.forEach(function(result){
         doneInLoopArray = result;
       });
+      
       doneInLoopArray.forEach(function(note){
         arrayOfKeys.push(note.$key);
       });
+<<<<<<< HEAD
       return arrayOfKeys;
     }
     
@@ -64,12 +72,15 @@ export class GroupComponent {
       for(let key of content){
         this._ds.deleteNote(key);
       }
-      this._ds.deleteGroup(this.group.$key);
-      this.clickedDelete.emit('');
+        this._ds.deleteGroup(this.group.$key);
+        this.clickedDelete.emit('');
+      };
     }
     
     editGroupName() {
+      if(this._authData != null) {
       this._ds.updateGroupName(this.group.$key, this.groupName);
+      }
     }
     
     changeNotesInTheGroup(id) {
@@ -77,12 +88,15 @@ export class GroupComponent {
     }
     
     enterKey(key) {
+      if(this._authData != null) {
+        
         if(key === 13) {
         let content = this.getContent();
         for(let key of content){
           console.log('key: '+key);
           this._ds.changeNoteGroup(key, this.groupName);
         }
+        
         this.editGroupName();
         this.getNotes();
       }
