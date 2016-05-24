@@ -47,8 +47,7 @@ export class Postnote2App implements OnInit {
        this.getGroups();
     }
     
-    openSideBar(){
-  
+   openSideBar(event){
         this._vs._showSideBar = !this._vs._showSideBar;
         this.statusCheckSideBar = this._vs._showSideBar;
     }
