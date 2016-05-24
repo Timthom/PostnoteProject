@@ -1,15 +1,7 @@
-<headerbar></headerbar>
+<headerbar (openSideBar)="openSideBar($event)"></headerbar>
 <div class="container">
   <div class="row">
-    <div>
-      <a id="menu-toggle" (click)="openSideBar()">
-        <button type="button" class="btn btn-lg" id="slideButton">
-          <span class="pull-right"> 
-            <img src="icon_menu.png" alt="menu">
-          </span>
-        </button>
-      </a>
-    </div>
+   
     <div class="row">
       <div class="col-xs-3" *ngIf="statusCheckSideBar == true">
         <menu (clicked)="addGroup()"></menu>
