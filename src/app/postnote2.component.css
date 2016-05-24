@@ -1,5 +1,5 @@
 creator{
-	margin-top: 15px;
+	margin-top: 25px;
 	float: left;
 	width: 100%;
 	margin-top: 10px;
@@ -9,6 +9,7 @@ menu{
 	float: left;
 	padding: 0px;
 	margin: 0px;
+	z-index: 0;
 }
 .container{
 	padding: 0px;
@@ -37,6 +38,14 @@ menu{
 }
 .col-xs-1{
 width: 6%;
+}
+
+headerbar {
+	background-color:#888;
+	width: 100%;
+	position: fixed;
+	z-index: 10001;
+	height: 8%;
 }
 
 

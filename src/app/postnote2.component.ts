@@ -9,6 +9,7 @@ import {DataService} from './data.service';
 import {OnInit} from '@angular/core';
 import {CreatorComponent} from './creator.component';
 import {ValueService} from './value.service';
+import {HeaderbarComponent} from './headerbar/headerbar.component'
 
 
 @Component({
@@ -17,7 +18,7 @@ import {ValueService} from './value.service';
   providers: [ROUTER_PROVIDERS, DataService, AngularFire],
   templateUrl: 'postnote2.component.html',
   styleUrls: ['postnote2.component.css'],
-  directives: [ROUTER_DIRECTIVES, NoteComponent, MenuComponent, GroupComponent, CreatorComponent],
+  directives: [ROUTER_DIRECTIVES, NoteComponent, MenuComponent, GroupComponent, CreatorComponent, HeaderbarComponent],
   pipes: []
 })
 @RouteConfig([

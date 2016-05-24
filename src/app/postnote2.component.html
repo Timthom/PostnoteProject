@@ -1,5 +1,6 @@
+<headerbar></headerbar>
 <div class="container">
-  
+  <div class="row">
     <div>
       <a id="menu-toggle" (click)="openSideBar()">
         <button type="button" class="btn btn-lg" id="slideButton">
@@ -10,16 +11,17 @@
       </a>
     </div>
     <div class="row">
-    <div class="col-xs-3" *ngIf="statusCheckSideBar == true">
-      <menu (clicked)="addGroup()"></menu>
-    </div>
-
-    <div [ngClass]="{'col-xs-9 col-xs-offset-3': statusCheckSideBar,  'col-xs-11  col-xs-offset-1 col-sm-11 col-sm-offset-1 col-md-11  col-md-offset-1': !statusCheckSideBar}">
-      <div >
-        <creator></creator>
+      <div class="col-xs-3" *ngIf="statusCheckSideBar == true">
+        <menu (clicked)="addGroup()"></menu>
       </div>
-      <group (clickedDelete)="deleteGroup()" class="row" *ngFor="let group of allGroups | async" [group]="group" [groupName]="group.name">
-      </group>
+
+      <div [ngClass]="{'col-xs-9 col-xs-offset-3': statusCheckSideBar,  'col-xs-11  col-xs-offset-1 col-sm-11 col-sm-offset-1 col-md-11  col-md-offset-1': !statusCheckSideBar}">
+        <div>
+          <creator></creator>
+        </div>
+        <group (clickedDelete)="deleteGroup()" class="row" *ngFor="let group of allGroups | async" [group]="group" [groupName]="group.name">
+        </group>
+      </div>
     </div>
   </div>
 </div>
