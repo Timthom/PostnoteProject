@@ -4,7 +4,7 @@ import {FirebaseListObservable} from 'angularfire2';
 import {DataService} from './data.service';
 import {OnInit} from '@angular/core';
 import {Postnote2App} from './postNote2.component';
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { defaultFirebase, FirebaseRef } from 'angularfire2';
 import { Observable } from 'rxjs/Observable';
 
@@ -26,42 +26,59 @@ export class MenuGroupComponent implements OnInit{
   
   @Input()
   group; 
+  _authData;
   
-  constructor(private _ds: DataService) {}
+  constructor(@Inject(FirebaseRef) private _ref: Firebase, private _ds: DataService) {
+    this._authData = this._ref.getAuth();
+  }
 
   ngOnInit() {
+    if(this._authData != null) {
         this.getNotes();
+    }
   }
 
   getNotes() {
+    if(this._authData != null) {
         this._ds.getAllNotesInGroup(this.group.name).then(titles => this.notes = titles);
+    }
         
   }
    
    deleteGroup() {
+     if(this._authData != null) {
       this._ds.deleteGroup(this.group.$key);
+     }
     }
     
     editGroupName() {
+      if(this._authData != null) {
       this._ds.updateGroupName(this.group.$key, this.group.name);
+      }
     }
     
     editGroup() {
-      this._ds.updateGroupName(this.group.$key, this.group.name);
+      if(this._authData != null) {
+        this._ds.updateGroupName(this.group.$key, this.group.name);
+    }
     }
     
     //When pressing the edit button, it enables editing on the input field
     editing() {
-      this.editingName = !this.editingName;
-      if(this.editingName){
-        document.getElementById(this.group.$key).removeAttribute("readonly");
-        document.getElementById(this.group.$key).focus();
+      if(this._authData != null) {
+        this.editingName = !this.editingName;
+        
+        if(this.editingName){
+          document.getElementById(this.group.$key).removeAttribute("readonly");
+          document.getElementById(this.group.$key).focus();
 
-      }else{
+      } else {
         document.getElementById(this.group.$key).setAttribute("readonly", "true");
         this.editGroup();
+        }
       }
-    }
+  }
+
   
   toggleExpand() {
     this.expanded = !this.expanded;

@@ -1,9 +1,9 @@
 import {Component, Input, Output, EventEmitter} from '@angular/core';
 import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from '@angular/router-deprecated';
-import {AngularFire} from 'angularfire2';
-import {FirebaseListObservable} from 'angularfire2';
 import {NoteComponent} from './note.component';
 import {DataService} from './data.service'
+import { AngularFire, defaultFirebase, FirebaseRef, FirebaseListObservable } from 'angularfire2';
+import { Injectable, Inject } from '@angular/core';
 
 @Component({
   moduleId: module.id,
@@ -33,36 +33,50 @@ export class GroupComponent {
   
   newName: string = "";
   contentList: string[];
+  _authData;
   
-  constructor(private _ds: DataService) {
+  constructor(@Inject(FirebaseRef) private _ref: Firebase, private _ds: DataService) {
+      this._authData = this._ref.getAuth();
     }
     
     ngOnInit() {
+      if(this._authData != null) {
         this.getNotes();
+      }
     }
     
     getNotes() {
+      if(this._authData != null) {
         this._ds.getAllNotesInGroup(this.groupName).then(notes => this.notes = notes);
+      }
     }
     
     deleteGroup() {
-      let doneInLoopArray;
-      let arrayOfKeys: any[] = [];
-      this.notes.forEach(function(result){
+      if(this._authData != null) {
+        
+        let doneInLoopArray;
+        let arrayOfKeys: any[] = [];
+        
+        this.notes.forEach(function(result){
         doneInLoopArray = result;
       });
+      
       doneInLoopArray.forEach(function(note){
         arrayOfKeys.push(note.$key);
       });
+      
       for(let key of arrayOfKeys){
         this._ds.deleteNote(key);
       }
-      this._ds.deleteGroup(this.group.$key);
-      this.clickedDelete.emit('');
+        this._ds.deleteGroup(this.group.$key);
+        this.clickedDelete.emit('');
+      };
     }
     
     editGroupName() {
+      if(this._authData != null) {
       this._ds.updateGroupName(this.group.$key, this.groupName);
+      }
     }
     
     changeNotesInTheGroup(id) {
@@ -70,21 +84,28 @@ export class GroupComponent {
     }
     
     enterKey(key) {
+      if(this._authData != null) {
+        
         if(key === 13) {
         let doneInLoopArray;
         let arrayOfKeys: any[] = [];
+        
         this.notes.forEach(function(result){
           doneInLoopArray = result;
         });
+          
         doneInLoopArray.forEach(function(note){
           arrayOfKeys.push(note.$key);
         });
+        
         for(let key of arrayOfKeys){
           console.log('key: '+key);
           this._ds.changeNoteGroup(key, this.groupName);
         }
+        
         this.editGroupName();
         this.getNotes();
       }
     }
+  }
 }
