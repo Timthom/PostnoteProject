@@ -1,9 +1,9 @@
 import {Component, Input, Output, EventEmitter} from '@angular/core';
 import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from '@angular/router-deprecated';
-import {AngularFire} from 'angularfire2';
-import {FirebaseListObservable} from 'angularfire2';
 import {NoteComponent} from './note.component';
-import {DataService} from './data.service'
+import {DataService} from './data.service';
+import { AngularFire, defaultFirebase, FirebaseRef, FirebaseListObservable } from 'angularfire2';
+import { Injectable, Inject } from '@angular/core';
 
 @Component({
   moduleId: module.id,
