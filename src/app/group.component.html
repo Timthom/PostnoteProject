@@ -1,8 +1,8 @@
 <div class="groupContainer" id={{groupName}}>
-    <input class="delete_button " type="image" src="icon_delete.png" alt="submit" width="30" height="30" (click)="deleteGroup()">    
-    <input class="group_name " id="group_name" type="text" [(ngModel)]="groupName" maxlength="18" contenteditable="true"
+    <button class="delete_button" (click)="deleteGroup()"><img class="button_image" src="icon_delete.png" alt="submit"></button> 
+    <input type="text" class="group_name " id="group_name" [(ngModel)]="groupName" maxlength="18" contenteditable="true"
         (keypress)="enterKey($event.keyCode)">
-        <br/>
+    <button class="collapse_button"><img class="button_image" src="icon_expand.png" alt="submit"></button>
     <hr class="line">
 </div>
 <note class="col-xs-4" *ngFor="let note of notes | async" [noteInNote]="note" [text]="note.text" [title]="note.title" [group]="note.group"
