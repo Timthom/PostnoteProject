@@ -20,14 +20,11 @@
 }
 
 .delete_button {
-    border-radius: 2px;
-    margin-bottom: -6px;
     border: none;
     outline: none;
     visibility: hidden;
     background-color: transparent;
-    margin-left: 10px;
-    float: right;
+    margin-left: 0em;
 }
 
 .delete_button:hover {
@@ -55,4 +52,8 @@ note {
 .button_image{
     height: 40px;
     width: 40px;
+}
+
+input{
+    height: 40px;
 }
