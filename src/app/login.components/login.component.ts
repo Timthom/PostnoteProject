@@ -1,13 +1,14 @@
 import {Component, OnInit} from "@angular/core";
 import {FormBuilder, ControlGroup, Validators} from "@angular/common";
 import {AuthorizationService} from "../authorization.service";
+import {ROUTER_DIRECTIVES, ROUTER_PROVIDERS, Router} from '@angular/router-deprecated';
 
 @Component({
   moduleId: module.id,
-  selector: 'creator',
+  selector: 'login-user',
   templateUrl: 'login.component.html',
   styleUrls: ['login.component.css'],
-  directives: [],
+  directives: [ROUTER_DIRECTIVES],
   pipes: [],
   providers: []
 })
@@ -17,10 +18,13 @@ export class LoginComponent implements OnInit {
     error = false;
     errorMessage = '';
 
-    constructor(private _fb: FormBuilder, private _authService: AuthorizationService) {}
+    constructor(private _fb: FormBuilder, private _authService: AuthorizationService, private _router: Router) {}
 
     onLoggedIn() {
         this._authService.loginUser(this.myForm.value);
+        /* if(this._authService.loginSuccess()) {
+            this._router.parent.navigate(['PostnoteAppRoute']);
+        } */
     }
 
     ngOnInit():any {
@@ -28,5 +32,13 @@ export class LoginComponent implements OnInit {
             email: ['', Validators.required],
             password: ['', Validators.required],
         });
+    }
+    
+    loginWithFacebook() {
+       this._authService.loginFacebookAuth();
+    }
+    
+    loginWithGoogle() {
+        this._authService.loginGoogleAuth();
     }
 }

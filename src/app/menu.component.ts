@@ -1,10 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from '@angular/router-deprecated';
-import {AngularFire} from 'angularfire2';
-import {FirebaseListObservable} from 'angularfire2';
 import {Note}from './note';
 import {DataService} from './data.service';
 import {MenuGroupComponent} from './menugroup.component';
+import {ValueService} from './value.service';
+import { AngularFire, defaultFirebase, FirebaseRef, FirebaseListObservable } from 'angularfire2';
+import { Injectable, Inject } from '@angular/core';
+import {CanReuse} from "@angular/router-deprecated";
 
 @Component({
   moduleId: module.id,
@@ -16,36 +18,50 @@ import {MenuGroupComponent} from './menugroup.component';
   pipes: []
 })
 
-@RouteConfig([
-])
-
-export class MenuComponent implements OnInit {
-    adding: boolean =false;
+export class MenuComponent implements OnInit, CanReuse  {
+  
+    routerCanReuse() {  
+        return false;
+    }
+    
+    adding: boolean = false;
     groupName: string ="";
     titles :FirebaseListObservable<any[]>;  
     buttonText: string ="Add category";
     myGroups: FirebaseListObservable<any[]>;
-    constructor(private _ds: DataService) {}
+    checkSideBar: boolean = this._vs._showSideBar;
+    _authData;
     
+    constructor(@Inject(FirebaseRef) private _ref: Firebase, private _ds: DataService, private _vs:ValueService) {
+      this._authData = this._ref.getAuth();
+    }
+     
     ngOnInit() {
+      if(this._authData != null) {
         this.getTitles();
         this.getGroups();
+      }
     }
 
     getTitles() {
+      if(this._authData != null) {
         this._ds.getAllNotes().then(titles => this.titles = titles);
+      }
     }
     
     getGroups() {
+      if(this._authData != null) {
       this._ds.getAllGroups().then(groups => this.myGroups = groups);
+      }
     }
    
-  
+ 
     jumpToNote(note:string){
       
       var element = document.getElementById(note);
       
       element.scrollIntoView(true);
+     
       
     }
     
@@ -60,10 +76,17 @@ export class MenuComponent implements OnInit {
     }
     
     addGroup(){
-      if(this.groupName.trim().length > 0){
-        let time = new Date().getTime();  
-        this._ds.addGroupToGroups(this.groupName, time);
-        this.groupName = "";
+      if(this._authData != null) {
+        if(this.groupName.trim().length > 0){
+          let time = new Date().getTime();  
+          this._ds.addGroupToGroups(this.groupName, time);
+          this.groupName = "";
+        }
       }
+    }
+        closeSideBar(){
+        
+        this._vs._showSideBar = !this._vs._showSideBar;
+        console.log('menu innnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn','side button gone');
     }
 }

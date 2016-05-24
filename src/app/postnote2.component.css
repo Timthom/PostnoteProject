@@ -27,6 +27,7 @@ menu{
 	margin: 0px;
 }
 .container{
+	position: absolute;
 	width: 100%;
 	padding: 0px;
 	margin: 0px;
@@ -35,8 +36,29 @@ menu{
 .col-xs-9 {
 	padding-right: 10px;
 }
+#slideButton{
+	background-color:#222;
+	position: fixed;
+	outline: none;
+	border-radius: 0px;
+}
 
-.col-xs-3 {
+#menu-toggle img{
+	width: 15px;
+	height: 15px;
+}
+
+.col-xs-2 {
 	padding-left: 5px;
 	height: 100%;
 }
+.col-xs-1{
+width: 6%;
+
+
+}
+
+
+
+
+

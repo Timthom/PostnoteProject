@@ -5,7 +5,7 @@ import {AuthorizationService} from "../authorization.service";
 
 @Component({
   moduleId: module.id,
-  selector: 'creator',
+  selector: 'create-user-account',
   templateUrl: 'create-user-account.component.html',
   styleUrls: ['create-user-account.component.css'],
   directives: [],

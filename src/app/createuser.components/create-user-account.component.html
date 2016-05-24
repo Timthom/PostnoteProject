@@ -1,18 +1,16 @@
-<h2>Skapa konto</h2>
+<div class="createUser">
+<h2>Create account</h2>
         <form [ngFormModel]="myForm" (ngSubmit)="onCreateAccount()">
             <div class="input-group">
-                <label for="email">E-Post</label>
-                <input [ngFormControl]="myForm.find('email')" type="email" id="email" #email="ngForm">
-               
+                <input [ngFormControl]="myForm.find('email')" type="email" placeholder="Email" id="email" #email="ngForm">
             </div>
             <div class="input-group">
-                <label for="password">Lösenord</label>
-                <input [ngFormControl]="myForm.find('password')" type="password" id="password">
+                <input [ngFormControl]="myForm.find('password')" type="password" placeholder="Password"  id="password">
             </div>
             <div class="input-group">
-                <label for="confirm-password">Bekräfta lösenord</label>
-                <input [ngFormControl]="myForm.find('confirmPassword')" type="password" id="confirm-password" #confirmPassword="ngForm">
-                <span *ngIf="!confirmPassword.pristine && confirmPassword.errors != null && confirmPassword.errors['passwordsNotMatch']">Lösenorden stämmer ej överens!</span>
+                <input [ngFormControl]="myForm.find('confirmPassword')" type="password" placeholder="Confirm password" id="confirm-password" #confirmPassword="ngForm">
+                <span *ngIf="!confirmPassword.pristine && confirmPassword.errors != null && confirmPassword.errors['passwordsNotMatch']"><br/>The passwords do not match!</span>
             </div>
-            <button type="submit" [disabled]="!myForm.valid">Bekräfta</button>
+            <button type="submit" [disabled]="!myForm.valid">Submit</button>
         </form>
+</div>

@@ -12,8 +12,15 @@ export class DataService {
     
     constructor (@Inject(FirebaseRef) private _ref: Firebase, private _af: AngularFire) {
         console.log("NU KÖR CONSTRUCTORN!!!");
+        console.log("Här är auth data: " + this._ref.getAuth()); 
+        
+        if(this._ref.getAuth() == null) return;
+        if(localStorage.getItem('token') == null) return;
+        
+        console.log("Skrivs ej ut???");
         const token = localStorage.getItem('token');
         this._ref.authWithCustomToken(token, function(error, authData) {
+            
         
         if (error) {
             console.log("Authentication Failed!", error);
@@ -38,6 +45,10 @@ export class DataService {
     
     //returns all notes in the DB...
     getAllNotes() {
+        
+        console.log("Körs typ detta eller vad händer!??!?!?!");
+        
+        if(this._ref.getAuth() == null) return;
   
         const token = localStorage.getItem('token');
         this._ref.authWithCustomToken(token, function(error, authData) {
@@ -55,6 +66,8 @@ export class DataService {
     
      //adds a new note(FirebaseListObservable with random id) to the database...
     addNoteToNotes(title: string, text: string, group: string, time: number) {
+        
+        if(this._ref.getAuth() == null) return;
         
         const token = localStorage.getItem('token');
         this._ref.authWithCustomToken(token, function(error, authData) {
@@ -75,6 +88,9 @@ export class DataService {
     
     //updates the notes title with the chosen id...
     updateNoteTitle(id: string, newTitle: string) {
+        
+        if(this._ref.getAuth() == null) return;
+        
         const token = localStorage.getItem('token');
         this._ref.authWithCustomToken(token, function(error, authData) {
         
@@ -90,6 +106,9 @@ export class DataService {
     
     //updates the notes text with the chosen id...
     updateNoteText(id: string, newText: string) {
+        
+        if(this._ref.getAuth() == null) return;
+        
         const token = localStorage.getItem('token');
         this._ref.authWithCustomToken(token, function(error, authData) {
         
@@ -105,6 +124,9 @@ export class DataService {
     
     //deletes the note with the chosen id...
     deleteNote(id: string) {
+        
+        if(this._ref.getAuth() == null) return;
+        
         const token = localStorage.getItem('token');
         this._notes.authWithCustomToken(token, function(error, authData) {
         
@@ -120,6 +142,9 @@ export class DataService {
     
     //returns every Note based on category
     getAllNotesInGroup(groupName: string) {
+        
+        if(this._ref.getAuth() == null) return;
+        
         const token = localStorage.getItem('token');
         this._ref.authWithCustomToken(token, function(error, authData) {
         
@@ -144,6 +169,9 @@ export class DataService {
     
     //returns all groups in the DB...
     getAllGroups() {
+        
+        if(this._ref.getAuth() == null) return;
+        
         const token = localStorage.getItem('token');
         this._ref.authWithCustomToken(token, function(error, authData) {
         
@@ -161,6 +189,9 @@ export class DataService {
      //adds a new group(FirebaseListObservable with random id) to the database. 
 
     addGroupToGroups(name: string, time: number) {
+        
+        if(this._ref.getAuth() == null) return;
+        
         const token = localStorage.getItem('token');
         this._ref.authWithCustomToken(token, function(error, authData) {
         

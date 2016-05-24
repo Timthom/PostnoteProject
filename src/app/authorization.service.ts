@@ -1,17 +1,17 @@
-import {Injectable, Inject, EventEmitter} from "@angular/core";
+import {EventEmitter, Injectable, Inject} from "@angular/core";
 import {User} from "./user.interface";
 import { AngularFire, defaultFirebase, FirebaseRef, FirebaseListObservable } from 'angularfire2';
 declare var Firebase: any;
 
 @Injectable()
 export class AuthorizationService {
-    private _userLoggedOut = new EventEmitter<any>();
     
-    
-    
+    _userLoggedInSucceed;
+
     constructor(@Inject(FirebaseRef) private _ref: Firebase) {
        
     }
+    
        // alert('Registreringen lyckades :)');
     createUserAccount(user: User) {
         this._ref.onAuth(this.authDataCallback);
@@ -32,7 +32,7 @@ authDataCallback(authData) {
       console.log('User is logged in');
     /* console.log("User " + authData.uid + " is logged in with " + authData.provider);
     console.log('AUTHDATACALLBACK!!!');
-    var ref = new Firebase('https://dazzling-fire-7472.firebaseio.com');
+    var ref = new Firebase('https://scorching-torch-8126.firebaseio.com/');
     ref.child("users").child(authData.uid).set({
       provider: authData.provider,
       name: authData.uid
@@ -44,8 +44,6 @@ authDataCallback(authData) {
   }
 }
 
-
-
     loginUser(user: User) {
         this._ref.authWithPassword({
             email: user.email,
@@ -55,27 +53,53 @@ authDataCallback(authData) {
             
             if (error) {
                 alert("Fel användarnamn eller lösenord. Försök igen!");
+            
             } else {
                 localStorage.setItem('token', authData.token);
                 console.log(authData);
+              
                 
             }
             
-        });
+        }); 
     }
     
+    loginFacebookAuth() {
+        this._ref.authWithOAuthPopup("facebook", function(error, authData) {
+            if (error) {
+                console.log("Login Failed!", error);
+            } else {
+                console.log("Authenticated successfully with payload:", authData);
+                localStorage.setItem('token', authData.token);
+            }
+        }, { remember: "sessionOnly" 
+    });
+}
     
-
-    logout() {
-        localStorage.removeItem('token');
-        this._userLoggedOut.emit(null);
-    }
-    
-    getLoggedOutEvent(): EventEmitter<any> {
-        return this._userLoggedOut;
-    }
-
+    loginGoogleAuth() {
+        this._ref.authWithOAuthPopup("google", function(error, authData) {
+            if (error) {
+                console.log("Login Failed!", error);
+            } else {
+                console.log("Authenticated successfully with payload:", authData);
+                localStorage.setItem('token', authData.token);
+            }
+        }, { remember: "sessionOnly" 
+    });
+}
+        
     isAuthenticated(): boolean {
+       
+        if(localStorage.getItem('token') == null) {
+            localStorage.getItem('token');
+        }
+         
         return localStorage.getItem('token') !== null;
+        
+    }
+    
+    killAuth() {
+        this._ref.unauth();
+        localStorage.removeItem('token');
     }
 }

@@ -1,11 +1,11 @@
 import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from '@angular/router-deprecated';
-import {AngularFire} from 'angularfire2';
-import {FirebaseListObservable} from 'angularfire2';
+import { AngularFire, defaultFirebase, FirebaseRef, FirebaseListObservable } from 'angularfire2';
 import {DataService} from './data.service';
 import {CORE_DIRECTIVES} from '@angular/common';
 import {DROPDOWN_DIRECTIVES} from 'ng2-bootstrap/ng2-bootstrap';
 import {Note}from './note';
+import { Injectable, Inject } from '@angular/core';
 
 @Component({
   moduleId: module.id,
@@ -29,6 +29,7 @@ export class DropdownComponent implements OnInit {
     public status:{isopen:boolean} = {isopen: false};
     public items:Array<string> = ['The first choice!',
     'And another choice for you.', 'but wait! A third!'];
+    _authData;
 
     public toggled(open:boolean):void {
     console.log('Dropdown is now: ', open);
@@ -42,17 +43,24 @@ export class DropdownComponent implements OnInit {
     
     groups :FirebaseListObservable<any[]>;  
   
-    constructor(private _ds: DataService) {}
+    constructor(@Inject(FirebaseRef) private _ref: Firebase, private _ds: DataService) {
+        this._authData = this._ref.getAuth();
+    }
     
     ngOnInit() {
+        if(this._authData != null) {
         this.getTitles();
+        }
     }
     
     getTitles() {
+        if(this._authData != null) {
         this._ds.getAllGroups().then(titles => this.groups = titles);
+        }
     }
     
     selectGroup(group: string){
+        if(this._authData != null) {
       this.changeGroup.emit(group);
       this.changeNoteGroup.emit(group);
         
@@ -60,5 +68,6 @@ export class DropdownComponent implements OnInit {
       buttonText.innerHTML = group;
       
       console.log("Group selected " + group);
+    }
     }
 }
