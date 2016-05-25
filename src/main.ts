@@ -9,9 +9,9 @@ if (environment.production) {
   enableProdMode();
 }
 
-document.addEventListener('deviceready', () => {
+// document.addEventListener('deviceready', () => {
   bootstrap(AppComponent, [
   FIREBASE_PROVIDERS, AuthorizationService, 
   defaultFirebase('https://dazzling-fire-7472.firebaseio.com') 
   ]);
-}, false);
+// }, false);

@@ -23,6 +23,8 @@ var GroupComponent = (function () {
         this._ds = _ds;
         this.clickedDelete = new core_1.EventEmitter();
         this.newName = "";
+        this.arrowSrc = 'icon_expand.png';
+        this.expanded = false;
         this._authData = this._ref.getAuth();
     }
     GroupComponent.prototype.ngOnInit = function () {
@@ -36,24 +38,25 @@ var GroupComponent = (function () {
             this._ds.getAllNotesInGroup(this.groupName).then(function (notes) { return _this.notes = notes; });
         }
     };
+    GroupComponent.prototype.getContent = function () {
+        var doneInLoopArray;
+        var arrayOfKeys = [];
+        this.notes.forEach(function (result) {
+            doneInLoopArray = result;
+        });
+        doneInLoopArray.forEach(function (note) {
+            arrayOfKeys.push(note.$key);
+        });
+        return arrayOfKeys;
+    };
     GroupComponent.prototype.deleteGroup = function () {
-        if (this._authData != null) {
-            var doneInLoopArray_1;
-            var arrayOfKeys_1 = [];
-            this.notes.forEach(function (result) {
-                doneInLoopArray_1 = result;
-            });
-            doneInLoopArray_1.forEach(function (note) {
-                arrayOfKeys_1.push(note.$key);
-            });
-            for (var _i = 0, arrayOfKeys_2 = arrayOfKeys_1; _i < arrayOfKeys_2.length; _i++) {
-                var key = arrayOfKeys_2[_i];
-                this._ds.deleteNote(key);
-            }
-            this._ds.deleteGroup(this.group.$key);
-            this.clickedDelete.emit('');
+        var content = this.getContent();
+        for (var _i = 0, content_1 = content; _i < content_1.length; _i++) {
+            var key = content_1[_i];
+            this._ds.deleteNote(key);
         }
-        ;
+        this._ds.deleteGroup(this.group.$key);
+        this.clickedDelete.emit('');
     };
     GroupComponent.prototype.editGroupName = function () {
         if (this._authData != null) {
@@ -66,22 +69,25 @@ var GroupComponent = (function () {
     GroupComponent.prototype.enterKey = function (key) {
         if (this._authData != null) {
             if (key === 13) {
-                var doneInLoopArray_2;
-                var arrayOfKeys_3 = [];
-                this.notes.forEach(function (result) {
-                    doneInLoopArray_2 = result;
-                });
-                doneInLoopArray_2.forEach(function (note) {
-                    arrayOfKeys_3.push(note.$key);
-                });
-                for (var _i = 0, arrayOfKeys_4 = arrayOfKeys_3; _i < arrayOfKeys_4.length; _i++) {
-                    var key_1 = arrayOfKeys_4[_i];
+                var content = this.getContent();
+                for (var _i = 0, content_2 = content; _i < content_2.length; _i++) {
+                    var key_1 = content_2[_i];
                     console.log('key: ' + key_1);
                     this._ds.changeNoteGroup(key_1, this.groupName);
                 }
                 this.editGroupName();
                 this.getNotes();
             }
+        }
+    };
+    // Expand category on click arrowBtn
+    GroupComponent.prototype.toggleExpand = function () {
+        this.expanded = !this.expanded;
+        if (this.expanded) {
+            this.arrowSrc = 'icon_hide.png';
+        }
+        else {
+            this.arrowSrc = 'icon_expand.png';
         }
     };
     __decorate([

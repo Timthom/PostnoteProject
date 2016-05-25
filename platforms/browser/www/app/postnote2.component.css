@@ -12,7 +12,7 @@ menu{
 	z-index: 0;
 }
 .container{
-	position: absolute;
+	/*position: absolute;*/
 	width: 100%;
 	padding: 0px;
 	margin: 0px;
@@ -31,11 +31,12 @@ width: 6%;
 }
 
 headerbar {
-	background-color:#888;
+	visibility: hidden;
 	width: 100%;
 	float:left;
 	z-index: 10001;
 	height: 8%;
+	position: fixed;
 }
 
 

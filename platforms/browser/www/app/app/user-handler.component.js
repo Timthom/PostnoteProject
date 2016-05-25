@@ -22,7 +22,7 @@ var UserHandlerComponent = (function () {
         this.switchWindow = false;
     }
     UserHandlerComponent.prototype.isAuth = function () {
-        console.log("Auth method is working!");
+        //console.log("Auth method is working!");
         return this._authServiceHandler.isAuthenticated();
     };
     UserHandlerComponent.prototype.logoutUser = function () {
