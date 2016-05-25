@@ -1,0 +1,143 @@
+.noteContainer {
+ overflow: auto;
+ box-shadow: 0px 2px 5px gray;
+ height: 300px;
+ width: 300px;
+ display: table-cell;
+ position: relative;
+}
+
+.noteContainer:hover .edit_button{
+  visibility: visible;
+}
+
+.noteContainer:hover .delete_button{
+  visibility: visible;
+}
+
+.delete_button {
+   border-radius: 2px;
+   visibility: hidden;
+   float: left;
+   margin-left: 6px;
+   margin-top: 6px;
+   outline: none;
+   transition: box-shadow 150ms ease-in-out, background-color 150ms ease-in-out;
+}
+
+.delete_button:hover {
+  box-shadow: 0px 1px 5px #5A5A5A ;
+  background-color: #F44336 ;
+}
+
+.edit_button {
+  border-radius: 2px;
+  visibility: hidden;
+  background-image: url('icon_edit.png');
+  background-size: 25px 25px;
+  height: 25px;
+  width: 25px;
+  float: right;
+  margin-right: 6px;
+  margin-top: 6px;
+  transition: box-shadow 150ms ease-in-out, background-color 150ms ease-in-out;
+}
+
+.edit_button:hover {
+  box-shadow: 0px 1px 5px #5A5A5A ; 
+  background-color: #4CAF50;
+}
+
+.title {
+  display: block;
+  height: 30px;
+  width: 200px;
+  font-size: 25px;
+  float: left;
+  padding-bottom: 4px;
+  margin-top: 5px;
+  margin-left: 19px;
+  margin-right: 19px;
+  text-align: center;
+  background-color: transparent;
+  border: none;
+  outline: none;
+}
+
+.title::-webkit-input-placeholder {
+    color: black;
+}
+
+.text_field {
+   width: 280px;
+  height: 219px;
+  margin: 10px;
+  margin-bottom: 0;
+  padding: 5px;
+  background-color: transparent ;
+  overflow: scroll;
+  resize: none;
+  border: none;
+  outline: none;
+  overflow: auto;
+}
+
+.selectedNoteTitle {
+  border: dashed 1px black;
+}
+
+.selectedNoteText {
+  border: dashed 1px black;
+  padding-top: 4px;
+  padding-left: 4px;
+}
+
+.savable {
+  background-image: url('icon_save.png');
+  visibility: visible;
+}
+
+.visible_dropdown {
+  visibility: visible;
+}
+
+dropdown {
+  visibility: hidden;
+  float: left;
+}
+
+colorpicker {
+  visibility: hidden;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  padding-bottom: 6px;
+  padding-right: 6px;
+}
+
+.visible_colorpicker {
+  visibility: visible;
+}
+.pink_color {
+    background-color: #F490B7;
+}
+
+.orange_color {
+    background-color: #FFA334;
+}
+
+.magenta_color {
+    background-color: #F56D7E;
+}
+
+.blue_color {
+    background-color: #8FD3CE;
+}
+
+.yellow_color {
+    background-color: #EEF66C;
+}
+
+.green_color {
+    background-color: mediumseagreen;
+}

@@ -1,0 +1,55 @@
+input {
+    outline: none;
+}
+
+p {
+    color: #D2D2D2;
+    cursor: pointer;
+}
+
+p:hover {
+    color: gray;
+}
+
+#container:hover #deleteBtn{
+    visibility: visible;
+}
+#container:hover #editBtn{
+    visibility: visible;
+}
+
+#container{
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+#editBtn,#deleteBtn{
+    border-radius: 2px;
+    visibility: hidden;
+    transition: background-color 150ms ease-in-out;
+}
+
+#editBtn:hover,#deleteBtn:hover{
+    background-color: gray;
+}
+
+.title{
+    background: none;
+    border: none!important;
+    color: white;
+    cursor: pointer;
+}
+
+.title:hover {
+    color: gray;
+    cursor: pointer;
+}
+
+.editing {
+    color: gray;
+}
+
+.editing:hover {
+    color: gray;
+    cursor: text;
+}

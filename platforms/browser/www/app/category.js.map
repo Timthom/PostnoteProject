@@ -1,0 +1,1 @@
+{"version":3,"file":"category.js","sourceRoot":"","sources":["category.ts"],"names":[],"mappings":"AAAA;;;;;;;;;EASE","sourcesContent":["/*import {Note} from './notes';\n\nexport class Category {\n  //Antar att man får ett id från firebase sedan?\n  id: string;\n  title: string;\n  notes: Note[];\n  //Kommer tillkomma andra variabler...\n}\n*/"]}
