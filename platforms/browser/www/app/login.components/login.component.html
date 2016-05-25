@@ -1,0 +1,15 @@
+<div class="login">
+<h2>Log In to your Account</h2>
+    <input class="imageButtons" type="image" src="loginfacebook.png" (click)="loginWithFacebook()">
+    <input class="imageButtons" type="image" src="logingoogle.png" (click)="loginWithGoogle()">
+        <div class="bar"></div>
+            <form [ngFormModel]="myForm" (ngSubmit)="onLoggedIn()">
+                <div class="input-group">
+                    <input [ngFormControl]="myForm.find('email')" type="email" placeholder="Email" id="email">
+                </div>
+                <div class="input-group">
+                    <input [ngFormControl]="myForm.find('password')" type="password" placeholder="Password" id="password">
+                </div>
+                <button type="submit" [disabled]="!myForm.valid">Login ></button>
+            </form>
+    </div>

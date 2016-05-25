@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["index.ts"],"names":[],"mappings":";AAAA,4BAA0B,eAAe,CAAC;AAAlC,gDAAkC;AAC1C,oCAA2B,uBAAuB,CAAC;AAA3C,0DAA2C","sourcesContent":["export {environment} from './environment';\nexport {Postnote2App} from './postnote2.component';\n"]}

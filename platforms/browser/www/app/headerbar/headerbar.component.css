@@ -1,0 +1,26 @@
+h1 {
+    font-size: 150%;
+    margin:  2px;
+    color: black;
+}
+
+button {
+    position:fixed;
+    top: 0px;
+    right: 0px;
+}
+
+#menu-toggle img{
+	width: 20px;
+	height: 20px;
+}
+
+#slideButton{
+	background-color:#888;
+	position: fixed;
+    top: 0px;
+    left: 0px;
+	z-index: 10000000;
+	outline: none;
+	border-radius: 0px;
+}

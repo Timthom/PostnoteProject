@@ -1,0 +1,71 @@
+.login {
+  position: absolute;
+  width: 400px;
+  height: 350px;
+  z-index: 15;
+  top: 35%;
+  left: 50%;
+  margin: -100px 0 0 -100px;
+  background-color: #F0F0F0;
+  border: 2px solid grey;
+  font-family: 'Open Sans', Verdana, Geneva, Arial, Helvetica, sans-serif;
+}
+
+h2 {
+    color: black;
+      margin-left: 20px;
+}
+
+    input {
+      width: 300px;
+      font-size:15pt;
+      border-radius: 3px;
+      background-color: white;
+      border: 1px solid black;
+      margin-left: 45px;
+      margin-top: 10px;
+    }
+    
+    button[disabled] {
+    background-color: #ccc;
+    cursor: default;
+  }
+
+  button:not([disabled]):hover {
+    background-color: mediumpurple;
+  }
+
+  .ng-dirty.ng-invalid {
+    border: 1px solid red;
+  }
+
+  .ng-dirty.ng-valid {
+    border: 1px solid green;
+    background-color: #b7e0a0;
+  
+  }
+  
+   button {
+    border-radius: 5px;
+    border: 1px solid black;
+    margin-top: 30px;
+    font-size: inherit;
+    background-color: green;
+    color: white;
+    cursor: pointer;
+    padding: 5px 8px;
+    float: right;
+    margin-right: 10px;
+  }
+  
+  .imageButtons {
+      margin-left: 45px;
+  }
+  
+  .bar {
+    margin-top: 5px;
+    border-bottom: 2px solid lightgray;
+}
+  
+
+

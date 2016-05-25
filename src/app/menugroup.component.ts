@@ -12,8 +12,8 @@ import { Observable } from 'rxjs/Observable';
 @Component({
   moduleId: module.id,
   selector: 'menuGroup',
-  templateUrl: 'menuGroup.component.html',
-  styleUrls: ['menuGroup.component.css'],
+  templateUrl: 'menugroup.component.html',
+  styleUrls: ['menugroup.component.css'],
   pipes: []
 })
 

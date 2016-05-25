@@ -1,0 +1,45 @@
+creator{
+	margin-top: 25px;
+	float: left;
+	width: 100%;
+	margin-top: 10px;
+}
+menu{
+	width: 100%;
+	float: left;
+	padding: 0px;
+	margin: 0px;
+	z-index: 0;
+}
+.container{
+	position: absolute;
+	width: 100%;
+	padding: 0px;
+	margin: 0px;
+}
+
+.col-xs-9 {
+	padding-right: 10px;
+}
+
+.col-xs-2 {
+	padding-left: 5px;
+	height: 100%;
+}
+.col-xs-1{
+width: 6%;
+}
+
+headerbar {
+	background-color:#888;
+	width: 100%;
+	float:left;
+	z-index: 10001;
+	height: 8%;
+}
+
+
+
+
+
+
