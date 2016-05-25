@@ -17,8 +17,9 @@
       <!-- Sidebar -->
       
         <br/><br/><br/><br/>
-        <ul *ngFor="let note of titles | async" (click)="jumpToNote(note.$key)">
+        <ul><li *ngFor="let note of titles | async" (click)="jumpToNote(note.$key)">
           {{note.title}}
+          </li>
         </ul>
         <hr>     
        <button class="addBtn btn btn-info btn-xs" [class.cancelable]="showingCancel" (click)="toggleInput()">

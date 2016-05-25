@@ -14,12 +14,12 @@ nav {
 /* Chrome, Safari, Opera */
 @-webkit-keyframes mymove {
     from {width: 0;}
-    to {width: 22%;}
+    to {width: 22.5%;}
 }
 
 @keyframes mymove {
     from {width: 0;}
-    to {width: 22%}
+    to {width: 22.5%}
 }
 
 ul{
