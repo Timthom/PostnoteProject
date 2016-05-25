@@ -24,7 +24,7 @@ export class UserHandlerComponent {
     }
 
     isAuth() {
-        console.log("Auth method is working!");
+        //console.log("Auth method is working!");
         return this._authServiceHandler.isAuthenticated();
         
         }

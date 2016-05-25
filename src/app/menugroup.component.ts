@@ -90,7 +90,6 @@ export class MenuGroupComponent implements OnInit{
     }
   }
   
-  
  jumpToNote(note:string){
       var element = document.getElementById(note);
       element.scrollIntoView(true);  

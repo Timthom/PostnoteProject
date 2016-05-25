@@ -1,6 +1,7 @@
-.groupContainer:hover .delete_button {
+.groupContainer:hover .delete_button{
     visibility: visible;
 }
+
 .line {
     border: 0;
     margin-top: 8px;
@@ -19,16 +20,14 @@
 }
 
 .delete_button {
-    border-radius: 2px;
-    margin-bottom: -6px;
     border: none;
     outline: none;
     visibility: hidden;
-    margin-left: 10px;
+    background-color: transparent;
+    margin-left: 0em;
 }
 
 .delete_button:hover {
-   
   box-shadow: 0px 1px 5px #5A5A5A ;
   background-color: #F44336 ;
 }
@@ -41,4 +40,20 @@ note {
     margin: 10px;
     width: 300px;
     height: 300px;
+}
+
+.collapse_button{
+    float: left;
+    border: none;
+    outline: none;
+    background-color: transparent;
+}
+
+.button_image{
+    height: 40px;
+    width: 40px;
+}
+
+input{
+    height: 40px;
 }
