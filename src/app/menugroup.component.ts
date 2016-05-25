@@ -98,8 +98,10 @@ export class MenuGroupComponent implements OnInit{
   }
   
   jumpToGroup(groupId :string){
+    
       var element = document.getElementById(groupId);
-      element.scrollIntoView(true);
+      element.scrollIntoView(true); 
+      //element.scrollIntoView(true);
       console.log(element);
   }
   

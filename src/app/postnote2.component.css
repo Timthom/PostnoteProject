@@ -19,7 +19,8 @@ menu{
 }
 
 .col-xs-9 {
-	padding-right: 10px;
+	padding-right: 0;
+	padding-left: 0;
 }
 
 .col-xs-2 {
@@ -33,14 +34,8 @@ width: 6%;
 headerbar {
 	background-color:#888;
 	width: 100%;
-	float:left;
+	/*float:left;*/
 	z-index: 10001;
 	height: 8%;
 	position: fixed;
 }
-
-
-
-
-
-

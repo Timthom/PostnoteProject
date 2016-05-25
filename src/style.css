@@ -15,3 +15,11 @@ h1 {
     font-size: 5em;
 }
 
+.row {
+    margin-right: 0;
+    margin-left: 0;
+}
+.col-xs-3 {
+	 padding-right: 0;
+     padding-left: 0; 
+}

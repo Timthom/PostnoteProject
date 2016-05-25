@@ -1,12 +1,27 @@
 .navbar {
     border-radius: 0px;
-    position: relative;
     position: fixed;
     display: block;
     height: 100%; 
     z-index: 10000;
     overflow:scroll;
 }
+nav {
+    -webkit-animation: mymove 5s ;  /* Chrome, Safari, Opera */
+    animation: mymove 5s ;
+}
+
+/* Chrome, Safari, Opera */
+@-webkit-keyframes mymove {
+    from {width: 0;}
+    to {width: 22%;}
+}
+
+@keyframes mymove {
+    from {width: 0;}
+    to {width: 22%}
+}
+
 ul{
     color: white;
 }

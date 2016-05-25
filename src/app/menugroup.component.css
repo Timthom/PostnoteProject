@@ -33,11 +33,14 @@ p:hover {
     background-color: gray;
 }
 
-.title{
-    background: none;
+.title {
+    background: none!important;
     border: none!important;
-    color: white;
-    cursor: pointer;
+    color: white!important;
+    cursor: pointer!important;
+    padding: inherit!important;
+
+   
 }
 
 .title:hover {
