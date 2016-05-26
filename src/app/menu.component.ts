@@ -4,8 +4,8 @@ import {Note}from './note';
 import {DataService} from './data.service';
 import {MenuGroupComponent} from './menugroup.component';
 import {ValueService} from './value.service';
-import { AngularFire, defaultFirebase, FirebaseRef, FirebaseListObservable } from 'angularfire2';
-import { Injectable, Inject } from '@angular/core';
+import {AngularFire, defaultFirebase, FirebaseRef, FirebaseListObservable} from 'angularfire2';
+import {Injectable, Inject} from '@angular/core';
 import {CanReuse} from "@angular/router-deprecated";
 
 @Component({
@@ -43,6 +43,9 @@ export class MenuComponent implements OnInit, CanReuse  {
       if(this._authData != null) {
         this.getTitles();
         this.getGroups();
+      } else {
+        console.log("ngOnInit in menu offline");
+        //skall innehålla samma funktioner? 
       }
     }
 
@@ -50,12 +53,16 @@ export class MenuComponent implements OnInit, CanReuse  {
       if(this._authData != null) {
         this._ds.getAllNotes().then(titles => this.titles = titles);
         this._ds.getAllNotesInGroup('noGroup').then(notes => this.titles = notes);
+      } else {
+        console.log("get titles offline");
       }
     }
     
     getGroups() {
       if(this._authData != null) {
-      this._ds.getAllGroups().then(groups => this.myGroups = groups);
+        this._ds.getAllGroups().then(groups => this.myGroups = groups);
+      } else{
+        console.log("get groups offline");
       }
     }
    
@@ -74,8 +81,7 @@ export class MenuComponent implements OnInit, CanReuse  {
       this.showingCancel = !this.showingCancel;
       if(this.adding){
         this.buttonText = "Cancel";
-      }
-      else{
+      } else {
         this.buttonText ="Add category";
       }
     }
@@ -92,6 +98,8 @@ export class MenuComponent implements OnInit, CanReuse  {
           this.adding = false;
           this.buttonText ="Add category";
         }
+      } else {
+        console.log("added group offline");
       }
     }       
 }
