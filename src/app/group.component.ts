@@ -4,6 +4,8 @@ import {NoteComponent} from './note.component';
 import {DataService} from './data.service';
 import { AngularFire, defaultFirebase, FirebaseRef, FirebaseListObservable } from 'angularfire2';
 import { Injectable, Inject } from '@angular/core';
+import {ValueService} from './value.service';
+
 
 @Component({
   moduleId: module.id,
@@ -34,10 +36,10 @@ export class GroupComponent {
   newName: string = "";
   contentList: string[];
   arrowSrc: string = 'icon_expand.png';
-  expanded: boolean = false;
+  expanded: boolean = this._tx._toggleExpand;
   _authData;
 
-  constructor( @Inject(FirebaseRef) private _ref: Firebase, private _ds: DataService) {
+  constructor( @Inject(FirebaseRef) private _ref: Firebase, private _ds: DataService, private _tx:ValueService) {
     this._authData = this._ref.getAuth();
   }
 
@@ -100,8 +102,9 @@ export class GroupComponent {
   }
   
 // Expand category on click arrowBtn
-  toggleExpand() {
-    this.expanded = !this.expanded;
+  groupExpand() {
+    this._tx._toggleExpand = !this._tx._toggleExpand;
+    this.expanded = this._tx._toggleExpand;
     if (this.expanded) {
       this.arrowSrc = 'icon_hide.png';
     }

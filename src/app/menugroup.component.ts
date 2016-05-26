@@ -7,6 +7,7 @@ import {Postnote2App} from './postNote2.component';
 import { Injectable, Inject } from '@angular/core';
 import { defaultFirebase, FirebaseRef } from 'angularfire2';
 import { Observable } from 'rxjs/Observable';
+import {ValueService} from './value.service';
 
 
 @Component({
@@ -20,7 +21,7 @@ import { Observable } from 'rxjs/Observable';
 
 export class MenuGroupComponent implements OnInit{
   arrowSrc: string = 'icon_expand_white.png';
-  expanded: boolean = false;
+  expanded: boolean = this._tx._toggleExpand;
   editingName: boolean = false;
   notes: FirebaseListObservable<any[]>;
   
@@ -28,7 +29,7 @@ export class MenuGroupComponent implements OnInit{
   group; 
   _authData;
   
-  constructor(@Inject(FirebaseRef) private _ref: Firebase, private _ds: DataService) {
+  constructor(@Inject(FirebaseRef) private _ref: Firebase, private _ds: DataService, private _tx:ValueService) {
     this._authData = this._ref.getAuth();
   }
 
@@ -81,7 +82,9 @@ export class MenuGroupComponent implements OnInit{
 
   
   toggleExpand() {
-    this.expanded = !this.expanded;
+    
+    this._tx._toggleExpand = !this._tx._toggleExpand;
+    this.expanded = this._tx._toggleExpand;
     if(this.expanded){
       this.arrowSrc = 'icon_hide_white.png';
     }
