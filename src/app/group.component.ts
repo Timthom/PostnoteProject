@@ -112,6 +112,7 @@ export class GroupComponent {
   edit_click(){
     if(this._authData != null) {
         this.editingName = !this.editingName;
+        
         if(this.editingName){
           document.getElementById(this.groupName.$key).removeAttribute("readonly");
           document.getElementById(this.groupName.$key).focus();
