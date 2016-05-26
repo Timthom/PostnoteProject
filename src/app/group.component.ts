@@ -37,6 +37,7 @@ export class GroupComponent {
   contentList: string[];
   arrowSrc: string = 'icon_expand.png';
   expanded: boolean = this._tx._toggleExpand;
+  editingName: boolean = false;
   _authData;
 
   constructor( @Inject(FirebaseRef) private _ref: Firebase, private _ds: DataService, private _tx:ValueService) {
@@ -81,11 +82,18 @@ export class GroupComponent {
       this._ds.updateGroupName(this.group.$key, this.groupName);
     }
   }
+  
+  editGroup() {
+      if(this._authData != null) {
+        this._ds.updateGroupName(this.group.$key, this.group.name);
+    }
+    }
 
   changeNotesInTheGroup(id) {
     this._ds.changeNoteGroup(id, this.groupName);
   }
 
+/*
   enterKey(key) {
     if (this._authData != null) {
       if (key === 13) {
@@ -99,6 +107,19 @@ export class GroupComponent {
         this.getNotes();
       }
     }
+  }*/
+  
+  edit_click(){
+    if(this._authData != null) {
+        this.editingName = !this.editingName;
+        if(this.editingName){
+          document.getElementById(this.groupName.$key).removeAttribute("readonly");
+          document.getElementById(this.groupName.$key).focus();
+      } else {
+        document.getElementById(this.groupName.$key).setAttribute("readonly", "true");
+        this.editGroupName();
+        }
+      }
   }
   
 // Expand category on click arrowBtn
@@ -107,9 +128,14 @@ export class GroupComponent {
     this.expanded = this._tx._toggleExpand;
     if (this.expanded) {
       this.arrowSrc = 'icon_hide.png';
+      document.getElementById('edit').style.visibility = "visible";
+      document.getElementById('delete').style.visibility = "visible";
     }
     else {
       this.arrowSrc = 'icon_expand.png';
+      document.getElementById('edit').style.visibility = "hidden";
+      document.getElementById('delete').style.visibility = "hidden";
+      
     }
   }
 }
