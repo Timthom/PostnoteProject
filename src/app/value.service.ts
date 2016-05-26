@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 export class ValueService {
 
   _showSideBar:boolean = true;
-  _toggleExpand:boolean = true;
+  _toggleExpand:boolean = false;
 
   constructor() {}
   
