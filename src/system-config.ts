@@ -56,6 +56,9 @@ System.config({
     '@angular': 'vendor/@angular',
     'rxjs': 'vendor/rxjs',
     'main': 'main.js'
+    // 'ng2-dragula': 'node_modules/ng2-dragula/ng2-dragula.js'
+  }, paths: { 
+  'dragula' : 'node_modules/dragula/dist/dragula.min.js'
   },
   packages: cliSystemConfigPackages
 });
