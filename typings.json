@@ -11,6 +11,7 @@
     "moment-node": "registry:dt/moment-node#2.11.1+20160511043338"
   },
   "dependencies": {
+    "dragula": "registry:npm/dragula#3.6.8+20160410191048",
     "moment": "registry:npm/moment#2.10.5+20160211003958"
   }
 }

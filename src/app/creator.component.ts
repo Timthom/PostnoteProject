@@ -18,9 +18,10 @@ import { Dragula, DragulaService } from 'ng2-dragula/ng2-dragula';
   selector: 'creator',
   templateUrl: 'creator.component.html',
   styleUrls: ['creator.component.css'],
-  directives: [ROUTER_DIRECTIVES, NoteComponent, DropdownComponent, Dragula],
+  directives: [ROUTER_DIRECTIVES, NoteComponent, DropdownComponent],
   pipes: [Reverse],
-  providers: []
+  providers: [],
+  viewProviders: []
 })
 @RouteConfig([
 ])
