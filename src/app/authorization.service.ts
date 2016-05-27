@@ -11,8 +11,7 @@ export class AuthorizationService {
     constructor(@Inject(FirebaseRef) private _ref: Firebase) {
        
     }
-    
-       // alert('Registreringen lyckades :)');
+
     createUserAccount(user: User) {
         this._ref.onAuth(this.authDataCallback);
         this._ref.createUser({
@@ -22,7 +21,7 @@ export class AuthorizationService {
             if (error) {
                 alert('E-post adressen finns redan. Välj en annan!');
             } else {
-                
+               alert("Registreringen lyckades");
         }
     });
 }
@@ -30,14 +29,6 @@ export class AuthorizationService {
 authDataCallback(authData) {
   if (authData) {
       console.log('User is logged in');
-    /* console.log("User " + authData.uid + " is logged in with " + authData.provider);
-    console.log('AUTHDATACALLBACK!!!');
-    var ref = new Firebase('https://scorching-torch-8126.firebaseio.com/');
-    ref.child("users").child(authData.uid).set({
-      provider: authData.provider,
-      name: authData.uid
-    
-    }); */
     
   } else {
     console.log("User is logged out");
@@ -58,7 +49,6 @@ authDataCallback(authData) {
                 localStorage.setItem('token', authData.token);
                 console.log(authData);
               
-                
             }
             
         }); 
