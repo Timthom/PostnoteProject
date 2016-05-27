@@ -76,19 +76,13 @@ export class GroupComponent {
     this._ds.deleteGroup(this.group.$key);
     this.clickedDelete.emit('');
   }
-
+  //
   editGroupName() {
     if (this._authData != null) {
       this._ds.updateGroupName(this.group.$key, this.groupName);
     }
   }
   
-  editGroup() {
-      if(this._authData != null) {
-        this._ds.updateGroupName(this.group.$key, this.group.name);
-    }
-    }
-
   changeNotesInTheGroup(id) {
     this._ds.changeNoteGroup(id, this.groupName);
   }
@@ -109,17 +103,20 @@ export class GroupComponent {
     }
   }*/
   
-  edit_click(){
+  // Enable inputfield to edit text in field when user click on pen icon else disable inputfield
+  editClick(){
     if(this._authData != null) {
         this.editingName = !this.editingName;
+        this.editGroupName();
+        this.getNotes();
         
-        if(this.editingName){
+ /*       if(this.editingName){
           document.getElementById(this.groupName.$key).removeAttribute("readonly");
           document.getElementById(this.groupName.$key).focus();
       } else {
-        document.getElementById(this.groupName.$key).setAttribute("readonly", "true");
+        document.getElementById(this.groupName.$key).setAttribute("readonly", "false");
         this.editGroupName();
-        }
+        }*/
       }
   }
   

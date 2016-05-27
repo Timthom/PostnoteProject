@@ -22,7 +22,7 @@
 .delete_button {
     border: none;
     outline: none;
-    visibility: hidden;
+    /*visibility: hidden;*/
     background-color: transparent;
     margin-left: 0em;
     float: right;
@@ -32,7 +32,7 @@
 .edit_button{
     border: none;
     outline: none;
-    visibility: hidden;
+    /*visibility: hidden;*/
     background-color: transparent;
     margin-left: 0em;
     float: right;
