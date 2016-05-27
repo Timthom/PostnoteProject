@@ -10,13 +10,15 @@ import { Observable } from 'rxjs/Observable';
 import { Reverse } from './reverse.pipe';
 import {DropdownComponent} from './dropdown.component';
 import { AngularFire, defaultFirebase, FirebaseRef, FirebaseListObservable } from 'angularfire2';
+import { Dragula, DragulaService } from 'ng2-dragula/ng2-dragula';
+// import { Dragula, DragulaService } from 'ng2-dragula/ng2-dragula';
 
 @Component({
   moduleId: module.id,
   selector: 'creator',
   templateUrl: 'creator.component.html',
   styleUrls: ['creator.component.css'],
-  directives: [ROUTER_DIRECTIVES, NoteComponent, DropdownComponent],
+  directives: [ROUTER_DIRECTIVES, NoteComponent, DropdownComponent, Dragula],
   pipes: [Reverse],
   providers: []
 })
