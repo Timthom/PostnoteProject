@@ -109,14 +109,13 @@ export class GroupComponent {
       } else {
         let content = this.getContent();
         // changes notes in the group to the new group
-        for (let key in content) {
+        for (let key of content) {
           this._ds.changeNoteGroup(key, this.groupName);
         }
-        
         this.editGroupName();
         this.getNotes();
-        
-        document.getElementById('group_name').setAttribute("readonly", "false");
+
+        document.getElementById('group_name').setAttribute("readonly", "true");
         document.getElementById('group_name').blur();
       }
     }
