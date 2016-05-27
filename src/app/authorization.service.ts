@@ -11,7 +11,6 @@ export class AuthorizationService {
     constructor(@Inject(FirebaseRef) private _ref: Firebase) {}
 
     createUserAccount(user: User) {
-        this._ref.onAuth(this.authDataCallback);
         this._ref.createUser({
             email: user.email,
             password: user.password
@@ -23,14 +22,6 @@ export class AuthorizationService {
             }
         });
     }
-
-    authDataCallback(authData) {
-        if (authData) {
-            console.log('User is logged in');
-        } else {
-            console.log("User is logged out");
-    }
-}
 
     loginUser(user: User) {
         this._ref.authWithPassword({
