@@ -8,9 +8,7 @@ export class AuthorizationService {
     
     _userLoggedInSucceed;
 
-    constructor(@Inject(FirebaseRef) private _ref: Firebase) {
-       
-    }
+    constructor(@Inject(FirebaseRef) private _ref: Firebase) {}
 
     createUserAccount(user: User) {
         this._ref.onAuth(this.authDataCallback);
@@ -22,17 +20,16 @@ export class AuthorizationService {
                 alert('E-post adressen finns redan. Välj en annan!');
             } else {
                alert("Registreringen lyckades");
-        }
-    });
-}
+            }
+        });
+    }
 
-authDataCallback(authData) {
-  if (authData) {
-      console.log('User is logged in');
-    
-  } else {
-    console.log("User is logged out");
-  }
+    authDataCallback(authData) {
+        if (authData) {
+            console.log('User is logged in');
+        } else {
+            console.log("User is logged out");
+    }
 }
 
     loginUser(user: User) {
@@ -47,10 +44,9 @@ authDataCallback(authData) {
             
             } else {
                 localStorage.setItem('token', authData.token);
-                console.log(authData);
-              
-            }
-            
+                console.log(authData);  
+                alert("Du är nu inloggad!");
+            }        
         }); 
     }
     
@@ -84,8 +80,7 @@ authDataCallback(authData) {
             localStorage.getItem('token');
         }
          
-        return localStorage.getItem('token') !== null;
-        
+        return localStorage.getItem('token') !== null; 
     }
     
     killAuth() {
