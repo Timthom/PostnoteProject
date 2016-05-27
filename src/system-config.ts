@@ -96,12 +96,13 @@ System.config({
   paths: {
     
     
-    
+              'dragula': 'node_modules/dragula/dist/dragula.js',
+          'ng2-dragula/*': 'node_modules/ng2-dragula/ng2-dragula.js'
     //Put dragula stuff here?......
-    'dragula': 'vendor/dragula/dist/dragula.min.js',
-    'ng2-dragula': 'vendor/ng2-dragula/ng2-dragula.js',
-    'contra': 'vendor/contra/dist/contra.min.js',
-    'crossvent': 'vendor/crossvent/dist/crossvent.min.js'
+    // 'dragula': 'vendor/dragula/dist/dragula.min.js',
+    // 'ng2-dragula': 'vendor/ng2-dragula/ng2-dragula.js',
+    // 'contra': 'vendor/contra/dist/contra.min.js',
+    // 'crossvent': 'vendor/crossvent/dist/crossvent.min.js'
     //..............................
   
   
