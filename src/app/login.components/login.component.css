@@ -1,71 +1,95 @@
 .login {
   position: absolute;
-  width: 400px;
-  height: 350px;
+  width: 25%;
+  height: 230px;
   z-index: 15;
-  top: 35%;
-  left: 50%;
-  margin: -100px 0 0 -100px;
-  background-color: #F0F0F0;
+  top: 6%;
+  right: 1%;
+  background-color: #F5F5F5;
   border: 2px solid grey;
   font-family: 'Open Sans', Verdana, Geneva, Arial, Helvetica, sans-serif;
+  color: #6B6B6B;
+  border-radius: 5px;
 }
 
-h2 {
-    color: black;
-      margin-left: 20px;
-}
-
-    input {
-      width: 300px;
+input {
+      width: 90%;
       font-size:15pt;
-      border-radius: 3px;
-      background-color: white;
-      border: 1px solid black;
-      margin-left: 45px;
+      border-radius: 4px;
+      background-color: #E0E0E0;
+      border: 2px solid #C3C3C3;
+      margin-left: 5%;
+      margin-right: 5%;
       margin-top: 10px;
-    }
+}
+
+.input-group {
+      display: block;
+}
     
-    button[disabled] {
+    
+button[disabled] {
     background-color: #ccc;
     cursor: default;
   }
 
-  button:not([disabled]):hover {
+button:not([disabled]):hover {
     background-color: mediumpurple;
   }
 
-  .ng-dirty.ng-invalid {
+.ng-dirty.ng-invalid {
     border: 1px solid red;
   }
 
-  .ng-dirty.ng-valid {
-    border: 1px solid green;
+.ng-dirty.ng-valid {
+    border: 1px solid #88AD88;
     background-color: #b7e0a0;
   
   }
   
-   button {
+ button {
     border-radius: 5px;
-    border: 1px solid black;
-    margin-top: 30px;
+    margin-top: 10px;
+    margin-right: 5%;
+    margin-left: 5%;
+    margin-bottom: 5px;
     font-size: inherit;
-    background-color: green;
-    color: white;
+    background-color: #4CAF50;    
+    color: #3C3C3C;
     cursor: pointer;
-    padding: 5px 8px;
-    float: right;
-    margin-right: 10px;
+    padding: 2px 8px;
+    width: 90%;
   }
   
-  .imageButtons {
-      margin-left: 45px;
-  }
+.line {
+   width: 90%;
+   height: 10px;
+   margin-left: 5%;
+   margin-right: 5%;
+   border-bottom: 1px solid #6B6B6B;;
+   text-align: center;
+ }
+ 
+ .lineText {
+   font-size: 10px;
+   background-color: #F3F5F6; 
+   padding: 0 10px;
+   display: inline-block;
+ }
+ 
+ .imageButtons {
+   float: left;
+   width: 45px;
+   height: 45px;
+   background-color: #F5F5F5;
+   padding: 2px;
+   border: 1px outset #C3C3C3;
+ }
   
-  .bar {
-    margin-top: 5px;
-    border-bottom: 2px solid lightgray;
-}
+  
+
+
+
   
 
 

@@ -1,0 +1,13 @@
+.logout {
+  position: absolute;
+  width: 25%;
+  height: 230px;
+  z-index: 15;
+  top: 6%;
+  right: 1%;
+  background-color: #F5F5F5;
+  border: 2px solid grey;
+  font-family: 'Open Sans', Verdana, Geneva, Arial, Helvetica, sans-serif;
+  color: #6B6B6B;
+  border-radius: 5px;
+}

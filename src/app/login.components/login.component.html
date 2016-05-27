@@ -1,15 +1,20 @@
 <div class="login">
-<h2>Log In to your Account</h2>
-    <input class="imageButtons" type="image" src="loginfacebook.png" (click)="loginWithFacebook()">
-    <input class="imageButtons" type="image" src="logingoogle.png" (click)="loginWithGoogle()">
-        <div class="bar"></div>
-            <form [ngFormModel]="myForm" (ngSubmit)="onLoggedIn()">
-                <div class="input-group">
-                    <input [ngFormControl]="myForm.find('email')" type="email" placeholder="Email" id="email">
-                </div>
-                <div class="input-group">
-                    <input [ngFormControl]="myForm.find('password')" type="password" placeholder="Password" id="password">
-                </div>
-                <button type="submit" [disabled]="!myForm.valid">Login ></button>
-            </form>
+    <form [ngFormModel]="myForm" (ngSubmit)="onLoggedIn()">
+        <div class="input-group">
+            <input [ngFormControl]="myForm.find('email')" type="email" placeholder="Email" id="email">
+        </div>
+        <div class="input-group">
+            <input [ngFormControl]="myForm.find('password')" type="password" placeholder="Password" id="password">
+        </div>
+        <button type="submit" [disabled]="!myForm.valid">Sign in</button>
+    </form>
+    <div class = "line">
+        <span class ="lineText">
+            Or sign in with
+        </span>
     </div>
+   <input class="imageButtons" type="image" src="Facebook-color.png" (click)="loginWithFacebook()">
+   <input class="imageButtons" type="image" src="Google-color.png" (click)="loginWithGoogle()">
+   <input class="imageButtons" type="image" src="Github-color.png" (click)="loginWithFacebook()">
+   <input class="imageButtons" type="image" src="Twitter-color.png" (click)="loginWithGoogle()">
+</div>
