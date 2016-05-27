@@ -16,7 +16,9 @@ module.exports = function(defaults) {
       'ng2-bootstrap/bundles/ng2-bootstrap.min.js',
       'moment/moment.js',
       'angularfire2/**/*.js',
-      'firebase/lib/*.js'
+      'firebase/lib/*.js',
+      'dragula/dist/dragula.min.css',
+      'ng2-dragula/ng2-dragula.js'
     ]
   });
 };
