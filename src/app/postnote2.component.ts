@@ -22,14 +22,10 @@ import {CanReuse} from "@angular/router-deprecated";
   pipes: []
 })
 
-export class Postnote2App implements OnInit, CanReuse {
+export class Postnote2App implements OnInit{
     
     _authData;
     
-    routerCanReuse() {  
-        return false;
-    }
-  
   allGroups :FirebaseListObservable<any[]>;
    statusCheckSideBar:boolean = this._vs._showSideBar;
    constructor(@Inject(FirebaseRef) private _ref: Firebase, private _ds: DataService, private _vs:ValueService) {

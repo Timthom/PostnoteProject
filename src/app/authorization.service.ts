@@ -18,7 +18,7 @@ export class AuthorizationService {
             if (error) {
                 alert('E-post adressen finns redan. Välj en annan!');
             } else {
-               alert("Registreringen lyckades");
+                alert("Registreringen lyckades");
             }
         });
     }

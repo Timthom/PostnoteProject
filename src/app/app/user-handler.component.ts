@@ -6,6 +6,7 @@ import {LoginComponent} from '../login.components/login.component';
 import {Postnote2App} from '../postnote2.component';
 import {MenuComponent} from '../menu.component';
 import {LogoutComponent} from '../logout/logout.component';
+import {CanReuse} from "@angular/router-deprecated";
 
 @Component({
     moduleId: module.id,
@@ -16,13 +17,17 @@ import {LogoutComponent} from '../logout/logout.component';
     outputs: ['_userLoggedOut']
 })
 
-export class UserHandlerComponent {
+export class UserHandlerComponent implements CanReuse  {
+    
+    routerCanReuse() {  
+        return false;
+    }
     
     switchWindow = false;
     loggingOut = false;
     
     constructor(private _authServiceHandler: AuthorizationService, private _router: Router) {
-        
+        console.log("Refreshing???");
     }
 
     isAuth() {
@@ -32,11 +37,12 @@ export class UserHandlerComponent {
         }
 
         logoutUser() {
-            console.log("Loggas ut?");
+          console.log("Loggas ut?");
           this._authServiceHandler.killAuth();
-          this._router.renavigate();  
           this.switchWindow = false;
-          this._router.parent.navigate(['UserHandlerRoute']);
+          this.loggingOut = false;
+          // this._router.renavigate();
+          // this._router.parent.navigate(['UserHandlerRoute']);
           
             
         }
