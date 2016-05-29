@@ -64,6 +64,18 @@ export class AuthorizationService {
         }, { remember: "sessionOnly" 
     });
 }
+
+    loginTwitterAuth() {
+        this._ref.authWithOAuthPopup("twitter", function(error, authData) {
+            if (error) {
+                console.log("Login Failed!", error);
+            } else {
+                console.log("Authenticated successfully with payload:", authData);
+                localStorage.setItem('token', authData.token);
+            }
+        }, { remember: "sessionOnly" 
+    });
+}
         
     isAuthenticated(): boolean {
        

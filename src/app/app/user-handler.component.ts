@@ -43,6 +43,7 @@ export class UserHandlerComponent implements CanReuse  {
           this._authServiceHandler.killAuth();
           this.switchWindow = false;
           this.loggingOut = false;
+          this.loggingIn = false;
           // this._router.renavigate();
           // this._router.parent.navigate(['UserHandlerRoute']);
           
