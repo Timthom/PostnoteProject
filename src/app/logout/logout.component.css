@@ -1,0 +1,37 @@
+.logout {
+  position: absolute;
+  width: 19%;
+  height: 90px;
+  z-index: 15;
+  top: 6%;
+  right: 1%;
+  background-color: #F5F5F5;
+  border: 2px solid grey;
+  font-family: 'Open Sans', Verdana, Geneva, Arial, Helvetica, sans-serif;
+  color: #6B6B6B;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.line {
+   width: 90%;
+   height: 10px;
+   margin-left: 5%;
+   margin-right: 5%;
+   border-bottom: 1px solid #6B6B6B;
+   text-align: center;
+ }
+ 
+ button {
+    border-radius: 5px;
+    margin-top: 10px;
+    margin-right: 5%;
+    margin-left: 5%;
+    margin-bottom: 5px;
+    font-size: inherit;
+    background-color: #ccc;
+    color: #3C3C3C;
+    cursor: pointer;
+    padding: 2px 8px;
+    width: 90%;
+  }
