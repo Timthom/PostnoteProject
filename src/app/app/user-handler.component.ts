@@ -25,6 +25,8 @@ export class UserHandlerComponent implements CanReuse  {
     
     switchWindow = false;
     loggingOut = false;
+    loggingIn = false;
+    
     
     constructor(private _authServiceHandler: AuthorizationService, private _router: Router) {
         console.log("Refreshing???");
@@ -55,6 +57,10 @@ export class UserHandlerComponent implements CanReuse  {
             return this.loggingOut;
         }
         
+        isLoggingIn() {
+            return this.loggingIn;
+        }
+        
         switchToCreateAccountWindow() {
             this.switchWindow = true;
             // this._router.parent.navigate(['CreateUserAccountRoute']);
@@ -62,8 +68,7 @@ export class UserHandlerComponent implements CanReuse  {
         
         switchToLoginWindow() {
             // this._router.parent.navigate(['LoginUserRoute']);
-            this.switchWindow = false;
-            
+            this.loggingIn = !this.loggingIn;       
         }
         
         switchToLogoutWindow() {
