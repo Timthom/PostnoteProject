@@ -5,31 +5,34 @@
     </ul>
   </nav>
   <postnote2-app></postnote2-app>
+  
   <div *ngIf="isLoggingOut()">
     <logout-user (emitLogout)="logoutUser()"></logout-user>
   </div>
 </div>
 
-<div *ngIf="!switchTo() && !isLoggingOut()">
-  <div *ngIf="!isAuth()">
-    <menu></menu>
+<div *ngIf="switchTo()">
+  <div *ngIf="!isAuth()">  
     <nav class="right">
       <ul>
         <li><a (click)="switchToCreateAccountWindow()">Create account</a></li>
       </ul>
     </nav>
-    <login-user></login-user>
+    
+    <postnote2-app></postnote2-app>
   </div>
 </div>
-
-<div *ngIf="switchTo() && !isLoggingOut()">
-  <div *ngIf="!isAuth()">
-    <menu></menu>
+ 
+  <div *ngIf="!isAuth()">  
     <nav class="right">
       <ul>
         <li><a (click)="switchToLoginWindow()">Login</a></li>
       </ul>
     </nav>
-    <create-user-account></create-user-account>
-  </div>
+    
+    <div *ngIf="isLoggingIn()">
+      <login-user></login-user>
+    </div>
+
+    <postnote2-app></postnote2-app>
 </div>
