@@ -38,6 +38,7 @@ export class GroupComponent {
   arrowSrc: string = 'icon_expand.png';
   expanded: boolean = this._tx._toggleExpand;
   editingName: boolean = false;
+  enableEditIfNull:string = '';
   _authData;
 
   constructor( @Inject(FirebaseRef) private _ref: Firebase, private _ds: DataService, private _tx: ValueService) {
@@ -110,19 +111,23 @@ export class GroupComponent {
       this.editingName = !this.editingName;
 
       if (this.editingName) {
-        document.getElementById('group_name').removeAttribute("readonly");
-        document.getElementById('group_name').focus();
+        //document.getElementById('group_name').removeAttribute("readonly");
+        // document.getElementById('group_name').focus();
+        this.enableEditIfNull = null;
+
+        
       } else {
         let content = this.getContent();
         // changes notes in the group to the new group
         for (let key of content) {
           this._ds.changeNoteGroup(key, this.groupName);
         }
+        this.enableEditIfNull = '';
         this.editGroupName();
         this.getNotes();
 
-        document.getElementById('group_name').setAttribute("readonly", "true");
-        document.getElementById('group_name').blur();
+        // document.getElementById('group_name').setAttribute("readonly", "true");
+        // document.getElementById('group_name').blur();
       }
     } else {
       console.log("enterkey in groupcomponent offline");

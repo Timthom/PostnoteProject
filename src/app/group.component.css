@@ -63,3 +63,7 @@ note {
 input{
     height: 40px;
 }
+.editingName{
+    background-color: red;
+    
+}
