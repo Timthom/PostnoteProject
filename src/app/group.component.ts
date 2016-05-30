@@ -31,7 +31,7 @@ export class GroupComponent {
 
   @Output() clickedDelete = new EventEmitter();
 
-  notes: FirebaseListObservable<any[]>;
+  notes: any;
 
   newName: string = "";
   contentList: string[];

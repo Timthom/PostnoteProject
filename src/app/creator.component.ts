@@ -28,7 +28,7 @@ import {LocalStorageService} from './localstorage.service';
 export class CreatorComponent {
     title: string = "";
     text: string = "";
-    notes: FirebaseListObservable<any[]>;
+    notes: any;
     selectedGroup: string = "noGroup";
     _authData;
     
