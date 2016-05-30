@@ -32,9 +32,12 @@ export class CreatorComponent {
     selectedGroup: string = "noGroup";
     _authData;
     
-    constructor(private _ds: DataService, @Inject(FirebaseRef) private _ref: Firebase) {
+    constructor(private _ds: DataService, @Inject(FirebaseRef) private _ref: Firebase, private _dragulaService: DragulaService) {
         this._authData = this._ref.getAuth()
         console.log("inne i creatorcomponents konstruktor");
+        _dragulaService.setOptions('bag-creator', {
+           
+        });
     }
     
     ngOnInit() {
