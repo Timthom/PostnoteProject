@@ -5,11 +5,12 @@ import {OnInit} from '@angular/core';
 import {Note} from './note';
 import {NoteComponent} from './note.component';
 import {Postnote2App} from './postNote2.component';
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import { Reverse } from './reverse.pipe';
+import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs/Observable';
+import {Reverse} from './reverse.pipe';
 import {DropdownComponent} from './dropdown.component';
-import { AngularFire, defaultFirebase, FirebaseRef, FirebaseListObservable } from 'angularfire2';
+import {AngularFire, defaultFirebase, FirebaseRef, FirebaseListObservable} from 'angularfire2';
+import {LocalStorageService} from './localstorage.service';
 
 @Component({
     moduleId: module.id,
@@ -18,7 +19,7 @@ import { AngularFire, defaultFirebase, FirebaseRef, FirebaseListObservable } fro
     styleUrls: ['creator.component.css'],
     directives: [ROUTER_DIRECTIVES, NoteComponent, DropdownComponent],
     pipes: [Reverse],
-    providers: []
+    providers: [LocalStorageService]
 })
 @RouteConfig([
 ])
@@ -29,7 +30,7 @@ export class CreatorComponent {
     selectedGroup: string = "noGroup";
     _authData;
 
-    constructor(private _ds: DataService, @Inject(FirebaseRef) private _ref: Firebase) {
+    constructor(private _ds: DataService, @Inject(FirebaseRef) private _ref: Firebase, private _ls: LocalStorageService) {
         this._authData = this._ref.getAuth()
         console.log("inne i creatorcomponents konstruktor");
     }
@@ -47,7 +48,6 @@ export class CreatorComponent {
 
     getNotes() {
         if (this._authData != null) {
-            console.log("Bör inte köras");
             console.log("inne i getNotes i creatorcomponent");
             this._ds.getAllNotesInGroup('noGroup').then(notes => this.notes = notes);
         } else {
@@ -57,7 +57,6 @@ export class CreatorComponent {
 
     groupChanged(event) {
         if (this._authData != null) {
-            console.log("Bör inte köras");
             this.selectedGroup = event;
         } else {
             console.log("groupchanged in creatorcomponent offline");
@@ -66,7 +65,6 @@ export class CreatorComponent {
 
     save() {
         if (this._authData != null) {
-            console.log("Bör inte köras");
             if (this.title !== '') {
                 let time = new Date().getTime();
                 this._ds.addNoteToNotes(this.title, this.text, this.selectedGroup, time, "yellow");
@@ -75,6 +73,13 @@ export class CreatorComponent {
             }
         } else {
             console.log("save in creatorcomponent offline");
+            if(this.title !== ''){
+                let time = new Date().getTime();
+                let newNote = new Note(this.title, this.text, this.selectedGroup, time.toString(), "yellow");
+                this._ls.addNoteToNotes(newNote);
+                this.title = '';
+                this.text = '';
+            }
         }
     }
 }
