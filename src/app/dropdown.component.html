@@ -3,7 +3,7 @@
     <button type="button" class="group_button dropdown_image" dropdownToggle [disabled]="disabled">
     </button>
     <ul class="dropdown-menu" role="menu" aria-labelledby="single-button">
-      <li *ngFor="let group of groups | async" (click)="selectGroup(group.name)">
+      <li *ngFor="let group of groups" (click)="selectGroup(group.name)">
           <a class="dropdown-item" href="#">{{group.name}}</a>
       </li>
       <li (click)="selectGroup('noGroup')">
