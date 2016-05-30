@@ -1,5 +1,5 @@
-.groupContainer:hover .delete_button{
-    visibility: visible;
+.groupContainer{
+    
 }
 
 .line {
@@ -22,14 +22,20 @@
 .delete_button {
     border: none;
     outline: none;
-    visibility: hidden;
+    /*visibility: hidden;*/
     background-color: transparent;
     margin-left: 0em;
+    float: right;
+    margin-right: 3em;
 }
 
-.delete_button:hover {
-  box-shadow: 0px 1px 5px #5A5A5A ;
-  background-color: #F44336 ;
+.edit_button{
+    border: none;
+    outline: none;
+    /*visibility: hidden;*/
+    background-color: transparent;
+    margin-left: 0em;
+    float: right;
 }
 
 .col-xs-4 {
@@ -56,4 +62,8 @@ note {
 
 input{
     height: 40px;
+}
+.editingName{
+    border: 1px solid black;
+    
 }

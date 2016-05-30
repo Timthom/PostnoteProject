@@ -23,16 +23,15 @@ export class DataService {
             
         
         if (error) {
-            console.log("Authentication Failed!", error);
+            //console.log("Authentication Failed!", error);
         } else {
-            console.log("Authenticated successfully with payload:", authData);
+            //console.log("Authenticated successfully with payload:", authData);
         }    
     }, { remember: "sessionOnly"
 });
         
         var authData = _ref.getAuth();
-        console.log(authData);
-        
+
         this._afNotes = _af.database.list('/users/' + authData.uid + '/notes');
         this._afGroups = _af.database.list('/users/' + authData.uid + '/groups', {
             query: {
@@ -56,9 +55,9 @@ export class DataService {
         this._ref.authWithCustomToken(token, function(error, authData) {
         
         if (error) {
-            console.log("Authentication Failed!", error);
+            //console.log("Authentication Failed!", error);
         } else {
-            console.log("Authenticated successfully with payload:", authData);
+            //console.log("Authenticated successfully with payload:", authData);
         }    
     }, { remember: "sessionOnly"
 });
@@ -75,9 +74,9 @@ export class DataService {
         this._ref.authWithCustomToken(token, function(error, authData) {
         
         if (error) {
-            console.log("Authentication Failed!", error);
+            //console.log("Authentication Failed!", error);
         } else {
-            console.log("Authenticated successfully with payload:", authData);
+            //console.log("Authenticated successfully with payload:", authData);
         }    
     }, { remember: "sessionOnly"
 });     console.log(token);
@@ -97,9 +96,9 @@ export class DataService {
         this._ref.authWithCustomToken(token, function(error, authData) {
         
         if (error) {
-            console.log("Authentication Failed!", error);
+            //console.log("Authentication Failed!", error);
         } else {
-            console.log("Authenticated successfully with payload:", authData);
+            //console.log("Authenticated successfully with payload:", authData);
         }    
     }, { remember: "sessionOnly"
 });
@@ -115,9 +114,9 @@ export class DataService {
         this._ref.authWithCustomToken(token, function(error, authData) {
         
         if (error) {
-            console.log("Authentication Failed!", error);
+            //console.log("Authentication Failed!", error);
         } else {
-            console.log("Authenticated successfully with payload:", authData);
+            //console.log("Authenticated successfully with payload:", authData);
         }    
     }, { remember: "sessionOnly"
 });
@@ -138,9 +137,9 @@ export class DataService {
         this._notes.authWithCustomToken(token, function(error, authData) {
         
         if (error) {
-            console.log("Authentication Failed!", error);
+            //console.log("Authentication Failed!", error);
         } else {
-            console.log("Authenticated successfully with payload:", authData);
+            //console.log("Authenticated successfully with payload:", authData);
         }    
     }, { remember: "sessionOnly"
 });
@@ -156,14 +155,14 @@ export class DataService {
         this._ref.authWithCustomToken(token, function(error, authData) {
         
         if (error) {
-            console.log("Authentication Failed!", error);
+            //console.log("Authentication Failed!", error);
         } else {
-            console.log("Authenticated successfully with payload:", authData);
+            //console.log("Authenticated successfully with payload:", authData);
         }    
     }, { remember: "sessionOnly"
 });
         var authData = this._ref.getAuth();
-        console.log(authData);
+        //console.log(authData);
         let tempObservable: FirebaseListObservable<any[]> = this._af.database.list('/users/' + authData.uid + '/notes', {
            query: {
               orderByChild: 'group',
@@ -183,9 +182,9 @@ export class DataService {
         this._ref.authWithCustomToken(token, function(error, authData) {
         
         if (error) {
-            console.log("Authentication Failed!", error);
+            //console.log("Authentication Failed!", error);
         } else {
-            console.log("Authenticated successfully with payload:", authData);
+            //console.log("Authenticated successfully with payload:", authData);
         }    
     }, { remember: "sessionOnly"
 });
@@ -202,9 +201,9 @@ export class DataService {
         this._ref.authWithCustomToken(token, function(error, authData) {
         
         if (error) {
-            console.log("Authentication Failed!", error);
+            //console.log("Authentication Failed!", error);
         } else {
-            console.log("Authenticated successfully with payload:", authData);
+            //console.log("Authenticated successfully with payload:", authData);
         }    
     }, { remember: "sessionOnly"
 });
@@ -217,9 +216,9 @@ export class DataService {
         this._ref.authWithCustomToken(token, function(error, authData) {
         
         if (error) {
-            console.log("Authentication Failed!", error);
+            //console.log("Authentication Failed!", error);
         } else {
-            console.log("Authenticated successfully with payload:", authData);
+            //console.log("Authenticated successfully with payload:", authData);
         }    
     }, { remember: "sessionOnly"
 });
@@ -232,9 +231,9 @@ export class DataService {
         this._ref.authWithCustomToken(token, function(error, authData) {
         
         if (error) {
-            console.log("Authentication Failed!", error);
+            //console.log("Authentication Failed!", error);
         } else {
-            console.log("Authenticated successfully with payload:", authData);
+            //console.log("Authenticated successfully with payload:", authData);
         }    
     }, { remember: "sessionOnly"
 });
@@ -247,9 +246,9 @@ export class DataService {
         this._notes.authWithCustomToken(token, function(error, authData) {
         
         if (error) {
-            console.log("Authentication Failed!", error);
+            //console.log("Authentication Failed!", error);
         } else {
-            console.log("Authenticated successfully with payload:", authData);
+            //console.log("Authenticated successfully with payload:", authData);
         }    
     }, { remember: "sessionOnly"
 });

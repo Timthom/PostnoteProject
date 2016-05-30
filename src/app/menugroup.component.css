@@ -7,14 +7,10 @@ p {
     cursor: pointer;
 }
 
-p:hover {
-    color: gray;
-}
-
-#container:hover #deleteBtn{
+#container #deleteBtn{
     visibility: visible;
 }
-#container:hover #editBtn{
+#container #editBtn{
     visibility: visible;
 }
 
@@ -42,10 +38,6 @@ p:hover {
     transition: background-color 150ms ease-in-out;
 }
 
-#editBtn:hover,#deleteBtn:hover{
-    background-color: gray;
-}
-
 .title{
     background: none;
     border: none!important;
@@ -53,8 +45,8 @@ p:hover {
     cursor: pointer;
 }
 
-.title:hover {
-    color: gray;
+.title {
+    color: white;
     cursor: pointer;
 }
 
@@ -62,7 +54,7 @@ p:hover {
     color: gray;
 }
 
-.editing:hover {
+.editing {
     color: gray;
     cursor: text;
 }
