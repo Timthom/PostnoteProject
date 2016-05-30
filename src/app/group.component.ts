@@ -39,6 +39,7 @@ export class GroupComponent {
   expanded: boolean = this._tx._toggleExpand;
   editingName: boolean = false;
   enableEditIfNull:string = '';
+  editSrc: string = 'icon_edit.png';
   _authData;
 
   constructor( @Inject(FirebaseRef) private _ref: Firebase, private _ds: DataService, private _tx: ValueService) {
@@ -111,10 +112,8 @@ export class GroupComponent {
       this.editingName = !this.editingName;
 
       if (this.editingName) {
-        //document.getElementById('group_name').removeAttribute("readonly");
-        // document.getElementById('group_name').focus();
         this.enableEditIfNull = null;
-
+        this.editSrc = 'icon_save.png';
         
       } else {
         let content = this.getContent();
@@ -125,9 +124,9 @@ export class GroupComponent {
         this.enableEditIfNull = '';
         this.editGroupName();
         this.getNotes();
+        
+        this.editSrc = 'icon_edit.png';
 
-        // document.getElementById('group_name').setAttribute("readonly", "true");
-        // document.getElementById('group_name').blur();
       }
     } else {
       console.log("enterkey in groupcomponent offline");
@@ -140,13 +139,9 @@ export class GroupComponent {
     this.expanded = this._tx._toggleExpand;
     if (this.expanded) {
       this.arrowSrc = 'icon_hide.png';
-      document.getElementById('edit').style.visibility = "visible";
-      document.getElementById('delete').style.visibility = "visible";
     }
     else {
       this.arrowSrc = 'icon_expand.png';
-      document.getElementById('edit').style.visibility = "hidden";
-      document.getElementById('delete').style.visibility = "hidden";
     }
   }
 }

@@ -78,9 +78,7 @@ export class MenuGroupComponent implements OnInit {
     }
   }
 
-
   toggleExpand() {
-
     this._tx._toggleExpand = !this._tx._toggleExpand;
     this.expanded = this._tx._toggleExpand;
     if (this.expanded) {
