@@ -47,12 +47,16 @@ export class GroupComponent {
   ngOnInit() {
     if (this._authData != null) {
       this.getNotes();
+    } else {
+      console.log("ngOnInit in groupcomponent offline");
     }
   }
 
   getNotes() {
     if (this._authData != null) {
       this._ds.getAllNotesInGroup(this.groupName).then(notes => this.notes = notes);
+    } else {
+      console.log("getnotes in groupcomponent offline");
     }
   }
 
@@ -80,6 +84,8 @@ export class GroupComponent {
   editGroupName() {
     if (this._authData != null) {
       this._ds.updateGroupName(this.group.$key, this.groupName);
+    } else {
+      console.log("editgroupname in groupcomponent offline");
     }
   }
 
@@ -118,6 +124,8 @@ export class GroupComponent {
         document.getElementById('group_name').setAttribute("readonly", "true");
         document.getElementById('group_name').blur();
       }
+    } else {
+      console.log("enterkey in groupcomponent offline");
     }
   }
 

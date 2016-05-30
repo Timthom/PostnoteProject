@@ -5,19 +5,21 @@ import {CreateUserAccountComponent} from '../createuser.components/create-user-a
 import {LoginComponent} from '../login.components/login.component';
 import {Postnote2App} from '../postnote2.component';
 import {MenuComponent} from '../menu.component';
+import {LogoutComponent} from '../logout/logout.component';
 
 @Component({
     moduleId: module.id,
     selector: 'user-handler',
     templateUrl: 'user-handler.component.html',
     styleUrls: ['user-handler.component.css'],
-    directives: [ROUTER_DIRECTIVES, CreateUserAccountComponent, LoginComponent, Postnote2App, MenuComponent],
+    directives: [ROUTER_DIRECTIVES, CreateUserAccountComponent, LoginComponent, Postnote2App, MenuComponent, LogoutComponent],
     outputs: ['_userLoggedOut']
 })
 
 export class UserHandlerComponent {
     
     switchWindow = false;
+    loggingOut = false;
     
     constructor(private _authServiceHandler: AuthorizationService, private _router: Router) {
         
@@ -43,6 +45,10 @@ export class UserHandlerComponent {
             return this.switchWindow;
         }
         
+        isLoggingOut(){
+            return this.loggingOut;
+        }
+        
         switchToCreateAccountWindow() {
             this.switchWindow = true;
             // this._router.parent.navigate(['CreateUserAccountRoute']);
@@ -52,6 +58,12 @@ export class UserHandlerComponent {
             // this._router.parent.navigate(['LoginUserRoute']);
             this.switchWindow = false;
             
+        }
+        
+        switchToLogoutWindow() {
+            console.log("Byter till logout!");
+            console.log(this.loggingOut);
+            this.loggingOut = !this.loggingOut;
         }
         
     }
