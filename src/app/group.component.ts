@@ -5,7 +5,7 @@ import {DataService} from './data.service';
 import { AngularFire, defaultFirebase, FirebaseRef, FirebaseListObservable } from 'angularfire2';
 import { Injectable, Inject } from '@angular/core';
 import {ValueService} from './value.service';
-
+import { Dragula, DragulaService } from 'ng2-dragula/ng2-dragula';
 
 @Component({
   moduleId: module.id,
@@ -13,8 +13,9 @@ import {ValueService} from './value.service';
   providers: [ROUTER_PROVIDERS],
   templateUrl: 'group.component.html',
   styleUrls: ['group.component.css'],
-  directives: [ROUTER_DIRECTIVES, NoteComponent],
-  pipes: []
+  directives: [ROUTER_DIRECTIVES, NoteComponent, Dragula],
+  pipes: [],
+  viewProviders: [DragulaService]
 })
 @RouteConfig([
 ])
