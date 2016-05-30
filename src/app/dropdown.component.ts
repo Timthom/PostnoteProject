@@ -49,25 +49,31 @@ export class DropdownComponent implements OnInit {
     
     ngOnInit() {
         if(this._authData != null) {
-        this.getTitles();
+            this.getTitles();
+        } else {
+            console.log("ngoninit in dropdowncomponent offline");
         }
     }
     
     getTitles() {
         if(this._authData != null) {
-        this._ds.getAllGroups().then(titles => this.groups = titles);
+            this._ds.getAllGroups().then(titles => this.groups = titles);
+        } else {
+            console.log("get titles in dropdowncomponent offline");
         }
     }
     
     selectGroup(group: string){
         if(this._authData != null) {
-      this.changeGroup.emit(group);
-      this.changeNoteGroup.emit(group);
+            this.changeGroup.emit(group);
+            this.changeNoteGroup.emit(group);
         
-      var buttonText: HTMLElement = document.getElementById('group_name');
-      buttonText.innerHTML = group;
+            var buttonText: HTMLElement = document.getElementById('group_name');
+            buttonText.innerHTML = group;
       
-      console.log("Group selected " + group);
-    }
+            console.log("Group selected " + group);
+        } else {
+            console.log("selectgroup in dropdowncomponent offline");
+        }
     }
 }

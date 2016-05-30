@@ -18,88 +18,100 @@ import { Observable } from 'rxjs/Observable';
 })
 
 
-export class MenuGroupComponent implements OnInit{
+export class MenuGroupComponent implements OnInit {
   arrowSrc: string = 'icon_expand_white.png';
   expanded: boolean = false;
   editingName: boolean = false;
   notes: FirebaseListObservable<any[]>;
-  
+
   @Input()
-  group; 
+  group;
   _authData;
-  
-  constructor(@Inject(FirebaseRef) private _ref: Firebase, private _ds: DataService) {
+
+  constructor( @Inject(FirebaseRef) private _ref: Firebase, private _ds: DataService) {
     this._authData = this._ref.getAuth();
   }
 
   ngOnInit() {
-    if(this._authData != null) {
-        this.getNotes();
+    if (this._authData != null) {
+      this.getNotes();
+    } else {
+      console.log("ngOnInit in menugroupcomponent offline");
     }
   }
 
   getNotes() {
-    if(this._authData != null) {
-        this._ds.getAllNotesInGroup(this.group.name).then(titles => this.notes = titles);
+    if (this._authData != null) {
+      this._ds.getAllNotesInGroup(this.group.name).then(titles => this.notes = titles);
+    } else {
+      console.log("getnotes in menugroupcomponent offline");
     }
-        
+
   }
-   
-   deleteGroup() {
-     if(this._authData != null) {
+
+  deleteGroup() {
+    if (this._authData != null) {
       this._ds.deleteGroup(this.group.$key);
-     }
+    } else {
+      console.log("deleteGroup in menugroupcomponent offline");
     }
-    
-    editGroupName() {
-      if(this._authData != null) {
+  }
+
+  editGroupName() {
+    if (this._authData != null) {
       this._ds.updateGroupName(this.group.$key, this.group.name);
-      }
+    } else {
+      console.log("editgroupname in menugroupcomponent offline");
     }
-    
-    editGroup() {
-      if(this._authData != null) {
-        this._ds.updateGroupName(this.group.$key, this.group.name);
+  }
+
+  editGroup() {
+    if (this._authData != null) {
+      this._ds.updateGroupName(this.group.$key, this.group.name);
+    } else {
+      console.log("editgroup in menugroupcomponent offline");
     }
-    }
-    
-    //When pressing the edit button, it enables editing on the input field
-    editing() {
-      if(this._authData != null) {
-        this.editingName = !this.editingName;
-        
-        if(this.editingName){
-          document.getElementById(this.group.$key).removeAttribute("readonly");
-          document.getElementById(this.group.$key).focus();
+  }
+
+  //When pressing the edit button, it enables editing on the input field
+  editing() {
+    if (this._authData != null) {
+      this.editingName = !this.editingName;
+
+      if (this.editingName) {
+        document.getElementById(this.group.$key).removeAttribute("readonly");
+        document.getElementById(this.group.$key).focus();
 
       } else {
         document.getElementById(this.group.$key).setAttribute("readonly", "true");
         this.editGroup();
-        }
       }
+    } else {
+      console.log("editing in menugroupcomponent offline");
+    }
   }
 
-  
+
   toggleExpand() {
     this.expanded = !this.expanded;
-    if(this.expanded){
+    if (this.expanded) {
       this.arrowSrc = 'icon_hide_white.png';
     }
-    else{
+    else {
       this.arrowSrc = 'icon_expand_white.png';
     }
   }
-  
- jumpToNote(note:string){
-      var element = document.getElementById(note);
-      element.scrollIntoView(true);  
-  
+
+  jumpToNote(note: string) {
+    var element = document.getElementById(note);
+    element.scrollIntoView(true);
+
   }
-  
-  jumpToGroup(groupId :string){
-      var element = document.getElementById(groupId);
-      element.scrollIntoView(true);
-      console.log(element);
+
+  jumpToGroup(groupId: string) {
+    var element = document.getElementById(groupId);
+    element.scrollIntoView(true);
+    console.log(element);
   }
-  
+
 }
