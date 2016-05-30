@@ -4,6 +4,7 @@ import {NoteComponent} from './note.component';
 import {DataService} from './data.service';
 import { AngularFire, defaultFirebase, FirebaseRef, FirebaseListObservable } from 'angularfire2';
 import { Injectable, Inject } from '@angular/core';
+import {Reverse} from './reverse.pipe';
 import {ValueService} from './value.service';
 import { Dragula, DragulaService } from 'ng2-dragula/ng2-dragula';
 
@@ -14,7 +15,7 @@ import { Dragula, DragulaService } from 'ng2-dragula/ng2-dragula';
   templateUrl: 'group.component.html',
   styleUrls: ['group.component.css'],
   directives: [ROUTER_DIRECTIVES, NoteComponent, Dragula],
-  pipes: [],
+  pipes: [Reverse],
   viewProviders: [DragulaService]
 })
 @RouteConfig([
