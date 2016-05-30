@@ -14,8 +14,12 @@ export class DataService {
         console.log("NU KÖR CONSTRUCTORN!!!");
         console.log("Här är auth data: " + this._ref.getAuth()); 
         
-        if(this._ref.getAuth() == null) return;
-        if(localStorage.getItem('token') == null) return;
+        if(this._ref.getAuth() == null) {
+            return;
+        } 
+        if(localStorage.getItem('token') == null) {
+            return;
+        } 
         
         console.log("Skrivs ej ut???");
         const token = localStorage.getItem('token');
