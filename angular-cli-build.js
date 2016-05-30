@@ -19,7 +19,7 @@ module.exports = function(defaults) {
       'firebase/lib/*.js',
       //Adding everthing below for DRAGULA??? Do I need another level down... Atoa etc..
       'dragula/dist/dragula.min.js',
-      'ng2-dragula/ng2-dragula.js',
+      'ng2-dragula/**',
       'contra/dist/contra.min.js',
       'crossvent/dist/crossvent.min.js'
       //.....................................
