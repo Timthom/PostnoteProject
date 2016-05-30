@@ -7,99 +7,100 @@ import {Postnote2App} from './postNote2.component';
 import { Injectable, Inject } from '@angular/core';
 import { defaultFirebase, FirebaseRef } from 'angularfire2';
 import { Observable } from 'rxjs/Observable';
+import {ValueService} from './value.service';
+import {LocalStorageService} from './localstorage.service';
 
 
 @Component({
   moduleId: module.id,
   selector: 'menuGroup',
+  providers: [LocalStorageService],
   templateUrl: 'menugroup.component.html',
   styleUrls: ['menugroup.component.css'],
   pipes: []
 })
 
 
-export class MenuGroupComponent implements OnInit{
+export class MenuGroupComponent implements OnInit {
   arrowSrc: string = 'icon_expand_white.png';
-  expanded: boolean = false;
+  expanded: boolean = this._tx._toggleExpand;
   editingName: boolean = false;
   notes: FirebaseListObservable<any[]>;
-  
+
   @Input()
-  group; 
+  group;
   _authData;
-  
-  constructor(@Inject(FirebaseRef) private _ref: Firebase, private _ds: DataService) {
+
+  constructor( @Inject(FirebaseRef) private _ref: Firebase, private _ds: DataService, private _tx: ValueService, private _ls: LocalStorageService) {
+
     this._authData = this._ref.getAuth();
   }
 
   ngOnInit() {
-    if(this._authData != null) {
-        this.getNotes();
-    }
+    this.getNotes();
   }
 
   getNotes() {
-    if(this._authData != null) {
-        this._ds.getAllNotesInGroup(this.group.name).then(titles => this.notes = titles);
+    if (this._authData != null) {
+      this._ds.getAllNotesInGroup(this.group.name).then(titles => this.notes = titles);
+    } else {
+      this._ls.getNotesInGroup();
+      //TO DO : Get notes in group in localstorage.service
     }
-        
   }
-   
-   deleteGroup() {
-     if(this._authData != null) {
+
+  deleteGroup() {
+    if (this._authData != null) {
       this._ds.deleteGroup(this.group.$key);
-     }
+    } else {
+      this._ls.deleteGroup(this.group.$key);
     }
-    
-    editGroupName() {
-      if(this._authData != null) {
-      this._ds.updateGroupName(this.group.$key, this.group.name);
-      }
-    }
-    
-    editGroup() {
-      if(this._authData != null) {
-        this._ds.updateGroupName(this.group.$key, this.group.name);
-    }
-    }
-    
-    //When pressing the edit button, it enables editing on the input field
-    editing() {
-      if(this._authData != null) {
-        this.editingName = !this.editingName;
-        
-        if(this.editingName){
-          document.getElementById(this.group.$key).removeAttribute("readonly");
-          document.getElementById(this.group.$key).focus();
-
-      } else {
-        document.getElementById(this.group.$key).setAttribute("readonly", "true");
-        this.editGroup();
-        }
-      }
   }
 
-  
+
+  editGroup() {
+    if (this._authData != null) {
+      this._ds.updateGroupName(this.group.$key, this.group.name);
+    } else {
+      this._ls.updateGroupName(this.group.$key, this.group.name);
+    }
+  }
+
+  //When pressing the edit button, it enables editing on the input field
+  editing() {
+    this.editingName = !this.editingName;
+
+    if (this.editingName) {
+      document.getElementById(this.group.$key).removeAttribute("readonly");
+      document.getElementById(this.group.$key).focus();
+    } else {
+      document.getElementById(this.group.$key).setAttribute("readonly", "true");
+      this.editGroup();
+    }
+
+  }
+
   toggleExpand() {
-    this.expanded = !this.expanded;
-    if(this.expanded){
+    this._tx._toggleExpand = !this._tx._toggleExpand;
+    this.expanded = this._tx._toggleExpand;
+
+    if (this.expanded) {
       this.arrowSrc = 'icon_hide_white.png';
     }
-    else{
+    else {
       this.arrowSrc = 'icon_expand_white.png';
     }
   }
-  
- jumpToNote(note:string){
-      var element = document.getElementById(note);
-      element.scrollIntoView(true);  
-  
+
+  jumpToNote(note: string) {
+    var element = document.getElementById(note);
+    element.scrollIntoView(true);
   }
-  
-  jumpToGroup(groupId :string){
-      var element = document.getElementById(groupId);
-      element.scrollIntoView(true);
-      console.log(element);
+
+  jumpToGroup(groupId: string) {
+    var element = document.getElementById(groupId);
+    element.scrollIntoView(true);
+    console.log(element);
   }
-  
+
 }
