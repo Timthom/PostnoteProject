@@ -8,13 +8,9 @@ export class AuthorizationService {
     
     _userLoggedInSucceed;
 
-    constructor(@Inject(FirebaseRef) private _ref: Firebase) {
-       
-    }
-    
-       // alert('Registreringen lyckades :)');
+    constructor(@Inject(FirebaseRef) private _ref: Firebase) {}
+
     createUserAccount(user: User) {
-        this._ref.onAuth(this.authDataCallback);
         this._ref.createUser({
             email: user.email,
             password: user.password
@@ -22,27 +18,10 @@ export class AuthorizationService {
             if (error) {
                 alert('E-post adressen finns redan. Välj en annan!');
             } else {
-                
-        }
-    });
-}
-
-authDataCallback(authData) {
-  if (authData) {
-      console.log('User is logged in');
-    /* console.log("User " + authData.uid + " is logged in with " + authData.provider);
-    console.log('AUTHDATACALLBACK!!!');
-    var ref = new Firebase('https://scorching-torch-8126.firebaseio.com/');
-    ref.child("users").child(authData.uid).set({
-      provider: authData.provider,
-      name: authData.uid
-    
-    }); */
-    
-  } else {
-    console.log("User is logged out");
-  }
-}
+                alert("Registreringen lyckades");
+            }
+        });
+    }
 
     loginUser(user: User) {
         this._ref.authWithPassword({
@@ -56,11 +35,9 @@ authDataCallback(authData) {
             
             } else {
                 localStorage.setItem('token', authData.token);
-                console.log(authData);
-              
-                
-            }
-            
+                console.log(authData);  
+                alert("Du är nu inloggad!");
+            }        
         }); 
     }
     
@@ -87,6 +64,30 @@ authDataCallback(authData) {
         }, { remember: "sessionOnly" 
     });
 }
+
+    loginTwitterAuth() {
+        this._ref.authWithOAuthPopup("twitter", function(error, authData) {
+            if (error) {
+                console.log("Login Failed!", error);
+            } else {
+                console.log("Authenticated successfully with payload:", authData);
+                localStorage.setItem('token', authData.token);
+            }
+        }, { remember: "sessionOnly" 
+    });
+}
+
+    loginGitHubAuth() {
+        this._ref.authWithOAuthPopup("github", function(error, authData) {
+            if (error) {
+                console.log("Login Failed!", error);
+            } else {
+                console.log("Authenticated successfully with payload:", authData);
+                localStorage.setItem('token', authData.token);
+            }
+        }, { remember: "sessionOnly" 
+    });
+}
         
     isAuthenticated(): boolean {
        
@@ -94,8 +95,7 @@ authDataCallback(authData) {
             localStorage.getItem('token');
         }
          
-        return localStorage.getItem('token') !== null;
-        
+        return localStorage.getItem('token') !== null; 
     }
     
     killAuth() {

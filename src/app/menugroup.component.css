@@ -7,14 +7,10 @@ p {
     cursor: pointer;
 }
 
-p:hover {
-    color: gray;
-}
-
-#container:hover #deleteBtn{
+#container #deleteBtn{
     visibility: visible;
 }
-#container:hover #editBtn{
+#container #editBtn{
     visibility: visible;
 }
 
@@ -23,15 +19,25 @@ p:hover {
     padding-right: 10px;
 }
 
+#editBtn, #deleteBtn{
+    border: none;
+    outline: none;
+    visibility: hidden;
+    background-color: transparent;
+}
+
+#arrowBtn{
+    outline: none;
+    background-color: transparent;
+    border: none;
+}
+
 #editBtn,#deleteBtn{
     border-radius: 2px;
     visibility: hidden;
     transition: background-color 150ms ease-in-out;
 }
 
-#editBtn:hover,#deleteBtn:hover{
-    background-color: gray;
-}
 
 .title {
     background: none!important;
@@ -43,8 +49,8 @@ p:hover {
    
 }
 
-.title:hover {
-    color: gray;
+.title {
+    color: white;
     cursor: pointer;
 }
 
@@ -52,7 +58,12 @@ p:hover {
     color: gray;
 }
 
-.editing:hover {
+.editing {
     color: gray;
     cursor: text;
+}
+
+.button_image{
+    width: 22px;
+    height: 22px;
 }

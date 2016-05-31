@@ -1,0 +1,23 @@
+<div class="colorpicker_container">
+    <div class="colorpicker" [class.showing_colors]="showingColors">
+        <div class="first_line">
+            <div class="color_div pink_color" (click)="selectColor('pink')">
+            </div>
+            <div class="color_div magenta_color" (click)="selectColor('magenta')">
+            </div>
+        </div><br>
+        <div class="second_line">
+            <div class="color_div orange_color" (click)="selectColor('orange')">
+            </div>
+            <div class="color_div yellow_color" (click)="selectColor('yellow')">
+            </div>
+        </div><br>
+        <div class="third_line">
+            <div class="color_div blue_color" (click)="selectColor('blue')">
+            </div>
+            <div class="color_div green_color" (click)="selectColor('green')">
+            </div>
+        </div> 
+    </div>
+    <input type="image" class="color_button" (click)="colorButtonClick()" src="icon_palette.png" height="25" width="25">
+</div>

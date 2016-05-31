@@ -1,0 +1,59 @@
+.groupContainer:hover .delete_button{
+    visibility: visible;
+}
+
+.line {
+    border: 0;
+    margin-top: 8px;
+    margin-left: 10px;
+    height: 1px;
+    background-image: linear-gradient(to right, #808080, #FFFFFF);
+}
+
+.group_name {
+    border: none;
+    outline: none;
+    font-size: 28px;
+    display: inline-block;
+    background: none;
+    text-align: left;
+}
+
+.delete_button {
+    border: none;
+    outline: none;
+    visibility: hidden;
+    background-color: transparent;
+    margin-left: 0em;
+}
+
+.delete_button:hover {
+  box-shadow: 0px 1px 5px #5A5A5A ;
+  background-color: #F44336 ;
+}
+
+.col-xs-4 {
+  padding: 0px;
+}
+
+note {
+    margin: 10px;
+    width: 300px;
+    height: 300px;
+}
+
+.collapse_button{
+    float: left;
+    border: none;
+    outline: none;
+    background-color: transparent;
+}
+
+.button_image{
+    height: 40px;
+    width: 40px;
+}
+
+input{
+    height: 40px;
+}

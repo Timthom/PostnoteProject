@@ -1,4 +1,4 @@
-<nav  class="navbar navbar-inverse ">
+<nav class="navbar navbar-inverse ">
   <div class="navbar-header">
     <a class="navbar-brand">Postnote</a>
     <div id="sidebar-wrapper">
@@ -15,27 +15,24 @@
 
     <div id="wrapper">
       <!-- Sidebar -->
-      
-        <br/><br/><br/><br/>
-        <ul><li *ngFor="let note of titles | async" (click)="jumpToNote(note.$key)">
-          {{note.title}}
-          </li>
-        </ul>
-        <hr>     
-       <button class="addBtn btn btn-info btn-xs" [class.cancelable]="showingCancel" (click)="toggleInput()">
+      <br/><br/><br/><br/>
+      <ul *ngFor="let note of titles" (click)="jumpToNote(note.$key)">
+        {{note.title}}
+      </ul>
+      <hr>
+      <button class="addBtn btn btn-info btn-xs" [class.cancelable]="showingCancel"
+        (click)="toggleInput()">
          {{buttonText}}
        </button>
       <form *ngIf="adding">
-        <input [(ngModel)]="groupName" type="text" id="categoryInput" placeholder="Name" (keyup.enter)="addGroup()">
+        <input [(ngModel)]="groupName" type="text" id="categoryInput" placeholder="Name"
+          (keyup.enter)="addGroup()" maxlength="18">
         <button id="plusBtn" type="button" (click)="addGroup()">+</button>
       </form>
       <hr>
-
-      <menuGroup *ngFor="let group of myGroups | async" [group]="group"></menuGroup>
-
+      <menuGroup *ngFor="let group of myGroups" [group]="group"></menuGroup>
     </div>
 
   </div>
 
 </nav>
-

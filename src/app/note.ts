@@ -1,10 +1,6 @@
 export class Note {
-  //Antar att man får ett id från firebase sedan?
-  id: string;
   
-  //Kommer tillkomma andra variabler...
-  
-  constructor(private title: string, private text: string){
+  constructor(private title: string, private text: string, private group: string, private $key: string, private color: string){
       console.log("inne i note.ts konstruktor");
   }
 }

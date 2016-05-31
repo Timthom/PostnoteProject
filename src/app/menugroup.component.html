@@ -1,15 +1,14 @@
-<div id="container">
-    <input id="arrowBtn" type="image" src={{arrowSrc}} [ngClass]="{expandedClass : expanded}" width="25" height="25" (click)="toggleExpand()">
-    <input readonly class="title" id={{group.$key}} [(ngModel)]="group.name" width="25" height="25"(click)="jumpToGroup(group.name)" (keyup.enter)="editGroup()"
-        [class.editing]="editingName">
-    <input id="editBtn" type="image" src="icon_edit_white.png" width="25" height="25" (click)="editing()">
-    <input id="deleteBtn" type="image" src="icon_delete_white.png" width="25" height="25" (click)="deleteGroup()">
+<div id="container">   
+    <button id="arrowBtn" [ngClass] = "{expandedClass : expanded}" (click)="toggleExpand()"><img class="button_image" src="{{arrowSrc}}" alt="submit"></button>
+    <input readonly class="title" id={{group.$key}} [(ngModel)]="group.name" (click)="jumpToGroup(group.name)" (keyup.enter)="editGroup()" [class.editing]="editingName" maxlength="18">
+    <button id="editBtn" (click)="editing()" [hidden]="!expanded"><img class="button_image" src="icon_edit_white.png" alt="submit"></button>
+    <button id="deleteBtn" (click)="deleteGroup()" [hidden]="!expanded"><img class="button_image" src="icon_delete_white.png" alt="submit"></button>
     <!--<ul *ngIf="expanded">
         <li>Expanderad!</li>
     </ul>-->
     <ul *ngIf="expanded">
-        <p *ngFor="let note of notes | async" (click)="jumpToNote(note.$key)">
-            {{note.title}}
+        <p *ngFor="let note of notes" [hidden]="!expanded" (click)="jumpToNote(note.$key)">
+          {{note.title}}
         </p>
     </ul>
 </div>

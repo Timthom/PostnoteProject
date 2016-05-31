@@ -5,42 +5,61 @@ import {CreateUserAccountComponent} from '../createuser.components/create-user-a
 import {LoginComponent} from '../login.components/login.component';
 import {Postnote2App} from '../postnote2.component';
 import {MenuComponent} from '../menu.component';
+import {LogoutComponent} from '../logout/logout.component';
+import {CanReuse} from "@angular/router-deprecated";
 
 @Component({
     moduleId: module.id,
     selector: 'user-handler',
     templateUrl: 'user-handler.component.html',
     styleUrls: ['user-handler.component.css'],
-    directives: [ROUTER_DIRECTIVES, CreateUserAccountComponent, LoginComponent, Postnote2App, MenuComponent],
+    directives: [ROUTER_DIRECTIVES, CreateUserAccountComponent, LoginComponent, Postnote2App, MenuComponent, LogoutComponent],
     outputs: ['_userLoggedOut']
 })
 
-export class UserHandlerComponent {
+export class UserHandlerComponent implements CanReuse  {
+    
+    routerCanReuse() {  
+        return false;
+    }
     
     switchWindow = false;
+    loggingOut = false;
+    loggingIn = false;
+    
     
     constructor(private _authServiceHandler: AuthorizationService, private _router: Router) {
-        
+        console.log("Refreshing???");
     }
 
     isAuth() {
-        console.log("Auth method is working!");
+        //console.log("Auth method is working!");
         return this._authServiceHandler.isAuthenticated();
         
         }
 
         logoutUser() {
-            console.log("Loggas ut?");
+          console.log("Loggas ut?");
           this._authServiceHandler.killAuth();
-          this._router.renavigate();  
           this.switchWindow = false;
-          this._router.parent.navigate(['UserHandlerRoute']);
+          this.loggingOut = false;
+          this.loggingIn = false;
+          // this._router.renavigate();
+          // this._router.parent.navigate(['UserHandlerRoute']);
           
             
         }
         
         switchTo(): boolean {
             return this.switchWindow;
+        }
+        
+        isLoggingOut(){
+            return this.loggingOut;
+        }
+        
+        isLoggingIn() {
+            return this.loggingIn;
         }
         
         switchToCreateAccountWindow() {
@@ -50,8 +69,13 @@ export class UserHandlerComponent {
         
         switchToLoginWindow() {
             // this._router.parent.navigate(['LoginUserRoute']);
-            this.switchWindow = false;
-            
+            this.loggingIn = !this.loggingIn;       
+        }
+        
+        switchToLogoutWindow() {
+            console.log("Byter till logout!");
+            console.log(this.loggingOut);
+            this.loggingOut = !this.loggingOut;
         }
         
     }
