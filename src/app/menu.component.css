@@ -6,25 +6,27 @@
     height: 100%; 
     z-index: 1001000000;
     overflow:scroll;
-    border: solid #404040;
     width: 290px;
+    background-color: #EEEEEE;
+    box-shadow: 1px 0px 5px rgba(0,0,0,0.5);
 }
 ul{
-    color: white;
+    color: #404040;
 }
 
 .navbar-brand{
     padding-left: 40%;
 }
 #menu-toggle{
-    color: white;
+    color: #404040;
 }
 #menu-toggle span{
       font-size: 1.5em;
       margin-top: 15px;
 }
 hr{
-    align:left;
+    background-color: #404040;
+    height: 1px;
     width: 90%;
 }
 
