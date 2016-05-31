@@ -49,7 +49,6 @@ export class MenuGroupComponent implements OnInit {
   deleteGroup() {
     if (this._authData != null) {
       this._ds.deleteGroup(this.group.$key);
-      
       this._tx._toggleExpand = false;
     }
   }
@@ -82,24 +81,18 @@ export class MenuGroupComponent implements OnInit {
   editing() {
     if (this._authData != null) {
       this.editingName = !this.editingName;
-
       if (this.editingName) {
         document.getElementById(this.group.$key).removeAttribute("readonly");
         document.getElementById(this.group.$key).focus();
-        
         this.editSrc = 'icon_save.png';
-        
       } else {
         document.getElementById(this.group.$key).setAttribute("readonly", "true");
-        
         let content = this.getContent();
         // changes notes in the group to the new group
         for (let key of content) {
           this._ds.changeNoteGroup(key, this.group.name);
         }
-        
         this.editSrc = 'icon_edit.png';
-        
         this.editGroup();
         this.getNotes();
       }

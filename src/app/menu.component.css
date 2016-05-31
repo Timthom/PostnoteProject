@@ -4,9 +4,10 @@
     position: fixed;
     display: block;
     height: 100%; 
-    z-index: 10000;
+    z-index: 1001000000;
     overflow:scroll;
     border: solid #404040;
+    width: 290px;
 }
 ul{
     color: white;
@@ -26,7 +27,6 @@ hr{
     align:left;
     width: 90%;
 }
-
 
 #sidebar_menu{
     width: 100%;
