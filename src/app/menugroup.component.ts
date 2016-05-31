@@ -95,6 +95,7 @@ export class MenuGroupComponent implements OnInit {
         this.editSrc = 'icon_edit.png';
         this.editGroup();
         this.getNotes();
+        this._tx._toggleExpand = false;
       }
     }
   }

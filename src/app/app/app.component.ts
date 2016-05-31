@@ -29,7 +29,7 @@ import {MenuComponent} from '../menu.component';
 export class AppComponent{
   
   constructor() {
-     console.log("Funkar? NEJ!");
+     console.log("Funkar?");
   }
 
  

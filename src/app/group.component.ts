@@ -110,6 +110,7 @@ export class GroupComponent {
         this.editGroupName();
         this.getNotes();
         this.editSrc = 'icon_edit.png';
+        this._tx._toggleExpand = false;
       }
     } else {
       console.log("enterkey in groupcomponent offline");

@@ -18,7 +18,7 @@ export class ValueService {
     }
     
     // getters and setter for the toggle arrow
-        get toggleExpand(){
+    get toggleExpand(){
     return this._toggleExpand;
     }
     
