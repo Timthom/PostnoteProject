@@ -11,24 +11,29 @@ a {
     text-decoration: none;
     cursor: pointer;
 }
-
+/*
 .btn{
 	background-color: transparent;
 	border: none;
 	outline: none;
-	padding: 0px;
+	padding: 10px;
+	
 }
 
 .btnImage{
-    height: 50px;
-	width: 50px;
+    height: 30px;
+	width: 30px;
 }
 
+*/
 menu {
 	width: 100%;
 	float: left;
 	padding: 0px;
 	margin: 0px;
+}
+divul .btn{
+	float: right;
 }
 
 
