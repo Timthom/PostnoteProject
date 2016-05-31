@@ -95,15 +95,13 @@ export class MenuGroupComponent implements OnInit {
   jumpToNote(note: string) {
     var element = document.getElementById(note);
     element.scrollIntoView(true);
-  }
-
-  
+  }  
   jumpToGroup(groupId :string){
     
       var element = document.getElementById(groupId);
       element.scrollIntoView(true); 
       //element.scrollIntoView(true);
       console.log(element);
-
+  }
 
 }
