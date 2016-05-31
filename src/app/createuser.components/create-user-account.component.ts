@@ -55,4 +55,8 @@ export class CreateUserAccountComponent implements OnInit {
             return {passwordsNotMatch: true};
         }
     }
+    
+    goBack() {
+        console.log("GoBack!");
+    }
 }
