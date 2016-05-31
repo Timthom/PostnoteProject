@@ -1,8 +1,8 @@
 nav.right {
     position: relative;
     float: right;
-    z-index:5;
-    margin-right: 5px;
+	z-index: 10090000;
+	
 }
 
 a {
@@ -10,10 +10,13 @@ a {
     cursor: pointer;
 }
 .btn{
-    	border: none;
 	background-color: transparent;
+	border: none;
 	outline: none;
-	padding: 0px;
+}
+
+.btnImage{
+    height: 39px;
 }
 
 menu {
