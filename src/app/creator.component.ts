@@ -35,7 +35,7 @@ export class CreatorComponent {
     constructor(private _ds: DataService, @Inject(FirebaseRef) private _ref: Firebase, private _dragulaService: DragulaService, private _ls: LocalStorageService) {
         this._authData = this._ref.getAuth()
         console.log("inne i creatorcomponents konstruktor");
-        _dragulaService.setOptions('bag-creator', {
+        _dragulaService.setOptions('drag-bag', {
            
         });
     }

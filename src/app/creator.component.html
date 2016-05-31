@@ -9,7 +9,6 @@
     </div>
     
     <div class="myDragulaContainer" [dragula]='"drag-bag"'>
- 
     <note class="col-xs-4" *ngFor="let note of notes | async | reverse" [noteInNote]="note" [text]="note.text" [title]="note.title" [group]="note.group" id="{{note.$key}}" [color]="note.color">
     </note>
     <!--<note class="col-xs-4" *ngFor="let note of notes | async" [dragula]='"bag-creator"' [dragulaModel]='notes' [noteInNote]="note" [text]="note.text" [title]="note.title" [group]="note.group" id="{{note.$key}}" [color]="note.color">-->
