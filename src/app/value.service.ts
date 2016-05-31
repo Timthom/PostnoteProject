@@ -5,6 +5,7 @@ export class ValueService {
 
   _showSideBar:boolean = true;
   _toggleExpand:boolean = false;
+  _focusedId:string = '';
 
   constructor() {}
   
@@ -16,7 +17,6 @@ export class ValueService {
       this._showSideBar = b;
     }
     
-    
     // getters and setter for the toggle arrow
         get toggleExpand(){
     return this._toggleExpand;
@@ -24,6 +24,14 @@ export class ValueService {
     
     set toggleExpand(b:boolean){
       this._toggleExpand = b;
+    }
+    
+    get focusedId(){
+      return this._focusedId;
+    }
+    
+    set focusedId(id:string){
+      this._focusedId = id;
     }
 
 }

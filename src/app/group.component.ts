@@ -118,7 +118,12 @@ export class GroupComponent {
 
   // Expand category on click arrowBtn
   groupExpand() {
-    this._tx._toggleExpand = !this._tx._toggleExpand;
+    // Uffes idea:
+    if(this.arrowSrc == 'icon_hide.png'){
+      this._tx._toggleExpand = false;
+    } else {
+      this._tx._toggleExpand = true;
+    }
     this.expanded = this._tx._toggleExpand;
     if (this.expanded) {
       this.arrowSrc = 'icon_hide.png';

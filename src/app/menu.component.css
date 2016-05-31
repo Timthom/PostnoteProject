@@ -8,9 +8,10 @@
     overflow:scroll;
     border: solid #404040;
     width: 290px;
+    background-color: white;
 }
 ul{
-    color: white;
+    color: #404040;
 }
 
 .navbar-brand{
