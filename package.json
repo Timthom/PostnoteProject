@@ -49,5 +49,13 @@
     "tslint": "3.6.0",
     "typescript": "1.8.10",
     "typings": "0.8.1"
-  }
+  },
+  "main": "angular-cli-build.js",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@bitbucket.org/postnoteteam/postnote.git"
+  },
+  "author": "",
+  "homepage": "https://bitbucket.org/postnoteteam/postnote#readme",
+  "description": ""
 }
