@@ -100,7 +100,11 @@ export class MenuGroupComponent implements OnInit {
   }
 
   toggleExpand() {
-    this._tx._toggleExpand = !this._tx._toggleExpand;
+    if(this.arrowSrc == 'icon_hide.png'){
+      this._tx._toggleExpand = false;
+    } else {
+      this._tx._toggleExpand = true;
+    }
     this.expanded = this._tx._toggleExpand;
     if (this.expanded) {
       this.arrowSrc = 'icon_hide.png';
