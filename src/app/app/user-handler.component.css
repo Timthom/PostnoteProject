@@ -9,6 +9,12 @@ a {
     text-decoration: none;
     cursor: pointer;
 }
+.btn{
+    	border: none;
+	background-color: transparent;
+	outline: none;
+	padding: 0px;
+}
 
 menu {
 	width: 100%;
