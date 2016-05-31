@@ -22,14 +22,14 @@ import {MenuComponent} from '../menu.component';
 })
 
 @RouteConfig([
-   {path: '/route1', name:'UserHandlerRoute', component: UserHandlerComponent, useAsDefault : true},
+   {path: '', name:'UserHandlerRoute', component: UserHandlerComponent, useAsDefault : true},
    
 ])
 
 export class AppComponent{
   
   constructor() {
-     console.log("Funkar?");
+     console.log("Funkar? NEJ!");
   }
 
  

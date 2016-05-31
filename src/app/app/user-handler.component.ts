@@ -32,7 +32,7 @@ export class UserHandlerComponent {
         }
 
         logoutUser() {
-            console.log("Loggas ut?");
+            //console.log("Loggas ut?");
           this._authServiceHandler.killAuth();
           this._router.renavigate();  
           this.switchWindow = false;
@@ -61,8 +61,8 @@ export class UserHandlerComponent {
         }
         
         switchToLogoutWindow() {
-            console.log("Byter till logout!");
-            console.log(this.loggingOut);
+            //console.log("Byter till logout!");
+            //console.log(this.loggingOut);
             this.loggingOut = !this.loggingOut;
         }
         

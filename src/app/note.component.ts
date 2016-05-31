@@ -42,7 +42,7 @@ export class NoteComponent implements OnInit {
   }
 
   constructor(private _ds: DataService) {
-    console.log('in constructor');
+    //console.log('in constructor');
   }
 
   isEditable: boolean = false;

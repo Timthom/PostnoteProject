@@ -33,23 +33,23 @@ export class Postnote2App implements OnInit, CanReuse {
     allGroups: FirebaseListObservable<any[]>;
     statusCheckSideBar: boolean = this._vs._showSideBar;
     constructor( @Inject(FirebaseRef) private _ref: Firebase, private _ds: DataService, private _vs: ValueService) {
-        console.log("Här är auth data: " + this._ref.getAuth());
+        //console.log("Här är auth data: " + this._ref.getAuth());
         this._authData = this._ref.getAuth();
-        console.log("Här är auth data 2: " + this._authData);
+        //console.log("Här är auth data 2: " + this._authData);
     }
 
     ngOnInit() {
         if (this._authData != null) {
             this.getGroups();
-            console.log("Bör inte köras");
+            //console.log("Bör inte köras");
         }
     }
 
     getGroups() {
         if (this._authData != null) {
-            console.log('inne i get groups');
+            //console.log('inne i get groups');
             this._ds.getAllGroups().then(groups => this.allGroups = groups);
-            console.log("Bör inte köras");
+            //console.log("Bör inte köras");
         }
     }
 

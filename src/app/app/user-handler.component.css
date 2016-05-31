@@ -1,24 +1,27 @@
 nav.right {
-    position: relative;
 	position: fixed;
-	z-index: 10090000;
+	z-index: 10070000;
 	display: block;
 	border-radius: 0px;
-	margin-left: 95%;
+	width: 50px;
+	margin-left: 200px;
 }
 
 a {
     text-decoration: none;
     cursor: pointer;
 }
+
 .btn{
 	background-color: transparent;
 	border: none;
 	outline: none;
+	padding: 0px;
 }
 
 .btnImage{
-    height: 39px;
+    height: 50px;
+	width: 50px;
 }
 
 menu {

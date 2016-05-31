@@ -31,36 +31,36 @@ export class CreatorComponent {
 
     constructor(private _ds: DataService, @Inject(FirebaseRef) private _ref: Firebase) {
         this._authData = this._ref.getAuth()
-        console.log("inne i creatorcomponents konstruktor");
+        //console.log("inne i creatorcomponents konstruktor");
     }
 
     ngOnInit() {
 
-        console.log("inne i OnInit i creatorcomponent...");
+        //console.log("inne i OnInit i creatorcomponent...");
         if (this._authData != null) {
-            console.log("Bör inte köras");
+            //console.log("Bör inte köras");
             this.getNotes();
         }
     }
 
     getNotes() {
         if (this._authData != null) {
-            console.log("Bör inte köras");
-            console.log("inne i getNotes i creatorcomponent");
+            //console.log("Bör inte köras");
+            //console.log("inne i getNotes i creatorcomponent");
             this._ds.getAllNotesInGroup('noGroup').then(notes => this.notes = notes);
         }
     }
 
     groupChanged(event) {
         if (this._authData != null) {
-            console.log("Bör inte köras");
+            //console.log("Bör inte köras");
             this.selectedGroup = event;
         }
     }
 
     save() {
         if (this._authData != null) {
-            console.log("Bör inte köras");
+            //console.log("Bör inte köras");
             if (this.title !== '') {
                 let time = new Date().getTime();
                 this._ds.addNoteToNotes(this.title, this.text, this.selectedGroup, time, "yellow");
