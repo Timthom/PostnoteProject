@@ -81,6 +81,8 @@ export class GroupComponent {
     }
     this._ds.deleteGroup(this.group.$key);
     this.clickedDelete.emit('');
+    
+    this._tx._toggleExpand = false;
   }
   //
   editGroupName() {

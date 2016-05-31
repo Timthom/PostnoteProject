@@ -6,6 +6,7 @@
     height: 100%; 
     z-index: 10000;
     overflow:scroll;
+    border: solid #404040;
 }
 ul{
     color: white;
