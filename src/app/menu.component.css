@@ -1,10 +1,11 @@
 .navbar {
     border-radius: 0px;
+    margin-top: 50px;
     position: relative;
     position: fixed;
     display: block;
     height: 100%; 
-    z-index: 1001000000;
+    z-index: 10010000;
     overflow:scroll;
     width: 290px;
     background-color: #EEEEEE;
