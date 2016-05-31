@@ -1,8 +1,10 @@
 nav.right {
     position: relative;
-    float: right;
+	position: fixed;
 	z-index: 10090000;
-	
+	display: block;
+	border-radius: 0px;
+	margin-left: 95%;
 }
 
 a {
