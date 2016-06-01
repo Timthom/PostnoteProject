@@ -42,13 +42,14 @@ headerbar {
 	border: none;
 	background-color: transparent;
 	outline: none;
-	padding: 0px;
+	
+	right: 15px;
 	z-index: 10040000;
 }
 
 .btnImage{
-	height: 50px;
-	width: 50px;
+	height: 30px;
+	width: 30px;
 }
 .navbar_item{
 	background-color: #EEEEEE;

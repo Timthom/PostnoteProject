@@ -3,8 +3,8 @@ nav.right {
 	z-index: 10070000;
 	display: block;
 	border-radius: 0px;
-	width: 50px;
-	margin-left: 200px;
+	width: 100%;
+	
 }
 
 a {
@@ -16,12 +16,15 @@ a {
 	background-color: transparent;
 	border: none;
 	outline: none;
-	padding: 0px;
+	right: 10px;
+	top: 4px;
+	position: relative;
+	float: right;
 }
 
 .btnImage{
-    height: 50px;
-	width: 50px;
+    height: 30px;
+	width: 30px;
 }
 
 menu {
