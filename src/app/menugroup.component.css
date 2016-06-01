@@ -3,7 +3,7 @@ input {
 }
 
 p {
-    color: #D2D2D2;
+    color: #404040;
     cursor: pointer;
 }
 
@@ -41,21 +41,21 @@ p {
 .title{
     background: none;
     border: none!important;
-    color: white;
+    color: #404040;
     cursor: pointer;
 }
 
 .title {
-    color: white;
+    color: #404040;
     cursor: pointer;
 }
 
 .editing {
-    color: gray;
+    color: #404040;
 }
 
 .editing {
-    color: gray;
+    color: #404040;
     cursor: text;
 }
 

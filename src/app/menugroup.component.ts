@@ -22,7 +22,7 @@ import {LocalStorageService} from './localstorage.service';
 
 
 export class MenuGroupComponent implements OnInit {
-  arrowSrc: string = 'icon_expand_white.png';
+  arrowSrc: string = 'icon_expand.png';
   expanded: boolean = this._tx._toggleExpand;
   editingName: boolean = false;
   notes: FirebaseListObservable<any[]>;
@@ -30,6 +30,7 @@ export class MenuGroupComponent implements OnInit {
   @Input()
   group;
   _authData;
+  editSrc: string = 'icon_edit.png';
 
   constructor( @Inject(FirebaseRef) private _ref: Firebase, private _ds: DataService, private _tx: ValueService, private _ls: LocalStorageService) {
 
@@ -52,9 +53,8 @@ export class MenuGroupComponent implements OnInit {
   deleteGroup() {
     if (this._authData != null) {
       this._ds.deleteGroup(this.group.$key);
-    } else {
-      this._ls.deleteGroup(this.group.$key);
-    }
+      this._tx._toggleExpand = false;
+    } 
   }
 
 
@@ -65,30 +65,56 @@ export class MenuGroupComponent implements OnInit {
       this._ls.updateGroupName(this.group.$key, this.group.name);
     }
   }
+  
+  getContent() {
+    let doneInLoopArray;
+    let arrayOfKeys: any[] = [];
+    this.notes.forEach(function (result) {
+      doneInLoopArray = result;
+    });
+    doneInLoopArray.forEach(function (note) {
+      arrayOfKeys.push(note.$key);
+    });
+    return arrayOfKeys;
+  }
 
   //When pressing the edit button, it enables editing on the input field
   editing() {
-    this.editingName = !this.editingName;
-
-    if (this.editingName) {
-      document.getElementById(this.group.$key).removeAttribute("readonly");
-      document.getElementById(this.group.$key).focus();
-    } else {
-      document.getElementById(this.group.$key).setAttribute("readonly", "true");
-      this.editGroup();
+    if (this._authData != null) {
+      this.editingName = !this.editingName;
+      if (this.editingName) {
+        document.getElementById(this.group.$key).removeAttribute("readonly");
+        document.getElementById(this.group.$key).focus();
+        this.editSrc = 'icon_save.png';
+      } else {
+        document.getElementById(this.group.$key).setAttribute("readonly", "true");
+        let content = this.getContent();
+        // changes notes in the group to the new group
+        for (let key of content) {
+          this._ds.changeNoteGroup(key, this.group.name);
+        }
+        this.editSrc = 'icon_edit.png';
+        this.editGroup();
+        this.getNotes();
+        this._tx._toggleExpand = false;
+      }
     }
 
   }
 
   toggleExpand() {
-    this._tx._toggleExpand = !this._tx._toggleExpand;
+    if(this.arrowSrc == 'icon_hide.png'){
+      this._tx._toggleExpand = false;
+    } else {
+      this._tx._toggleExpand = true;
+    }
     this.expanded = this._tx._toggleExpand;
 
     if (this.expanded) {
-      this.arrowSrc = 'icon_hide_white.png';
+      this.arrowSrc = 'icon_hide.png';
     }
     else {
-      this.arrowSrc = 'icon_expand_white.png';
+      this.arrowSrc = 'icon_expand.png';
     }
   }
 

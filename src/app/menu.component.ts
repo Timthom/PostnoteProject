@@ -26,7 +26,7 @@ export class MenuComponent implements OnInit, CanReuse {
   routerCanReuse() {
     return false;
   }
-
+  
   showingCancel: boolean = false;
   adding: boolean = false;
   groupName: string = "";
@@ -38,7 +38,9 @@ export class MenuComponent implements OnInit, CanReuse {
 
   @Output() clicked = new EventEmitter();
 
+
   constructor( @Inject(FirebaseRef) private _ref: Firebase, private _ds: DataService, private _vs: ValueService, private _ls: LocalStorageService) {
+
     this._authData = this._ref.getAuth();
   }
 
@@ -48,8 +50,6 @@ export class MenuComponent implements OnInit, CanReuse {
       this.getGroups();
     } else {
       console.log("ngOnInit in menu offline");
-      this.getTitles();
-      this.getGroups();
     }
   }
 
@@ -58,9 +58,7 @@ export class MenuComponent implements OnInit, CanReuse {
       this._ds.getAllNotes().then(titles => this.titles = titles);
       this._ds.getAllNotesInGroup('noGroup').then(notes => this.titles = notes);
     } else {
-      console.log("get titles in menu offline");
-      this.titles = this._ls.getAllNotes();
-
+      console.log("get titles offline");
     }
   }
 
@@ -68,19 +66,14 @@ export class MenuComponent implements OnInit, CanReuse {
     if (this._authData != null) {
       this._ds.getAllGroups().then(groups => this.myGroups = groups);
     } else {
-      console.log("get groups in menu offline");
-      this.myGroups = this._ls.getAllGroups();
+      console.log("get groups offline");
     }
   }
 
 
   jumpToNote(note: string) {
-
     var element = document.getElementById(note);
-
     element.scrollIntoView(true);
-
-
   }
 
   toggleInput() {
@@ -113,8 +106,11 @@ export class MenuComponent implements OnInit, CanReuse {
         this._ls.saveGroup(newGroup);
         this.groupName = "";
         this.adding = false;
+        this.showingCancel = !this.showingCancel;
         this.buttonText = "Add category";
       }
-    }
+    } /*else {
+      console.log("added group offline");
+    }*/
   }
 }

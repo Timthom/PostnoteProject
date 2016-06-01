@@ -1,6 +1,6 @@
 <div class="groupContainer" id={{groupName}}>
     <button class="collapse_button" [ngClass] = "{expandedClass : expanded}" (click)="groupExpand()"><img class="button_image" src="{{arrowSrc}}" alt="submit"></button>
-    <input type="text" class="group_name " id="group_name" [(ngModel)]="groupName" maxlength="18" [attr.disabled]="enableEditIfNull" [class.editingName]="editingName">
+    <input type="text" class="group_name " id="group_name" [(ngModel)]="groupName" maxlength="18" [attr.disabled]="enableEditIfNull" [class.editingName]="editingName" (keyup.enter)="editClick()">
     <button class="delete_button" id="{{deleteBtn}}" (click)="deleteGroup()" [hidden]="!expanded"><img class="button_image" src="icon_delete.png" alt="submit" [hidden]="!expanded"></button>
     <button class="edit_button" id="{{editBtn}}" (click)="editClick()" [hidden]="!expanded"><img class="button_image" src="{{editSrc}}" alt="submit" [hidden]="!expanded"></button>
     <hr class="line">
