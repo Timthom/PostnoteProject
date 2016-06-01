@@ -68,7 +68,7 @@ export class UserHandlerComponent implements CanReuse  {
                 this.loggingIn = false;
                 this.createUser = false;
             } else {
-               this.loggingIn = !this.loggingIn;    
+                this.loggingIn = !this.loggingIn;    
             }
         }
         
