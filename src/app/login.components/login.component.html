@@ -1,4 +1,5 @@
 <div class="login">
+    <span class="createAccountText" (click)="createAccountWindow()">Create Account</span>
     <form [ngFormModel]="myForm" (ngSubmit)="onLoggedIn()">
         <div class="input-group">
             <input [ngFormControl]="myForm.find('email')" type="email" placeholder="Email" id="email">
@@ -8,7 +9,7 @@
         </div>
         <button type="submit" [disabled]="!myForm.valid">Sign in</button>
     </form>
-    <div class = "line">
+    <div class="line">
         <span class ="lineText">
             Or sign in with
         </span>
@@ -18,3 +19,5 @@
    <input class="imageButtons" type="image" src="Github-color.png" (click)="loginWithGitHub()">
    <input class="imageButtons" type="image" src="Twitter-color.png" (click)="loginWithTwitter()">
 </div>
+
+

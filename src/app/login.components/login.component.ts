@@ -1,4 +1,4 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, OnInit, EventEmitter, Output} from "@angular/core";
 import {FormBuilder, ControlGroup, Validators} from "@angular/common";
 import {AuthorizationService} from "../authorization.service";
 import {ROUTER_DIRECTIVES, ROUTER_PROVIDERS, Router} from '@angular/router-deprecated';
@@ -14,6 +14,8 @@ import {ROUTER_DIRECTIVES, ROUTER_PROVIDERS, Router} from '@angular/router-depre
 })
 
 export class LoginComponent implements OnInit {
+    @Output() emitCreateUserAccount = new EventEmitter();
+    
     myForm: ControlGroup;
     error = false;
     errorMessage = '';
@@ -48,5 +50,10 @@ export class LoginComponent implements OnInit {
     
     loginWithGitHub() {
         this._authService.loginGitHubAuth();
+    }
+    
+    createAccountWindow() {
+        console.log("Create account click is working!");
+        this.emitCreateUserAccount.emit('');
     }
 }
