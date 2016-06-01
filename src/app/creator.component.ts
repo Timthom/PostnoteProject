@@ -10,7 +10,7 @@ import {Observable} from 'rxjs/Observable';
 import {Reverse} from './reverse.pipe';
 import {DropdownComponent} from './dropdown.component';
 import { AngularFire, defaultFirebase, FirebaseRef, FirebaseListObservable } from 'angularfire2';
-import { Dragula, DragulaService } from 'ng2-dragula/ng2-dragula';
+import { Dragula } from 'ng2-dragula/ng2-dragula';
 import {LocalStorageService} from './localstorage.service';
 
 @Component({
@@ -20,8 +20,7 @@ import {LocalStorageService} from './localstorage.service';
   styleUrls: ['creator.component.css'],
   directives: [ROUTER_DIRECTIVES, NoteComponent, DropdownComponent, Dragula],
   pipes: [Reverse],
-  providers: [LocalStorageService],
-  viewProviders: [DragulaService]
+  providers: [LocalStorageService]
 })
 @RouteConfig([
 ])
@@ -32,12 +31,9 @@ export class CreatorComponent {
     selectedGroup: string = "noGroup";
     _authData;
     
-    constructor(private _ds: DataService, @Inject(FirebaseRef) private _ref: Firebase, private _dragulaService: DragulaService, private _ls: LocalStorageService) {
+    constructor(private _ds: DataService, @Inject(FirebaseRef) private _ref: Firebase, private _ls: LocalStorageService) {
         this._authData = this._ref.getAuth()
         console.log("inne i creatorcomponents konstruktor");
-        _dragulaService.setOptions('drag-bag', {
-           
-        });
     }
 
     ngOnInit() {

@@ -10,13 +10,14 @@ import {CreateUserAccountComponent} from '../createuser.components/create-user-a
 import {AuthorizationService} from "../authorization.service";
 import {UserHandlerComponent} from "./user-handler.component";
 import {MenuComponent} from '../menu.component';
-// import { DragulaService } from 'ng2-dragula/ng2-dragula';
+import { DragulaService } from 'ng2-dragula/ng2-dragula';
+import { DragulaHelperService } from '../dragula-helper.service';
 
 @Component({
   moduleId: module.id,
   selector: 'my-app',
-  providers: [ROUTER_PROVIDERS, DataService, AngularFire,ValueService],
-  // viewProviders: [DragulaService],
+  providers: [ROUTER_PROVIDERS, DataService, AngularFire,ValueService, DragulaHelperService],
+  viewProviders: [DragulaService],
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.css'],
   directives: [UserHandlerComponent, ROUTER_DIRECTIVES],
@@ -30,12 +31,11 @@ import {MenuComponent} from '../menu.component';
 
 export class AppComponent{
   
-  constructor() {
+  constructor(private _dragulaService: DragulaService, private _dhs: DragulaHelperService) {
+    this._dhs._configureDragula(_dragulaService);
      console.log("Funkar?");
   }
-
  
-  
 }
 
 
