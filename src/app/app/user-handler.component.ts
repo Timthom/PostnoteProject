@@ -39,7 +39,7 @@ export class UserHandlerComponent implements CanReuse  {
         }
 
         logoutUser() {
-          console.log("Loggas ut?");
+            //console.log("Loggas ut?");
           this._authServiceHandler.killAuth();
           this.switchWindow = false;
           this.loggingOut = false;
@@ -73,8 +73,8 @@ export class UserHandlerComponent implements CanReuse  {
         }
         
         switchToLogoutWindow() {
-            console.log("Byter till logout!");
-            console.log(this.loggingOut);
+            //console.log("Byter till logout!");
+            //console.log(this.loggingOut);
             this.loggingOut = !this.loggingOut;
         }
         

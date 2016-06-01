@@ -45,28 +45,32 @@ export class Postnote2App implements OnInit{
            console.log("ngoninit in postnote2component offline");
        }
     }
-    
+
     getGroups() {
-        if(this._authData != null) {
-            console.log('inne i get groups');
+        if (this._authData != null) {
+            //console.log('inne i get groups');
             this._ds.getAllGroups().then(groups => this.allGroups = groups);
             console.log("Bör inte köras");
         } else {
             console.log("getgroups in postnote2component offline");
         }
     }
-    
+
     addGroup() {
-       this.getGroups();
+        this.getGroups();
     }
-     
+
     deleteGroup() {
-       this.getGroups();
+        this.getGroups();
     }
-    
-   openSideBar(event){
+
+    openSideBar(event) {
         this._vs._showSideBar = !this._vs._showSideBar;
         this.statusCheckSideBar = this._vs._showSideBar;
     }
-  
+    // Test metod
+    checkClick(){
+        console.log('Testar om knappen back fungerar ???');
+    }
+
 }

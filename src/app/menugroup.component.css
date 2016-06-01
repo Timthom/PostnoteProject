@@ -3,7 +3,7 @@ input {
 }
 
 p {
-    color: #D2D2D2;
+    color: #404040;
     cursor: pointer;
 }
 
@@ -42,24 +42,20 @@ p {
 .title {
     background: none!important;
     border: none!important;
-    color: white!important;
+    color: #404040!important;
     cursor: pointer!important;
     padding: inherit!important;
     width: 58%;
-   
+
 }
 
-.title {
-    color: white;
-    cursor: pointer;
+
+.editing {
+    color: #404040;
 }
 
 .editing {
-    color: gray;
-}
-
-.editing {
-    color: gray;
+    color: #404040;
     cursor: text;
 }
 
