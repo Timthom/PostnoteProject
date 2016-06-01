@@ -29,28 +29,6 @@ menu{
 .col-xs-1{
 width: 6%;
 }
-
-headerbar {
-	visibility: hidden;
-	width: 100%;
-	float:left;
-	z-index: 10001;
-	height: 8%;
-	position: fixed;
-}
-.btn{
-	border: none;
-	background-color: transparent;
-	outline: none;
-	
-	right: 15px;
-	z-index: 10040000;
-}
-
-.btnImage{
-	height: 30px;
-	width: 30px;
-}
 .navbar_item{
 	background-color: #EEEEEE;
 	margin-bottom: 0px;
@@ -60,7 +38,17 @@ headerbar {
 	height: 50px;
 	box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.5);
 	position: fixed;
-	z-index: 10020000;
+}
+
+.backBtn{
+	border: none;
+	background-color: transparent;
+	z-index: 1000;	
+}
+
+.btnImage{
+	height: 35px;
+	width: 35px;
 }
 
 .note_groups{

@@ -65,5 +65,9 @@ export class Postnote2App implements OnInit, CanReuse {
         this._vs._showSideBar = !this._vs._showSideBar;
         this.statusCheckSideBar = this._vs._showSideBar;
     }
+    // Test metod
+    checkClick(){
+        console.log('Testar om knappen back fungerar ???');
+    }
 
 }
