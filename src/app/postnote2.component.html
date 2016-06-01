@@ -9,11 +9,11 @@
   </div>
 
   <div class="row">
-    <div class="col-xs-3" *ngIf="statusCheckSideBar == true">
+    <div class="col-xs-4" *ngIf="statusCheckSideBar == true">
       <menu (clicked)="addGroup()"></menu>
     </div>
 
-    <div class="note_groups" [ngClass]="{'col-xs-9 col-xs-offset-3': statusCheckSideBar,  'col-xs-12 col-sm-12 col-md-12': !statusCheckSideBar}">
+    <div class="note_groups">
       <div>
         <creator></creator>
       </div>

@@ -12,7 +12,7 @@ a {
     cursor: pointer;
 }
 
-.btn{
+.loginBtn{
 	background-color: transparent;
 	border: none;
 	outline: none;
@@ -20,7 +20,6 @@ a {
 	top: 4px;
 	position: relative;
 	float: right;
-	z-index: 1000;
 }
 
 .btnImage{
