@@ -6,6 +6,7 @@ import {LoginComponent} from '../login.components/login.component';
 import {Postnote2App} from '../postnote2.component';
 import {MenuComponent} from '../menu.component';
 import {LogoutComponent} from '../logout/logout.component';
+import {CanReuse} from "@angular/router-deprecated";
 
 @Component({
     moduleId: module.id,
@@ -16,13 +17,19 @@ import {LogoutComponent} from '../logout/logout.component';
     outputs: ['_userLoggedOut']
 })
 
-export class UserHandlerComponent {
+export class UserHandlerComponent implements CanReuse  {
+    
+    routerCanReuse() {  
+        return false;
+    }
     
     switchWindow = false;
     loggingOut = false;
+    loggingIn = false;
+    
     
     constructor(private _authServiceHandler: AuthorizationService, private _router: Router) {
-        
+        console.log("Refreshing???");
     }
 
     isAuth() {
@@ -34,9 +41,11 @@ export class UserHandlerComponent {
         logoutUser() {
             //console.log("Loggas ut?");
           this._authServiceHandler.killAuth();
-          this._router.renavigate();  
           this.switchWindow = false;
-          this._router.parent.navigate(['UserHandlerRoute']);
+          this.loggingOut = false;
+          this.loggingIn = false;
+          // this._router.renavigate();
+          // this._router.parent.navigate(['UserHandlerRoute']);
           
             
         }
@@ -49,6 +58,10 @@ export class UserHandlerComponent {
             return this.loggingOut;
         }
         
+        isLoggingIn() {
+            return this.loggingIn;
+        }
+        
         switchToCreateAccountWindow() {
             this.switchWindow = true;
             // this._router.parent.navigate(['CreateUserAccountRoute']);
@@ -56,8 +69,7 @@ export class UserHandlerComponent {
         
         switchToLoginWindow() {
             // this._router.parent.navigate(['LoginUserRoute']);
-            this.switchWindow = false;
-            
+            this.loggingIn = !this.loggingIn;       
         }
         
         switchToLogoutWindow() {

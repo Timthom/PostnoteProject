@@ -8,11 +8,13 @@ import { Injectable, Inject } from '@angular/core';
 import { defaultFirebase, FirebaseRef } from 'angularfire2';
 import { Observable } from 'rxjs/Observable';
 import {ValueService} from './value.service';
+import {LocalStorageService} from './localstorage.service';
 
 
 @Component({
   moduleId: module.id,
   selector: 'menuGroup',
+  providers: [LocalStorageService],
   templateUrl: 'menugroup.component.html',
   styleUrls: ['menugroup.component.css'],
   pipes: []
@@ -30,19 +32,21 @@ export class MenuGroupComponent implements OnInit {
   _authData;
   editSrc: string = 'icon_edit.png';
 
-  constructor( @Inject(FirebaseRef) private _ref: Firebase, private _ds: DataService, private _tx: ValueService) {
+  constructor( @Inject(FirebaseRef) private _ref: Firebase, private _ds: DataService, private _tx: ValueService, private _ls: LocalStorageService) {
+
     this._authData = this._ref.getAuth();
   }
 
   ngOnInit() {
-    if (this._authData != null) {
-      this.getNotes();
-    }
+    this.getNotes();
   }
 
   getNotes() {
     if (this._authData != null) {
       this._ds.getAllNotesInGroup(this.group.name).then(titles => this.notes = titles);
+    } else {
+      this._ls.getNotesInGroup();
+      //TO DO : Get notes in group in localstorage.service
     }
   }
 
@@ -50,18 +54,15 @@ export class MenuGroupComponent implements OnInit {
     if (this._authData != null) {
       this._ds.deleteGroup(this.group.$key);
       this._tx._toggleExpand = false;
-    }
+    } 
   }
 
-  editGroupName() {
-    if (this._authData != null) {
-      this._ds.updateGroupName(this.group.$key, this.group.name);
-    }
-  }
 
   editGroup() {
     if (this._authData != null) {
       this._ds.updateGroupName(this.group.$key, this.group.name);
+    } else {
+      this._ls.updateGroupName(this.group.$key, this.group.name);
     }
   }
   
@@ -95,8 +96,10 @@ export class MenuGroupComponent implements OnInit {
         this.editSrc = 'icon_edit.png';
         this.editGroup();
         this.getNotes();
+        this._tx._toggleExpand = false;
       }
     }
+
   }
 
   toggleExpand() {
@@ -106,6 +109,7 @@ export class MenuGroupComponent implements OnInit {
       this._tx._toggleExpand = true;
     }
     this.expanded = this._tx._toggleExpand;
+
     if (this.expanded) {
       this.arrowSrc = 'icon_hide.png';
     }

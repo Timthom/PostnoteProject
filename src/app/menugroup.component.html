@@ -8,6 +8,7 @@
     </ul>-->
     <ul *ngIf="expanded">
         <p *ngFor="let note of notes | async" [hidden]="!expanded" (click)="jumpToNote(note.$key)">
+
           {{note.title}}
         </p>
     </ul>

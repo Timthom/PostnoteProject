@@ -7,11 +7,14 @@ import {ValueService} from './value.service';
 import {AngularFire, defaultFirebase, FirebaseRef, FirebaseListObservable} from 'angularfire2';
 import {Injectable, Inject} from '@angular/core';
 import {CanReuse} from "@angular/router-deprecated";
+import {Group} from './group';
+
+import {LocalStorageService} from './localstorage.service';
 
 @Component({
   moduleId: module.id,
   selector: 'menu',
-  providers: [ROUTER_PROVIDERS],
+  providers: [ROUTER_PROVIDERS, LocalStorageService],
   templateUrl: 'menu.component.html',
   styleUrls: ['menu.component.css'],
   directives: [ROUTER_DIRECTIVES, MenuGroupComponent],
@@ -23,19 +26,21 @@ export class MenuComponent implements OnInit, CanReuse {
   routerCanReuse() {
     return false;
   }
-
+  
   showingCancel: boolean = false;
   adding: boolean = false;
   groupName: string = "";
-  titles: FirebaseListObservable<any[]>;
+  titles: any;
   buttonText: string = "Add category";
-  myGroups: FirebaseListObservable<any[]>;
+  myGroups: any;
   checkSideBar: boolean = this._vs._showSideBar;
   _authData;
 
   @Output() clicked = new EventEmitter();
 
-  constructor( @Inject(FirebaseRef) private _ref: Firebase, private _ds: DataService, private _vs: ValueService) {
+
+  constructor( @Inject(FirebaseRef) private _ref: Firebase, private _ds: DataService, private _vs: ValueService, private _ls: LocalStorageService) {
+
     this._authData = this._ref.getAuth();
   }
 
@@ -45,7 +50,6 @@ export class MenuComponent implements OnInit, CanReuse {
       this.getGroups();
     } else {
       console.log("ngOnInit in menu offline");
-      //skall innehålla samma funktioner? 
     }
   }
 
@@ -92,11 +96,23 @@ export class MenuComponent implements OnInit, CanReuse {
         this.getTitles();
         this.clicked.emit('');
         this.adding = false;
-        this.showingCancel = !this.showingCancel;
         this.buttonText = "Add category";
       }
     } else {
+      console.log("added group in menu offline");
+      if (this.groupName.trim().length > 0) {
+        let time = new Date().getTime();
+        let newGroup = new Group(this.groupName, time.toString());
+        this._ls.saveGroup(newGroup);
+        this.groupName = "";
+        this.adding = false;
+        this.showingCancel = !this.showingCancel;
+        this.buttonText = "Add category";
+      }
+    } /*else {
       console.log("added group offline");
-    }
+    }*/
+    
+    
   }
 }

@@ -13,7 +13,10 @@ import { Injectable, Inject } from '@angular/core';
 import {CanReuse} from "@angular/router-deprecated";
 import{UserHandlerComponent} from './app/user-handler.component';
 
+import {LocalStorageService} from './localStorage.service';
+
 @Component({
+<<<<<<< HEAD
     moduleId: module.id,
     selector: 'postnote2-app',
     providers: [ROUTER_PROVIDERS, DataService, AngularFire],
@@ -21,11 +24,21 @@ import{UserHandlerComponent} from './app/user-handler.component';
     styleUrls: ['postnote2.component.css'],
     directives: [ROUTER_DIRECTIVES, NoteComponent, MenuComponent, GroupComponent, CreatorComponent/*, UserHandlerComponent*/],
     pipes: []
+=======
+  moduleId: module.id,
+  selector: 'postnote2-app',
+  providers: [ROUTER_PROVIDERS, DataService, AngularFire, LocalStorageService],
+  templateUrl: 'postnote2.component.html',
+  styleUrls: ['postnote2.component.css'],
+  directives: [ROUTER_DIRECTIVES, NoteComponent, MenuComponent, GroupComponent, CreatorComponent, HeaderbarComponent],
+  pipes: []
+>>>>>>> 524abcb53d559d919d428af566a4a5e642096b3a
 })
 
-export class Postnote2App implements OnInit, CanReuse {
-
+export class Postnote2App implements OnInit{
+    
     _authData;
+<<<<<<< HEAD
     //111111111111111111111User handler
     _userLogOut;
 
@@ -54,18 +67,34 @@ export class Postnote2App implements OnInit, CanReuse {
     }
     
 
+=======
+    
+  allGroups :FirebaseListObservable<any[]>;
+   statusCheckSideBar:boolean = this._vs._showSideBar;
+   constructor(@Inject(FirebaseRef) private _ref: Firebase, private _ds: DataService, private _vs:ValueService, private _ls: LocalStorageService) {
+        console.log("Här är auth data: " + this._ref.getAuth());
+        this._authData = this._ref.getAuth();
+        console.log("Här är auth data 2: " + this._authData);
+        console.log(this._ls);
+   }
+    
+>>>>>>> 524abcb53d559d919d428af566a4a5e642096b3a
     ngOnInit() {
-        if (this._authData != null) {
-            this.getGroups();
-            //console.log("Bör inte köras");
-        }
+       if(this._authData != null) {
+        this.getGroups();
+        console.log("Bör inte köras");
+       } else {
+           console.log("ngoninit in postnote2component offline");
+       }
     }
 
     getGroups() {
         if (this._authData != null) {
             //console.log('inne i get groups');
             this._ds.getAllGroups().then(groups => this.allGroups = groups);
-            //console.log("Bör inte köras");
+            console.log("Bör inte köras");
+        } else {
+            console.log("getgroups in postnote2component offline");
         }
     }
 
@@ -77,9 +106,10 @@ export class Postnote2App implements OnInit, CanReuse {
         this.getGroups();
     }
 
-    openSideBar(event) {
+    openSideBar() {
         this._vs._showSideBar = !this._vs._showSideBar;
         this.statusCheckSideBar = this._vs._showSideBar;
     }
+    
 
 }

@@ -1,16 +1,17 @@
 nav.right {
 	position: fixed;
-	z-index: 10070000;
+	z-index: 500;
 	display: block;
 	border-radius: 0px;
-	width: 50px;
-	margin-left: 200px;
+	width: 100%;
+	
 }
 
 a {
     text-decoration: none;
     cursor: pointer;
 }
+<<<<<<< HEAD
 /*
 .btn{
 	background-color: transparent;
@@ -18,6 +19,17 @@ a {
 	outline: none;
 	padding: 10px;
 	
+=======
+
+.loginBtn{
+	background-color: transparent;
+	border: none;
+	outline: none;
+	right: 10px;
+	top: 4px;
+	position: relative;
+	float: right;
+>>>>>>> 524abcb53d559d919d428af566a4a5e642096b3a
 }
 
 .btnImage{

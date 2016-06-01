@@ -14,8 +14,12 @@ export class DataService {
         console.log("NU KÖR CONSTRUCTORN!!!");
         console.log("Här är auth data: " + this._ref.getAuth()); 
         
-        if(this._ref.getAuth() == null) return;
-        if(localStorage.getItem('token') == null) return;
+        if(this._ref.getAuth() == null) {
+            return;
+        } 
+        if(localStorage.getItem('token') == null) {
+            return;
+        } 
         
         console.log("Skrivs ej ut???");
         const token = localStorage.getItem('token');
@@ -31,13 +35,14 @@ export class DataService {
 });
         
         var authData = _ref.getAuth();
-        //console.log(authData);
+
         this._afNotes = _af.database.list('/users/' + authData.uid + '/notes');
         this._afGroups = _af.database.list('/users/' + authData.uid + '/groups', {
             query: {
                 orderByChild: 'timeStamp'
             }
         });
+        
         this._notes = _ref.child('/users/' + authData.uid + '/notes');
         this._groups = _ref.child('/users/' + authData.uid + '/groups');
         console.log("inne i dataservice konstruktor");
@@ -61,7 +66,7 @@ export class DataService {
     }, { remember: "sessionOnly"
 });
         console.log(token);
-      return Promise.resolve(this._afNotes);
+        return Promise.resolve(this._afNotes);
     }
     
      //adds a new note(FirebaseListObservable with random id) to the database...
@@ -189,7 +194,6 @@ export class DataService {
 });
         return Promise.resolve(this._afGroups);
     }
-    
     
      //adds a new group(FirebaseListObservable with random id) to the database. 
 

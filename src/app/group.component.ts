@@ -63,25 +63,34 @@ export class GroupComponent {
   }
 
   getContent() {
-    let doneInLoopArray;
-    let arrayOfKeys: any[] = [];
-    this.notes.forEach(function (result) {
-      doneInLoopArray = result;
-    });
-    doneInLoopArray.forEach(function (note) {
+    if(this._authData != null) {
+      let doneInLoopArray;
+      let arrayOfKeys: any[] = [];
+      
+      this.notes.forEach(function (result) {
+        doneInLoopArray = result;
+      });
+      
+      doneInLoopArray.forEach(function (note) {
       arrayOfKeys.push(note.$key);
     });
+    
     return arrayOfKeys;
   }
-
+}
+    
   deleteGroup() {
-    let content = this.getContent();
-    for (let key of content) {
-      this._ds.deleteNote(key);
-    }
+    if (this._authData != null) {
+      
+      let content = this.getContent();
+      
+      for (let key of content) {
+        this._ds.deleteNote(key);
+      }
     this._ds.deleteGroup(this.group.$key);
     this.clickedDelete.emit('');
     this._tx._toggleExpand = false;
+    }
   }
   //
   editGroupName() {
@@ -110,6 +119,7 @@ export class GroupComponent {
         this.editGroupName();
         this.getNotes();
         this.editSrc = 'icon_edit.png';
+        this._tx._toggleExpand = false;
       }
     } else {
       console.log("enterkey in groupcomponent offline");

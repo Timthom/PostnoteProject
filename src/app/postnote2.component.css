@@ -17,7 +17,7 @@ menu{
 	padding: 0px;
 	margin: 0px;
 }
-
+/*
 .col-xs-9 {
 	padding-right: 10px;
 }
@@ -29,6 +29,7 @@ menu{
 .col-xs-1{
 width: 6%;
 }
+
 
 headerbar {
 	visibility: hidden;
@@ -51,6 +52,8 @@ headerbar {
 	height: 30px;
 	width: 30px;
 }
+*/
+
 .navbar_item{
 	background-color: #EEEEEE;
 	margin-bottom: 0px;
@@ -60,10 +63,21 @@ headerbar {
 	height: 50px;
 	box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.5);
 	position: fixed;
-	z-index: 10020000;
+}
+
+.backBtn{
+	border: none;
+	margin: 12px;
+	background-color: transparent;
+	z-index: 1000;
+	outline: none;	
+}
+
+.btnImage{
+	height: 25px;
+	width: 25px;
 }
 
 .note_groups{
-	margin-left: 300px;
 	margin-top: 50px;
 }

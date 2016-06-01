@@ -17,19 +17,19 @@ import {MenuComponent} from '../menu.component';
   providers: [ROUTER_PROVIDERS, DataService, AngularFire,ValueService],
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.css'],
-  directives: [MenuComponent, ROUTER_DIRECTIVES],
+  directives: [UserHandlerComponent, ROUTER_DIRECTIVES],
   pipes: []
 })
 
 @RouteConfig([
-   {path: '', name:'UserHandlerRoute', component: UserHandlerComponent, useAsDefault : true},
+   // {path: '/route1', name:'UserHandlerRoute', component: UserHandlerComponent, useAsDefault : true},
    
 ])
 
 export class AppComponent{
   
   constructor() {
-     console.log("Funkar? NEJ!");
+     console.log("Funkar?");
   }
 
  
