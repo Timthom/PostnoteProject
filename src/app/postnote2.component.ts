@@ -11,7 +11,6 @@ import {HeaderbarComponent} from './headerbar/headerbar.component'
 import {ValueService} from './value.service';
 import { Injectable, Inject } from '@angular/core';
 import {CanReuse} from "@angular/router-deprecated";
-
 import {LocalStorageService} from './localStorage.service';
 
 @Component({
@@ -28,7 +27,7 @@ export class Postnote2App implements OnInit{
     
     _authData;
     
-  allGroups :FirebaseListObservable<any[]>;
+   allGroups : any;
    statusCheckSideBar:boolean = this._vs._showSideBar;
    constructor(@Inject(FirebaseRef) private _ref: Firebase, private _ds: DataService, private _vs:ValueService, private _ls: LocalStorageService) {
         console.log("Här är auth data: " + this._ref.getAuth());

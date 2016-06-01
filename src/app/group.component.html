@@ -5,5 +5,7 @@
     <button class="edit_button" id="{{editBtn}}" (click)="editClick()" [hidden]="!expanded"><img class="button_image" src="{{editSrc}}" alt="submit" [hidden]="!expanded"></button>
     <hr class="line">
 </div>
-<note class="col-xs-4" *ngFor="let note of notes | async" [hidden]="!expanded" [noteInNote]="note" [text]="note.text" [title]="note.title" [group]="note.group"
+<div class="myDragulaContainer" [dragula]='"drag-bag"'>
+<note class="col-xs-4" *ngFor="let note of notes | async | reverse" [hidden]="!expanded" [noteInNote]="note" [text]="note.text" [title]="note.title" [group]="note.group"
     [color]="note.color" id="{{note.$key}}"></note>
+</div>
