@@ -10,11 +10,13 @@ import {CreateUserAccountComponent} from '../createuser.components/create-user-a
 import {AuthorizationService} from "../authorization.service";
 import {UserHandlerComponent} from "./user-handler.component";
 import {MenuComponent} from '../menu.component';
+// import { DragulaService } from 'ng2-dragula/ng2-dragula';
 
 @Component({
   moduleId: module.id,
   selector: 'my-app',
   providers: [ROUTER_PROVIDERS, DataService, AngularFire,ValueService],
+  // viewProviders: [DragulaService],
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.css'],
   directives: [UserHandlerComponent, ROUTER_DIRECTIVES],
