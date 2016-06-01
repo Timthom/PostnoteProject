@@ -27,6 +27,7 @@ import {LocalStorageService} from './localStorage.service';
 export class Postnote2App implements OnInit{
     
     _authData;
+    btnImage: string = 'icon_back.png';
     
   allGroups :FirebaseListObservable<any[]>;
    statusCheckSideBar:boolean = this._vs._showSideBar;
@@ -67,7 +68,10 @@ export class Postnote2App implements OnInit{
     openSideBar() {
         this._vs._showSideBar = !this._vs._showSideBar;
         this.statusCheckSideBar = this._vs._showSideBar;
+        if (this.statusCheckSideBar) {
+            this.btnImage = 'icon_back.png';
+        } else {
+            this.btnImage = 'icon_menu.png';
+        }
     }
-    
-
 }
