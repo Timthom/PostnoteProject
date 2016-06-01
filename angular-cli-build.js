@@ -18,7 +18,7 @@ module.exports = function(defaults) {
       'angularfire2/**/*.js',
       'firebase/lib/*.js',
       //Adding everthing below for DRAGULA??? Do I need another level down... Atoa etc..
-      'dragula/dist/dragula.min.js',
+      'dragula/dist/dragula.min.*',
       'ng2-dragula/**',
       'contra/dist/contra.min.js',
       'crossvent/dist/crossvent.min.js'
