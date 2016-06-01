@@ -19,11 +19,7 @@ import {LocalStorageService} from './localstorage.service';
     styleUrls: ['creator.component.css'],
     directives: [ROUTER_DIRECTIVES, NoteComponent, DropdownComponent],
     pipes: [Reverse],
-<<<<<<< HEAD
     providers: [LocalStorageService]
-=======
-    providers: []
->>>>>>> UffeErminV1
 })
 @RouteConfig([
 ])
@@ -33,75 +29,47 @@ export class CreatorComponent {
     notes: FirebaseListObservable<any[]>;
     selectedGroup: string = "noGroup";
     _authData;
-
-<<<<<<< HEAD
+    
     constructor(private _ds: DataService, @Inject(FirebaseRef) private _ref: Firebase, private _ls: LocalStorageService) {
-=======
-    constructor(private _ds: DataService, @Inject(FirebaseRef) private _ref: Firebase) {
->>>>>>> UffeErminV1
         this._authData = this._ref.getAuth()
         //console.log("inne i creatorcomponents konstruktor");
     }
 
     ngOnInit() {
-
-<<<<<<< HEAD
         console.log("inne i OnInit i creatorcomponent...");
         if (this._authData != null) {
             console.log("Bör inte köras");
             this.getNotes();
         } else {
             console.log("ngOnInit in creatorcomponent offline");
-=======
-        //console.log("inne i OnInit i creatorcomponent...");
-        if (this._authData != null) {
-            //console.log("Bör inte köras");
-            this.getNotes();
->>>>>>> UffeErminV1
         }
     }
 
     getNotes() {
         if (this._authData != null) {
-<<<<<<< HEAD
             console.log("inne i getNotes i creatorcomponent");
             this._ds.getAllNotesInGroup('noGroup').then(notes => this.notes = notes);
         } else {
             console.log("getnotes in creatorcomponent offline");
-=======
-            //console.log("Bör inte köras");
-            //console.log("inne i getNotes i creatorcomponent");
-            this._ds.getAllNotesInGroup('noGroup').then(notes => this.notes = notes);
->>>>>>> UffeErminV1
         }
     }
 
     groupChanged(event) {
         if (this._authData != null) {
-<<<<<<< HEAD
             this.selectedGroup = event;
         } else {
             console.log("groupchanged in creatorcomponent offline");
-=======
-            //console.log("Bör inte köras");
-            this.selectedGroup = event;
->>>>>>> UffeErminV1
         }
     }
 
     save() {
         if (this._authData != null) {
-<<<<<<< HEAD
-=======
-            //console.log("Bör inte köras");
->>>>>>> UffeErminV1
             if (this.title !== '') {
                 let time = new Date().getTime();
                 this._ds.addNoteToNotes(this.title, this.text, this.selectedGroup, time, "yellow");
                 this.title = '';
                 this.text = '';
             }
-<<<<<<< HEAD
         } else {
             console.log("save in creatorcomponent offline");
             if(this.title !== ''){
@@ -111,8 +79,6 @@ export class CreatorComponent {
                 this.title = '';
                 this.text = '';
             }
-=======
->>>>>>> UffeErminV1
         }
     }
 }
