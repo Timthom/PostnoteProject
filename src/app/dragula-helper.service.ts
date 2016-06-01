@@ -39,19 +39,19 @@ export class DragulaHelperService {
     });
     
     dragulaService.drag.subscribe((value) => {
-      console.log(`drag: ${value[0]}`);
+      // console.log(`drag: ${value[0]}`);
       this._onDrag(value.slice(1));
     });
     dragulaService.drop.subscribe((value) => {
-      console.log(`drop: ${value[0]}`);
+      // console.log(`drop: ${value[0]}`);
       this._onDrop(value.slice(1));
     });
     dragulaService.over.subscribe((value) => {
-      console.log(`over: ${value[0]}`);
+      // console.log(`over: ${value[0]}`);
       this._onOver(value.slice(1));
     });
     dragulaService.out.subscribe((value) => {
-      console.log(`out: ${value[0]}`);
+      // console.log(`out: ${value[0]}`);
       this._onOut(value.slice(1));
     });
     
@@ -60,25 +60,25 @@ export class DragulaHelperService {
   private _onDrag(args) {
     let [e, el] = args;
     // do something
-   console.log(`Inne i onDrag e: ${e}, el: ${el}`);
+  //  console.log(`Inne i onDrag e: ${e}, el: ${el}`);
   }
 
   private _onDrop(args) {
     let [e, el] = args;
     // do something
-    console.log(`Inne i onDrop e: ${e}, el: ${el}`);
+    // console.log(`Inne i onDrop e: ${e}, el: ${el}`);
   }
 
   private _onOver(args) {
     let [e, el, container] = args;
     // do something
-    console.log(`Inne i onOver e: ${e}, el: ${el}, container: ${container}`);
+    // console.log(`Inne i onOver e: ${e}, el: ${el}, container: ${container}`);
   }
 
   private _onOut(args) {
     let [e, el, container] = args;
     // do something
-    console.log(`Inne i onOut e: ${e}, el: ${el}, container: ${container}`);
+    // console.log(`Inne i onOut e: ${e}, el: ${el}, container: ${container}`);
   }
    
   
