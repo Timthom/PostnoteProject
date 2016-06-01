@@ -1,4 +1,4 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, OnInit, EventEmitter, Output} from "@angular/core";
 import {FormBuilder, ControlGroup, Validators, Control} from "@angular/common";
 import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from '@angular/router-deprecated';
 import {AuthorizationService} from "../authorization.service";
@@ -14,6 +14,8 @@ import {AuthorizationService} from "../authorization.service";
 })
 
 export class CreateUserAccountComponent implements OnInit {
+    @Output() emitLoginUserAccountWindow = new EventEmitter();
+    
     myForm:ControlGroup;
     error = false;
     errorMessage = '';
@@ -56,7 +58,8 @@ export class CreateUserAccountComponent implements OnInit {
         }
     }
     
-    goBack() {
-        console.log("GoBack!");
+    switchBackToLoginComponent() {
+        this.emitLoginUserAccountWindow.emit('');
+        console.log("GoBack button is working!!!");
     }
 }

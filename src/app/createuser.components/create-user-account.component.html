@@ -10,6 +10,6 @@
                 <input [ngFormControl]="myForm.find('confirmPassword')" type="password" placeholder="Confirm password" id="confirm-password" #confirmPassword="ngForm">
                 <span *ngIf="!confirmPassword.pristine && confirmPassword.errors != null && confirmPassword.errors['passwordsNotMatch']"><br/>The passwords do not match!</span>
             </div>
-                <button id="col2" class="noColor" type="button" (click)="goBack()">Back</button><button id="col1" type="submit" [disabled]="!myForm.valid">Create account</button>
+                <button id="col2" class="noColor" type="button" (click)="switchBackToLoginComponent()">Back</button><button id="col1" type="submit" [disabled]="!myForm.valid">Create account</button>
         </form>
 </div>

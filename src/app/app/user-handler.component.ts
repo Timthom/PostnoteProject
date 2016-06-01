@@ -93,8 +93,9 @@ export class UserHandlerComponent implements CanReuse  {
             this.createUser = true;
         }
         
-        switchBackToLoginWindow() {
-            
+        loginUser() {
+            console.log("Back button is working in user-handler!");
+            this.loggingIn = true;
+            this.createUser = false;
         }
-        
     }
