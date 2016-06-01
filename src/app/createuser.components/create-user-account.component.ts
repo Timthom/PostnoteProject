@@ -24,6 +24,7 @@ export class CreateUserAccountComponent implements OnInit {
 
     onCreateAccount() {
         this._authService.createUserAccount(this.myForm.value);
+        this.switchBackToLoginComponent();
     }
 
     ngOnInit():any {
