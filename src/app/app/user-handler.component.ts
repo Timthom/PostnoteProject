@@ -39,11 +39,7 @@ export class UserHandlerComponent implements CanReuse  {
         }
 
         logoutUser() {
-<<<<<<< HEAD
-          console.log("Loggas ut?");
-=======
             //console.log("Loggas ut?");
->>>>>>> UffeErminV1
           this._authServiceHandler.killAuth();
           this.switchWindow = false;
           this.loggingOut = false;
