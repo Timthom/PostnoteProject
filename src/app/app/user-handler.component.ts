@@ -64,7 +64,12 @@ export class UserHandlerComponent implements CanReuse  {
         
         switchToLoginWindow() {
             // this._router.parent.navigate(['LoginUserRoute']);
-            this.loggingIn = !this.loggingIn;       
+            if(this.createUser == true) {
+                this.loggingIn = false;
+                this.createUser = false;
+            } else {
+               this.loggingIn = !this.loggingIn;    
+            }
         }
         
         switchToLogoutWindow() {
@@ -78,16 +83,14 @@ export class UserHandlerComponent implements CanReuse  {
             // this._router.parent.navigate(['CreateUserAccountRoute']);
         }
         
-        isCreatingAccount() {   
-            return this.createUser;
+        isCreatingAccount() {    
+            return this.createUser;   
         }
         
         createUserAccount() {
             console.log("EventEmitter is working!?");
             this.loggingIn = false;
             this.createUser = true;
-            
-            
         }
         
         switchBackToLoginWindow() {
