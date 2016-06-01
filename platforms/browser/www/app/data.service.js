@@ -19,23 +19,22 @@ var DataService = (function () {
         this._af = _af;
         console.log("NU KÖR CONSTRUCTORN!!!");
         console.log("Här är auth data: " + this._ref.getAuth());
-        if (this._ref.getAuth() == null)
+        if (this._ref.getAuth() == null) {
             return;
-        if (localStorage.getItem('token') == null)
+        }
+        if (localStorage.getItem('token') == null) {
             return;
+        }
         console.log("Skrivs ej ut???");
         var token = localStorage.getItem('token');
         this._ref.authWithCustomToken(token, function (error, authData) {
             if (error) {
-                console.log("Authentication Failed!", error);
             }
             else {
-                console.log("Authenticated successfully with payload:", authData);
             }
         }, { remember: "sessionOnly"
         });
         var authData = _ref.getAuth();
-        console.log(authData);
         this._afNotes = _af.database.list('/users/' + authData.uid + '/notes');
         this._afGroups = _af.database.list('/users/' + authData.uid + '/groups', {
             query: {
@@ -54,10 +53,8 @@ var DataService = (function () {
         var token = localStorage.getItem('token');
         this._ref.authWithCustomToken(token, function (error, authData) {
             if (error) {
-                console.log("Authentication Failed!", error);
             }
             else {
-                console.log("Authenticated successfully with payload:", authData);
             }
         }, { remember: "sessionOnly"
         });
@@ -71,10 +68,8 @@ var DataService = (function () {
         var token = localStorage.getItem('token');
         this._ref.authWithCustomToken(token, function (error, authData) {
             if (error) {
-                console.log("Authentication Failed!", error);
             }
             else {
-                console.log("Authenticated successfully with payload:", authData);
             }
         }, { remember: "sessionOnly"
         });
@@ -90,10 +85,8 @@ var DataService = (function () {
         var token = localStorage.getItem('token');
         this._ref.authWithCustomToken(token, function (error, authData) {
             if (error) {
-                console.log("Authentication Failed!", error);
             }
             else {
-                console.log("Authenticated successfully with payload:", authData);
             }
         }, { remember: "sessionOnly"
         });
@@ -106,10 +99,8 @@ var DataService = (function () {
         var token = localStorage.getItem('token');
         this._ref.authWithCustomToken(token, function (error, authData) {
             if (error) {
-                console.log("Authentication Failed!", error);
             }
             else {
-                console.log("Authenticated successfully with payload:", authData);
             }
         }, { remember: "sessionOnly"
         });
@@ -126,10 +117,8 @@ var DataService = (function () {
         var token = localStorage.getItem('token');
         this._notes.authWithCustomToken(token, function (error, authData) {
             if (error) {
-                console.log("Authentication Failed!", error);
             }
             else {
-                console.log("Authenticated successfully with payload:", authData);
             }
         }, { remember: "sessionOnly"
         });
@@ -142,15 +131,13 @@ var DataService = (function () {
         var token = localStorage.getItem('token');
         this._ref.authWithCustomToken(token, function (error, authData) {
             if (error) {
-                console.log("Authentication Failed!", error);
             }
             else {
-                console.log("Authenticated successfully with payload:", authData);
             }
         }, { remember: "sessionOnly"
         });
         var authData = this._ref.getAuth();
-        console.log(authData);
+        //console.log(authData);
         var tempObservable = this._af.database.list('/users/' + authData.uid + '/notes', {
             query: {
                 orderByChild: 'group',
@@ -166,10 +153,8 @@ var DataService = (function () {
         var token = localStorage.getItem('token');
         this._ref.authWithCustomToken(token, function (error, authData) {
             if (error) {
-                console.log("Authentication Failed!", error);
             }
             else {
-                console.log("Authenticated successfully with payload:", authData);
             }
         }, { remember: "sessionOnly"
         });
@@ -182,10 +167,8 @@ var DataService = (function () {
         var token = localStorage.getItem('token');
         this._ref.authWithCustomToken(token, function (error, authData) {
             if (error) {
-                console.log("Authentication Failed!", error);
             }
             else {
-                console.log("Authenticated successfully with payload:", authData);
             }
         }, { remember: "sessionOnly"
         });
@@ -196,10 +179,8 @@ var DataService = (function () {
         var token = localStorage.getItem('token');
         this._ref.authWithCustomToken(token, function (error, authData) {
             if (error) {
-                console.log("Authentication Failed!", error);
             }
             else {
-                console.log("Authenticated successfully with payload:", authData);
             }
         }, { remember: "sessionOnly"
         });
@@ -210,10 +191,8 @@ var DataService = (function () {
         var token = localStorage.getItem('token');
         this._ref.authWithCustomToken(token, function (error, authData) {
             if (error) {
-                console.log("Authentication Failed!", error);
             }
             else {
-                console.log("Authenticated successfully with payload:", authData);
             }
         }, { remember: "sessionOnly"
         });
@@ -224,10 +203,8 @@ var DataService = (function () {
         var token = localStorage.getItem('token');
         this._notes.authWithCustomToken(token, function (error, authData) {
             if (error) {
-                console.log("Authentication Failed!", error);
             }
             else {
-                console.log("Authenticated successfully with payload:", authData);
             }
         }, { remember: "sessionOnly"
         });

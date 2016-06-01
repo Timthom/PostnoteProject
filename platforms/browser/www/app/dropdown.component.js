@@ -42,11 +42,17 @@ var DropdownComponent = (function () {
         if (this._authData != null) {
             this.getTitles();
         }
+        else {
+            console.log("ngoninit in dropdowncomponent offline");
+        }
     };
     DropdownComponent.prototype.getTitles = function () {
         var _this = this;
         if (this._authData != null) {
             this._ds.getAllGroups().then(function (titles) { return _this.groups = titles; });
+        }
+        else {
+            console.log("get titles in dropdowncomponent offline");
         }
     };
     DropdownComponent.prototype.selectGroup = function (group) {
@@ -56,6 +62,9 @@ var DropdownComponent = (function () {
             var buttonText = document.getElementById('group_name');
             buttonText.innerHTML = group;
             console.log("Group selected " + group);
+        }
+        else {
+            console.log("selectgroup in dropdowncomponent offline");
         }
     };
     __decorate([

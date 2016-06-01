@@ -1,9 +1,11 @@
 "use strict";
 var Note = (function () {
-    //Kommer tillkomma andra variabler...
-    function Note(title, text) {
+    function Note(title, text, group, $key, color) {
         this.title = title;
         this.text = text;
+        this.group = group;
+        this.$key = $key;
+        this.color = color;
         console.log("inne i note.ts konstruktor");
     }
     return Note;

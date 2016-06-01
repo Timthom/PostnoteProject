@@ -27,7 +27,7 @@ var NoteComponent = (function () {
         this.isBlue = false;
         this.isYellow = true;
         this.isGreen = false;
-        console.log('in constructor');
+        //console.log('in constructor');
     }
     NoteComponent.prototype.ngOnInit = function () {
         this.colorInit(this.color);

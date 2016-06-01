@@ -18,11 +18,14 @@ var menugroup_component_1 = require('./menugroup.component');
 var value_service_1 = require('./value.service');
 var angularfire2_1 = require('angularfire2');
 var core_2 = require('@angular/core');
+var group_1 = require('./group');
+var localstorage_service_1 = require('./localstorage.service');
 var MenuComponent = (function () {
-    function MenuComponent(_ref, _ds, _vs) {
+    function MenuComponent(_ref, _ds, _vs, _ls) {
         this._ref = _ref;
         this._ds = _ds;
         this._vs = _vs;
+        this._ls = _ls;
         this.showingCancel = false;
         this.adding = false;
         this.groupName = "";
@@ -39,6 +42,9 @@ var MenuComponent = (function () {
             this.getTitles();
             this.getGroups();
         }
+        else {
+            console.log("ngOnInit in menu offline");
+        }
     };
     MenuComponent.prototype.getTitles = function () {
         var _this = this;
@@ -46,11 +52,17 @@ var MenuComponent = (function () {
             this._ds.getAllNotes().then(function (titles) { return _this.titles = titles; });
             this._ds.getAllNotesInGroup('noGroup').then(function (notes) { return _this.titles = notes; });
         }
+        else {
+            console.log("get titles offline");
+        }
     };
     MenuComponent.prototype.getGroups = function () {
         var _this = this;
         if (this._authData != null) {
             this._ds.getAllGroups().then(function (groups) { return _this.myGroups = groups; });
+        }
+        else {
+            console.log("get groups offline");
         }
     };
     MenuComponent.prototype.jumpToNote = function (note) {
@@ -80,6 +92,20 @@ var MenuComponent = (function () {
                 this.buttonText = "Add category";
             }
         }
+        else {
+            console.log("added group in menu offline");
+            if (this.groupName.trim().length > 0) {
+                var time = new Date().getTime();
+                var newGroup = new group_1.Group(this.groupName, time.toString());
+                this._ls.saveGroup(newGroup);
+                this.groupName = "";
+                this.adding = false;
+                this.showingCancel = !this.showingCancel;
+                this.buttonText = "Add category";
+            }
+        } /*else {
+          console.log("added group offline");
+        }*/
     };
     __decorate([
         core_1.Output(), 
@@ -89,14 +115,14 @@ var MenuComponent = (function () {
         core_1.Component({
             moduleId: module.id,
             selector: 'menu',
-            providers: [router_deprecated_1.ROUTER_PROVIDERS],
+            providers: [router_deprecated_1.ROUTER_PROVIDERS, localstorage_service_1.LocalStorageService],
             templateUrl: 'menu.component.html',
             styleUrls: ['menu.component.css'],
             directives: [router_deprecated_1.ROUTER_DIRECTIVES, menugroup_component_1.MenuGroupComponent],
             pipes: []
         }),
         __param(0, core_2.Inject(angularfire2_1.FirebaseRef)), 
-        __metadata('design:paramtypes', [Firebase, data_service_1.DataService, value_service_1.ValueService])
+        __metadata('design:paramtypes', [Firebase, data_service_1.DataService, value_service_1.ValueService, localstorage_service_1.LocalStorageService])
     ], MenuComponent);
     return MenuComponent;
 }());

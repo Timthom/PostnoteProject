@@ -35,6 +35,8 @@ var barrels = [
     'app/shared',
     'app/app',
     'app/headerbar',
+    'app/logout-component',
+    'app/logout',
 ];
 var cliSystemConfigPackages = {};
 barrels.forEach(function (barrelName) {

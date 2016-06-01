@@ -22,31 +22,37 @@ var creator_component_1 = require('./creator.component');
 var headerbar_component_1 = require('./headerbar/headerbar.component');
 var value_service_1 = require('./value.service');
 var core_2 = require('@angular/core');
+var localStorage_service_1 = require('./localStorage.service');
 var Postnote2App = (function () {
-    function Postnote2App(_ref, _ds, _vs) {
+    function Postnote2App(_ref, _ds, _vs, _ls) {
         this._ref = _ref;
         this._ds = _ds;
         this._vs = _vs;
+        this._ls = _ls;
         this.statusCheckSideBar = this._vs._showSideBar;
         console.log("Här är auth data: " + this._ref.getAuth());
         this._authData = this._ref.getAuth();
         console.log("Här är auth data 2: " + this._authData);
+        console.log(this._ls);
     }
-    Postnote2App.prototype.routerCanReuse = function () {
-        return false;
-    };
     Postnote2App.prototype.ngOnInit = function () {
         if (this._authData != null) {
             this.getGroups();
             console.log("Bör inte köras");
         }
+        else {
+            console.log("ngoninit in postnote2component offline");
+        }
     };
     Postnote2App.prototype.getGroups = function () {
         var _this = this;
         if (this._authData != null) {
-            console.log('inne i get groups');
+            //console.log('inne i get groups');
             this._ds.getAllGroups().then(function (groups) { return _this.allGroups = groups; });
             console.log("Bör inte köras");
+        }
+        else {
+            console.log("getgroups in postnote2component offline");
         }
     };
     Postnote2App.prototype.addGroup = function () {
@@ -59,18 +65,22 @@ var Postnote2App = (function () {
         this._vs._showSideBar = !this._vs._showSideBar;
         this.statusCheckSideBar = this._vs._showSideBar;
     };
+    // Test metod
+    Postnote2App.prototype.checkClick = function () {
+        console.log('Testar om knappen back fungerar ???');
+    };
     Postnote2App = __decorate([
         core_1.Component({
             moduleId: module.id,
             selector: 'postnote2-app',
-            providers: [router_deprecated_1.ROUTER_PROVIDERS, data_service_1.DataService, angularfire2_1.AngularFire],
+            providers: [router_deprecated_1.ROUTER_PROVIDERS, data_service_1.DataService, angularfire2_1.AngularFire, localStorage_service_1.LocalStorageService],
             templateUrl: 'postnote2.component.html',
             styleUrls: ['postnote2.component.css'],
             directives: [router_deprecated_1.ROUTER_DIRECTIVES, note_component_1.NoteComponent, menu_component_1.MenuComponent, group_component_1.GroupComponent, creator_component_1.CreatorComponent, headerbar_component_1.HeaderbarComponent],
             pipes: []
         }),
         __param(0, core_2.Inject(angularfire2_1.FirebaseRef)), 
-        __metadata('design:paramtypes', [Firebase, data_service_1.DataService, value_service_1.ValueService])
+        __metadata('design:paramtypes', [Firebase, data_service_1.DataService, value_service_1.ValueService, localStorage_service_1.LocalStorageService])
     ], Postnote2App);
     return Postnote2App;
 }());

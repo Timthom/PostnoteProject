@@ -3,18 +3,14 @@ input {
 }
 
 p {
-    color: #D2D2D2;
+    color: #404040;
     cursor: pointer;
 }
 
-p:hover {
-    color: gray;
-}
-
-#container:hover #deleteBtn{
+#container #deleteBtn{
     visibility: visible;
 }
-#container:hover #editBtn{
+#container #editBtn{
     visibility: visible;
 }
 
@@ -42,28 +38,24 @@ p:hover {
     transition: background-color 150ms ease-in-out;
 }
 
-#editBtn:hover,#deleteBtn:hover{
-    background-color: gray;
-}
 
-.title{
-    background: none;
+.title {
+    background: none!important;
     border: none!important;
-    color: white;
-    cursor: pointer;
+    color: #404040!important;
+    cursor: pointer!important;
+    padding: inherit!important;
+    width: 58%;
+
 }
 
-.title:hover {
-    color: gray;
-    cursor: pointer;
+
+.editing {
+    color: #404040;
 }
 
 .editing {
-    color: gray;
-}
-
-.editing:hover {
-    color: gray;
+    color: #404040;
     cursor: text;
 }
 

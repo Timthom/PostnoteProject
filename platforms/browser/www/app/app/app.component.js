@@ -14,7 +14,6 @@ var angularfire2_1 = require('angularfire2');
 var data_service_1 = require('../data.service');
 var value_service_1 = require('../value.service');
 var user_handler_component_1 = require("./user-handler.component");
-var menu_component_1 = require('../menu.component');
 var AppComponent = (function () {
     function AppComponent() {
         console.log("Funkar?");
@@ -26,12 +25,10 @@ var AppComponent = (function () {
             providers: [router_deprecated_1.ROUTER_PROVIDERS, data_service_1.DataService, angularfire2_1.AngularFire, value_service_1.ValueService],
             templateUrl: 'app.component.html',
             styleUrls: ['app.component.css'],
-            directives: [menu_component_1.MenuComponent, router_deprecated_1.ROUTER_DIRECTIVES],
+            directives: [user_handler_component_1.UserHandlerComponent, router_deprecated_1.ROUTER_DIRECTIVES],
             pipes: []
         }),
-        router_deprecated_1.RouteConfig([
-            { path: '/route1', name: 'UserHandlerRoute', component: user_handler_component_1.UserHandlerComponent, useAsDefault: true },
-        ]), 
+        router_deprecated_1.RouteConfig([]), 
         __metadata('design:paramtypes', [])
     ], AppComponent);
     return AppComponent;

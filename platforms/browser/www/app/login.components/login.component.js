@@ -38,6 +38,12 @@ var LoginComponent = (function () {
     LoginComponent.prototype.loginWithGoogle = function () {
         this._authService.loginGoogleAuth();
     };
+    LoginComponent.prototype.loginWithTwitter = function () {
+        this._authService.loginTwitterAuth();
+    };
+    LoginComponent.prototype.loginWithGitHub = function () {
+        this._authService.loginGitHubAuth();
+    };
     LoginComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
