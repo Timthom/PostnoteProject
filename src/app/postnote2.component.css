@@ -59,3 +59,16 @@ width: 6%;
 .note_groups{
 	margin-top: 50px;
 }
+
+.shadow {
+	background-color: rgba(0, 0, 0, 0.5);
+	display: none;
+	position: fixed;
+	height: 100%;
+	width: 100%;
+	z-index: 5;
+}
+
+.shadow_active {
+	display: block;
+}

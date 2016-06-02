@@ -7,8 +7,8 @@
    </button>
 
   </div>
-
   <div class="row">
+    <div class="shadow" [class.shadow_active]="statusCheckSideBar"></div>
     <div class="col-xs-4" *ngIf="statusCheckSideBar == true">
       <menu (clicked)="addGroup()"></menu>
     </div>
