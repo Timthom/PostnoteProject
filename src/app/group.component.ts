@@ -5,12 +5,14 @@ import {DataService} from './data.service';
 import { AngularFire, defaultFirebase, FirebaseRef, FirebaseListObservable } from 'angularfire2';
 import { Injectable, Inject } from '@angular/core';
 import {ValueService} from './value.service';
+import {LocalStorageService} from './localstorage.service';
+
 
 
 @Component({
   moduleId: module.id,
   selector: 'group',
-  providers: [ROUTER_PROVIDERS],
+  providers: [ROUTER_PROVIDERS, LocalStorageService],
   templateUrl: 'group.component.html',
   styleUrls: ['group.component.css'],
   directives: [ROUTER_DIRECTIVES, NoteComponent],
@@ -31,73 +33,78 @@ export class GroupComponent {
 
   @Output() clickedDelete = new EventEmitter();
 
-  notes: FirebaseListObservable<any[]>;
+  notes: any;
 
   newName: string = "";
   contentList: string[];
   arrowSrc: string = 'icon_expand.png';
   expanded: boolean = this._tx._toggleExpand;
   editingName: boolean = false;
-  enableEditIfNull:string = '';
+  enableEditIfNull: string = '';
   editSrc: string = 'icon_edit.png';
   _authData;
 
-  constructor( @Inject(FirebaseRef) private _ref: Firebase, private _ds: DataService, private _tx: ValueService) {
+  constructor( @Inject(FirebaseRef) private _ref: Firebase, private _ds: DataService, private _tx: ValueService, private _ls: LocalStorageService) {
     this._authData = this._ref.getAuth();
+
   }
 
   ngOnInit() {
-    if (this._authData != null) {
-      this.getNotes();
-    } else {
-      console.log("ngOnInit in groupcomponent offline");
-    }
+    this.getNotes();
+
   }
 
   getNotes() {
     if (this._authData != null) {
       this._ds.getAllNotesInGroup(this.groupName).then(notes => this.notes = notes);
     } else {
-      console.log("getnotes in groupcomponent offline");
+      this.notes = this._ls.getNotesInGroup(this.groupName);
     }
   }
 
   getContent() {
-    if(this._authData != null) {
+    if (this._authData != null) {
       let doneInLoopArray;
       let arrayOfKeys: any[] = [];
-      
+
       this.notes.forEach(function (result) {
         doneInLoopArray = result;
       });
-      
+
       doneInLoopArray.forEach(function (note) {
-      arrayOfKeys.push(note.$key);
-    });
-    
-    return arrayOfKeys;
+        arrayOfKeys.push(note.$key);
+      });
+
+      return arrayOfKeys;
+    }
   }
-}
-    
+
   deleteGroup() {
     if (this._authData != null) {
-      
+
       let content = this.getContent();
-      
+
       for (let key of content) {
         this._ds.deleteNote(key);
       }
-      
+
       this._ds.deleteGroup(this.group.$key);
-      this.clickedDelete.emit('');
+    } else {
+
+      for (let note of this.notes) {
+        this._ls.deleteNote(note.$key);
+      }
+
+      this._ls.deleteGroup(this.group.$key);
     }
+    this.clickedDelete.emit('');
   }
   //
   editGroupName() {
     if (this._authData != null) {
       this._ds.updateGroupName(this.group.$key, this.groupName);
     } else {
-      console.log("editgroupname in groupcomponent offline");
+      this._ls.updateGroupName(this.group.$key, this.groupName);
     }
   }
 
@@ -109,7 +116,7 @@ export class GroupComponent {
            console.log('key: ' + key);
            this._ds.changeNoteGroup(key, this.groupName);
          }
- 
+   
          this.editGroupName();
          this.getNotes();
        }
@@ -118,29 +125,29 @@ export class GroupComponent {
 
   // Enable inputfield to edit text in field when user click on pen icon else disable inputfield
   editClick() {
-    if (this._authData != null) {
-      this.editingName = !this.editingName;
 
-      if (this.editingName) {
-        this.enableEditIfNull = null;
-        this.editSrc = 'icon_save.png';
-        
-      } else {
-        let content = this.getContent();
-        // changes notes in the group to the new group
+    this.editingName = !this.editingName;
+
+    if (this.editingName) {
+      this.enableEditIfNull = null;
+      this.editSrc = 'icon_save.png';
+
+    } else {
+      let content = this.getContent();
+      // changes notes in the group to the new group
+      if (this._authData != null) {
         for (let key of content) {
           this._ds.changeNoteGroup(key, this.groupName);
         }
-        this.enableEditIfNull = '';
-        this.editGroupName();
-        this.getNotes();
-        
-        this.editSrc = 'icon_edit.png';
-
       }
-    } else {
-      console.log("enterkey in groupcomponent offline");
+      this.enableEditIfNull = '';
+      this.editGroupName();
+      this.getNotes();
+
+      this.editSrc = 'icon_edit.png';
+
     }
+
   }
 
   // Expand category on click arrowBtn

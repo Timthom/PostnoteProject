@@ -7,6 +7,7 @@ import {Postnote2App} from '../postnote2.component';
 import {MenuComponent} from '../menu.component';
 import {LogoutComponent} from '../logout/logout.component';
 import {CanReuse} from "@angular/router-deprecated";
+import { LocalStorageService } from '../localstorage.service'
 
 @Component({
     moduleId: module.id,
@@ -14,7 +15,8 @@ import {CanReuse} from "@angular/router-deprecated";
     templateUrl: 'user-handler.component.html',
     styleUrls: ['user-handler.component.css'],
     directives: [ROUTER_DIRECTIVES, CreateUserAccountComponent, LoginComponent, Postnote2App, MenuComponent, LogoutComponent],
-    outputs: ['_userLoggedOut']
+    outputs: ['_userLoggedOut'],
+    providers: [LocalStorageService],
 })
 
 export class UserHandlerComponent implements CanReuse  {
