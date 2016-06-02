@@ -40,7 +40,7 @@ export class CreateUserAccountComponent implements OnInit {
         } else if(!re_2.test(this.myForm.value.password)) {
             alert('Error: password must contain at least one uppercase letter!');
         } else if(!re_3.test(this.myForm.value.password)) {
-            alert('Error: password must contain at least one lowercase letter (a-z)!');
+            alert('Error: password must contain at least one lowercase letter!');
         } else if(this.myForm.value.password.length < 8) {
             alert('Error: password must contain at least 8 characters!');
         } else if(this.myForm.value.password.length > 20) {
