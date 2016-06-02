@@ -26,7 +26,7 @@ import {LocalStorageService} from './localStorage.service';
 export class Postnote2App implements OnInit{
     
     _authData;
-    btnImage: string = 'icon_back.png';
+    btnImage: string = 'icon_menu.png';
     
    allGroups : any;
    statusCheckSideBar:boolean = this._vs._showSideBar;
