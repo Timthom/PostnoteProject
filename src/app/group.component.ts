@@ -116,14 +116,15 @@ export class GroupComponent {
       this.enableEditIfNull = null;
       this.editSrc = 'icon_save.png';
     } else {
-      let content = this.getContent();
-      // changes notes in the group to the new group
-
-      for (let key of content) {
-        if (this._authData != null) {
+      if (this._authData != null) {
+        let content = this.getContent();
+        // changes notes in the group to the new group
+        for (let key of content) {
           this._ds.changeNoteGroup(key, this.groupName);
-        } else {
-          this._ls.changeNoteGroup(key, this.groupName);
+        }
+      } else {
+        for (let note of this.notes) {
+          this._ls.changeNoteGroup(note.$key, this.groupName);
         }
       }
       this.enableEditIfNull = '';

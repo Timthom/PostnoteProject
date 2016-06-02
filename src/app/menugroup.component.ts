@@ -85,7 +85,6 @@ export class MenuGroupComponent implements OnInit {
 
   //When pressing the edit button, it enables editing on the input field
   editing() {
-    if (this._authData != null) {
       this.editingName = !this.editingName;
       if (this.editingName) {
         document.getElementById(this.group.$key).removeAttribute("readonly");
@@ -93,18 +92,24 @@ export class MenuGroupComponent implements OnInit {
         this.editSrc = 'icon_save.png';
       } else {
         document.getElementById(this.group.$key).setAttribute("readonly", "true");
+         if (this._authData != null) {
         let content = this.getContent();
         // changes notes in the group to the new group
+        
+       
         for (let key of content) {
           this._ds.changeNoteGroup(key, this.group.name);
+          } 
+        } else {
+          for (let note of this.notes) {
+            this._ls.changeNoteGroup(note.$key, this.group.name);
+          }
         }
         this.editSrc = 'icon_edit.png';
         this.editGroup();
         this.getNotes();
         this._tx._toggleExpand = false;
       }
-    }
-
   }
 
   toggleExpand() {
