@@ -112,5 +112,7 @@ export class MenuComponent implements OnInit, CanReuse {
     } /*else {
       console.log("added group offline");
     }*/
+    
+    
   }
 }

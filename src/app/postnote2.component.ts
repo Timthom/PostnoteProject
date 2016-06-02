@@ -26,6 +26,7 @@ import {LocalStorageService} from './localStorage.service';
 export class Postnote2App implements OnInit{
     
     _authData;
+    btnImage: string = 'icon_back.png';
     
    allGroups : any;
    statusCheckSideBar:boolean = this._vs._showSideBar;
@@ -63,13 +64,13 @@ export class Postnote2App implements OnInit{
         this.getGroups();
     }
 
-    openSideBar(event) {
+    openSideBar() {
         this._vs._showSideBar = !this._vs._showSideBar;
         this.statusCheckSideBar = this._vs._showSideBar;
+        if (this.statusCheckSideBar) {
+            this.btnImage = 'icon_back.png';
+        } else {
+            this.btnImage = 'icon_menu.png';
+        }
     }
-    // Test metod
-    checkClick(){
-        console.log('Testar om knappen back fungerar ???');
-    }
-
 }
