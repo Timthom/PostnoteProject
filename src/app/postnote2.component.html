@@ -2,27 +2,13 @@
 <div class="container">
   <!--Top navbar-->
   <div class="navbar_item">
-    <button class="backBtn" (click)="openSideBar()">
-       <img class="btnImage" src="icon_back.png" alt="backButton">
+    <button class="backBtn">
+       <img class="btnImage" src="{{btnImage}}" (click)="openSideBar()" alt="backButton">
    </button>
-<<<<<<< HEAD
-   <!--Login button-->
-         <button class="btn pull-right" (click)="logOutUser()">
-       <img class="btnImage" src="user_icon.png" alt="Logout">
-      </button>
-   
-   </div>
-   
-    <div class="row">
-      <div class="col-xs-3" *ngIf="statusCheckSideBar == true">
-        <menu (clicked)="addGroup()"></menu>
-      </div>
-=======
->>>>>>> 524abcb53d559d919d428af566a4a5e642096b3a
 
   </div>
-
   <div class="row">
+    <div class="shadow" [class.shadow_active]="statusCheckSideBar"></div>
     <div class="col-xs-4" *ngIf="statusCheckSideBar == true">
       <menu (clicked)="addGroup()"></menu>
     </div>

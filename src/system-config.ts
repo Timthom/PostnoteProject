@@ -5,7 +5,11 @@
 const map: any = {
   'firebase': 'vendor/firebase/lib/firebase-web.js',
   'angularfire2': 'vendor/angularfire2',
-  'moment': 'vendor/moment/moment.js'
+  'moment': 'vendor/moment/moment.js',
+  
+  'ng2-dragula': 'vendor/ng2-dragula',
+  'dragula': 'vendor/dragula/dist/dragula.min.js'
+  
 };
 
 /** User packages configuration. */
@@ -13,6 +17,10 @@ const packages: any = {
   angularfire2: {
     defaultExtension: 'js',
     main: 'angularfire2.js'
+  },
+  'ng2-dragula': {
+    defaultExtension: 'js',
+    main: 'ng2-dragula.js'
   }
 };
 

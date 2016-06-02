@@ -96,6 +96,7 @@ export class MenuComponent implements OnInit, CanReuse {
         this.getTitles();
         this.clicked.emit('');
         this.adding = false;
+        this.showingCancel = !this.showingCancel;
         this.buttonText = "Add category";
       }
     } else {

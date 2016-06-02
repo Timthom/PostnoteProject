@@ -6,8 +6,13 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class Reverse implements PipeTransform {
 
   transform(value) {
-    console.log('inne i pipen... value=' + value );
-    return value.slice().reverse();
+    if (value) {
+      console.log('inne i pipen... value= ' + value );
+      return value.slice().reverse();
+    } else {
+      console.log('value = '+value);
+    }
+
   }
 
 }

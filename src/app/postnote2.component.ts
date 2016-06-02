@@ -11,8 +11,11 @@ import {HeaderbarComponent} from './headerbar/headerbar.component'
 import {ValueService} from './value.service';
 import { Injectable, Inject } from '@angular/core';
 import {CanReuse} from "@angular/router-deprecated";
+<<<<<<< HEAD
 import{UserHandlerComponent} from './app/user-handler.component';
 
+=======
+>>>>>>> 2b50636e35cde7f34bbec00a4c42e5dafb0b77e8
 import {LocalStorageService} from './localStorage.service';
 
 @Component({
@@ -38,6 +41,7 @@ import {LocalStorageService} from './localStorage.service';
 export class Postnote2App implements OnInit{
     
     _authData;
+<<<<<<< HEAD
 <<<<<<< HEAD
     //111111111111111111111User handler
     _userLogOut;
@@ -68,8 +72,11 @@ export class Postnote2App implements OnInit{
     
 
 =======
+=======
+    btnImage: string = 'icon_menu.png';
+>>>>>>> 2b50636e35cde7f34bbec00a4c42e5dafb0b77e8
     
-  allGroups :FirebaseListObservable<any[]>;
+   allGroups : any;
    statusCheckSideBar:boolean = this._vs._showSideBar;
    constructor(@Inject(FirebaseRef) private _ref: Firebase, private _ds: DataService, private _vs:ValueService, private _ls: LocalStorageService) {
         console.log("Här är auth data: " + this._ref.getAuth());
@@ -109,7 +116,10 @@ export class Postnote2App implements OnInit{
     openSideBar() {
         this._vs._showSideBar = !this._vs._showSideBar;
         this.statusCheckSideBar = this._vs._showSideBar;
+        if (this.statusCheckSideBar) {
+            this.btnImage = 'icon_back.png';
+        } else {
+            this.btnImage = 'icon_menu.png';
+        }
     }
-    
-
 }

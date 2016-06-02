@@ -1,13 +1,13 @@
 .navbar {
     border-radius: 0px;
     margin-top: 50px;
-    position: relative;
+    margin-left: -15px;
     position: fixed;
     display: block;
     height: 100%; 
-    z-index: 10010000;
-    overflow:auto;
+    overflow: auto;
     width: 300px;
+    z-index: 10;
     background-color: #EEEEEE;
     box-shadow: 1px 0px 5px rgba(0,0,0,0.5);
 }

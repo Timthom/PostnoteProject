@@ -63,14 +63,16 @@ headerbar {
 	height: 50px;
 	box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.5);
 	position: fixed;
+	z-index: 20;
 }
 
 .backBtn{
+	outline: none;
 	border: none;
 	margin: 12px;
 	background-color: transparent;
-	z-index: 1000;
-	outline: none;	
+	z-index: 2;
+	padding: 0;
 }
 
 .btnImage{
@@ -80,4 +82,17 @@ headerbar {
 
 .note_groups{
 	margin-top: 50px;
+}
+
+.shadow {
+	background-color: rgba(0, 0, 0, 0.5);
+	display: none;
+	position: fixed;
+	height: 100%;
+	width: 100%;
+	z-index: 5;
+}
+
+.shadow_active {
+	display: block;
 }

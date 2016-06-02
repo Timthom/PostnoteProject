@@ -4,8 +4,9 @@ import {NoteComponent} from './note.component';
 import {DataService} from './data.service';
 import { AngularFire, defaultFirebase, FirebaseRef, FirebaseListObservable } from 'angularfire2';
 import { Injectable, Inject } from '@angular/core';
+import {Reverse} from './reverse.pipe';
 import {ValueService} from './value.service';
-
+import { Dragula } from 'ng2-dragula/ng2-dragula';
 
 @Component({
   moduleId: module.id,
@@ -13,8 +14,8 @@ import {ValueService} from './value.service';
   providers: [ROUTER_PROVIDERS],
   templateUrl: 'group.component.html',
   styleUrls: ['group.component.css'],
-  directives: [ROUTER_DIRECTIVES, NoteComponent],
-  pipes: []
+  directives: [ROUTER_DIRECTIVES, NoteComponent, Dragula],
+  pipes: [Reverse]
 })
 @RouteConfig([
 ])
@@ -31,7 +32,7 @@ export class GroupComponent {
 
   @Output() clickedDelete = new EventEmitter();
 
-  notes: FirebaseListObservable<any[]>;
+  notes: any;
 
   newName: string = "";
   contentList: string[];
@@ -44,8 +45,9 @@ export class GroupComponent {
 
   constructor( @Inject(FirebaseRef) private _ref: Firebase, private _ds: DataService, private _tx: ValueService) {
     this._authData = this._ref.getAuth();
+    
   }
-
+  
   ngOnInit() {
     if (this._authData != null) {
       this.getNotes();
@@ -142,4 +144,5 @@ export class GroupComponent {
       this.arrowSrc = 'icon_expand.png';
     }
   }
+  
 }

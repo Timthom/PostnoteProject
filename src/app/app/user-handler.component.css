@@ -4,7 +4,7 @@ nav.right {
 	display: block;
 	border-radius: 0px;
 	width: 100%;
-	
+	height: 1px;
 }
 
 a {
@@ -26,7 +26,7 @@ a {
 	border: none;
 	outline: none;
 	right: 10px;
-	top: 4px;
+	top: 7px;
 	position: relative;
 	float: right;
 >>>>>>> 524abcb53d559d919d428af566a4a5e642096b3a
