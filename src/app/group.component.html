@@ -6,6 +6,5 @@
     <hr class="line">
 </div>
 <div class="myDragulaContainer" [dragula]='"drag-bag"'>
-<note class="col-xs-4" *ngFor="let note of notes | async | reverse" [hidden]="!expanded" [noteInNote]="note" [text]="note.text" [title]="note.title" [group]="note.group"
-    [color]="note.color" id="{{note.$key}}"></note>
+    <note class="col-xs-4" *ngFor="let note of notes | async | reverse" [hidden]="!expanded" [noteInNote]="note" [text]="note.text" [title]="note.title" [group]="note.group" [color]="note.color" id="{{note.$key}}"></note>
 </div>
