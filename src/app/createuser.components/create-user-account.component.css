@@ -1,10 +1,10 @@
 .createUser {
   position: absolute;
-  width: 23.5%;
+  width: 300px;
   height: 165px;
   z-index: 15;
-  top: 6%;
-  right: 1%;
+  top: 60px;
+  right: 10px;
   background-color: #EEEEEE;
   font-family: 'Open Sans', Verdana, Geneva, Arial, Helvetica, sans-serif;
   color: #6B6B6B;

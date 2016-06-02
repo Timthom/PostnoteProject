@@ -2,7 +2,7 @@
   <nav class="right">
  
       <button class="loginBtn" (click)="switchToLogoutWindow()">
-        <img class="btnImage" src="user_icon.png" alt="login">
+        <img class="btnImage" src="icon_user_signed_in.png" alt="login">
       </button>
    
   </nav>
@@ -21,9 +21,9 @@
  
   <div *ngIf="!isAuth()">  
     <nav class="right">
-      <ul>
-        <li><a (click)="switchToLoginWindow()">Login</a></li>
-      </ul>
+      <button class="loginBtn" (click)="switchToLoginWindow()">
+        <img class="btnImage" src="icon_user_signed_out.png" alt="login">
+      </button>
     </nav>
     
     <div *ngIf="isLoggingIn()">
