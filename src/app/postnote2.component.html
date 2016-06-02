@@ -1,7 +1,7 @@
 <headerbar (openSideBar)="openSideBar($event)"></headerbar>
 <div class="container">
   <div class="row">
-   
+
     <div class="row">
       <div class="col-xs-3" *ngIf="statusCheckSideBar == true">
         <menu (clicked)="addGroup()"></menu>
@@ -11,8 +11,14 @@
         <div>
           <creator></creator>
         </div>
-        <group (clickedDelete)="deleteGroup()" class="row" *ngFor="let group of allGroups" [group]="group" [groupName]="group.name">
-        </group>
+        <div *ngIf="_authData == null">
+          <group (clickedDelete)="deleteGroup()" class="row" *ngFor="let group of allGroups" [group]="group" [groupName]="group.name">
+          </group>
+        </div>
+        <div *ngIf="_authData != null">
+          <group (clickedDelete)="deleteGroup()" class="row" *ngFor="let group of allGroups | async" [group]="group" [groupName]="group.name">
+          </group>
+        </div>
       </div>
     </div>
   </div>

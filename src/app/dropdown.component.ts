@@ -49,8 +49,8 @@ export class DropdownComponent implements OnInit {
 
     constructor( @Inject(FirebaseRef) private _ref: Firebase, private _ds: DataService, private _ls: LocalStorageService, private _menu: MenuComponent, private _menuGroup: MenuGroupComponent) {
         this._authData = this._ref.getAuth();
-        _menu.clicked.subscribe(this.getTitles());
-        _menuGroup.groupsChanged.subscribe(this.getTitles());
+        //_menu.clicked.subscribe(this.getTitles());
+        //_menuGroup.groupsChanged.subscribe(this.getTitles());
       
     }
 

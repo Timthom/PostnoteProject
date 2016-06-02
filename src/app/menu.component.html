@@ -16,9 +16,17 @@
     <div id="wrapper">
       <!-- Sidebar -->
       <br/><br/><br/><br/>
-      <ul *ngFor="let note of titles" (click)="jumpToNote(note.$key)">
-        {{note.title}}
-      </ul>
+      <div *ngIf='_authData == null'>
+        <ul *ngFor="let note of titles" (click)="jumpToNote(note.$key)">
+          {{note.title}}
+        </ul>
+      </div>
+      <div *ngIf='_authData != null'>
+        <ul *ngFor="let note of titles | async" (click)="jumpToNote(note.$key)">
+          {{note.title}}
+        </ul>
+      </div>
+
       <hr>
       <button class="addBtn btn btn-info btn-xs" [class.cancelable]="showingCancel" (click)="toggleInput()">
          {{buttonText}}
@@ -28,10 +36,14 @@
         <button id="plusBtn" type="button" (click)="addGroup()">+</button>
       </form>
       <hr>
-      <menuGroup *ngFor="let group of myGroups"  [group]="group" (groupsChanged) = "getGroups()"></menuGroup>
+      <div *ngIf = '_authData == null'>
+        <menuGroup *ngFor="let group of myGroups" [group]="group" (groupsChanged)="getGroups()"></menuGroup>
+      </div>
+      <div *ngIf = '_authData != null'>
+        <menuGroup *ngFor="let group of myGroups | async" [group]="group" (groupsChanged)="getGroups()"></menuGroup>
+      </div>
     </div>
 
   </div>
 
 </nav>
-

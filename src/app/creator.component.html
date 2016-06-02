@@ -7,8 +7,12 @@
     <textarea class="inputText" [(ngModel)]="text" placeholder="Your notes ..." name="inputText" cols="30" rows="10"></textarea>
     <dropdown [group]="selectedGroup" (changeGroup)="groupChanged($event)"></dropdown>
     </div>
- 
-    <note class="col-xs-4" *ngFor="let note of notes" [noteInNote]="note" [text]="note.text" [title]="note.title" [group]="note.group" id="{{note.$key}}" [color]="note.color">
+    <div *ngIf = '_authData != null'>
+        <note class="col-xs-4" *ngFor="let note of notes | async" [noteInNote]="note" [text]="note.text" [title]="note.title" [group]="note.group" id="{{note.$key}}" [color]="note.color">
     </note>
-
+    </div>
+    <div *ngIf = '_authData == null'>
+        <note class="col-xs-4" *ngFor="let note of notes" [noteInNote]="note" [text]="note.text" [title]="note.title" [group]="note.group" id="{{note.$key}}" [color]="note.color">
+    </note>
+    </div>
 </div>

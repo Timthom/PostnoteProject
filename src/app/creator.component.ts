@@ -31,6 +31,7 @@ export class CreatorComponent {
     notes: any;
     selectedGroup: string = "noGroup";
     _authData;
+    loggedIn: boolean = false;
 
     constructor(private _ds: DataService, @Inject(FirebaseRef) private _ref: Firebase, private _ls: LocalStorageService) {
         this._authData = this._ref.getAuth()

@@ -31,7 +31,7 @@ export class MenuGroupComponent implements OnInit {
   group;
   _authData;
 
-  @Output() groupsChanged: EventEmitter<string> = new EventEmitter();
+  @Output() groupsChanged = new EventEmitter();
 
   constructor( @Inject(FirebaseRef) private _ref: Firebase, private _ds: DataService, private _tx: ValueService, private _ls: LocalStorageService) {
 
@@ -56,9 +56,8 @@ export class MenuGroupComponent implements OnInit {
     } else {
       this._ls.deleteGroup(this.group.$key);
     }
-    //this.groupsChanged.emit('');
-    console.log(this.groupsChanged);
-    this.groupsChanged.next([]);
+    this.groupsChanged.emit('');
+
   }
 
 

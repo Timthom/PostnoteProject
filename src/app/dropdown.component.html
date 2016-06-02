@@ -1,11 +1,18 @@
-<div (click)="$event.preventDefault()">  
+<div (click)="$event.preventDefault()">
   <div class="btn-group dropup" dropdown [(isOpen)]="status.isopen">
-    <button id ="group_name" type="button" class="group_button dropdown_image" dropdownToggle [disabled]="disabled">
+    <button id="group_name" type="button" class="group_button dropdown_image" dropdownToggle [disabled]="disabled">
     </button>
     <ul class="dropdown-menu" role="menu" aria-labelledby="single-button">
-      <li *ngFor="let group of groups" (click)="selectGroup(group.name)">
+      <div *ngIf='_authData == null'>
+        <li *ngFor="let group of groups" (click)="selectGroup(group.name)">
           <a class="dropdown-item" href="#">{{group.name}}</a>
-      </li>
+        </li>
+      </div>
+      <div *ngIf='_authData != null'>
+        <li *ngFor="let group of groups | async" (click)="selectGroup(group.name)">
+          <a class="dropdown-item" href="#">{{group.name}}</a>
+        </li>
+      </div>
       <li (click)="selectGroup('noGroup')">
         <a href="#">No group</a>
       </li>
