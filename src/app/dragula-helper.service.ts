@@ -97,8 +97,8 @@ export class DragulaHelperService {
       [3]: diven som den dras ifrån...
       [4]: Sibling, den till höger om där den släpptes... om sist null...
       */ 
-      //  console.log(`drop, value: `);
-      //  console.log(value);
+       console.log(`drop, value: `);
+       console.log(value);
        
        //Detta ger mig en sträng med id:t...
        //console.log(value[1].attributes[3].nodeValue);

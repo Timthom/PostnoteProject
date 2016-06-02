@@ -9,12 +9,12 @@ import { defaultFirebase, FirebaseRef } from 'angularfire2';
 import { Observable } from 'rxjs/Observable';
 import {ValueService} from './value.service';
 import {LocalStorageService} from './localstorage.service';
-
+import { Dragula } from 'ng2-dragula/ng2-dragula';
 
 @Component({
   moduleId: module.id,
   selector: 'menuGroup',
-  providers: [LocalStorageService],
+  providers: [LocalStorageService, Dragula],
   templateUrl: 'menugroup.component.html',
   styleUrls: ['menugroup.component.css'],
   pipes: []

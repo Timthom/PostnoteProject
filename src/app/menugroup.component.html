@@ -7,8 +7,11 @@
         <li>Expanderad!</li>
     </ul>-->
     <ul *ngIf="expanded">
-        <p *ngFor="let note of notes | async" [hidden]="!expanded" (click)="jumpToNote(note.$key)">
-          {{note.title}}
-        </p>
+        <!--<div class="myDragulaContainer" [dragula]='"drag-bag"'>-->
+            <p *ngFor="let note of notes | async" [hidden]="!expanded" (click)="jumpToNote(note.$key)">
+                {{note.title}}
+            </p>
+        <!--</div>-->
     </ul>
 </div>
+
