@@ -2,11 +2,10 @@
     border-radius: 0px;
     margin-top: 50px;
     margin-left: -15px;
-    position: relative;
     position: fixed;
     display: block;
     height: 100%; 
-    overflow:auto;
+    overflow: auto;
     width: 300px;
     z-index: 10;
     background-color: #EEEEEE;
