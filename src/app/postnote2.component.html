@@ -1,7 +1,7 @@
 <!--<headerbar (openSideBar)="openSideBar($event)"></headerbar>-->
 <div class="container">
   <!--Top navbar-->
-  <div class="navbar_item">
+  <div class="navbar_item navbar-inverse">
     <button class="backBtn">
        <img class="btnImage" src="{{btnImage}}" (click)="openSideBar()" alt="backButton">
    </button>
@@ -17,7 +17,7 @@
       <div>
         <creator></creator>
       </div>
-      <group (clickedDelete)="deleteGroup()" class="row" *ngFor="let group of allGroups | async" [group]="group" [groupName]="group.name">
+      <group (clickedDelete)="deleteGroup()" class="row" *ngFor="let group of allGroups | async" [group]="group" [groupName]="group.name" onload ="delaySidebar()">
       </group>
     </div>
   </div>

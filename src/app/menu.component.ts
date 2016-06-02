@@ -44,6 +44,8 @@ export class MenuComponent implements OnInit, CanReuse {
     this._authData = this._ref.getAuth();
   }
 
+
+
   ngOnInit() {
     if (this._authData != null) {
       this.getTitles();
@@ -111,8 +113,8 @@ export class MenuComponent implements OnInit, CanReuse {
       }
     } /*else {
       console.log("added group offline");
-    }*/
-    
-    
+    }*/   
   }
+
+
 }
