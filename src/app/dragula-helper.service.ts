@@ -115,7 +115,16 @@ export class DragulaHelperService {
         group = value[2].parentElement.firstElementChild.id;
       }
       
-      this._dataservice.changeNoteGroup(id, group)
+      /* Vill göra en kontroll på om den bytte till en annan grupp men måste läsa på om promises mer först... */
+      // let currentGroup: string = this._dataservice.getGroupNameFromId(id) ;
+      // console.log(group + ' <-- ' + currentGroup);
+      // if (currentGroup == group) {
+      //   do nothing
+      // } else {
+        this._dataservice.changeNoteGroup(id, group);
+      // }
+      
+      
       
     });
     dragulaService.over.subscribe((value) => {
