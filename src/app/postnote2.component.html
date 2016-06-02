@@ -1,25 +1,28 @@
 <!--<headerbar (openSideBar)="openSideBar($event)"></headerbar>-->
 <div class="container">
   <!--Top navbar-->
-   <div class="navbar_item">
-     <button class="backBtn" (click)="checkClick()">
+  <div class="navbar_item">
+    <button class="backBtn" (click)="checkClick()">
        <img class="btnImage" src="icon_back.png" alt="backButton" (click)="checkClick()">
    </button>
-   
-   </div>
-   
-    <div class="row">
-      <div class="col-xs-3" *ngIf="statusCheckSideBar == true">
-        <menu (clicked)="addGroup()"></menu>
-      </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-3" *ngIf="statusCheckSideBar == true">
+      <menu (clicked)="addGroup()"></menu>
+    </div>
 
-      <div class="note_groups" [ngClass]="{'col-xs-9 col-xs-offset-3': statusCheckSideBar,  'col-xs-11  col-xs-offset-1 col-sm-11 col-sm-offset-1 col-md-11  col-md-offset-1': !statusCheckSideBar}">
-        <div>
-          <creator></creator>
-        </div>
+    <div class="note_groups" [ngClass]="{'col-xs-9 col-xs-offset-3': statusCheckSideBar,  'col-xs-11  col-xs-offset-1 col-sm-11 col-sm-offset-1 col-md-11  col-md-offset-1': !statusCheckSideBar}">
+      <div>
+        <creator></creator>
+      </div>
+      <div *ngIf="_authData == null">
+        <group (clickedDelete)="deleteGroup()" class="row" *ngFor="let group of allGroups" [group]="group" [groupName]="group.name">
+        </group>
+      </div>
+      <div *ngIf="_authData != null">
         <group (clickedDelete)="deleteGroup()" class="row" *ngFor="let group of allGroups | async" [group]="group" [groupName]="group.name">
         </group>
       </div>
     </div>
-  <!--</div>-->
+  </div>
 </div>

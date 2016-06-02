@@ -1,4 +1,4 @@
-import {Component, Input, Pipe} from '@angular/core';
+import {Component, Input, Pipe, Output, EventEmitter} from '@angular/core';
 import {AngularFire} from 'angularfire2';
 import {FirebaseListObservable} from 'angularfire2';
 import {DataService} from './data.service';
@@ -25,12 +25,14 @@ export class MenuGroupComponent implements OnInit {
   arrowSrc: string = 'icon_expand.png';
   expanded: boolean = this._tx._toggleExpand;
   editingName: boolean = false;
-  notes: FirebaseListObservable<any[]>;
+  notes: any;
 
   @Input()
   group;
   _authData;
   editSrc: string = 'icon_edit.png';
+
+  @Output() groupsChanged = new EventEmitter();
 
   constructor( @Inject(FirebaseRef) private _ref: Firebase, private _ds: DataService, private _tx: ValueService, private _ls: LocalStorageService) {
 
@@ -45,16 +47,18 @@ export class MenuGroupComponent implements OnInit {
     if (this._authData != null) {
       this._ds.getAllNotesInGroup(this.group.name).then(titles => this.notes = titles);
     } else {
-      this._ls.getNotesInGroup();
-      //TO DO : Get notes in group in localstorage.service
+      this.notes = this._ls.getNotesInGroup(this.group.name);
     }
   }
 
   deleteGroup() {
     if (this._authData != null) {
       this._ds.deleteGroup(this.group.$key);
-      this._tx._toggleExpand = false;
-    } 
+    } else {
+      this._ls.deleteGroup(this.group.$key);
+    }
+    this._tx._toggleExpand = false;
+    this.groupsChanged.emit('');
   }
 
 
@@ -64,6 +68,7 @@ export class MenuGroupComponent implements OnInit {
     } else {
       this._ls.updateGroupName(this.group.$key, this.group.name);
     }
+    this.groupsChanged.emit('');
   }
   
   getContent() {
@@ -126,7 +131,6 @@ export class MenuGroupComponent implements OnInit {
   jumpToGroup(groupId: string) {
     var element = document.getElementById(groupId);
     element.scrollIntoView(true);
-    console.log(element);
   }
 
 }
