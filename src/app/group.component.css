@@ -6,8 +6,9 @@
     border: 0;
     margin-top: 8px;
     margin-left: 10px;
+    margin-right: 10px;
     height: 1px;
-    background-image: linear-gradient(to right, #808080, #FFFFFF);
+    background-color:#404040;
 }
 
 .group_name {
@@ -17,6 +18,7 @@
     display: inline-block;
     background: none;
     text-align: left;
+    width: 35%;
 }
 
 .delete_button {
@@ -26,7 +28,7 @@
     background-color: transparent;
     margin-left: 0em;
     float: right;
-    margin-right: 3em;
+    margin-right:10px;
 }
 
 .edit_button{
