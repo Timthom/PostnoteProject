@@ -72,3 +72,7 @@ note {
 dropdown {
   border: none;
 }
+
+.myDragulaContainer {
+  cursor: -webkit-grab;
+}

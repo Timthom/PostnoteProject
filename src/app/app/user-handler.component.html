@@ -15,12 +15,6 @@
 
 <div *ngIf="switchTo()">
   <div *ngIf="!isAuth()">  
-    <nav class="right">
-      <ul>
-        <li><a (click)="switchToCreateAccountWindow()">Create account</a></li>
-      </ul>
-    </nav>
-    
     <postnote2-app></postnote2-app>
   </div>
 </div>
@@ -33,8 +27,12 @@
     </nav>
     
     <div *ngIf="isLoggingIn()">
-      <login-user></login-user>
+      <login-user (emitCreateUserAccount)="createUserAccount()"></login-user>  
     </div>
-
+    
+    <div *ngIf="isCreatingAccount()">
+      <create-user-account (emitLoginUserAccountWindow)="loginUser()"></create-user-account>
+    </div>
+    
     <postnote2-app></postnote2-app>
 </div>

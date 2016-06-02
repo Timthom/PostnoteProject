@@ -16,7 +16,13 @@ module.exports = function(defaults) {
       'ng2-bootstrap/bundles/ng2-bootstrap.min.js',
       'moment/moment.js',
       'angularfire2/**/*.js',
-      'firebase/lib/*.js'
+      'firebase/lib/*.js',
+      //Adding everthing below for DRAGULA??? Do I need another level down... Atoa etc..
+      'dragula/dist/dragula.min.*',
+      'ng2-dragula/**',
+      'contra/dist/contra.min.js',
+      'crossvent/dist/crossvent.min.js'
+      //.....................................
     ]
   });
 };

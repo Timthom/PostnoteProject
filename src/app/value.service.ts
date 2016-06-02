@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class ValueService {
 
-  _showSideBar:boolean = true;
+  _showSideBar:boolean = false;
   _toggleExpand:boolean = false;
   _focusedId:string = '';
 

@@ -9,24 +9,25 @@ import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {Reverse} from './reverse.pipe';
 import {DropdownComponent} from './dropdown.component';
-import {AngularFire, defaultFirebase, FirebaseRef, FirebaseListObservable} from 'angularfire2';
+import { AngularFire, defaultFirebase, FirebaseRef, FirebaseListObservable } from 'angularfire2';
+import { Dragula } from 'ng2-dragula/ng2-dragula';
 import {LocalStorageService} from './localstorage.service';
 
 @Component({
-    moduleId: module.id,
-    selector: 'creator',
-    templateUrl: 'creator.component.html',
-    styleUrls: ['creator.component.css'],
-    directives: [ROUTER_DIRECTIVES, NoteComponent, DropdownComponent],
-    pipes: [Reverse],
-    providers: [LocalStorageService]
+  moduleId: module.id,
+  selector: 'creator',
+  templateUrl: 'creator.component.html',
+  styleUrls: ['creator.component.css'],
+  directives: [ROUTER_DIRECTIVES, NoteComponent, DropdownComponent, Dragula],
+  pipes: [Reverse],
+  providers: [LocalStorageService]
 })
 @RouteConfig([
 ])
 export class CreatorComponent {
     title: string = "";
     text: string = "";
-    notes: FirebaseListObservable<any[]>;
+    notes: any;
     selectedGroup: string = "noGroup";
     _authData;
     
