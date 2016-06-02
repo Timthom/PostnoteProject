@@ -58,13 +58,6 @@ button:not([disabled]):hover {
     
   }
 
-span {
-  position:absolute;
-  color: orangered;
-  left: 42px;
-  margin-top: 30px;
-}
-
 .noColor {
   background-color: #EEEEEE;
 }
