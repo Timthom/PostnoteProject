@@ -65,7 +65,7 @@ export class CreatorComponent {
 
     save() {
         if (this._authData != null) {
-            if (this.title !== '') {
+            if (this.title !== '' || this.text !== '') {
                 let time = new Date().getTime();
                 this._ds.addNoteToNotes(this.title, this.text, this.selectedGroup, time, "yellow");
                 this.title = '';
@@ -73,7 +73,7 @@ export class CreatorComponent {
             }
         } else {
             console.log("save in creatorcomponent offline");
-            if(this.title !== ''){
+            if(this.title !== '' || this.text !== ''){
                 let time = new Date().getTime();
                 let newNote = new Note(this.title, this.text, this.selectedGroup, time.toString(), "yellow");
                 this._ls.addNoteToNotes(newNote);

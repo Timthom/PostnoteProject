@@ -1,5 +1,5 @@
 <div class="login">
-    <span class="createAccountText" (click)="createAccountWindow()">Create Account</span>
+    <div class="createAccountText" (click)="createAccountWindow()">Create Account</div>
     <form [ngFormModel]="myForm" (ngSubmit)="onLoggedIn()">
         <div class="input-group">
             <input [ngFormControl]="myForm.find('email')" type="email" placeholder="Email" id="email">
