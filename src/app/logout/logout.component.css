@@ -16,9 +16,14 @@
 	z-index: 10090000;
 }
 
+.user {
+  display:block;
+  margin-top: 4%;
+}
+
 .line {
    width: 90%;
-   height: 10px;
+   height: 2%;
    margin-left: 5%;
    margin-right: 5%;
    border-bottom: 1px solid #6B6B6B;

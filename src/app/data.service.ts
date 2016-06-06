@@ -2,6 +2,7 @@ import { Injectable, Inject } from '@angular/core';
 import { Note } from './note';
 import { AngularFire, defaultFirebase, FirebaseRef, FirebaseListObservable } from 'angularfire2';
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
 
 @Injectable()
 export class DataService {
@@ -9,6 +10,7 @@ export class DataService {
     _groups: Firebase;
     _afNotes: FirebaseListObservable<any[]>;
     _afGroups: FirebaseListObservable<any[]>;
+    _afUserInfo: FirebaseListObservable<any[]>;
 
     constructor( @Inject(FirebaseRef) private _ref: Firebase, private _af: AngularFire) {
         console.log("NU KÖR CONSTRUCTORN!!!");
@@ -32,11 +34,12 @@ export class DataService {
                 //console.log("Authenticated successfully with payload:", authData);
             }
         }, {
-            remember: "sessionOnly"
+            remember: "default"
             });
 
         var authData = _ref.getAuth();
-
+        
+        this._afUserInfo = _af.database.list('/users/' + authData.uid);
         this._afNotes = _af.database.list('/users/' + authData.uid + '/notes');
         this._afGroups = _af.database.list('/users/' + authData.uid + '/groups', {
             query: {
@@ -65,7 +68,7 @@ export class DataService {
                 //console.log("Authenticated successfully with payload:", authData);
             }
         }, {
-            remember: "sessionOnly"
+            remember: "default"
             });
         console.log(token);
         return Promise.resolve(this._afNotes);
@@ -85,7 +88,7 @@ export class DataService {
                 //console.log("Authenticated successfully with payload:", authData);
             }
         }, {
-            remember: "sessionOnly"
+            remember: "default"
             }); console.log(token);
 
         console.log(this._notes.ref);
@@ -108,7 +111,7 @@ export class DataService {
                 //console.log("Authenticated successfully with payload:", authData);
             }
         }, {
-            remember: "sessionOnly"
+            remember: "default"
             });
         this._notes.child(id).update({ 'title': newTitle });
     }
@@ -127,7 +130,7 @@ export class DataService {
                 //console.log("Authenticated successfully with payload:", authData);
             }
         }, {
-            remember: "sessionOnly"
+            remember: "default"
             });
         this._notes.child(id).update({ 'text': newText });
     }
@@ -151,7 +154,7 @@ export class DataService {
                 //console.log("Authenticated successfully with payload:", authData);
             }
         }, {
-            remember: "sessionOnly"
+            remember: "default"
             });
         this._notes.child(id).remove();
     }
@@ -170,7 +173,7 @@ export class DataService {
                 //console.log("Authenticated successfully with payload:", authData);
             }
         }, {
-            remember: "sessionOnly"
+            remember: "default"
             });
         var authData = this._ref.getAuth();
         //console.log(authData);
@@ -198,7 +201,7 @@ export class DataService {
                 //console.log("Authenticated successfully with payload:", authData);
             }
         }, {
-            remember: "sessionOnly"
+            remember: "default"
             });
         return Promise.resolve(this._afGroups);
     }
@@ -218,7 +221,7 @@ export class DataService {
                 //console.log("Authenticated successfully with payload:", authData);
             }
         }, {
-            remember: "sessionOnly"
+            remember: "default"
             });
         this._groups.push({ 'name': name, 'timeStamp': (time * -1) });
     }
@@ -234,7 +237,7 @@ export class DataService {
                 //console.log("Authenticated successfully with payload:", authData);
             }
         }, {
-            remember: "sessionOnly"
+            remember: "default"
             });
         this._groups.child(id).update({ 'name': name });
     }
@@ -250,7 +253,7 @@ export class DataService {
                 //console.log("Authenticated successfully with payload:", authData);
             }
         }, {
-            remember: "sessionOnly"
+            remember: "default"
             });
         this._groups.child(id).remove();
     }
@@ -266,8 +269,8 @@ export class DataService {
                 //console.log("Authenticated successfully with payload:", authData);
             }
         }, {
-            remember: "sessionOnly"
+            remember: "default"
             });
         this._notes.child(id).update({ 'group': group });
-    }
+    } 
 }
