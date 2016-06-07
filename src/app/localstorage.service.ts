@@ -20,16 +20,25 @@ export class LocalStorageService {
 
         if (!localStorage.getItem("savedGroups")) {
             this.groups = [];
+            console.log("grops");
+            console.log('inne i true');
         } else {
             this.groups = this.getAllGroups();
+             console.log('inne i false');
         }
     }
 
 
 
     getAllGroups() {
-        this.groups = JSON.parse(localStorage.getItem("savedGroups"));
+        console.log('inne i getAllGroups');
+        console.log('JSON.parse(localStorage.getItem("savedGroups")' + JSON.parse(localStorage.getItem("savedGroups")));
+        if (JSON.parse(localStorage.getItem("savedGroups"))) {
+                    this.groups = JSON.parse(localStorage.getItem("savedGroups"));
         return this.groups;
+        } else {
+            return [];
+        }
     }
 
     saveGroup(group: Group) {
@@ -80,14 +89,20 @@ export class LocalStorageService {
     }
 
     getNotesInGroup(groupName: string) {
-        this.notes = JSON.parse(localStorage.getItem("savedNotes"));
-        let groupNotes = new Array;
-        for (var item of this.notes) {
-            if (item.group === groupName) {
-                groupNotes.push(item);
+        console.log("localStorage.getItem(savedNotes) : " + localStorage.getItem("savedNotes"));
+        if (localStorage.getItem("savedNotes")){
+            this.notes = JSON.parse(localStorage.getItem("savedNotes"));
+            let groupNotes = new Array;
+            for (var item of this.notes) {
+                if (item.group === groupName) {
+                    groupNotes.push(item);
+                }
             }
+            return groupNotes;
+        } else {
+            return [];
         }
-        return groupNotes;
+
     }
 
     changeNoteGroup(key: string, newGroup: string) {
