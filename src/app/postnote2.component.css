@@ -42,6 +42,11 @@ width: 6%;
 	z-index: 10000;
 }
 
+.cbp-af-header-shrink {
+	height: 50px;
+	opacity: 0.8;
+}
+
 .backBtn{
 	outline: none;
 	border: none;

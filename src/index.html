@@ -31,14 +31,16 @@
 
   <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet'
     type='text/css'>
-    
+
   <link rel="stylesheet" href="animate.css">
- 
+
   <!--Css for dragula-->
-  <link rel="stylesheet" href="vendor/dragula/dist/dragula.min.css"> 
- <!--................-->
+  <link rel="stylesheet" href="vendor/dragula/dist/dragula.min.css">
+  <!--................-->
 
   <link rel="stylesheet" href="style.css" type="text/css">
+  
+  <script type="text/javascript" src="modernizr.custom.js"></script>
 
   <!-- Service worker support is disabled by default.
        Install the worker script and uncomment to enable.
@@ -53,10 +55,10 @@
   -->
 </head>
 
-<body (onload) ="delaySidebar">
+<body>
 
   <my-app>Loading...</my-app>
-
+  
   <script src="vendor/es6-shim/es6-shim.js"></script>
   <script src="vendor/reflect-metadata/Reflect.js"></script>
   <script src="vendor/systemjs/dist/system.src.js"></script>
@@ -64,8 +66,8 @@
 
   <script src="vendor/ng2-bootstrap/bundles/ng2-bootstrap.min.js"></script>
   <!--<script src="node_modules/jquery/dist/jquery.min.js"></script>-->
-  
-  
+
+
   <!--Below are the scripts for the dragula library and its dependencies...-->
   <!--
   <script src=”vendor/contra/dist/contra.min.js”></script>
@@ -73,8 +75,8 @@
   <script src=”vendor/dragula/dist/dragula.min.js”></script>
   <script src=”vendor/ng2-dragula/ng2-dragula.js”></script>
   <!--.....................................................................-->
-  
-  
+
+  <script src="vendor/desandro-classie/classie.js"></script>
   <!--<script type="text/javascript" src="cordova.js"></script>-->
 
   <script>
@@ -82,8 +84,10 @@
       System.import('main');
     }).catch(console.error.bind(console));
   </script>
-  <script type="text/javascript" src="wow.js"></script>
-  <script type="text/javascript" src="app.js"></script>
+  <!-- <script type="text/javascript" src="classie.js" async></script>-->
+  <script type="text/javascript" src="cbpAnimatedHeader.js" async></script>
+  <script type="text/javascript" src="wow.js" async></script>
+  <script type="text/javascript" src="app.js" async></script>
 </body>
 
 </html>
