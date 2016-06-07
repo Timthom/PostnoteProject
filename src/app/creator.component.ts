@@ -34,7 +34,7 @@ export class CreatorComponent {
     _authData;
 
     constructor(private _ds: DataService, @Inject(FirebaseRef) private _ref: Firebase, private _ls: LocalStorageService) {
-        this._authData = this._ref.getAuth()
+        this._authData = this._ref.getAuth();
     }
 
     ngOnInit() {
