@@ -1,14 +1,21 @@
+
 <div id="container">   
     <button id="arrowBtn" [ngClass] = "{expandedClass : expanded}" (click)="toggleExpand()"><img class="button_image" src="{{arrowSrc}}" alt="submit"></button>
     <input readonly class="title" id={{group.$key}} [(ngModel)]="group.name" (click)="toggleExpand()" (click)="jumpToGroup(group.name)" (keyup.enter)="editing()" [class.editing]="editingName" maxlength="18">
     <button id="editBtn" (click)="editing()" [hidden]="!expanded"><img class="button_image" src="{{editSrc}}" alt="submit"></button>
     <button id="deleteBtn" (click)="deleteGroup()" [hidden]="!expanded"><img class="button_image" src="icon_delete.png" alt="submit"></button>
-    <!--<ul *ngIf="expanded">
-        <li>Expanderad!</li>
-    </ul>-->
+
     <ul *ngIf="expanded">
-        <p *ngFor="let note of notes | async" [hidden]="!expanded" (click)="jumpToNote(note.$key)">
-          {{note.title}}
-        </p>
+        <div *ngIf="_authData == null">
+            <p *ngFor="let note of notes" [hidden]="!expanded" (click)="jumpToNote(note.$key)">
+                {{note.title}}
+            </p>
+        </div>
+        <div *ngIf="_authData != null">
+            <p *ngFor="let note of notes | async" [hidden]="!expanded" (click)="jumpToNote(note.$key)">
+                {{note.title}}
+            </p>
+        </div>
     </ul>
 </div>
+

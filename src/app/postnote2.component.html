@@ -5,7 +5,6 @@
     <button class="backBtn">
        <img class="btnImage" src="{{btnImage}}" (click)="openSideBar()" alt="backButton">
    </button>
-
   </div>
   <div class="row">
     <div class="shadow" [class.shadow_active]="statusCheckSideBar"></div>
@@ -17,9 +16,14 @@
       <div>
         <creator></creator>
       </div>
-      <group (clickedDelete)="deleteGroup()" class="row" *ngFor="let group of allGroups | async" [group]="group" [groupName]="group.name">
-      </group>
+      <div *ngIf="_authData == null">
+        <group (clickedDelete)="deleteGroup()" class="row" *ngFor="let group of allGroups" [group]="group" [groupName]="group.name">
+        </group>
+      </div>
+      <div *ngIf="_authData != null">
+        <group (clickedDelete)="deleteGroup()" class="row" *ngFor="let group of allGroups | async" [group]="group" [groupName]="group.name">
+        </group>
+      </div>
     </div>
   </div>
-  <!--</div>-->
 </div>

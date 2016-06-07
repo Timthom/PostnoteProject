@@ -6,15 +6,19 @@ import {CORE_DIRECTIVES} from '@angular/common';
 import {DROPDOWN_DIRECTIVES} from 'ng2-bootstrap/ng2-bootstrap';
 import {Note}from './note';
 import { Injectable, Inject } from '@angular/core';
+import {LocalStorageService} from './localstorage.service';
+import {MenuComponent} from './menu.component';
+import {MenuGroupComponent} from './menugroup.component';
+
 
 @Component({
-  moduleId: module.id,
-  selector: 'dropdown',
-  providers: [ROUTER_PROVIDERS],
-  templateUrl: 'dropdown.component.html',
-  styleUrls: ['dropdown.component.css'],
-  directives: [ROUTER_DIRECTIVES, DROPDOWN_DIRECTIVES, CORE_DIRECTIVES],
-  pipes: []
+    moduleId: module.id,
+    selector: 'dropdown',
+    providers: [ROUTER_PROVIDERS, LocalStorageService, MenuComponent, MenuGroupComponent],
+    templateUrl: 'dropdown.component.html',
+    styleUrls: ['dropdown.component.css'],
+    directives: [ROUTER_DIRECTIVES, DROPDOWN_DIRECTIVES, CORE_DIRECTIVES],
+    pipes: []
 })
 
 @RouteConfig([
@@ -24,56 +28,52 @@ export class DropdownComponent implements OnInit {
     @Input() group: string;
     @Output() changeGroup = new EventEmitter();
     @Input() noteGroup: string;
-    @Output() changeNoteGroup = new EventEmitter();    
-    public disabled:boolean = false;
-    public status:{isopen:boolean} = {isopen: false};
-    public items:Array<string> = ['The first choice!',
-    'And another choice for you.', 'but wait! A third!'];
+    @Output() changeNoteGroup = new EventEmitter();
+    public disabled: boolean = false;
+    public status: { isopen: boolean } = { isopen: false };
+    public items: Array<string> = ['The first choice!',
+        'And another choice for you.', 'but wait! A third!'];
     _authData;
 
-    public toggled(open:boolean):void {
-    console.log('Dropdown is now: ', open);
+    public toggled(open: boolean): void {
     }
 
-    public toggleDropdown($event:MouseEvent):void {
-    $event.preventDefault();
-    $event.stopPropagation();
-    this.status.isopen = !this.status.isopen;
+    //Körs inte??
+    public toggleDropdown($event: MouseEvent): void {
+        $event.preventDefault();
+        $event.stopPropagation();
+        this.status.isopen = !this.status.isopen;
     }
-    
-    groups :FirebaseListObservable<any[]>;  
-  
-    constructor(@Inject(FirebaseRef) private _ref: Firebase, private _ds: DataService) {
+
+    groups: any;
+
+    constructor( @Inject(FirebaseRef) private _ref: Firebase, private _ds: DataService, private _ls: LocalStorageService, private _menu: MenuComponent, private _menuGroup: MenuGroupComponent) {
         this._authData = this._ref.getAuth();
+        //_menu.clicked.subscribe(this.getTitles());
+        //_menuGroup.groupsChanged.subscribe(this.getTitles());
+      
     }
-    
+
     ngOnInit() {
-        if(this._authData != null) {
-            this.getTitles();
-        } else {
-            console.log("ngoninit in dropdowncomponent offline");
-        }
+        this.getTitles();
     }
-    
+
     getTitles() {
-        if(this._authData != null) {
+        console.log("DROPDOWNS GET TITLES");
+        if (this._authData != null) {
             this._ds.getAllGroups().then(titles => this.groups = titles);
         } else {
-            console.log("get titles in dropdowncomponent offline");
+            this.groups = this._ls.getAllGroups();
         }
     }
-    
-    selectGroup(group: string){
-        if(this._authData != null) {
-            this.changeGroup.emit(group);
-            this.changeNoteGroup.emit(group);
-        
-            var buttonText: HTMLElement = document.getElementById('group_name');
-            buttonText.innerHTML = group;
-      
-            console.log("Group selected " + group);
-        } else {
-            console.log("selectgroup in dropdowncomponent offline");
-        }
+
+    selectGroup(group: string) {
+        //Emits to creator?
+        this.changeGroup.emit(group);
+        //Emits to note component and group component?
+        this.changeNoteGroup.emit(group);
+        var buttonText: HTMLElement = document.getElementById('group_name');
+        buttonText.innerHTML = group;
+       
     }
 }

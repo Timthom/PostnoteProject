@@ -1,5 +1,5 @@
-.groupContainer{
-    
+button {
+    margin-top: 4px;
 }
 
 .line {
@@ -46,7 +46,7 @@
 
 note {
     margin: 10px;
-    width: 100%;
+    width: 300px;
     height: 300px;
 }
 
@@ -58,8 +58,8 @@ note {
 }
 
 .button_image{
-    height: 40px;
-    width: 40px;
+    height: 30px;
+    width: 30px;
 }
 
 input{

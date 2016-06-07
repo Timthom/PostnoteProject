@@ -40,11 +40,12 @@
   float: right;
   margin-right: 6px;
   margin-top: 6px;
+  cursor: pointer;
   transition: box-shadow 150ms ease-in-out, background-color 150ms ease-in-out;
 }
 
 .edit_button:hover {
-  box-shadow: 0px 1px 5px #5A5A5A ; 
+  box-shadow: 0px 1px 5px #5A5A5A; 
   background-color: #4CAF50;
 }
 
