@@ -1,11 +1,15 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
+// import { AngularFire, defaultFirebase, FirebaseRef, FirebaseListObservable } from 'angularfire2';
 import { DragulaService } from 'ng2-dragula/ng2-dragula';
 import {DataService} from './data.service';
+// import { LocalStorageService } from './localstorage.service'
 
 @Injectable()
 export class DragulaHelperService {
 
-  constructor(private _dataservice: DataService) {}
+  constructor(private _dataservice: DataService /*,  @Inject(FirebaseRef) private _ref: Firebase , private _authData: any, private _ls: LocalStorageService*/) {
+    // this._authData = this._ref.getAuth();
+  }
 
   /***********************************************************
   -------------------Dragula stuff below----------------------
@@ -109,10 +113,12 @@ export class DragulaHelperService {
        
       let id: string = value[1].attributes[3].nodeValue;
       let group: string;
-      if (value[2].parentElement.firstElementChild.id === '') {
+      console.log(`cosnollen group = ${value[2].parentElement.parentElement.firstElementChild.id}`);
+      if (value[2].parentElement.parentElement.firstElementChild.id === '') {
+        console.log('group är null');
         group = 'noGroup'
       } else {
-        group = value[2].parentElement.firstElementChild.id;
+        group = value[2].parentElement.parentElement.firstElementChild.id;
       }
       
       /* Vill göra en kontroll på om den bytte till en annan grupp men måste läsa på om promises mer först... */
@@ -121,7 +127,14 @@ export class DragulaHelperService {
       // if (currentGroup == group) {
       //   do nothing
       // } else {
+      console.log(`id = ${id}, group = ${group}`);
+      // if (this._authData != null) {
+        console.log('inloggad');     
         this._dataservice.changeNoteGroup(id, group);
+      // } else {
+      //   this._ls.changeNoteGroup(id, group);
+      // }
+
       // }
       
       
@@ -138,12 +151,7 @@ export class DragulaHelperService {
       //  console.log(`over, value: `);
       //  console.log(value);
       
-      
-      
-      
-      
-
-
+     
     });
     dragulaService.out.subscribe((value) => {
       /* 
@@ -154,11 +162,7 @@ export class DragulaHelperService {
       [3]: containers som den drogs ifrån...
       */ 
       //  console.log(`out, value: `);
-      //  console.log(value);
-
-      
-      
-      
+      //  console.log(value);     
 
     });
     
