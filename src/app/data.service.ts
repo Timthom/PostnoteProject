@@ -271,12 +271,14 @@ export class DataService {
     }
 
     /* Vill göra denna med promises om jag hinner //Marcus... */    
-    // getGroupNameFromId(id: string) {
-    //     if(this._ref.getAuth() == null) return;
-    //     console.log('auth inte null');
-    //     let Promise p1 = new Promise();
-    //     (this._notes.child(id).child('group').on('value', (s) => (console.log(s.val())));
-        
-    // }
-    
+    getGroupNameFromId(id: string) {
+    //     console.log('4');
+    //     return new Promise(function(resolve){
+    //         console.log('5');
+    //         resolve(this._notes.child(id).child('group').once('value'));
+    //         // resolve('hej');
+    //     });
+    //         // console.log('5');
+    //         // this._notes.child(id).child('group').once('value').then((s) => (console.log(s.val())));          
+    }  
 }

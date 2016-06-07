@@ -12,11 +12,12 @@ import {UserHandlerComponent} from "./user-handler.component";
 import {MenuComponent} from '../menu.component';
 import { DragulaService } from 'ng2-dragula/ng2-dragula';
 import { DragulaHelperService } from '../dragula-helper.service';
+import {LocalStorageService} from '../localstorage.service';
 
 @Component({
   moduleId: module.id,
   selector: 'my-app',
-  providers: [ROUTER_PROVIDERS, DataService, AngularFire,ValueService, DragulaHelperService],
+  providers: [ROUTER_PROVIDERS, DataService, AngularFire,ValueService, DragulaHelperService, LocalStorageService],
   viewProviders: [DragulaService],
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.css'],
