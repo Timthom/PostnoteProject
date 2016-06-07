@@ -66,7 +66,11 @@ export class CreatorComponent {
             } else {
                 let newNote = new Note(this.title, this.text, this.selectedGroup, time.toString(), this.randomColor());
                 this._ls.addNoteToNotes(newNote);
-                this.getNotes(); 
+                this.getNotes(); //Update view
+                if(this.selectedGroup != 'noGroup'){
+                    //TEMPORARY
+                    location.reload();
+                }
             }
             
             this.title = '';
