@@ -151,5 +151,4 @@ export class GroupComponent {
       this.arrowSrc = 'icon_expand.png';
     }
   }
-
 }
