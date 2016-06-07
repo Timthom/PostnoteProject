@@ -99,6 +99,8 @@ export class MenuComponent implements OnInit, CanReuse {
         let newGroup = new Group(this.groupName, time.toString());
         this._ls.saveGroup(newGroup);
         this.getGroups();
+        //TEMPORARY
+        location.reload();
       }
 ​
       this.clicked.emit('');

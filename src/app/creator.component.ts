@@ -66,6 +66,10 @@ export class CreatorComponent {
                 let newNote = new Note(this.title, this.text, this.selectedGroup, time.toString(), "yellow");
                 this._ls.addNoteToNotes(newNote);
                 this.getNotes(); //Update view
+                if(this.selectedGroup != 'noGroup'){
+                    //TEMPORARY
+                    location.reload();
+                }
             }
             //Clearing the creator after adding note
             this.title = '';
