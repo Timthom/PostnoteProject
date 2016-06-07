@@ -145,4 +145,8 @@ export class GroupComponent {
     }
   }
   
+  test(){
+    console.log('Testar input texten- Ermin')
+  }
+  
 }
