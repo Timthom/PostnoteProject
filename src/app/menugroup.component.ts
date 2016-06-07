@@ -23,7 +23,7 @@ import { Dragula } from 'ng2-dragula/ng2-dragula';
 
 export class MenuGroupComponent implements OnInit {
   arrowSrc: string = 'icon_expand.png';
-  expanded: boolean = this._tx._toggleExpand;
+  expanded: boolean;
   editingName: boolean = false;
   notes: any;
 
@@ -114,11 +114,11 @@ export class MenuGroupComponent implements OnInit {
 
   toggleExpand() {
     if(this.arrowSrc == 'icon_hide.png'){
-      this._tx._toggleExpand = false;
+      this.expanded = false;
     } else {
-      this._tx._toggleExpand = true;
+      this.expanded= true;
     }
-    this.expanded = this._tx._toggleExpand;
+    // this.expanded = this._tx._toggleExpand;
 
     if (this.expanded) {
       this.arrowSrc = 'icon_hide.png';

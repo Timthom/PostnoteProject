@@ -56,12 +56,12 @@ export class CreatorComponent {
     }
 
     save() {
-        if (this.title !== '') {
+        if (this.title !== '' || this.text !== '') {
             let time = new Date().getTime();
-
+​
             if (this._authData != null) {
                 this._ds.addNoteToNotes(this.title, this.text, this.selectedGroup, time, "yellow");
-
+​
             } else {
                 let newNote = new Note(this.title, this.text, this.selectedGroup, time.toString(), "yellow");
                 this._ls.addNoteToNotes(newNote);

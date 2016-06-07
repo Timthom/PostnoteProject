@@ -31,6 +31,7 @@ export class Postnote2App implements OnInit {
 
     @Output() groupChanged = new EventEmitter();
 
+    btnImage: string = 'icon_menu.png';
     allGroups: any;
     statusCheckSideBar: boolean = this._vs._showSideBar;
     constructor( @Inject(FirebaseRef) private _ref: Firebase, private _ds: DataService, private _vs: ValueService, private _ls: LocalStorageService, private _menuGroup: MenuGroupComponent) {
@@ -61,13 +62,14 @@ export class Postnote2App implements OnInit {
         this.groupChanged.emit('');
     }
 
-    openSideBar(event) {
+    openSideBar() {
         this._vs._showSideBar = !this._vs._showSideBar;
         this.statusCheckSideBar = this._vs._showSideBar;
+        if (this.statusCheckSideBar) {
+            this.btnImage = 'icon_back.png';
+        } else {
+            this.btnImage = 'icon_menu.png';
+        }
     }
 
-    // Test metod
-    checkClick(){
-        console.log('Testar om knappen back fungerar ???');
-    }
 }

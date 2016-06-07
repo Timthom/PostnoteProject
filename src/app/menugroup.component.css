@@ -43,15 +43,7 @@ p {
     border: none!important;
     color: #404040;
     cursor: pointer;
-}
-
-.title {
-    color: #404040;
-    cursor: pointer;
-}
-
-.editing {
-    color: #404040;
+    width: 55%;
 }
 
 .editing {

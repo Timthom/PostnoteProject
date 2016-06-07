@@ -89,18 +89,18 @@ export class MenuComponent implements OnInit, CanReuse {
   addGroup() {
     if (this.groupName.trim().length > 0) {
       let time = new Date().getTime();
-
+​
       if (this._authData != null) {
         this._ds.addGroupToGroups(this.groupName, time);
         this.getGroups();
         this.getTitles();
-
+​
       } else {
         let newGroup = new Group(this.groupName, time.toString());
         this._ls.saveGroup(newGroup);
         this.getGroups();
       }
-
+​
       this.clicked.emit('');
       
       //Reset input after adding
