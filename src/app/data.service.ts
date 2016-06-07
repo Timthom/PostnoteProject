@@ -259,7 +259,6 @@ export class DataService {
     changeNoteGroup(id: string, group: string) {
         const token = localStorage.getItem('token');
         this._notes.authWithCustomToken(token, function (error, authData) {
-
             if (error) {
                 //console.log("Authentication Failed!", error);
             } else {
@@ -270,4 +269,14 @@ export class DataService {
             });
         this._notes.child(id).update({ 'group': group });
     }
+
+    /* Vill göra denna med promises om jag hinner //Marcus... */    
+    // getGroupNameFromId(id: string) {
+    //     if(this._ref.getAuth() == null) return;
+    //     console.log('auth inte null');
+    //     let Promise p1 = new Promise();
+    //     (this._notes.child(id).child('group').on('value', (s) => (console.log(s.val())));
+        
+    // }
+    
 }
