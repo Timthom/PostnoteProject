@@ -12,6 +12,7 @@ import {DropdownComponent} from './dropdown.component';
 import { AngularFire, defaultFirebase, FirebaseRef, FirebaseListObservable } from 'angularfire2';
 import { Dragula } from 'ng2-dragula/ng2-dragula';
 import {LocalStorageService} from './localstorage.service';
+import {Group} from './group';
 
 
 
@@ -30,10 +31,12 @@ export class CreatorComponent {
     title: string = "";
     text: string = "";
     notes: any;
+    groups: any;
     selectedGroup: string = "noGroup";
     colorCount: number = 0; 
     _authData;
     categoriesVisible: boolean = false;
+    groupButtons: any = [];
 
     constructor(private _ds: DataService, @Inject(FirebaseRef) private _ref: Firebase, private _ls: LocalStorageService) {
         this._authData = this._ref.getAuth();
@@ -41,6 +44,50 @@ export class CreatorComponent {
 
     ngOnInit() {
         this.getNotes();
+        this.createGroupButtons();
+        
+    }
+    
+    createGroupButtons () {
+        this.getGroups();
+        var yPosition: number = 40;
+        
+        for(var group of this.groups){
+            var node = document.createElement('BUTTON');
+            
+            yPosition += 50;
+            
+            node.style.display = 'none';
+            node.style.position = 'fixed';
+            node.style.outline = 'none';
+            node.style.height = '30px';
+            node.style.width = '30px';
+            node.style.borderRadius = '100%';
+            node.style.border = 'none';
+            node.style.right = '30px';
+            node.style.bottom = yPosition + 'px';
+            node.style.backgroundColor = '#FFFFFF';
+            node.style.boxShadow = '0 3px 7px rgba(0, 0, 0, 0.5)';
+            node.style.zIndex = '3';
+            
+            node.innerHTML = group.name.charAt(0).toUpperCase();
+            
+            document.getElementById('groupButtons').appendChild(node);
+            console.log(node);
+            
+            this.groupButtons.push(node);
+            //document.getElementById('groupButtons').appendChild('<button class="categoryButton" [class.categoryButtonVisible]="categoriesVisible">' + group.name.charAt(0) + '</button>');
+        }
+        
+        console.log(this.groupButtons);
+    }
+    
+    getGroups() {
+         if (this._authData != null) {
+            this._ds.getAllGroups().then(groups => this.groups = groups);
+        } else {
+            this.groups = this._ls.getAllGroups();
+        }
     }
 
     getNotes() {
@@ -95,6 +142,14 @@ export class CreatorComponent {
         
     open() {
         this.categoriesVisible = !this.categoriesVisible;
+        
+        for(var button of this.groupButtons) {
+            if(this.categoriesVisible) {
+                button.style.display = 'block';
+            } else {
+                button.style.display = 'none';
+            }
+        }
     }
     
 }

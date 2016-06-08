@@ -45,7 +45,7 @@
     color: #505050;
 }
 
-#createButton {
+.createButton {
     height: 50px;
     width: 50px;
     border-radius: 100%;
@@ -58,14 +58,18 @@
     z-index: 3;
 }
 
-.categoryButton {
+#noCategoryButton {
   display: none;
+  box-shadow: none;
+}
+
+.categoryButton {
+  position: fixed;
   outline: none;
   height: 30px;
   width: 30px;
   border-radius: 100%;
   border: none;
-  position: fixed;
   right: 30px;
   background-color: #FFFFFF;
   box-shadow: 0 3px 7px rgba(0, 0, 0, 0.5);
