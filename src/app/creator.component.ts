@@ -32,6 +32,7 @@ export class CreatorComponent {
     notes: any;
     selectedGroup: string = "noGroup";
     _authData;
+    categoriesVisible: boolean = false;
 
     constructor(private _ds: DataService, @Inject(FirebaseRef) private _ref: Firebase, private _ls: LocalStorageService) {
         this._authData = this._ref.getAuth();
@@ -71,6 +72,10 @@ export class CreatorComponent {
             this.title = '';
             this.text = '';
         }
+    }
+    
+    open() {
+        this.categoriesVisible = !this.categoriesVisible;
     }
     
 }
