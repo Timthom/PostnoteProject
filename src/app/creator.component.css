@@ -45,18 +45,39 @@
     color: #505050;
 }
 
-#saveButton {
-   float: right;
-   border-radius: 2px;
-   margin-right: 6px;
-   margin-top: 6px;
-   outline: none;
-   transition: box-shadow 150ms ease-in-out, background-color 150ms ease-in-out;
+#createButton {
+    height: 50px;
+    width: 50px;
+    border-radius: 100%;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #404040;
+    cursor: pointer;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+    z-index: 3;
 }
 
-#saveButton:hover {
-   box-shadow: 0px 1px 5px #5A5A5A;
-   background-color: #EEEEEE; 
+.categoryButton {
+  display: none;
+  outline: none;
+  height: 30px;
+  width: 30px;
+  border-radius: 100%;
+  border: none;
+  position: fixed;
+  right: 30px;
+  background-color: #FFFFFF;
+  box-shadow: 0 3px 7px rgba(0, 0, 0, 0.5);
+  z-index: 3;
+}
+
+.categoryButtonVisible {
+  display: block;
+}
+
+#S {
+  bottom: 90px;
 }
 
 note {

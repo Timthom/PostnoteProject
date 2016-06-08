@@ -33,6 +33,7 @@ export class CreatorComponent {
     selectedGroup: string = "noGroup";
     colorCount: number = 0; 
     _authData;
+    categoriesVisible: boolean = false;
 
     constructor(private _ds: DataService, @Inject(FirebaseRef) private _ref: Firebase, private _ls: LocalStorageService) {
         this._authData = this._ref.getAuth();
@@ -78,6 +79,7 @@ export class CreatorComponent {
         }
     }
     
+    
     randomColor () {
         var colors = ["blue", "magenta", "yellow", "green", "pink", "orange"];
         // if we want to pick a random color.......
@@ -88,6 +90,11 @@ export class CreatorComponent {
             this.colorCount = 0; 
         }
         return color;
+    }
+        
+        
+    open() {
+        this.categoriesVisible = !this.categoriesVisible;
     }
     
 }
