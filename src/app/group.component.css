@@ -74,6 +74,18 @@ input{
     
 }
 .editingName:hover{
-    cursor: text;
-    
+    cursor: text;   
+}
+/*Modal css*/
+#rigth-button{
+    width: 40%;
+}
+#left-button{
+    width: 40%;
+}
+.modal-body{
+    font-size: 1.5em;
+}
+.modal-title{
+    font-size: 2em;
 }
