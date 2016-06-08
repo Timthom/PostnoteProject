@@ -1,18 +1,27 @@
 <div id="container">
-    
+
     <div class="creator">
-    <input type="text" [(ngModel)]="title" class="inputTitle" placeholder="Enter title ..."> 
-    
-    <input id="saveButton" type="image" src="icon_post.png" alt="Submit" width="25" height="25" (click)="save()">
-    <textarea class="inputText" [(ngModel)]="text" placeholder="Your notes ..." name="inputText" cols="30" rows="10"></textarea>
-    <dropdown [group]="selectedGroup" (changeGroup)="groupChanged($event)"></dropdown>
-    </div>
-    <div class="myDragulaContainer" [dragula]='"drag-bag"'>
-    <note class="col-xs-4" *ngFor="let note of notes | async | reverse" [noteInNote]="note" [text]="note.text" [title]="note.title" [group]="note.group" id="{{note.$key}}" [color]="note.color">
-    </note>
-    <!--<note class="col-xs-4" *ngFor="let note of notes | async" [dragula]='"bag-creator"' [dragulaModel]='notes' [noteInNote]="note" [text]="note.text" [title]="note.title" [group]="note.group" id="{{note.$key}}" [color]="note.color">-->
-    <!--</note>-->
-    
+        <input type="text" [(ngModel)]="title" class="inputTitle" placeholder="Enter title ..." maxlength="18">
+
+        <input id="saveButton" type="image" src="icon_post.png" alt="Submit" width="25" height="25" (click)="save()">
+        <textarea class="inputText" [(ngModel)]="text" placeholder="Your notes ..." name="inputText" cols="30" rows="10"></textarea>
+        <dropdown [group]="selectedGroup" (changeGroup)="groupChanged($event)"></dropdown>
     </div>
 
+        <!--<note class="col-xs-4" *ngFor="let note of notes | async" [dragula]='"bag-creator"' [dragulaModel]='notes' [noteInNote]="note" [text]="note.text" [title]="note.title" [group]="note.group" id="{{note.$key}}" [color]="note.color">-->
+        <!--</note>-->
+
+    <div *ngIf='_authData != null'>
+        <div class="myDragulaContainer" [dragula]='"drag-bag"'>
+            <note class="col-xs-4" *ngFor="let note of notes | async | reverse" [noteInNote]="note" [text]="note.text" [title]="note.title" [group]="note.group" id="{{note.$key}}" [color]="note.color">
+            </note>
+        </div>
+    </div>
+    <div *ngIf='_authData == null'>
+        <div class="myDragulaContainer" [dragula]='"drag-bag"'>
+            <note class="col-xs-4" *ngFor="let note of notes | reverse" [noteInNote]="note" [text]="note.text" [title]="note.title" [group]="note.group"
+                id="{{note.$key}}" [color]="note.color">
+            </note>
+        </div>
+    </div>
 </div>

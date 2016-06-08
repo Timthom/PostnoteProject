@@ -11,9 +11,13 @@
    /* background-color: #EEEEEE;*/
     box-shadow: 1px 0px 5px rgba(0,0,0,0.5);
 }
-ul{
+
+p{
     color: #404040;
-    margin-top: 15px;
+    width: 80%;
+    margin: auto;
+    margin-bottom: 10px;
+    cursor: pointer;
 }
 
 .navbar-brand{
@@ -88,6 +92,7 @@ hr{
 #plusBtn:active {
     background-color: #A0A0A0;
 }
+
 #wrapper {
     overflow: scroll;
 }
@@ -116,3 +121,4 @@ hr{
   0% {opacity: 0;}
   100% {opacity: 1;}
 }
+

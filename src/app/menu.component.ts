@@ -10,6 +10,7 @@ import {CanReuse} from "@angular/router-deprecated";
 import {Group} from './group';
 
 import {LocalStorageService} from './localstorage.service';
+//import {Postnote2App} from './postnote2.component';
 
 @Component({
   moduleId: module.id,
@@ -42,17 +43,16 @@ export class MenuComponent implements OnInit, CanReuse {
   constructor( @Inject(FirebaseRef) private _ref: Firebase, private _ds: DataService, private _vs: ValueService, private _ls: LocalStorageService) {
 
     this._authData = this._ref.getAuth();
+    //_postNote2.groupChanged.subscribe(this.getGroups);
+    
   }
 
 
 
   ngOnInit() {
-    if (this._authData != null) {
-      this.getTitles();
-      this.getGroups();
-    } else {
-      console.log("ngOnInit in menu offline");
-    }
+
+    this.getTitles();
+    this.getGroups();
   }
 
   getTitles() {
@@ -60,7 +60,7 @@ export class MenuComponent implements OnInit, CanReuse {
       this._ds.getAllNotes().then(titles => this.titles = titles);
       this._ds.getAllNotesInGroup('noGroup').then(notes => this.titles = notes);
     } else {
-      console.log("get titles offline");
+      this.titles = this._ls.getNotesInGroup('noGroup');
     }
   }
 
@@ -68,7 +68,7 @@ export class MenuComponent implements OnInit, CanReuse {
     if (this._authData != null) {
       this._ds.getAllGroups().then(groups => this.myGroups = groups);
     } else {
-      console.log("get groups offline");
+      this.myGroups = this._ls.getAllGroups();
     }
   }
 
@@ -89,29 +89,22 @@ export class MenuComponent implements OnInit, CanReuse {
   }
 
   addGroup() {
-    if (this._authData != null) {
-      if (this.groupName.trim().length > 0) {
-        let time = new Date().getTime();
+    if (this.groupName.trim().length > 0) {
+      let time = new Date().getTime();
+​
+      if (this._authData != null) {
         this._ds.addGroupToGroups(this.groupName, time);
-        this.groupName = "";
         this.getGroups();
         this.getTitles();
-        this.clicked.emit('');
-        this.adding = false;
-        this.showingCancel = !this.showingCancel;
-        this.buttonText = "Add category";
-      }
-    } else {
-      console.log("added group in menu offline");
-      if (this.groupName.trim().length > 0) {
-        let time = new Date().getTime();
+​
+      } else {
         let newGroup = new Group(this.groupName, time.toString());
         this._ls.saveGroup(newGroup);
-        this.groupName = "";
-        this.adding = false;
-        this.showingCancel = !this.showingCancel;
-        this.buttonText = "Add category";
+        this.getGroups();
+        //TEMPORARY
+        location.reload();
       }
+
     } /*else {
       console.log("added group offline");
     }*/   
@@ -119,3 +112,16 @@ export class MenuComponent implements OnInit, CanReuse {
 
 
 }
+
+​
+      this.clicked.emit('');
+      
+      //Reset input after adding
+      this.groupName = "";
+      this.adding = false;
+      this.showingCancel = !this.showingCancel;
+      this.buttonText = "Add category";
+    
+  
+
+
