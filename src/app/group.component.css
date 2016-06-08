@@ -20,6 +20,9 @@ button {
     text-align: left;
     width: 35%;
 }
+.group_name:hover{
+     cursor: pointer;
+}
 
 .delete_button {
     border: none;
@@ -67,5 +70,22 @@ input{
 }
 .editingName{
     border: 1px solid black;
+    cursor: text;
     
+}
+.editingName:hover{
+    cursor: text;   
+}
+/*Modal css*/
+#rigth-button{
+    width: 40%;
+}
+#left-button{
+    width: 40%;
+}
+.modal-body{
+    font-size: 1.5em;
+}
+.modal-title{
+    font-size: 2em;
 }
