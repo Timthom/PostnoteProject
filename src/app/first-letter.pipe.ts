@@ -5,7 +5,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class FirstLetter implements PipeTransform {
 
-  transform(value: string): string {
+  transform(value: any): any {
     if(value){
       console.log(value.charAt(0));
       return value.charAt(0);
