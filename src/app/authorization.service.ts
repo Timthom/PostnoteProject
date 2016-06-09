@@ -41,17 +41,19 @@ export class AuthorizationService {
                 console.log(authData.password.email);  
                 alert("Du är nu inloggad!");
                 
+                var d = new Date();
+                var n = d.getTime();
+                
                 var ref = new Firebase("https://dazzling-fire-7472.firebaseio.com/users");
             
                 ref.child(authData.uid).once('value', function(snapshot) {
-                    var exists = (snapshot.val() !== null);
-                    if(!exists) {
-                        ref.child(authData.uid).set({
-                        provider: authData.provider,
-                        email: authData.password.email       
-                        });
-                    }
-                    console.log(exists);
+                    
+                    ref.child(authData.uid).update({
+                    provider: authData.provider,
+                    email: authData.password.email,
+                    expire: n       
+                     
+                    });
                 });      
             }        
         }); 
@@ -66,17 +68,19 @@ export class AuthorizationService {
                 localStorage.setItem('token', authData.token);
                 console.log(authData.facebook.email);
                 
+                var d = new Date();
+                var n = d.getTime();
+                
                 var ref = new Firebase("https://dazzling-fire-7472.firebaseio.com/users");
             
                 ref.child(authData.uid).once('value', function(snapshot) {
-                    var exists = (snapshot.val() !== null);
-                    if(!exists) {
-                        ref.child(authData.uid).set({
-                        provider: authData.provider,
-                        email: authData.facebook.email       
-                        });
-                    }
-                    console.log(exists);
+                    
+                    ref.child(authData.uid).update({
+                    provider: authData.provider,
+                    email: authData.facebook.email,
+                    expire: n       
+                        
+                    });
                 });
             }
         }, { remember: "default", scope: "email"
@@ -90,19 +94,21 @@ export class AuthorizationService {
             } else {
                 console.log("Authenticated successfully with payload:", authData);
                 localStorage.setItem('token', authData.token);
-                console.log(authData.google.email); 
+                console.log(authData.google.email);
+                
+                var d = new Date();
+                var n = d.getTime(); 
                 
                 var ref = new Firebase("https://dazzling-fire-7472.firebaseio.com/users");
             
                 ref.child(authData.uid).once('value', function(snapshot) {
-                    var exists = (snapshot.val() !== null);
-                    if(!exists) {
-                        ref.child(authData.uid).set({
-                        provider: authData.provider,
-                        email: authData.google.email       
-                        });
-                    }
-                    console.log(exists);
+                    
+                    ref.child(authData.uid).update({
+                    provider: authData.provider,
+                    email: authData.google.email,
+                    expire: n        
+                    
+                    });
                 });
                 
             }
@@ -119,17 +125,19 @@ export class AuthorizationService {
                 localStorage.setItem('token', authData.token);
                 console.log(authData);
                 
+                var d = new Date();
+                var n = d.getTime();
+                
                 var ref = new Firebase("https://dazzling-fire-7472.firebaseio.com/users");
             
                 ref.child(authData.uid).once('value', function(snapshot) {
-                    var exists = (snapshot.val() !== null);
-                    if(!exists) {
-                        ref.child(authData.uid).set({
-                        provider: authData.provider,
-                        email: authData.twitter.username       
-                        });
-                    }
-                    console.log(exists);
+                    
+                    ref.child(authData.uid).update({
+                    provider: authData.provider,
+                    email: authData.twitter.username,
+                    expire: n       
+                    
+                    });
                 });
             }
         }, { remember: "default", scope: "username"
@@ -152,15 +160,13 @@ export class AuthorizationService {
                 var ref = new Firebase("https://dazzling-fire-7472.firebaseio.com/users");
             
                 ref.child(authData.uid).once('value', function(snapshot) {
-                    var exists = (snapshot.val() !== null);
                     
-                        ref.child(authData.uid).update({
-                        provider: authData.provider,
-                        email: authData.github.email,
-                        expire: n       
-                        });
-                    
-                    console.log(exists);
+                    ref.child(authData.uid).update({
+                    provider: authData.provider,
+                    email: authData.github.email,
+                    expire: n      
+                     
+                    });
                 });
             }
         }, { remember: "default", scope: "user"
