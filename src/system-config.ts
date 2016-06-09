@@ -8,8 +8,8 @@ const map: any = {
   'moment': 'vendor/moment/moment.js',
   
   'ng2-dragula': 'vendor/ng2-dragula',
-  'dragula': 'vendor/dragula/dist/dragula.min.js'
-  
+  'dragula': 'vendor/dragula/dist/dragula.min.js',
+  'hammerjs': 'vendor/hammer'
 };
 
 /** User packages configuration. */
@@ -21,6 +21,10 @@ const packages: any = {
   'ng2-dragula': {
     defaultExtension: 'js',
     main: 'ng2-dragula.js'
+  },
+  'hammerjs': {
+    defaultExtension: 'js',
+    main: 'hammer.js'
   }
 };
 

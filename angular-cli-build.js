@@ -20,6 +20,7 @@ module.exports = function(defaults) {
       //Adding everthing below for DRAGULA??? Do I need another level down... Atoa etc..
       'dragula/dist/dragula.min.*',
       'ng2-dragula/**',
+      'hammerjs/**',
       'contra/dist/contra.min.js',
       'crossvent/dist/crossvent.min.js'
       //.....................................

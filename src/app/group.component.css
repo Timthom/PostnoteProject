@@ -20,6 +20,7 @@ button {
     text-align: left;
     width: 35%;
 }
+
 .group_name:hover{
      cursor: pointer;
 }
@@ -77,14 +78,15 @@ note {
 input{
     height: 40px;
 }
+
 .editingName{
     border: 1px solid black;
     cursor: text;
-    
 }
 .editingName:hover{
     cursor: text;   
 }
+
 /*Modal css*/
 #rigth-button{
     width: 40%;
