@@ -149,13 +149,15 @@ export class NoteComponent implements OnInit {
   }
 
   deleteClick() {
-    if (this._authData != null) {
-      this._ds.deleteNote(this.noteInNote.$key);
+    var o = this;
+    setTimeout(function() {
+      if (o._authData != null) {
+      o._ds.deleteNote(o.noteInNote.$key);
     } else {
-      this._ls.deleteNote(this.noteInNote.$key);
+      o._ls.deleteNote(o.noteInNote.$key);
       //TEMPORARY
       location.reload();
-    }
+    }; }, 500);
   }
 }
 
