@@ -13,9 +13,13 @@ export class DataService {
     constructor( @Inject(FirebaseRef) private _ref: Firebase, private _af: AngularFire) {
 
         if (this._ref.getAuth() == null) {
+            console.log('return#1');
             return;
         }
+        
+        //Varför sker det här?
         if (localStorage.getItem('token') == null) {
+            console.log('return#2');
             return;
         }
         
@@ -40,8 +44,10 @@ export class DataService {
                 orderByChild: 'timeStamp'
             }
         });
-
+        console.log('nu kommer notesen!');
+console.log(this._notes);
         this._notes = _ref.child('/users/' + authData.uid + '/notes');
+console.log(this._notes);
         this._groups = _ref.child('/users/' + authData.uid + '/groups');
     }
 
@@ -265,12 +271,19 @@ export class DataService {
     }
 
     /* Vill göra denna med promises om jag hinner //Marcus... */    
-    // getGroupNameFromId(id: string) {
-    //     if(this._ref.getAuth() == null) return;
-    //     console.log('auth inte null');
-    //     let Promise p1 = new Promise();
-    //     (this._notes.child(id).child('group').on('value', (s) => (console.log(s.val())));
+    getGroupNameFromId(id: string) {
+        let notes = this._notes;
+        console.log(notes);
+    //this._notes.child(id).child('group').once('value').then((s) => (console.log(s.val())));
+        return new Promise(function(resolve){
         
-    // }
-    
+        //this._notes.child(id).child('group').once('value').then((s) => resolve(s.val()));
+        //resolve(this._notes.child(id).child('group').once('value').then((s) => (s.val())));
+        notes.child(id).child('group').on('value', (s) => resolve(s.val()))
+        
+        // console.log(notes, abc);
+        // resolve(abc);
+        //resolve('hej');
+        });      
+    }
 }
