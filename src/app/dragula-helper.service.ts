@@ -126,7 +126,7 @@ _authData: any;
       } else {
         group = value[2].parentElement.parentElement.firstElementChild.id;
       }
-      console.log('1');
+      // console.log('1');
 
       // this._notes.child(id).child('group').once('value').then(function(s) {
       //   let currentGroup = s.val();
@@ -155,14 +155,12 @@ _authData: any;
       // } else {
       // console.log(`id = ${id}, group = ${group}`);
       if (this._authData != null) {
-        console.log('inloggad');
+        // console.log('inloggad');
         this._dataservice.changeNoteGroup(id, group);
       } else {
         this._ls.changeNoteGroup(id, group);
       }
       // }
-      
-      
       
     });
     dragulaService.over.subscribe((value) => {
@@ -186,8 +184,8 @@ _authData: any;
       [2]: containern. som den är över ifrån...
       [3]: containers som den drogs ifrån...
       */ 
-      //  console.log(`out, value: `);
-      //  console.log(value);     
+        console.log(`out, value: `);
+        console.log(value);     
 
     });
     
