@@ -31,10 +31,11 @@ export class CreatorComponent {
     text: string = "";
     notes: any;
     selectedGroup: string = "noGroup";
+    colorCount: number = 0; 
     _authData;
 
     constructor(private _ds: DataService, @Inject(FirebaseRef) private _ref: Firebase, private _ls: LocalStorageService) {
-        this._authData = this._ref.getAuth()
+        this._authData = this._ref.getAuth();
     }
 
     ngOnInit() {
@@ -56,21 +57,37 @@ export class CreatorComponent {
     }
 
     save() {
-        if (this.title !== '') {
+        if (this.title !== '' || this.text !== '') {
             let time = new Date().getTime();
-
+​
             if (this._authData != null) {
-                this._ds.addNoteToNotes(this.title, this.text, this.selectedGroup, time, "yellow");
-
+                this._ds.addNoteToNotes(this.title, this.text, this.selectedGroup, time, this.randomColor());
+​
             } else {
-                let newNote = new Note(this.title, this.text, this.selectedGroup, time.toString(), "yellow");
+                let newNote = new Note(this.title, this.text, this.selectedGroup, time.toString(), this.randomColor());
                 this._ls.addNoteToNotes(newNote);
                 this.getNotes(); //Update view
+                if(this.selectedGroup != 'noGroup'){
+                    //TEMPORARY
+                    location.reload();
+                }
             }
-            //Clearing the creator after adding note
+            
             this.title = '';
             this.text = '';
         }
+    }
+    
+    randomColor () {
+        var colors = ["blue", "magenta", "yellow", "green", "pink", "orange"];
+        // if we want to pick a random color.......
+        //var color = colors[Math.floor(Math.random()*colors.length)];
+        var color = colors[this.colorCount];
+        this.colorCount++;
+        if(this.colorCount === 6){
+            this.colorCount = 0; 
+        }
+        return color;
     }
     
 }

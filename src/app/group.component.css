@@ -1,13 +1,14 @@
-.groupContainer{
-    
+button {
+    margin-top: 4px;
 }
 
 .line {
     border: 0;
     margin-top: 8px;
     margin-left: 10px;
+    margin-right: 10px;
     height: 1px;
-    background-image: linear-gradient(to right, #808080, #FFFFFF);
+    background-color:#404040;
 }
 
 .group_name {
@@ -17,6 +18,10 @@
     display: inline-block;
     background: none;
     text-align: left;
+    width: 35%;
+}
+.group_name:hover{
+     cursor: pointer;
 }
 
 .delete_button {
@@ -26,7 +31,7 @@
     background-color: transparent;
     margin-left: 0em;
     float: right;
-    margin-right: 3em;
+    margin-right:10px;
 }
 
 .edit_button{
@@ -56,8 +61,8 @@ note {
 }
 
 .button_image{
-    height: 40px;
-    width: 40px;
+    height: 30px;
+    width: 30px;
 }
 
 input{
@@ -65,5 +70,22 @@ input{
 }
 .editingName{
     border: 1px solid black;
+    cursor: text;
     
+}
+.editingName:hover{
+    cursor: text;   
+}
+/*Modal css*/
+#rigth-button{
+    width: 40%;
+}
+#left-button{
+    width: 40%;
+}
+.modal-body{
+    font-size: 1.5em;
+}
+.modal-title{
+    font-size: 2em;
 }

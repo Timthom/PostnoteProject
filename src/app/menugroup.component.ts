@@ -9,12 +9,12 @@ import { defaultFirebase, FirebaseRef } from 'angularfire2';
 import { Observable } from 'rxjs/Observable';
 import {ValueService} from './value.service';
 import {LocalStorageService} from './localstorage.service';
-
+import { Dragula } from 'ng2-dragula/ng2-dragula';
 
 @Component({
   moduleId: module.id,
   selector: 'menuGroup',
-  providers: [LocalStorageService],
+  providers: [LocalStorageService, Dragula],
   templateUrl: 'menugroup.component.html',
   styleUrls: ['menugroup.component.css'],
   pipes: []
@@ -23,7 +23,7 @@ import {LocalStorageService} from './localstorage.service';
 
 export class MenuGroupComponent implements OnInit {
   arrowSrc: string = 'icon_expand.png';
-  expanded: boolean = this._tx._toggleExpand;
+  expanded: boolean;
   editingName: boolean = false;
   notes: any;
 
@@ -56,6 +56,8 @@ export class MenuGroupComponent implements OnInit {
       this._ds.deleteGroup(this.group.$key);
     } else {
       this._ls.deleteGroup(this.group.$key);
+      //TEMPORARY
+      location.reload();
     }
     this._tx._toggleExpand = false;
     this.groupsChanged.emit('');
@@ -67,10 +69,12 @@ export class MenuGroupComponent implements OnInit {
       this._ds.updateGroupName(this.group.$key, this.group.name);
     } else {
       this._ls.updateGroupName(this.group.$key, this.group.name);
+      //TEMPORARY
+      location.reload();
     }
     this.groupsChanged.emit('');
   }
-  
+
   getContent() {
     let doneInLoopArray;
     let arrayOfKeys: any[] = [];
@@ -85,40 +89,41 @@ export class MenuGroupComponent implements OnInit {
 
   //When pressing the edit button, it enables editing on the input field
   editing() {
-      this.editingName = !this.editingName;
-      if (this.editingName) {
-        document.getElementById(this.group.$key).removeAttribute("readonly");
-        document.getElementById(this.group.$key).focus();
-        this.editSrc = 'icon_save.png';
-      } else {
-        document.getElementById(this.group.$key).setAttribute("readonly", "true");
-         if (this._authData != null) {
+    this.editingName = !this.editingName;
+    if (this.editingName) {
+      document.getElementById(this.group.$key).removeAttribute("readonly");
+      document.getElementById(this.group.$key).focus();
+      this.editSrc = 'icon_save.png';
+    } else {
+      document.getElementById(this.group.$key).setAttribute("readonly", "true");
+      if (this._authData != null) {
         let content = this.getContent();
         // changes notes in the group to the new group
-        
-       
+
+
         for (let key of content) {
           this._ds.changeNoteGroup(key, this.group.name);
-          } 
-        } else {
-          for (let note of this.notes) {
-            this._ls.changeNoteGroup(note.$key, this.group.name);
-          }
         }
-        this.editSrc = 'icon_edit.png';
-        this.editGroup();
-        this.getNotes();
-        this._tx._toggleExpand = false;
+      } else {
+        for (let note of this.notes) {
+          this._ls.changeNoteGroup(note.$key, this.group.name);
+          
+        }
       }
+      this.editSrc = 'icon_edit.png';
+      this.editGroup();
+      this.getNotes();
+      this._tx._toggleExpand = false;
+    }
   }
 
   toggleExpand() {
-    if(this.arrowSrc == 'icon_hide.png'){
-      this._tx._toggleExpand = false;
+    if (this.arrowSrc == 'icon_hide.png') {
+      this.expanded = false;
     } else {
-      this._tx._toggleExpand = true;
+      this.expanded = true;
     }
-    this.expanded = this._tx._toggleExpand;
+    // this.expanded = this._tx._toggleExpand;
 
     if (this.expanded) {
       this.arrowSrc = 'icon_hide.png';

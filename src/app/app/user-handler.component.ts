@@ -99,37 +99,40 @@ export class UserHandlerComponent implements CanReuse  {
         }
         
         checkIfUserSessionHasExpired() {
-            var o = this;
             var authData = this._ref.getAuth();
-            var ref = new Firebase("https://dazzling-fire-7472.firebaseio.com/users/" + authData.uid);
-            ref.once("value").then((snapshot) => {
+            if(authData != null) {
+                
+                var o = this;
+                var ref = new Firebase("https://dazzling-fire-7472.firebaseio.com/users/" + authData.uid);
+                ref.once("value").then((snapshot) => {
             
-            var d = new Date();          
-            var n = d.getTime();
+                var d = new Date();          
+                var n = d.getTime();
             
-            var lastExpire = (snapshot.val().expire / 1000);  
-            var currentExpire = (n / 1000);
+                var lastExpire = (snapshot.val().expire / 1000);  
+                var currentExpire = (n / 1000);
             
-            console.log(lastExpire);
-            console.log(currentExpire);
+                console.log(lastExpire);
+                console.log(currentExpire);
             
-            var result = currentExpire - lastExpire;
-            console.log(result);
+                var result = currentExpire - lastExpire;
+                console.log(result);
             
-            if(result >= 10) {
-                // o.value = false;      
-                o.logoutUser();   
-                alert("Your session has expired. Please log in again!");    
-            } else {
-               // o.value = true;              
-               var ref = new Firebase("https://dazzling-fire-7472.firebaseio.com/users");
-               ref.child(authData.uid).once('value', function(snapshot) {
-                    var exists = (snapshot.val() !== null);
-                        ref.child(authData.uid).update({
-                            expire: n       
+                if(result >= 10) {
+                    // o.value = false;      
+                    o.logoutUser();   
+                    alert("Your session has expired. Please log in again!");    
+                } else {
+                    // o.value = true;              
+                    var ref = new Firebase("https://dazzling-fire-7472.firebaseio.com/users");
+                    ref.child(authData.uid).once('value', function(snapshot) {
+                        var exists = (snapshot.val() !== null);
+                            ref.child(authData.uid).update({
+                                expire: n       
+                        });
                     });
-                });
-            }
-        });
+                }
+            });            
+        }
      }
 }

@@ -9,6 +9,7 @@ import { Injectable, Inject } from '@angular/core';
 import {LocalStorageService} from './localstorage.service';
 import {MenuComponent} from './menu.component';
 import {MenuGroupComponent} from './menugroup.component';
+import {UserHandlerComponent} from './app/user-handler.component';
 
 
 @Component({
@@ -75,5 +76,9 @@ export class DropdownComponent implements OnInit {
         var buttonText: HTMLElement = document.getElementById('group_name');
         buttonText.innerHTML = group;
        
+    }
+    
+    checkSession() {
+        console.log("klafösdfds");  
     }
 }

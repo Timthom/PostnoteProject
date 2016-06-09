@@ -12,16 +12,16 @@
 
   <div id="wrapper">
     <!-- Sidebar -->
-    <br/><br/><br/><br/>
+    <br/>
     <div *ngIf='_authData == null'>
-      <ul *ngFor="let note of titles" (click)="jumpToNote(note.$key)">
+      <p *ngFor="let note of titles" (click)="jumpToNote(note.$key)">
         {{note.title}}
-      </ul>
+      </p>
     </div>
     <div *ngIf='_authData != null'>
-      <ul *ngFor="let note of titles | async" (click)="jumpToNote(note.$key)">
+      <p *ngFor="let note of titles | async" (click)="jumpToNote(note.$key)">
         {{note.title}}
-      </ul>
+      </p>
     </div>
     <hr>
     <button class="addBtn btn btn-info btn-xs" [class.cancelable]="showingCancel" (click)="toggleInput()">

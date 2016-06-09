@@ -80,9 +80,9 @@ export class GroupComponent {
 
   deleteGroup() {
     if (this._authData != null) {
-
+      //To be able to iterate through all notes
       let content = this.getContent();
-
+      //Remove all notes in group
       for (let key of content) {
         this._ds.deleteNote(key);
       }
@@ -90,12 +90,14 @@ export class GroupComponent {
       this.clickedDelete.emit('');
       this._tx._toggleExpand = false;
     } else {
-
+      //Removes notes of the group
       for (let note of this.notes) {
         this._ls.deleteNote(note.$key);
       }
 
       this._ls.deleteGroup(this.group.$key);
+      //TEMPORARY
+      location.reload();
     }
     this.clickedDelete.emit('');
   }
@@ -105,6 +107,8 @@ export class GroupComponent {
       this._ds.updateGroupName(this.group.$key, this.groupName);
     } else {
       this._ls.updateGroupName(this.group.$key, this.groupName);
+      //TEMPORARY
+      location.reload();
     }
   }
 
@@ -151,5 +155,4 @@ export class GroupComponent {
       this.arrowSrc = 'icon_expand.png';
     }
   }
-
 }
