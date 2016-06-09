@@ -75,8 +75,13 @@ width: 6%;
 
 .note_groups{
 	display: table-cell;
-	margin-top: 15px;
+	width: 100%;
 }
 
-.groupNest{
+.container{
+	width: 100%;
+}
+
+group{
+	width: 100%;
 }
