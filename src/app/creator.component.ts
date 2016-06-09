@@ -12,17 +12,18 @@ import {DropdownComponent} from './dropdown.component';
 import { AngularFire, defaultFirebase, FirebaseRef, FirebaseListObservable } from 'angularfire2';
 import { Dragula } from 'ng2-dragula/ng2-dragula';
 import {LocalStorageService} from './localstorage.service';
+import {FirstLetter} from './first-letter.pipe';
 
 
 
 @Component({
-  moduleId: module.id,
-  selector: 'creator',
-  templateUrl: 'creator.component.html',
-  styleUrls: ['creator.component.css'],
-  directives: [ROUTER_DIRECTIVES, NoteComponent, DropdownComponent, Dragula],
-  pipes: [Reverse],
-  providers: [LocalStorageService]
+    moduleId: module.id,
+    selector: 'creator',
+    templateUrl: 'creator.component.html',
+    styleUrls: ['creator.component.css'],
+    directives: [ROUTER_DIRECTIVES, NoteComponent, DropdownComponent, Dragula],
+    pipes: [Reverse, FirstLetter],
+    providers: [LocalStorageService]
 })
 @RouteConfig([
 ])
@@ -30,9 +31,11 @@ export class CreatorComponent {
     title: string = "";
     text: string = "";
     notes: any;
+    groups: any;
     selectedGroup: string = "noGroup";
-    colorCount: number = 0; 
     _authData;
+    categoriesVisible: boolean = false;
+    colorCount: number = 0; 
 
     constructor(private _ds: DataService, @Inject(FirebaseRef) private _ref: Firebase, private _ls: LocalStorageService) {
         this._authData = this._ref.getAuth();
@@ -40,7 +43,17 @@ export class CreatorComponent {
 
     ngOnInit() {
         this.getNotes();
+        this.getGroups();
     }
+
+    getGroups() {
+        if (this._authData != null) {
+            this._ds.getAllGroups().then(groups => this.groups = groups);
+        } else {
+            this.groups = this._ls.getAllGroups();
+        }
+    }
+
 
     getNotes() {
         if (this._authData != null) {
@@ -49,45 +62,46 @@ export class CreatorComponent {
             this.notes = this._ls.getNotesInGroup('noGroup');
         }
     }
-    
+
     //Emitted from dropdown?
     groupChanged(event) {
         //Causes a bug where the creators dropdown changes when you change a notes group?
-       this.selectedGroup = event;
+        this.selectedGroup = event;
     }
 
-    save() {
-        if (this.title !== '' || this.text !== '') {
+    save(group: any) {
+        // if (this.title !== '' || this.text !== '') {
             let time = new Date().getTime();
-​
+
             if (this._authData != null) {
-                this._ds.addNoteToNotes(this.title, this.text, this.selectedGroup, time, this.randomColor());
-​
+                this._ds.addNoteToNotes("", "", group, time, this.randomColor());
+
             } else {
-                let newNote = new Note(this.title, this.text, this.selectedGroup, time.toString(), this.randomColor());
+                let newNote = new Note("", "", group, time.toString(), this.randomColor());
                 this._ls.addNoteToNotes(newNote);
                 this.getNotes(); //Update view
-                if(this.selectedGroup != 'noGroup'){
-                    //TEMPORARY
-                    location.reload();
-                }
             }
-            
-            this.title = '';
-            this.text = '';
-        }
+
+            this.categoriesVisible = false; 
+            // this.title = '';
+            // this.text = '';
+        // }
+    }
+
+    open() {
+        this.categoriesVisible = !this.categoriesVisible;
     }
     
     randomColor () {
-        var colors = ["blue", "magenta", "yellow", "green", "pink", "orange"];
-        // if we want to pick a random color.......
-        //var color = colors[Math.floor(Math.random()*colors.length)];
-        var color = colors[this.colorCount];
-        this.colorCount++;
-        if(this.colorCount === 6){
-            this.colorCount = 0; 
-        }
-        return color;
-    }
+       var colors = ["blue", "magenta", "yellow", "green", "pink", "orange"];
+       // if we want to pick a random color.......
+       //var color = colors[Math.floor(Math.random()*colors.length)];
+       var color = colors[this.colorCount];
+       this.colorCount++;
+       if(this.colorCount === 6){
+           this.colorCount = 0; 
+       }
+       return color;
+   }
     
 }
