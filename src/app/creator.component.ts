@@ -35,7 +35,6 @@ export class CreatorComponent {
     selectedGroup: string = "noGroup";
     _authData;
     categoriesVisible: boolean = false;
-    //buttons: any;
 
     constructor(private _ds: DataService, @Inject(FirebaseRef) private _ref: Firebase, private _ls: LocalStorageService) {
         this._authData = this._ref.getAuth();
