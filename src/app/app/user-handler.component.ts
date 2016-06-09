@@ -77,7 +77,7 @@ export class UserHandlerComponent implements CanReuse  {
             this.loggingOut = !this.loggingOut;
         }
         
-         switchToCreateAccountWindow() {
+        switchToCreateAccountWindow() {
             this.switchWindow = true;
             // this._router.parent.navigate(['CreateUserAccountRoute']);
         }
@@ -118,7 +118,7 @@ export class UserHandlerComponent implements CanReuse  {
                 var result = currentExpire - lastExpire;
                 console.log(result);
             
-                if(result >= 10) {
+                if(result >= 1000) {
                     // o.value = false;      
                     o.logoutUser();   
                     alert("Your session has expired. Please log in again!");    
@@ -126,7 +126,6 @@ export class UserHandlerComponent implements CanReuse  {
                     // o.value = true;              
                     var ref = new Firebase("https://dazzling-fire-7472.firebaseio.com/users");
                     ref.child(authData.uid).once('value', function(snapshot) {
-                        var exists = (snapshot.val() !== null);
                             ref.child(authData.uid).update({
                                 expire: n       
                         });
