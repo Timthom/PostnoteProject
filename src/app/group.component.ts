@@ -142,17 +142,19 @@ export class GroupComponent {
   // Expand category on click arrowBtn
   groupExpand() {
     // Uffes idea:
-    if (this.arrowSrc == 'icon_hide.png') {
-      this._tx._toggleExpand = false;
-    } else {
-      this._tx._toggleExpand = true;
-    }
-    this.expanded = this._tx._toggleExpand;
-    if (this.expanded) {
-      this.arrowSrc = 'icon_hide.png';
-    }
-    else {
-      this.arrowSrc = 'icon_expand.png';
+    if (!this.editingName) {
+      if (this.arrowSrc == 'icon_hide.png') {
+        this._tx._toggleExpand = false;
+      } else {
+        this._tx._toggleExpand = true;
+      }
+      this.expanded = this._tx._toggleExpand;
+      if (this.expanded) {
+        this.arrowSrc = 'icon_hide.png';
+      }
+      else {
+        this.arrowSrc = 'icon_expand.png';
+      }
     }
   }
 }

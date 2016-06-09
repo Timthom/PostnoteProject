@@ -56,10 +56,6 @@ width: 6%;
 	width: 25px;
 }
 
-.note_groups{
-	margin-top: 50px;
-}
-
 .shadow {
 	background-color: rgba(0, 0, 0, 0.5);
 	display: none;
@@ -71,4 +67,21 @@ width: 6%;
 
 .shadow_active {
 	display: block;
+}
+
+.createdNotes{
+	margin-top: 50px;
+}
+
+.note_groups{
+	display: table-cell;
+	width: 100%;
+}
+
+.container{
+	width: 100%;
+}
+
+group{
+	width: 100%;
 }

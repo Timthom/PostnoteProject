@@ -12,7 +12,7 @@
 
   <div id="wrapper">
     <!-- Sidebar -->
-    <br/>
+
     <div *ngIf='_authData == null'>
       <p *ngFor="let note of titles" (click)="jumpToNote(note.$key)">
         {{note.title}}

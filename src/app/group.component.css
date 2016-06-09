@@ -43,6 +43,15 @@ button {
     float: right;
 }
 
+.ifButtons{
+    display: inline-block;
+    float: right;
+}
+
+.groupContainer{
+    height: 48px;
+}
+
 .col-xs-4 {
   padding: 0px;
 }
@@ -88,4 +97,9 @@ input{
 }
 .modal-title{
     font-size: 2em;
+}
+
+.container{
+    padding: 0;
+    margin: 0;
 }
