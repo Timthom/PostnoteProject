@@ -1,6 +1,7 @@
 <div id="container">
 
-   <img id="createButton" src="icon_fab.png" (click)="open()">
+   <img class="createButton" src="icon_fab.png" (click)="open()">
+   <img class="createButton noCategoryHidden" [class.noCategoryVisible]="categoriesVisible" src="icon_fab_active.png" (click)="save('noGroup')">
 
    <div *ngIf='_authData == null' id="categoryGroupButton">
        <button *ngFor="let group of groups | reverse" class="categoryButton" (click)="save(group.name)" [class.categoryButtonVisible]="categoriesVisible">{{group.name | uppercase | firstLetter }}</button>
