@@ -1,19 +1,14 @@
 <div id="container">
 
    <img id="createButton" src="icon_fab.png" (click)="open()">
-   <!--<button class="categoryButton" id="S" [class.categoryButtonVisible]="categoriesVisible">S</button>-->
 
-   <div *ngIf='_authData == null'>
-       <button *ngFor="let group of groups" class="categoryButton" [class.categoryButtonVisible]="categoriesVisible"> {{group.name}}</button>
+   <div *ngIf='_authData == null' id="CG">
+       <button *ngFor="let group of groups | reverse" class="categoryButton" [class.categoryButtonVisible]="categoriesVisible">{{group.name | uppercase | firstLetter }}</button>
    </div>
-   <div *ngIf='_authData != null'>
-       <button *ngFor="let group of groups | async" class="categoryButton" [class.categoryButtonVisible]="categoriesVisible">{{group.name}}</button>
+   <div *ngIf='_authData != null' id="CG">
+       <button *ngFor="let group of groups | async | reverse" class="categoryButton" [class.categoryButtonVisible]="categoriesVisible">{{group.name | uppercase | firstLetter}}</button>
    </div>
-
-
-   <!--<note class="col-xs-4" *ngFor="let note of notes | async" [dragula]='"bag-creator"' [dragulaModel]='notes' [noteInNote]="note" [text]="note.text" [title]="note.title" [group]="note.group" id="{{note.$key}}" [color]="note.color">-->
-   <!--</note>-->
-
+   
    <div *ngIf='_authData != null'>
        <div class="myDragulaContainer" [dragula]='"drag-bag"'>
            <note class="col-xs-4" *ngFor="let note of notes | async | reverse" [noteInNote]="note" [text]="note.text" [title]="note.title"

@@ -12,106 +12,82 @@ import {DropdownComponent} from './dropdown.component';
 import { AngularFire, defaultFirebase, FirebaseRef, FirebaseListObservable } from 'angularfire2';
 import { Dragula } from 'ng2-dragula/ng2-dragula';
 import {LocalStorageService} from './localstorage.service';
+import {FirstLetter} from './first-letter.pipe';
 
 
 
 @Component({
-   moduleId: module.id,
-   selector: 'creator',
-   templateUrl: 'creator.component.html',
-   styleUrls: ['creator.component.css'],
-   directives: [ROUTER_DIRECTIVES, NoteComponent, DropdownComponent, Dragula],
-   pipes: [Reverse],
-   providers: [LocalStorageService]
+    moduleId: module.id,
+    selector: 'creator',
+    templateUrl: 'creator.component.html',
+    styleUrls: ['creator.component.css'],
+    directives: [ROUTER_DIRECTIVES, NoteComponent, DropdownComponent, Dragula],
+    pipes: [Reverse, FirstLetter],
+    providers: [LocalStorageService]
 })
 @RouteConfig([
 ])
 export class CreatorComponent {
-   title: string = "";
-   text: string = "";
-   notes: any;
-   groups: any;
-   selectedGroup: string = "noGroup";
-   _authData;
-   categoriesVisible: boolean = false;
-   buttons: any;
+    title: string = "";
+    text: string = "";
+    notes: any;
+    groups: any;
+    selectedGroup: string = "noGroup";
+    _authData;
+    categoriesVisible: boolean = false;
+    //buttons: any;
 
-   constructor(private _ds: DataService, @Inject(FirebaseRef) private _ref: Firebase, private _ls: LocalStorageService) {
-       this._authData = this._ref.getAuth();
-   }
+    constructor(private _ds: DataService, @Inject(FirebaseRef) private _ref: Firebase, private _ls: LocalStorageService) {
+        this._authData = this._ref.getAuth();
+    }
 
-   ngOnInit() {
-       this.getNotes();
-       this.getGroups();
-   }
+    ngOnInit() {
+        this.getNotes();
+        this.getGroups();
+    }
 
-   getGroups() {
-       if (this._authData != null) {
-           this._ds.getAllGroups().then(groups => this.groups = groups);
-       } else {
-           this.groups = this._ls.getAllGroups();
-       }
-   }
+    getGroups() {
+        if (this._authData != null) {
+            this._ds.getAllGroups().then(groups => this.groups = groups);
+        } else {
+            this.groups = this._ls.getAllGroups();
+        }
+    }
 
 
-   getNotes() {
-       if (this._authData != null) {
-           this._ds.getAllNotesInGroup('noGroup').then(notes => this.notes = notes);
-       } else {
-           this.notes = this._ls.getNotesInGroup('noGroup');
-       }
-   }
+    getNotes() {
+        if (this._authData != null) {
+            this._ds.getAllNotesInGroup('noGroup').then(notes => this.notes = notes);
+        } else {
+            this.notes = this._ls.getNotesInGroup('noGroup');
+        }
+    }
 
-   //Emitted from dropdown?
-   groupChanged(event) {
-       //Causes a bug where the creators dropdown changes when you change a notes group?
-       this.selectedGroup = event;
-   }
+    //Emitted from dropdown?
+    groupChanged(event) {
+        //Causes a bug where the creators dropdown changes when you change a notes group?
+        this.selectedGroup = event;
+    }
 
-   save() {
-       if (this.title !== '' || this.text !== '') {
-           let time = new Date().getTime();
+    save() {
+        if (this.title !== '' || this.text !== '') {
+            let time = new Date().getTime();
 
-           if (this._authData != null) {
-               this._ds.addNoteToNotes(this.title, this.text, this.selectedGroup, time, "yellow");
+            if (this._authData != null) {
+                this._ds.addNoteToNotes(this.title, this.text, this.selectedGroup, time, "yellow");
 
-           } else {
-               let newNote = new Note(this.title, this.text, this.selectedGroup, time.toString(), "yellow");
-               this._ls.addNoteToNotes(newNote);
-               this.getNotes(); //Update view
-           }
-           //Clearing the creator after adding note
-           this.title = '';
-           this.text = '';
-       }
-   }
+            } else {
+                let newNote = new Note(this.title, this.text, this.selectedGroup, time.toString(), "yellow");
+                this._ls.addNoteToNotes(newNote);
+                this.getNotes(); //Update view
+            }
 
-   open() {
-       this.categoriesVisible = !this.categoriesVisible;
-       this.buttons = document.getElementsByClassName('categoryButton');
+            this.title = '';
+            this.text = '';
+        }
+    }
 
-       var yPosition: number = 40;
-
-       for (var i = 0; i < this.buttons.length; i++) {
-           yPosition += 50;
-
-           this.buttons[i].style.bottom = yPosition + 'px';
-
-           if (this._authData != null) {
-               var buttonText = this.buttons[i].innerHTML.charAt(0).toUpperCase();
-           } else {
-               var buttonText = this.buttons[i].innerHTML.charAt(1).toUpperCase();
-               if (buttonText.length < 1) {
-                   var buttonText = this.buttons[i].innerHTML.charAt(0).toUpperCase();
-               }
-           }
-           this.buttons[i].innerHTML = buttonText;
-           if (this.categoriesVisible) {
-               this.buttons[i].style.display = 'block';
-           } else {
-               this.buttons[i].style.display = 'none';
-           }
-       }
-   }
-
+    open() {
+        this.categoriesVisible = !this.categoriesVisible;
+    }
 }

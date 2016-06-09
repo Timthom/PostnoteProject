@@ -31,27 +31,23 @@ export class DropdownComponent implements OnInit {
     @Output() changeNoteGroup = new EventEmitter();
     public disabled: boolean = false;
     public status: { isopen: boolean } = { isopen: false };
-    public items: Array<string> = ['The first choice!',
-        'And another choice for you.', 'but wait! A third!'];
     _authData;
+    groups: any;
 
     public toggled(open: boolean): void {
     }
 
-    //Körs inte??
     public toggleDropdown($event: MouseEvent): void {
         $event.preventDefault();
         $event.stopPropagation();
         this.status.isopen = !this.status.isopen;
     }
 
-    groups: any;
-
     constructor( @Inject(FirebaseRef) private _ref: Firebase, private _ds: DataService, private _ls: LocalStorageService, private _menu: MenuComponent, private _menuGroup: MenuGroupComponent) {
         this._authData = this._ref.getAuth();
         //_menu.clicked.subscribe(this.getTitles());
         //_menuGroup.groupsChanged.subscribe(this.getTitles());
-      
+
     }
 
     ngOnInit() {
@@ -59,7 +55,6 @@ export class DropdownComponent implements OnInit {
     }
 
     getTitles() {
-        console.log("DROPDOWNS GET TITLES");
         if (this._authData != null) {
             this._ds.getAllGroups().then(titles => this.groups = titles);
         } else {
@@ -74,6 +69,5 @@ export class DropdownComponent implements OnInit {
         this.changeNoteGroup.emit(group);
         var buttonText: HTMLElement = document.getElementById('group_name');
         buttonText.innerHTML = group;
-       
     }
 }

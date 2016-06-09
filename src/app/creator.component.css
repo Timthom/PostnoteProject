@@ -57,6 +57,20 @@
    z-index: 3;
 }
 
+#CG {
+ display:block;
+ outline: none;
+ max-height: 200px;
+ width: 50px;
+ border: none;
+ position: fixed;
+ bottom: 80px;
+ right: 20px;
+ background-color: transparent;
+ z-index: 3;
+ overflow: auto;
+}
+
 .categoryButton {
  display:none;
  outline: none;
@@ -64,11 +78,11 @@
  width: 30px;
  border-radius: 100%;
  border: none;
- position: fixed;
- right: 30px;
+ float: right;
+ margin: 10px;
  background-color: #FFFFFF ;
  box-shadow: 0 3px 7px rgba(0, 0, 0, 0.5);
- z-index: 3;
+ z-index: 4;
 }
 
 .categoryButtonVisible {

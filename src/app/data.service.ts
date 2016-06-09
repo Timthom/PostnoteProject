@@ -11,8 +11,6 @@ export class DataService {
     _afGroups: FirebaseListObservable<any[]>;
 
     constructor( @Inject(FirebaseRef) private _ref: Firebase, private _af: AngularFire) {
-        console.log("NU KÖR CONSTRUCTORN!!!");
-        console.log("Här är auth data: " + this._ref.getAuth());
 
         if (this._ref.getAuth() == null) {
             return;
@@ -20,8 +18,7 @@ export class DataService {
         if (localStorage.getItem('token') == null) {
             return;
         }
-
-        console.log("Skrivs ej ut???");
+        
         const token = localStorage.getItem('token');
         this._ref.authWithCustomToken(token, function (error, authData) {
 
@@ -46,13 +43,10 @@ export class DataService {
 
         this._notes = _ref.child('/users/' + authData.uid + '/notes');
         this._groups = _ref.child('/users/' + authData.uid + '/groups');
-        console.log("inne i dataservice konstruktor");
     }
 
     //returns all notes in the DB...
     getAllNotes() {
-
-        console.log("Körs typ detta eller vad händer!??!?!?!");
 
         if (this._ref.getAuth() == null) return;
 
