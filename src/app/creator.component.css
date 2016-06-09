@@ -44,7 +44,7 @@
    color: #505050 ;
 }
 
-#createButton {
+.createButton {
    height: 50px;
    width: 50px;
    border-radius: 100%;
@@ -55,6 +55,14 @@
    cursor: pointer;
    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
    z-index: 3;
+}
+
+.noCategoryHidden {
+  display: none;
+}
+
+.noCategoryVisible {
+  display: block;
 }
 
 #CG {
