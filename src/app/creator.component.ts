@@ -69,22 +69,23 @@ export class CreatorComponent {
         this.selectedGroup = event;
     }
 
-    save() {
-        if (this.title !== '' || this.text !== '') {
+    save(group: any) {
+        // if (this.title !== '' || this.text !== '') {
             let time = new Date().getTime();
 
             if (this._authData != null) {
-                this._ds.addNoteToNotes(this.title, this.text, this.selectedGroup, time, "yellow");
+                this._ds.addNoteToNotes("", "", group, time, "yellow");
 
             } else {
-                let newNote = new Note(this.title, this.text, this.selectedGroup, time.toString(), "yellow");
+                let newNote = new Note(this.title, this.text, group, time.toString(), "yellow");
                 this._ls.addNoteToNotes(newNote);
                 this.getNotes(); //Update view
             }
 
-            this.title = '';
-            this.text = '';
-        }
+            this.categoriesVisible = false; 
+            // this.title = '';
+            // this.text = '';
+        // }
     }
 
     open() {

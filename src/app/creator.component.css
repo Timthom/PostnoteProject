@@ -51,13 +51,13 @@
    position: fixed;
    bottom: 20px;
    right: 20px;
-   background-color: #404040 ;
+   background-color: #404040;
    cursor: pointer;
    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
    z-index: 3;
 }
 
-#CG {
+#categoryGroupButton {
  display:block;
  outline: none;
  max-height: 200px;
