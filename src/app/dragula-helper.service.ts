@@ -1,14 +1,20 @@
 import { Injectable, Inject } from '@angular/core';
-// import { AngularFire, defaultFirebase, FirebaseRef, FirebaseListObservable } from 'angularfire2';
+import { AngularFire, defaultFirebase, FirebaseRef, FirebaseListObservable } from 'angularfire2';
 import { DragulaService } from 'ng2-dragula/ng2-dragula';
 import {DataService} from './data.service';
-// import { LocalStorageService } from './localstorage.service'
+import { LocalStorageService } from './localstorage.service'
 
 @Injectable()
 export class DragulaHelperService {
+_notes: any;
+_authData: any;
 
-  constructor(private _dataservice: DataService /*,  @Inject(FirebaseRef) private _ref: Firebase , private _authData: any, private _ls: LocalStorageService*/) {
-    // this._authData = this._ref.getAuth();
+  constructor(private _dataservice: DataService,  @Inject(FirebaseRef) private _ref: Firebase, private _ls: LocalStorageService) {
+    this._authData = this._ref.getAuth();
+    
+    /***** This is only because I dont know how to return the promise from dataservice *****/
+    let authData = this._ref.getAuth();
+   // this._notes = this._ref.child('/users/' + authData.uid + '/notes');
   }
 
   /***********************************************************
@@ -113,31 +119,48 @@ export class DragulaHelperService {
        
       let id: string = value[1].attributes[3].nodeValue;
       let group: string;
-      console.log(`cosnollen group = ${value[2].parentElement.parentElement.firstElementChild.id}`);
+      // console.log(`cosnollen group = ${value[2].parentElement.parentElement.firstElementChild.id}`);
       if (value[2].parentElement.parentElement.firstElementChild.id === '') {
-        console.log('group är null');
+        // console.log('group är null');
         group = 'noGroup'
       } else {
         group = value[2].parentElement.parentElement.firstElementChild.id;
       }
+      // console.log('1');
+
+      // this._notes.child(id).child('group').once('value').then(function(s) {
+      //   let currentGroup = s.val();
+      //   console.log('cg '+ currentGroup)
+        
+      //    if (currentGroup == group) {
+      //       console.log('dropped note in same group will not update group...')
+      //    } else {
+      //      this.updateGroup(id, group);
+      //    }
+  
+      // }); 
       
       /* Vill göra en kontroll på om den bytte till en annan grupp men måste läsa på om promises mer först... */
-      // let currentGroup: string = this._dataservice.getGroupNameFromId(id) ;
-      // console.log(group + ' <-- ' + currentGroup);
+      console.log('nu testar jag');
+       let currentGroup: any = this._dataservice.getGroupNameFromId(id) ;
+      // console.log('2');
+      currentGroup.then((result) => (console.log('inne i promisen: ' + result)));
+      // console.log('3');
+      //  console.log(group + ' <--  + currentGroup:');
+      //  console.log('6');
+      //  console.log(currentGroup);
+      //  console.log('7');
       // if (currentGroup == group) {
       //   do nothing
       // } else {
-      console.log(`id = ${id}, group = ${group}`);
-      // if (this._authData != null) {
-        console.log('inloggad');     
+      // console.log(`id = ${id}, group = ${group}`);
+      if (this._authData != null) {
+        // console.log('inloggad');
         this._dataservice.changeNoteGroup(id, group);
-      // } else {
-      //   this._ls.changeNoteGroup(id, group);
+      } else {
+        this._ls.changeNoteGroup(id, group);
+      }
       // }
-
-      // }
-      
-      
       
     });
     dragulaService.over.subscribe((value) => {
@@ -161,11 +184,20 @@ export class DragulaHelperService {
       [2]: containern. som den är över ifrån...
       [3]: containers som den drogs ifrån...
       */ 
-      //  console.log(`out, value: `);
-      //  console.log(value);     
+        console.log(`out, value: `);
+        console.log(value);     
 
     });
     
+  }
+  
+  updateGroup(id: string, group: string) {
+      if (this._authData) {
+        this._ls.changeNoteGroup(id, group);
+      } else {
+        console.log('inloggad');     
+        this._dataservice.changeNoteGroup(id, group);        
+      }
   }
   
 }
