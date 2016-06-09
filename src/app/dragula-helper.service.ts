@@ -14,7 +14,7 @@ _authData: any;
     
     /***** This is only because I dont know how to return the promise from dataservice *****/
     let authData = this._ref.getAuth();
-    this._notes = this._ref.child('/users/' + authData.uid + '/notes');
+   // this._notes = this._ref.child('/users/' + authData.uid + '/notes');
   }
 
   /***********************************************************
