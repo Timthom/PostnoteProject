@@ -20,19 +20,14 @@ export class LocalStorageService {
 
         if (!localStorage.getItem("savedGroups")) {
             this.groups = [];
-            console.log("grops");
-            console.log('inne i true');
         } else {
             this.groups = this.getAllGroups();
-             console.log('inne i false');
         }
     }
 
 
 
     getAllGroups() {
-        console.log('inne i getAllGroups');
-        console.log('JSON.parse(localStorage.getItem("savedGroups")' + JSON.parse(localStorage.getItem("savedGroups")));
         if (JSON.parse(localStorage.getItem("savedGroups"))) {
                     this.groups = JSON.parse(localStorage.getItem("savedGroups"));
         return this.groups;
@@ -49,11 +44,7 @@ export class LocalStorageService {
 
 
     deleteGroup(groupkey: string) {
-        //TODO
-        //Go through each note
-        //if the group name is the same as the group
-        //remove this note
-
+        //The notes in group are removed in the components before this method is called
         for (var item in this.groups) {
             if (groupkey == this.groups[item].$key) {
                 this.groups.splice(item, 1);

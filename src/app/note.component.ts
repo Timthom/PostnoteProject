@@ -86,6 +86,8 @@ export class NoteComponent implements OnInit {
       this._ds.changeNoteGroup(this.noteInNote.$key, this.noteSelectedGroup);
     } else {
       this._ls.changeNoteGroup(this.noteInNote.$key, this.noteSelectedGroup);
+      //TEMPORARY
+      location.reload();
     }
 
   }
@@ -145,6 +147,8 @@ export class NoteComponent implements OnInit {
       this._ds.deleteNote(this.noteInNote.$key);
     } else {
       this._ls.deleteNote(this.noteInNote.$key);
+      //TEMPORARY
+      location.reload();
     }
   }
 
