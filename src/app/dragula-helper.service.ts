@@ -141,9 +141,10 @@ _authData: any;
       // }); 
       
       /* Vill göra en kontroll på om den bytte till en annan grupp men måste läsa på om promises mer först... */
-      // let currentGroup: any = this._dataservice.getGroupNameFromId(id) ;
+      console.log('nu testar jag');
+       let currentGroup: any = this._dataservice.getGroupNameFromId(id) ;
       // console.log('2');
-      // currentGroup.then((result) => (console.log('inne i promisen' + result)));
+      currentGroup.then((result) => (console.log('inne i promisen: ' + result)));
       // console.log('3');
       //  console.log(group + ' <--  + currentGroup:');
       //  console.log('6');
@@ -152,15 +153,13 @@ _authData: any;
       // if (currentGroup == group) {
       //   do nothing
       // } else {
-        
       // console.log(`id = ${id}, group = ${group}`);
       if (this._authData != null) {
-        console.log('inloggad');     
+        console.log('inloggad');
         this._dataservice.changeNoteGroup(id, group);
       } else {
         this._ls.changeNoteGroup(id, group);
       }
-
       // }
       
       
