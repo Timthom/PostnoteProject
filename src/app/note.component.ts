@@ -40,13 +40,14 @@ export class NoteComponent implements OnInit {
   color;
 
   _authData;
+  test: any;
 
   ngOnInit() {
     this.colorInit(this.color);
   }
 
 
-  constructor( @Inject(FirebaseRef) private _ref: Firebase, private _ds: DataService, private _ls: LocalStorageService) {
+  constructor(@Inject(FirebaseRef) private _ref: Firebase, private _ds: DataService, private _ls: LocalStorageService) {
     this._authData = this._ref.getAuth();
   }
 
@@ -61,11 +62,15 @@ export class NoteComponent implements OnInit {
   isGreen: boolean = false;
 
   editClick() {
+    
+    // this._userHa.checkIfUserSessionHasExpired();
+    
     //IF TODO
-    if (this.isEditable) {
+    if (this.isEditable /* && this._authService.getValue() */) {
       if (this._authData != null) {
         this._ds.updateNoteTitle(this.noteInNote.$key, this.title);
         this._ds.updateNoteText(this.noteInNote.$key, this.text);
+        // console.log(this._authService.getValue());
       } else {
         this._ls.updateNoteTitle(this.noteInNote.$key, this.title);
         this._ls.updateNoteText(this.noteInNote.$key, this.text);
@@ -75,6 +80,7 @@ export class NoteComponent implements OnInit {
       this.enabledIfNull = null;
     }
     this.isEditable = !this.isEditable;
+    
 
   }
 
@@ -147,5 +153,5 @@ export class NoteComponent implements OnInit {
       this._ls.deleteNote(this.noteInNote.$key);
     }
   }
-
 }
+

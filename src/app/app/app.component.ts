@@ -31,11 +31,10 @@ import { DragulaHelperService } from '../dragula-helper.service';
 
 export class AppComponent{
   
-  constructor(private _dragulaService: DragulaService, private _dhs: DragulaHelperService) {
+  constructor(private _dragulaService: DragulaService, private _dhs: DragulaHelperService, private _authServiceHandler: AuthorizationService) {
     this._dhs._configureDragula(_dragulaService);
      console.log("Funkar?");
   }
- 
 }
 
 

@@ -8,6 +8,8 @@ export class AuthorizationService {
     
     _userLoggedInSucceed;
     user: any;
+    expire: any;
+    value: any;
     
     constructor(@Inject(FirebaseRef) private _ref: Firebase) {}
 
@@ -144,16 +146,20 @@ export class AuthorizationService {
                 console.log(authData.provider);
                 console.log(authData.github.username);
                 
+                var d = new Date();
+                var n = d.getTime();
+                
                 var ref = new Firebase("https://dazzling-fire-7472.firebaseio.com/users");
             
                 ref.child(authData.uid).once('value', function(snapshot) {
                     var exists = (snapshot.val() !== null);
-                    if(!exists) {
-                        ref.child(authData.uid).set({
+                    
+                        ref.child(authData.uid).update({
                         provider: authData.provider,
-                        email: authData.github.email       
+                        email: authData.github.email,
+                        expire: n       
                         });
-                    }
+                    
                     console.log(exists);
                 });
             }
@@ -189,5 +195,9 @@ export class AuthorizationService {
      
      returnLoggedInUser() {
          return this.user;
-     }     
+     }   
+     
+     getValue() {
+         return this.value;
+     }
 }
