@@ -27,9 +27,17 @@ import {LocalStorageService} from './localstorage.service';
 @RouteConfig([
 ])
 export class CreatorComponent {
+    @Input()
+    groups : any;
+    @Input()
+    notes : any;
+    
+    @Output() 
+    notesChanged = new EventEmitter();
+    
+
     title: string = "";
     text: string = "";
-    notes: any;
     selectedGroup: string = "noGroup";
     colorCount: number = 0; 
     _authData;
@@ -40,6 +48,7 @@ export class CreatorComponent {
 
     ngOnInit() {
         this.getNotes();
+        
     }
 
     getNotes() {
@@ -66,13 +75,14 @@ export class CreatorComponent {
             } else {
                 let newNote = new Note(this.title, this.text, this.selectedGroup, time.toString(), this.randomColor());
                 this._ls.addNoteToNotes(newNote);
-                this.getNotes(); //Update view
                 if(this.selectedGroup != 'noGroup'){
                     //TEMPORARY
-                    location.reload();
+                    //location.reload();
                 }
+                this.notesChanged.emit('');
             }
-            
+            this.getNotes(); //Update view
+
             this.title = '';
             this.text = '';
         }
@@ -88,6 +98,11 @@ export class CreatorComponent {
             this.colorCount = 0; 
         }
         return color;
+    }
+    
+    noteChanged() {
+        this.notesChanged.emit('');
+        //this.getNotes();
     }
     
 }

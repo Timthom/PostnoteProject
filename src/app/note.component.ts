@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, Output, EventEmitter} from '@angular/core';
 import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from '@angular/router-deprecated';
 import {AngularFire} from 'angularfire2';
 import {FirebaseListObservable} from 'angularfire2';
@@ -24,6 +24,7 @@ import {LocalStorageService} from './localstorage.service';
 ])
 
 export class NoteComponent implements OnInit {
+  
   @Input()
   noteInNote;
 
@@ -38,6 +39,12 @@ export class NoteComponent implements OnInit {
 
   @Input()
   color;
+  
+  @Input()
+  groups: any;
+  
+  @Output()
+  noteChanged = new EventEmitter();
 
   _authData;
 
@@ -61,7 +68,6 @@ export class NoteComponent implements OnInit {
   isGreen: boolean = false;
 
   editClick() {
-    //IF TODO
     if (this.isEditable) {
       if (this._authData != null) {
         this._ds.updateNoteTitle(this.noteInNote.$key, this.title);
@@ -69,13 +75,17 @@ export class NoteComponent implements OnInit {
       } else {
         this._ls.updateNoteTitle(this.noteInNote.$key, this.title);
         this._ls.updateNoteText(this.noteInNote.$key, this.text);
+        //Emit to postnote2
+        this.noteChanged.emit('');
       }
       this.enabledIfNull = "";
+      
     } else {
       this.enabledIfNull = null;
     }
     this.isEditable = !this.isEditable;
-
+    
+    
   }
 
   //Emitted from dropdown
@@ -87,13 +97,12 @@ export class NoteComponent implements OnInit {
     } else {
       this._ls.changeNoteGroup(this.noteInNote.$key, this.noteSelectedGroup);
       //TEMPORARY
-      location.reload();
+      //location.reload();
     }
-
+    //this.noteChanged.emit(''); uppdateras m.h.a. editclick??
   }
 
   colorChanged(event) {
-    //IF TODO
     this.colorSwitch(event);
     this.isEditable = true;
     if (this._authData != null) {
@@ -147,8 +156,9 @@ export class NoteComponent implements OnInit {
       this._ds.deleteNote(this.noteInNote.$key);
     } else {
       this._ls.deleteNote(this.noteInNote.$key);
+      this.noteChanged.emit('');
       //TEMPORARY
-      location.reload();
+      //location.reload();
     }
   }
 

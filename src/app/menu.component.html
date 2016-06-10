@@ -33,10 +33,10 @@
     </form>
     <hr>
     <div *ngIf='_authData == null'>
-      <menuGroup *ngFor="let group of myGroups" [group]="group" (groupsChanged)="getGroups()"></menuGroup>
+      <menuGroup *ngFor="let group of myGroups" [groups] = "myGroups" [group]="group" (groupsChanged)="groupsChanged(groups)"></menuGroup>
     </div>
     <div *ngIf='_authData != null'>
-      <menuGroup *ngFor="let group of myGroups | async" [group]="group" (groupsChanged)="getGroups()"></menuGroup>
+      <menuGroup *ngFor="let group of myGroups | async" [groups] = "myGroups" [group]="group" (groupsChanged)="groupsChanged(groups)" ></menuGroup>
     </div>
   </div>
 

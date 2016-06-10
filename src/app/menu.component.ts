@@ -28,12 +28,15 @@ export class MenuComponent implements OnInit, CanReuse {
     return false;
   }
   
+  @Input() myGroups: any;
+  @Input() notes: any;
+
   showingCancel: boolean = false;
   adding: boolean = false;
   groupName: string = "";
   titles: any;
   buttonText: string = "Add category";
-  myGroups: any;
+  
   checkSideBar: boolean = this._vs._showSideBar;
   _authData;
 
@@ -48,9 +51,8 @@ export class MenuComponent implements OnInit, CanReuse {
   }
 
   ngOnInit() {
-
     this.getTitles();
-    this.getGroups();
+    //this.getGroups();
   }
 
   getTitles() {
@@ -100,7 +102,7 @@ export class MenuComponent implements OnInit, CanReuse {
         this._ls.saveGroup(newGroup);
         this.getGroups();
         //TEMPORARY
-        location.reload();
+        //location.reload();
       }
 ​
       this.clicked.emit('');
@@ -111,5 +113,10 @@ export class MenuComponent implements OnInit, CanReuse {
       this.showingCancel = !this.showingCancel;
       this.buttonText = "Add category";
     }
+  }
+  
+  groupsChanged(groups : any){
+    //this.myGroups = groups;
+    //console.log("GROUPS CHANGED MENU " + this.myGroups);
   }
 }
