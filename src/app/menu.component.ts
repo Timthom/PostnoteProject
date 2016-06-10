@@ -46,8 +46,7 @@ export class MenuComponent implements OnInit, CanReuse {
     private _vs: ValueService,
     private _ls: LocalStorageService,
     private _el: ElementRef) {
-
-    this._authData = this._ref.getAuth();
+      this._authData = this._ref.getAuth();
     //_postNote2.groupChanged.subscribe(this.getGroups);
 
   }
@@ -57,22 +56,22 @@ export class MenuComponent implements OnInit, CanReuse {
     this.getGroups();
   }
 
-/*
-  ngAfterViewInit(note: string) {
-    if (!MenuComponent.hammerInitialized) {
-      console.log("hammertime!")
-
-      var myElement = document.getElementById(note);
-      var hammertime = new Hammer(myElement);
-      hammertime.on('swiperight', function(ev){
-        
-      });
-      MenuComponent.hammerInitialized = true;
-    } else {
-
+  /*
+    ngAfterViewInit(note: string) {
+      if (!MenuComponent.hammerInitialized) {
+        console.log("hammertime!")
+  
+        var myElement = document.getElementById(note);
+        var hammertime = new Hammer(myElement);
+        hammertime.on('swiperight', function(ev){
+          
+        });
+        MenuComponent.hammerInitialized = true;
+      } else {
+  
+      }
     }
-  }
-  */
+    */
 
   getTitles() {
     if (this._authData != null) {

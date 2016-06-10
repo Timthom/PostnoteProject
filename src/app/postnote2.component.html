@@ -1,5 +1,6 @@
 <!--<headerbar (openSideBar)="openSideBar($event)"></headerbar>-->
 <div class="container">
+
   <!--Top navbar-->
   <div class="navbar_item">
     <button class="backBtn">
@@ -11,7 +12,11 @@
       <menu (clicked)="addGroup()"></menu>
     </div>
       <div class="createdNotes">
-        <creator></creator>
+        <creator><push-notification 
+  title="notification.title"
+  body="notification.body"
+  icon="notification.icon">
+</push-notification></creator>
       </div>
     <div class="note_groups">
       <div *ngIf="_authData == null">

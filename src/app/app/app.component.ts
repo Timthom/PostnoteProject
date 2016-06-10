@@ -12,6 +12,8 @@ import {UserHandlerComponent} from "./user-handler.component";
 import {MenuComponent} from '../menu.component';
 import { DragulaService } from 'ng2-dragula/ng2-dragula';
 import { DragulaHelperService } from '../dragula-helper.service';
+import { PushNotificationComponent } from 'ng2-notifications/ng2-notifications';
+
 
 @Component({
   moduleId: module.id,
@@ -20,7 +22,7 @@ import { DragulaHelperService } from '../dragula-helper.service';
   viewProviders: [DragulaService],
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.css'],
-  directives: [UserHandlerComponent, ROUTER_DIRECTIVES],
+  directives: [PushNotificationComponent,UserHandlerComponent, ROUTER_DIRECTIVES],
   pipes: []
 })
 

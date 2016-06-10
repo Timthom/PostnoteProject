@@ -47,11 +47,16 @@ export class DropdownComponent implements OnInit {
 
     groups: any;
 
-    constructor( @Inject(FirebaseRef) private _ref: Firebase, private _ds: DataService, private _ls: LocalStorageService, private _menu: MenuComponent, private _menuGroup: MenuGroupComponent) {
-        this._authData = this._ref.getAuth();
+    constructor(
+        @Inject(FirebaseRef) private _ref: Firebase,
+        private _ds: DataService,
+        private _ls: LocalStorageService,
+        private _menu: MenuComponent,
+        private _menuGroup: MenuGroupComponent) {
+            this._authData = this._ref.getAuth();
         //_menu.clicked.subscribe(this.getTitles());
         //_menuGroup.groupsChanged.subscribe(this.getTitles());
-      
+
     }
 
     ngOnInit() {
@@ -74,6 +79,6 @@ export class DropdownComponent implements OnInit {
         this.changeNoteGroup.emit(group);
         var buttonText: HTMLElement = document.getElementById('group_name');
         buttonText.innerHTML = group;
-       
+
     }
 }

@@ -21,8 +21,10 @@ module.exports = function(defaults) {
       'dragula/dist/dragula.min.*',
       'ng2-dragula/**',
       'contra/dist/contra.min.js',
-      'crossvent/dist/crossvent.min.js'
+      'crossvent/dist/crossvent.min.js',
       //.....................................
+      // adding notifications
+      'ng2-notifications/**'
     ]
   });
 };

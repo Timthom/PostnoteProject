@@ -8,7 +8,9 @@ const map: any = {
   'moment': 'vendor/moment/moment.js',
   
   'ng2-dragula': 'vendor/ng2-dragula',
-  'dragula': 'vendor/dragula/dist/dragula.min.js'
+  'dragula': 'vendor/dragula/dist/dragula.min.js',
+  // Notification
+  'ng2-notifications':'vendor/ng2-notifications'
   
 };
 
@@ -21,6 +23,10 @@ const packages: any = {
   'ng2-dragula': {
     defaultExtension: 'js',
     main: 'ng2-dragula.js'
+  },
+  'ng2-notifications': {
+    defaultExtension: 'js',
+    main: 'ng2-notifications.js'
   }
 };
 

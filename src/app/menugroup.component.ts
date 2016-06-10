@@ -34,9 +34,12 @@ export class MenuGroupComponent implements OnInit {
 
   @Output() groupsChanged = new EventEmitter();
 
-  constructor( @Inject(FirebaseRef) private _ref: Firebase, private _ds: DataService, private _tx: ValueService, private _ls: LocalStorageService) {
-
-    this._authData = this._ref.getAuth();
+  constructor(
+    @Inject(FirebaseRef) private _ref: Firebase,
+    private _ds: DataService,
+    private _tx: ValueService,
+    private _ls: LocalStorageService) {
+      this._authData = this._ref.getAuth();
   }
 
   ngOnInit() {
@@ -107,7 +110,7 @@ export class MenuGroupComponent implements OnInit {
       } else {
         for (let note of this.notes) {
           this._ls.changeNoteGroup(note.$key, this.group.name);
-          
+
         }
       }
       this.editSrc = 'icon_edit.png';

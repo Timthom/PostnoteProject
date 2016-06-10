@@ -46,8 +46,11 @@ export class NoteComponent implements OnInit {
   }
 
 
-  constructor( @Inject(FirebaseRef) private _ref: Firebase, private _ds: DataService, private _ls: LocalStorageService) {
-    this._authData = this._ref.getAuth();
+  constructor(
+    @Inject(FirebaseRef) private _ref: Firebase,
+    private _ds: DataService,
+    private _ls: LocalStorageService) {
+      this._authData = this._ref.getAuth();
   }
 
   isEditable: boolean = false;

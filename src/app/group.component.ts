@@ -8,6 +8,8 @@ import {Reverse} from './reverse.pipe';
 import {ValueService} from './value.service';
 import { Dragula } from 'ng2-dragula/ng2-dragula';
 import {LocalStorageService} from './localstorage.service';
+import {PushNotificationComponent} from 'ng2-notifications/ng2-notifications';
+
 
 @Component({
   moduleId: module.id,
@@ -15,7 +17,7 @@ import {LocalStorageService} from './localstorage.service';
   providers: [ROUTER_PROVIDERS, LocalStorageService],
   templateUrl: 'group.component.html',
   styleUrls: ['group.component.css'],
-  directives: [ROUTER_DIRECTIVES, NoteComponent, Dragula],
+  directives: [PushNotificationComponent,ROUTER_DIRECTIVES, NoteComponent, Dragula],
   pipes: [Reverse]
 })
 @RouteConfig([
@@ -44,8 +46,12 @@ export class GroupComponent {
   editSrc: string = 'icon_edit.png';
   _authData;
 
-  constructor( @Inject(FirebaseRef) private _ref: Firebase, private _ds: DataService, private _tx: ValueService, private _ls: LocalStorageService) {
-    this._authData = this._ref.getAuth();
+  constructor( 
+    @Inject(FirebaseRef) private _ref: Firebase, 
+    private _ds: DataService, 
+    private _tx: ValueService, 
+    private _ls: LocalStorageService) {
+      this._authData = this._ref.getAuth();
   }
 
   ngOnInit() {
@@ -157,4 +163,9 @@ export class GroupComponent {
       }
     }
   }
+  public notification: any = {
+    title: 'New Angular 2 Library!',
+    body: 'ng2-notifications',
+    icon: 'https://goo.gl/3eqeiE'
+  };
 }
