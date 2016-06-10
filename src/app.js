@@ -20,4 +20,4 @@ wow.init();
 
 
 
-alert("Hej");
+//alert("Hej");

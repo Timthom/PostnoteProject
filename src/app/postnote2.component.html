@@ -1,5 +1,5 @@
 <!--<headerbar (openSideBar)="openSideBar($event)"></headerbar>-->
-<div class="container">
+<div class="container-fluid">
   <!--Top navbar-->
   <div class="navbar_item navbar-inverse cbp-af-header">
     <button class="backBtn">
@@ -16,6 +16,7 @@
       <div>
         <creator></creator>
       </div>
+      
 
       <div *ngIf="_authData == null">
         <group (clickedDelete)="deleteGroup()" class="row" *ngFor="let group of allGroups"

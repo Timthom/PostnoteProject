@@ -1,9 +1,9 @@
-creator{
+/*creator{
 	margin-top: 25px;
 	float: left;
 	width: 100%;
 	margin-top: 10px;
-}
+}*/
 menu{
 	width: 100%;
 	float: left;
@@ -11,7 +11,7 @@ menu{
 	margin: 0px;
 	z-index: 0;
 }
-.container{
+.container-fluid{
 	/*position: absolute;*/
 	width: 100%;
 	padding: 0px;
