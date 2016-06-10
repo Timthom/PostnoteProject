@@ -1,16 +1,14 @@
 <div class="createUser">
-<h2>Create account</h2>
-        <form [ngFormModel]="myForm" (ngSubmit)="onCreateAccount()">
+        <form  [ngFormModel]="myForm" novalidate (ngSubmit)="onCreateAccount()">
             <div class="input-group">
-                <input [ngFormControl]="myForm.find('email')" type="email" placeholder="Email" id="email" #email="ngForm">
+                <input [ngFormControl]="myForm.find('email')" type="email" placeholder="Email" id="email">
             </div>
             <div class="input-group">
-                <input [ngFormControl]="myForm.find('password')" type="password" placeholder="Password"  id="password">
+                <input [ngFormControl]="myForm.find('password')" type="password" placeholder="Password" id="password">
             </div>
             <div class="input-group">
-                <input [ngFormControl]="myForm.find('confirmPassword')" type="password" placeholder="Confirm password" id="confirm-password" #confirmPassword="ngForm">
-                <span *ngIf="!confirmPassword.pristine && confirmPassword.errors != null && confirmPassword.errors['passwordsNotMatch']"><br/>The passwords do not match!</span>
+                <input [ngFormControl]="myForm.find('confirmPassword')" type="password" placeholder="Confirm password" id="confirm-password">
             </div>
-            <button type="submit" [disabled]="!myForm.valid">Submit</button>
+                <button id="col2" class="noColor" type="button" (click)="switchBackToLoginComponent()">Back</button><button id="col1" type="submit">Create account</button>
         </form>
 </div>

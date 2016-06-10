@@ -1,9 +1,10 @@
 <div class="noteContainer" [class.pink_color]="isPink" [class.magenta_color]="isMagenta" [class.orange_color]="isOrange" [class.blue_color]="isBlue" [class.yellow_color]="isYellow" [class.green_color]="isGreen">
-  <input class="delete_button" type="image" src="icon_delete.png" alt="Submit" width="25" height="25" (click)="deleteClick()">
-  <input [attr.disabled]="enabledIfNull" [class.selectedNoteTitle]="isEditable" [(ngModel)]="title" class="title" maxlength="18">
-  <div class="edit_button" [class.savable]="isEditable" (click)="editClick()"></div>
+  <div (click)="editClick()" class="editDiv" [class.editDivHidden]="isEditable"></div>
+  <input class="delete_button" [class.deleteButtonVisible]="isEditable" type="image" src="icon_delete.png" alt="Submit" width="25" height="25" (click)="deleteClick()">
+  <input [attr.disabled]="enabledIfNull" [class.selectedNoteTitle]="isEditable" [(ngModel)]="title" class="title" maxlength="18" placeholder="Title ...">
+  <div class="saveButton" [class.saveButtonVisible]="isEditable" (click)="save()"></div>
   <br>
-  <textarea [attr.disabled]="enabledIfNull" [class.selectedNoteText]="isEditable" [(ngModel)]="text" class="text_field" maxlength="150"></textarea>
+  <textarea [attr.disabled]="enabledIfNull" [class.selectedNoteText]="isEditable" [(ngModel)]="text" class="text_field" maxlength="150" placeholder="Make a note ..."></textarea>
   <dropdown class="group_dropdown" [class.visible_dropdown]="isEditable" [noteGroup]="selectedNoteGroup" (changeNoteGroup)="noteGroupChanged($event)"></dropdown>
   <colorpicker (changeColor)="colorChanged($event)" [class.visible_colorpicker]="isEditable"></colorpicker> 
 </div>

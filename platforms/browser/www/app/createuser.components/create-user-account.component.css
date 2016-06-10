@@ -1,76 +1,77 @@
 .createUser {
-  position: absolute;
-  width: 400px;
-  height: 300px;
+  position: fixed;
+  width: 300px;
+  height: 165px;
   z-index: 15;
-  top: 35%;
-  left: 50%;
-  margin: -100px 0 0 -100px;
-  background-color: #F0F0F0;
-  border: 2px solid grey;
+  top: 60px;
+  right: 10px;
+  background-color: #EEEEEE;
   font-family: 'Open Sans', Verdana, Geneva, Arial, Helvetica, sans-serif;
+  color: #6B6B6B;
+  box-shadow: 0px 1px 5px rgba(0,0,0,0.5);
 }
 
-h2 {
-    color: black;
-      margin-left: 40px;
-}
-
-    input {
-      width: 300px;
+input {
+      width: 90%;
       font-size:15pt;
-      border-radius: 3px;
-      background-color: white;
-      border: 1px solid black;
-      margin-left: 45px;
+      border-radius: 2px;
+      border: none;
+      background-color: #E0E0E0;
+      box-shadow: inset 0px 1px 2px rgba(0,0,0,0.5);
+      margin-left: 5%;
+      margin-right: 5%;
       margin-top: 10px;
-    }
+      padding-left: 7px;
+}
+
+.input-group {
+      display: block;
+}    
     
-    button[disabled] {
-    background-color: #ccc;
+button[disabled] {
     cursor: default;
   }
 
-  button:not([disabled]):hover {
-    background-color: mediumpurple;
-  }
-
-  .ng-dirty.ng-invalid {
-    background-color: orangered;
-  }
-
-  .ng-dirty.ng-valid {
-    border: 1px solid green;
-    background-color: #b7e0a0;
-  
-  }
-  
-   button {
-    border-radius: 5px;
-    border: 1px solid black;
-    margin-top: 30px;
-    font-size: inherit;
-    background-color: green;
-    color: white;
+button:not([disabled]):hover {
     cursor: pointer;
-    padding: 5px 8px;
-    float: right;
-    margin-right: 10px;
+  }
+
+.ng-dirty.ng-invalid {
+    border: 1px solid red;
+  }
+
+.ng-dirty.ng-valid {
+    border: 1px solid #88AD88;
+    background-color: #b7e0a0;
   }
   
-  .imageButtons {
-      margin-left: 45px;
+ button {
+    background-color: #4CAF50; 
+    margin-top: 10px;
+    margin-bottom: 5px; 
+    font-size: inherit;
+    color: #3C3C3C;
+    cursor: pointer;
+    border: none;
+    border-radius: 2px;
+    box-shadow: 0px 1px 5px rgba(0,0,0,0.5);
+    
   }
-  
-  .bar {
-    margin-top: 5px;
-    border-bottom: 2px solid lightgray;
+
+.noColor {
+  background-color: #EEEEEE;
 }
 
-span {
-  position:absolute;
-  color: orangered;
-  left: 42px;
-  margin-top: 30px;
+#col1 {
+    display: inline-block;
+    width: 43.5%;
+    margin-right: 5%;
+}
+
+#col2 {
+    display: inline-block;
+    width: 43.5%;
+    margin-left: 5%;
+    margin-right: 9px;
 }
   

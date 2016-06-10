@@ -17,9 +17,7 @@ var AuthorizationService = (function () {
     function AuthorizationService(_ref) {
         this._ref = _ref;
     }
-    // alert('Registreringen lyckades :)');
     AuthorizationService.prototype.createUserAccount = function (user) {
-        this._ref.onAuth(this.authDataCallback);
         this._ref.createUser({
             email: user.email,
             password: user.password
@@ -28,16 +26,9 @@ var AuthorizationService = (function () {
                 alert('E-post adressen finns redan. Välj en annan!');
             }
             else {
+                alert("Registreringen lyckades");
             }
         });
-    };
-    AuthorizationService.prototype.authDataCallback = function (authData) {
-        if (authData) {
-            console.log('User is logged in');
-        }
-        else {
-            console.log("User is logged out");
-        }
     };
     AuthorizationService.prototype.loginUser = function (user) {
         this._ref.authWithPassword({
@@ -50,6 +41,7 @@ var AuthorizationService = (function () {
             else {
                 localStorage.setItem('token', authData.token);
                 console.log(authData);
+                alert("Du är nu inloggad!");
             }
         });
     };
@@ -67,6 +59,30 @@ var AuthorizationService = (function () {
     };
     AuthorizationService.prototype.loginGoogleAuth = function () {
         this._ref.authWithOAuthPopup("google", function (error, authData) {
+            if (error) {
+                console.log("Login Failed!", error);
+            }
+            else {
+                console.log("Authenticated successfully with payload:", authData);
+                localStorage.setItem('token', authData.token);
+            }
+        }, { remember: "sessionOnly"
+        });
+    };
+    AuthorizationService.prototype.loginTwitterAuth = function () {
+        this._ref.authWithOAuthPopup("twitter", function (error, authData) {
+            if (error) {
+                console.log("Login Failed!", error);
+            }
+            else {
+                console.log("Authenticated successfully with payload:", authData);
+                localStorage.setItem('token', authData.token);
+            }
+        }, { remember: "sessionOnly"
+        });
+    };
+    AuthorizationService.prototype.loginGitHubAuth = function () {
+        this._ref.authWithOAuthPopup("github", function (error, authData) {
             if (error) {
                 console.log("Login Failed!", error);
             }

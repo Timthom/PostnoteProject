@@ -62,7 +62,7 @@ export class Postnote2App implements OnInit {
         this.groupChanged.emit('');
     }
 
-    openSideBar() {
+    toggleSideBar() {
         this._vs._showSideBar = !this._vs._showSideBar;
         this.statusCheckSideBar = this._vs._showSideBar;
         if (this.statusCheckSideBar) {
@@ -71,5 +71,5 @@ export class Postnote2App implements OnInit {
             this.btnImage = 'icon_menu.png';
         }
     }
-
+    
 }

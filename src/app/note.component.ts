@@ -61,8 +61,11 @@ export class NoteComponent implements OnInit {
   isGreen: boolean = false;
 
   editClick() {
-    //IF TODO
-    if (this.isEditable) {
+    this.isEditable = true;
+    this.enabledIfNull = null;
+  }
+  
+  save() {
       if (this._authData != null) {
         this._ds.updateNoteTitle(this.noteInNote.$key, this.title);
         this._ds.updateNoteText(this.noteInNote.$key, this.text);
@@ -70,12 +73,8 @@ export class NoteComponent implements OnInit {
         this._ls.updateNoteTitle(this.noteInNote.$key, this.title);
         this._ls.updateNoteText(this.noteInNote.$key, this.text);
       }
-      this.enabledIfNull = "";
-    } else {
-      this.enabledIfNull = null;
-    }
-    this.isEditable = !this.isEditable;
-
+    this.isEditable = false;
+    this.enabledIfNull = "";
   }
 
   //Emitted from dropdown

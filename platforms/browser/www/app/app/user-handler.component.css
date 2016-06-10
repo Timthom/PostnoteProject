@@ -1,13 +1,30 @@
 nav.right {
-    position: relative;
-    float: right;
-    z-index:5;
-    margin-right: 5px;
+	position: fixed;
+	z-index: 500;
+	display: block;
+	border-radius: 0px;
+	width: 100%;
+	height: 1px;
 }
 
 a {
     text-decoration: none;
     cursor: pointer;
+}
+
+.loginBtn{
+	background-color: transparent;
+	border: none;
+	outline: none;
+	right: 10px;
+	top: 7px;
+	position: relative;
+	float: right;
+}
+
+.btnImage{
+    height: 30px;
+	width: 30px;
 }
 
 menu {
