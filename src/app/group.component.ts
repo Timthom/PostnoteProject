@@ -163,9 +163,11 @@ export class GroupComponent {
       }
     }
   }
+  // Toast
   public notification: any = {
-    title: 'New Angular 2 Library!',
-    body: 'ng2-notifications',
-    icon: 'https://goo.gl/3eqeiE'
+    title: 'Postnote',
+    body: 'Välkommen till postnote appen !!',
+    icon: 'https://goo.gl/3eqeiE',
+    closeDelay: '2000'
   };
 }

@@ -1,14 +1,17 @@
 <div class="container">
+    <push-notification #notification 
+        title="Postnote app" 
+        body="Welcome to Postnote !" 
+        closeDelay="2000" 
+        icon="https://goo.gl/3eqeiE">
+    </push-notification>
     
-    <div *ngIf="expanded" class="ifButtons" (load)="notification.show()">
+    <div *ngIf="expanded" class="ifButtons">
         <button class="delete_button" id="{{deleteBtn}}"><img class="button_image" src="icon_delete.png" alt="submit" data-toggle="modal" data-target="#myModal"></button>
-        <button class="edit_button" id="{{editBtn}}" (click)="editClick()"><img class="button_image" src="{{editSrc}}" alt="submit" ><push-notification #notification title="ng2-notifications"
-  body="Component for Native Push Notifications"
-  icon="https://goo.gl/3eqeiE" (load)="notification.show()">
-</push-notification></button>
+        <button class="edit_button" id="{{editBtn}}" (click)="editClick()"><img class="button_image" src="{{editSrc}}" alt="submit"></button>
     </div>
     <div class="groupContainer" id={{groupName}} (click)="groupExpand()">
-        <button class="collapse_button" [ngClass]="{expandedClass : expanded}"><img class="button_image" src="{{arrowSrc}}" alt="submit"></button>
+        <button class="collapse_button" [ngClass]="{expandedClass : expanded}"><img class="button_image" src="{{arrowSrc}}" alt="submit" (click)="notification.show()"></button>
         <input type="text" class="group_name " id="group_name" [(ngModel)]="groupName" maxlength="18" [attr.disabled]="enableEditIfNull"
             [class.editingName]="editingName" (keyup.enter)="editClick()">
         <hr class="line">
