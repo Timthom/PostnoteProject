@@ -15,33 +15,74 @@ var create_user_account_component_1 = require('../createuser.components/create-u
 var login_component_1 = require('../login.components/login.component');
 var postnote2_component_1 = require('../postnote2.component');
 var menu_component_1 = require('../menu.component');
+var logout_component_1 = require('../logout/logout.component');
+var localstorage_service_1 = require('../localstorage.service');
 var UserHandlerComponent = (function () {
     function UserHandlerComponent(_authServiceHandler, _router) {
         this._authServiceHandler = _authServiceHandler;
         this._router = _router;
         this.switchWindow = false;
+        this.loggingOut = false;
+        this.loggingIn = false;
+        this.createUser = false;
+        console.log("Refreshing???");
     }
+    UserHandlerComponent.prototype.routerCanReuse = function () {
+        return false;
+    };
     UserHandlerComponent.prototype.isAuth = function () {
         //console.log("Auth method is working!");
         return this._authServiceHandler.isAuthenticated();
     };
     UserHandlerComponent.prototype.logoutUser = function () {
-        console.log("Loggas ut?");
+        //console.log("Loggas ut?");
         this._authServiceHandler.killAuth();
-        this._router.renavigate();
         this.switchWindow = false;
-        this._router.parent.navigate(['UserHandlerRoute']);
+        this.loggingOut = false;
+        this.loggingIn = false;
+        // this._router.renavigate();
+        // this._router.parent.navigate(['UserHandlerRoute']);
     };
     UserHandlerComponent.prototype.switchTo = function () {
         return this.switchWindow;
+    };
+    UserHandlerComponent.prototype.isLoggingOut = function () {
+        return this.loggingOut;
+    };
+    UserHandlerComponent.prototype.isLoggingIn = function () {
+        return this.loggingIn;
+    };
+    UserHandlerComponent.prototype.switchToLoginWindow = function () {
+        // this._router.parent.navigate(['LoginUserRoute']);
+        if (this.createUser == true) {
+            this.loggingIn = false;
+            this.createUser = false;
+        }
+        else {
+            this.loggingIn = !this.loggingIn;
+        }
+    };
+    UserHandlerComponent.prototype.switchToLogoutWindow = function () {
+        //console.log("Byter till logout!");
+        //console.log(this.loggingOut);
+        this.loggingOut = !this.loggingOut;
     };
     UserHandlerComponent.prototype.switchToCreateAccountWindow = function () {
         this.switchWindow = true;
         // this._router.parent.navigate(['CreateUserAccountRoute']);
     };
-    UserHandlerComponent.prototype.switchToLoginWindow = function () {
-        // this._router.parent.navigate(['LoginUserRoute']);
-        this.switchWindow = false;
+    UserHandlerComponent.prototype.isCreatingAccount = function () {
+        return this.createUser;
+    };
+    UserHandlerComponent.prototype.createUserAccount = function () {
+        console.log("EventEmitter is working!?");
+        this.loggingIn = false;
+        this.createUser = true;
+    };
+    UserHandlerComponent.prototype.loginUser = function () {
+        console.log("Back button is working in user-handler!");
+        this.loggingIn = true;
+        this.createUser = false;
     };
     UserHandlerComponent = __decorate([
         core_1.Component({
@@ -49,8 +90,9 @@ var UserHandlerComponent = (function () {
             selector: 'user-handler',
             templateUrl: 'user-handler.component.html',
             styleUrls: ['user-handler.component.css'],
-            directives: [router_deprecated_1.ROUTER_DIRECTIVES, create_user_account_component_1.CreateUserAccountComponent, login_component_1.LoginComponent, postnote2_component_1.Postnote2App, menu_component_1.MenuComponent],
-            outputs: ['_userLoggedOut']
+            directives: [router_deprecated_1.ROUTER_DIRECTIVES, create_user_account_component_1.CreateUserAccountComponent, login_component_1.LoginComponent, postnote2_component_1.Postnote2App, menu_component_1.MenuComponent, logout_component_1.LogoutComponent],
+            outputs: ['_userLoggedOut'],
+            providers: [localstorage_service_1.LocalStorageService],
         }), 
         __metadata('design:paramtypes', [authorization_service_1.AuthorizationService, router_deprecated_1.Router])
     ], UserHandlerComponent);

@@ -17,49 +17,49 @@ var DataService = (function () {
     function DataService(_ref, _af) {
         this._ref = _ref;
         this._af = _af;
-        console.log("NU KÖR CONSTRUCTORN!!!");
-        console.log("Här är auth data: " + this._ref.getAuth());
-        if (this._ref.getAuth() == null)
+        if (this._ref.getAuth() == null) {
+            console.log('return#1');
             return;
-        if (localStorage.getItem('token') == null)
+        }
+        //Varför sker det här?
+        if (localStorage.getItem('token') == null) {
+            console.log('return#2');
             return;
-        console.log("Skrivs ej ut???");
+        }
         var token = localStorage.getItem('token');
         this._ref.authWithCustomToken(token, function (error, authData) {
             if (error) {
-                console.log("Authentication Failed!", error);
             }
             else {
-                console.log("Authenticated successfully with payload:", authData);
             }
-        }, { remember: "sessionOnly"
+        }, {
+            remember: "sessionOnly"
         });
         var authData = _ref.getAuth();
-        console.log(authData);
         this._afNotes = _af.database.list('/users/' + authData.uid + '/notes');
         this._afGroups = _af.database.list('/users/' + authData.uid + '/groups', {
             query: {
                 orderByChild: 'timeStamp'
             }
         });
+        console.log('nu kommer notesen!');
+        console.log(this._notes);
         this._notes = _ref.child('/users/' + authData.uid + '/notes');
+        console.log(this._notes);
         this._groups = _ref.child('/users/' + authData.uid + '/groups');
-        console.log("inne i dataservice konstruktor");
     }
     //returns all notes in the DB...
     DataService.prototype.getAllNotes = function () {
-        console.log("Körs typ detta eller vad händer!??!?!?!");
         if (this._ref.getAuth() == null)
             return;
         var token = localStorage.getItem('token');
         this._ref.authWithCustomToken(token, function (error, authData) {
             if (error) {
-                console.log("Authentication Failed!", error);
             }
             else {
-                console.log("Authenticated successfully with payload:", authData);
             }
-        }, { remember: "sessionOnly"
+        }, {
+            remember: "sessionOnly"
         });
         console.log(token);
         return Promise.resolve(this._afNotes);
@@ -71,12 +71,11 @@ var DataService = (function () {
         var token = localStorage.getItem('token');
         this._ref.authWithCustomToken(token, function (error, authData) {
             if (error) {
-                console.log("Authentication Failed!", error);
             }
             else {
-                console.log("Authenticated successfully with payload:", authData);
             }
-        }, { remember: "sessionOnly"
+        }, {
+            remember: "sessionOnly"
         });
         console.log(token);
         console.log(this._notes.ref);
@@ -90,12 +89,11 @@ var DataService = (function () {
         var token = localStorage.getItem('token');
         this._ref.authWithCustomToken(token, function (error, authData) {
             if (error) {
-                console.log("Authentication Failed!", error);
             }
             else {
-                console.log("Authenticated successfully with payload:", authData);
             }
-        }, { remember: "sessionOnly"
+        }, {
+            remember: "sessionOnly"
         });
         this._notes.child(id).update({ 'title': newTitle });
     };
@@ -106,12 +104,11 @@ var DataService = (function () {
         var token = localStorage.getItem('token');
         this._ref.authWithCustomToken(token, function (error, authData) {
             if (error) {
-                console.log("Authentication Failed!", error);
             }
             else {
-                console.log("Authenticated successfully with payload:", authData);
             }
-        }, { remember: "sessionOnly"
+        }, {
+            remember: "sessionOnly"
         });
         this._notes.child(id).update({ 'text': newText });
     };
@@ -126,12 +123,11 @@ var DataService = (function () {
         var token = localStorage.getItem('token');
         this._notes.authWithCustomToken(token, function (error, authData) {
             if (error) {
-                console.log("Authentication Failed!", error);
             }
             else {
-                console.log("Authenticated successfully with payload:", authData);
             }
-        }, { remember: "sessionOnly"
+        }, {
+            remember: "sessionOnly"
         });
         this._notes.child(id).remove();
     };
@@ -142,15 +138,14 @@ var DataService = (function () {
         var token = localStorage.getItem('token');
         this._ref.authWithCustomToken(token, function (error, authData) {
             if (error) {
-                console.log("Authentication Failed!", error);
             }
             else {
-                console.log("Authenticated successfully with payload:", authData);
             }
-        }, { remember: "sessionOnly"
+        }, {
+            remember: "sessionOnly"
         });
         var authData = this._ref.getAuth();
-        console.log(authData);
+        //console.log(authData);
         var tempObservable = this._af.database.list('/users/' + authData.uid + '/notes', {
             query: {
                 orderByChild: 'group',
@@ -166,12 +161,11 @@ var DataService = (function () {
         var token = localStorage.getItem('token');
         this._ref.authWithCustomToken(token, function (error, authData) {
             if (error) {
-                console.log("Authentication Failed!", error);
             }
             else {
-                console.log("Authenticated successfully with payload:", authData);
             }
-        }, { remember: "sessionOnly"
+        }, {
+            remember: "sessionOnly"
         });
         return Promise.resolve(this._afGroups);
     };
@@ -182,12 +176,11 @@ var DataService = (function () {
         var token = localStorage.getItem('token');
         this._ref.authWithCustomToken(token, function (error, authData) {
             if (error) {
-                console.log("Authentication Failed!", error);
             }
             else {
-                console.log("Authenticated successfully with payload:", authData);
             }
-        }, { remember: "sessionOnly"
+        }, {
+            remember: "sessionOnly"
         });
         this._groups.push({ 'name': name, 'timeStamp': (time * -1) });
     };
@@ -196,12 +189,11 @@ var DataService = (function () {
         var token = localStorage.getItem('token');
         this._ref.authWithCustomToken(token, function (error, authData) {
             if (error) {
-                console.log("Authentication Failed!", error);
             }
             else {
-                console.log("Authenticated successfully with payload:", authData);
             }
-        }, { remember: "sessionOnly"
+        }, {
+            remember: "sessionOnly"
         });
         this._groups.child(id).update({ 'name': name });
     };
@@ -210,12 +202,11 @@ var DataService = (function () {
         var token = localStorage.getItem('token');
         this._ref.authWithCustomToken(token, function (error, authData) {
             if (error) {
-                console.log("Authentication Failed!", error);
             }
             else {
-                console.log("Authenticated successfully with payload:", authData);
             }
-        }, { remember: "sessionOnly"
+        }, {
+            remember: "sessionOnly"
         });
         this._groups.child(id).remove();
     };
@@ -224,14 +215,27 @@ var DataService = (function () {
         var token = localStorage.getItem('token');
         this._notes.authWithCustomToken(token, function (error, authData) {
             if (error) {
-                console.log("Authentication Failed!", error);
             }
             else {
-                console.log("Authenticated successfully with payload:", authData);
             }
-        }, { remember: "sessionOnly"
+        }, {
+            remember: "sessionOnly"
         });
         this._notes.child(id).update({ 'group': group });
+    };
+    /* Vill göra denna med promises om jag hinner //Marcus... */
+    DataService.prototype.getGroupNameFromId = function (id) {
+        var notes = this._notes;
+        console.log(notes);
+        //this._notes.child(id).child('group').once('value').then((s) => (console.log(s.val())));
+        return new Promise(function (resolve) {
+            //this._notes.child(id).child('group').once('value').then((s) => resolve(s.val()));
+            //resolve(this._notes.child(id).child('group').once('value').then((s) => (s.val())));
+            notes.child(id).child('group').on('value', function (s) { return resolve(s.val()); });
+            // console.log(notes, abc);
+            // resolve(abc);
+            //resolve('hej');
+        });
     };
     DataService = __decorate([
         core_1.Injectable(),

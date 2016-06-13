@@ -13,8 +13,9 @@ var Reverse = (function () {
     function Reverse() {
     }
     Reverse.prototype.transform = function (value) {
-        console.log('inne i pipen... value=' + value);
-        return value.slice().reverse();
+        if (value) {
+            return value.slice().reverse();
+        }
     };
     Reverse = __decorate([
         core_1.Pipe({

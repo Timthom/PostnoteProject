@@ -15,38 +15,60 @@ var CreateUserAccountComponent = (function () {
     function CreateUserAccountComponent(_fb, _authService) {
         this._fb = _fb;
         this._authService = _authService;
+        this.emitLoginUserAccountWindow = new core_1.EventEmitter();
         this.error = false;
         this.errorMessage = '';
     }
     CreateUserAccountComponent.prototype.onCreateAccount = function () {
-        this._authService.createUserAccount(this.myForm.value);
+        console.log(this.myForm.value.email);
+        /* Password matching expression. Password must be at least 8 characters, no more than 20 characters,
+        and must include at least one upper case letter, one lower case letter, and one numeric digit. */
+        // var re = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,20}$/;
+        var re = /[0-9]/;
+        var re_2 = /[A-Z]/;
+        var re_3 = /[a-z]/;
+        var re_4 = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        if (this.myForm.value.password != this.myForm.value.confirmPassword) {
+            alert('Error: passwords do not match!');
+        }
+        else if (!re.test(this.myForm.value.password)) {
+            alert('Error: password must contain at least one number!');
+        }
+        else if (!re_2.test(this.myForm.value.password)) {
+            alert('Error: password must contain at least one uppercase letter!');
+        }
+        else if (!re_3.test(this.myForm.value.password)) {
+            alert('Error: password must contain at least one lowercase letter!');
+        }
+        else if (this.myForm.value.password.length < 8) {
+            alert('Error: password must contain at least 8 characters!');
+        }
+        else if (this.myForm.value.password.length > 20) {
+            alert('Error: password must be less than 20 charachters!');
+        }
+        else if (!re_4.test(this.myForm.value.email)) {
+            alert('Error: You must enter a valid email address as username!');
+        }
+        else {
+            this._authService.createUserAccount(this.myForm.value);
+            this.switchBackToLoginComponent();
+        }
     };
     CreateUserAccountComponent.prototype.ngOnInit = function () {
         this.myForm = this._fb.group({
-            email: ['', common_1.Validators.compose([
-                    common_1.Validators.required,
-                    this.checkIfEmailIsValid
-                ])],
+            email: ['', common_1.Validators.required],
             password: ['', common_1.Validators.required],
-            confirmPassword: ['', common_1.Validators.compose([
-                    common_1.Validators.required,
-                    this.checkIfPassWordsMatch.bind(this)
-                ])],
+            confirmPassword: ['', common_1.Validators.required],
         });
     };
-    CreateUserAccountComponent.prototype.checkIfEmailIsValid = function (control) {
-        if (!control.value.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)) {
-            return { noEmail: true };
-        }
+    CreateUserAccountComponent.prototype.switchBackToLoginComponent = function () {
+        this.emitLoginUserAccountWindow.emit('');
+        console.log("GoBack button is working!!!");
     };
-    CreateUserAccountComponent.prototype.checkIfPassWordsMatch = function (control) {
-        if (!this.myForm) {
-            return { passwordsNotMatch: true };
-        }
-        if (control.value !== this.myForm.controls['password'].value) {
-            return { passwordsNotMatch: true };
-        }
-    };
+    __decorate([
+        core_1.Output(), 
+        __metadata('design:type', Object)
+    ], CreateUserAccountComponent.prototype, "emitLoginUserAccountWindow", void 0);
     CreateUserAccountComponent = __decorate([
         core_1.Component({
             moduleId: module.id,

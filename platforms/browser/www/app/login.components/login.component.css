@@ -1,71 +1,112 @@
 .login {
-  position: absolute;
-  width: 400px;
-  height: 350px;
+  position: fixed;
+  width: 300px;
+  height: 220px;
   z-index: 15;
-  top: 35%;
-  left: 50%;
-  margin: -100px 0 0 -100px;
-  background-color: #F0F0F0;
-  border: 2px solid grey;
+  top: 60px;
+  right: 10px;
+  background-color: #EEEEEE;
+  border-radius: 2px;
   font-family: 'Open Sans', Verdana, Geneva, Arial, Helvetica, sans-serif;
+  color: #404040;
+  box-shadow: 0px 1px 5px rgba(0,0,0,0.5);
 }
 
-h2 {
-    color: black;
-      margin-left: 20px;
-}
-
-    input {
-      width: 300px;
+input {
+      width: 90%;
       font-size:15pt;
-      border-radius: 3px;
-      background-color: white;
-      border: 1px solid black;
-      margin-left: 45px;
+      border-radius: 2px;
+      border: none;
+      background-color: #E0E0E0;
+      box-shadow: inset 0px 1px 2px rgba(0,0,0,0.5);
+      margin-left: 5%;
+      margin-right: 5%;
       margin-top: 10px;
-    }
+      padding-left: 7px;
+}
+
+.input-group {
+      display: block;
+}    
     
-    button[disabled] {
-    background-color: #ccc;
+button[disabled] {
     cursor: default;
   }
 
-  button:not([disabled]):hover {
-    background-color: mediumpurple;
+button:not([disabled]):hover {
+    cursor: pointer;
   }
 
-  .ng-dirty.ng-invalid {
+.ng-dirty.ng-invalid {
     border: 1px solid red;
   }
 
-  .ng-dirty.ng-valid {
-    border: 1px solid green;
+.ng-dirty.ng-valid {
+    border: 1px solid #88AD88;
     background-color: #b7e0a0;
-  
   }
   
-   button {
-    border-radius: 5px;
-    border: 1px solid black;
-    margin-top: 30px;
+ button {
+    background-color: #4CAF50;    
+    margin-top: 10px;
+    margin-right: 5%;
+    margin-left: 5%;
+    margin-bottom: 5px;
     font-size: inherit;
-    background-color: green;
-    color: white;
+    color: #3C3C3C;
     cursor: pointer;
-    padding: 5px 8px;
-    float: right;
-    margin-right: 10px;
+    padding: 2px 8px;
+    width: 90%;
+    border: none;
+    border-radius: 2px;
+    box-shadow: 0px 1px 5px rgba(0,0,0,0.5);
   }
   
-  .imageButtons {
-      margin-left: 45px;
-  }
+.line {
+   width: 90%;
+   height: 10px;
+   margin-left: 5%;
+   margin-right: 5%;
+   border-bottom: 1px solid #6B6B6B;
+   text-align: center;
+ }
+ 
+ .lineText {
+   font-size: 10px;
+   background-color: #EEEEEE;
+   padding: 0 10px;
+   display: inline-block;
+ }
+ 
+ .imageButtons {
+   margin-top: 13px;
+   float: left;  
+   width: 45px;
+   height: 45px;
+   background-color: #EEEEEE;
+   padding: 2px;
+   border: none;
+   border-radius: 2px;
+   box-shadow: 0px 1px 5px rgba(0,0,0,0.5);
+ }
+ 
+ .createAccountText { 
+   top: 5px;
+   width: 80px;
+   margin-bottom: 5px;
+   text-decoration: underline;
+   font-size: 11px;
+   cursor: pointer; 
+   position: relative;
+   left: 205px;
+ }
+ 
+
   
-  .bar {
-    margin-top: 5px;
-    border-bottom: 2px solid lightgray;
-}
+  
+
+
+
   
 
 

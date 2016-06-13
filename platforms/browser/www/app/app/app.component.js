@@ -14,25 +14,29 @@ var angularfire2_1 = require('angularfire2');
 var data_service_1 = require('../data.service');
 var value_service_1 = require('../value.service');
 var user_handler_component_1 = require("./user-handler.component");
-var menu_component_1 = require('../menu.component');
+var ng2_dragula_1 = require('ng2-dragula/ng2-dragula');
+var dragula_helper_service_1 = require('../dragula-helper.service');
+var localstorage_service_1 = require('../localstorage.service');
 var AppComponent = (function () {
-    function AppComponent() {
+    function AppComponent(_dragulaService, _dhs) {
+        this._dragulaService = _dragulaService;
+        this._dhs = _dhs;
+        this._dhs._configureDragula(_dragulaService);
         console.log("Funkar?");
     }
     AppComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
             selector: 'my-app',
-            providers: [router_deprecated_1.ROUTER_PROVIDERS, data_service_1.DataService, angularfire2_1.AngularFire, value_service_1.ValueService],
+            providers: [router_deprecated_1.ROUTER_PROVIDERS, data_service_1.DataService, angularfire2_1.AngularFire, value_service_1.ValueService, dragula_helper_service_1.DragulaHelperService, localstorage_service_1.LocalStorageService],
+            viewProviders: [ng2_dragula_1.DragulaService],
             templateUrl: 'app.component.html',
             styleUrls: ['app.component.css'],
-            directives: [menu_component_1.MenuComponent, router_deprecated_1.ROUTER_DIRECTIVES],
+            directives: [user_handler_component_1.UserHandlerComponent, router_deprecated_1.ROUTER_DIRECTIVES],
             pipes: []
         }),
-        router_deprecated_1.RouteConfig([
-            { path: '/route1', name: 'UserHandlerRoute', component: user_handler_component_1.UserHandlerComponent, useAsDefault: true },
-        ]), 
-        __metadata('design:paramtypes', [])
+        router_deprecated_1.RouteConfig([]), 
+        __metadata('design:paramtypes', [ng2_dragula_1.DragulaService, dragula_helper_service_1.DragulaHelperService])
     ], AppComponent);
     return AppComponent;
 }());
