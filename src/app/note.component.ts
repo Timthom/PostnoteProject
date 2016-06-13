@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, Output, EventEmitter} from '@angular/core';
 import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from '@angular/router-deprecated';
 import {AngularFire} from 'angularfire2';
 import {FirebaseListObservable} from 'angularfire2';
@@ -24,6 +24,7 @@ import {LocalStorageService} from './localstorage.service';
 ])
 
 export class NoteComponent implements OnInit {
+  
   @Input()
   noteInNote;
 
@@ -38,6 +39,12 @@ export class NoteComponent implements OnInit {
 
   @Input()
   color;
+  
+  @Input()
+  groups: any;
+  
+  @Output()
+  noteChanged = new EventEmitter();
 
   _authData;
   test: any;
@@ -68,16 +75,18 @@ export class NoteComponent implements OnInit {
   }
   
   save() {
-    
       if (this._authData != null) {
         this._ds.updateNoteTitle(this.noteInNote.$key, this.title);
         this._ds.updateNoteText(this.noteInNote.$key, this.text);
       } else {
         this._ls.updateNoteTitle(this.noteInNote.$key, this.title);
         this._ls.updateNoteText(this.noteInNote.$key, this.text);
+        //Emit to postnote2
+        this.noteChanged.emit('');
       }
     this.isEditable = false;
     this.enabledIfNull = "";
+
   }
 
   //Emitted from dropdown
@@ -89,13 +98,12 @@ export class NoteComponent implements OnInit {
     } else {
       this._ls.changeNoteGroup(this.noteInNote.$key, this.noteSelectedGroup);
       //TEMPORARY
-      location.reload();
+      //location.reload();
     }
-
+    //this.noteChanged.emit(''); uppdateras m.h.a. editclick??
   }
 
   colorChanged(event) {
-    //IF TODO
     this.colorSwitch(event);
     this.isEditable = true;
     if (this._authData != null) {
@@ -151,9 +159,7 @@ export class NoteComponent implements OnInit {
       o._ds.deleteNote(o.noteInNote.$key);
     } else {
       o._ls.deleteNote(o.noteInNote.$key);
-      //TEMPORARY
-      location.reload();
-
+      o.noteChanged.emit('');
     }; }, 500);
     this.delete_button = !this.delete_button;
   }

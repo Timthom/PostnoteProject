@@ -80,7 +80,6 @@ export class LocalStorageService {
     }
 
     getNotesInGroup(groupName: string) {
-        console.log("localStorage.getItem(savedNotes) : " + localStorage.getItem("savedNotes"));
         if (localStorage.getItem("savedNotes")){
             this.notes = JSON.parse(localStorage.getItem("savedNotes"));
             let groupNotes = new Array;
@@ -109,6 +108,7 @@ export class LocalStorageService {
     addNoteToNotes(note: Note) {
         this.notes.push(note);
         localStorage.setItem("savedNotes", JSON.stringify(this.notes));
+        console.log("ADD NOTE TO LS");
     }
 
     deleteNote(key: string) {

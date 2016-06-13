@@ -1,34 +1,29 @@
- 
 <div class="groupContainer row" id={{groupName}} (click)="groupExpand()">
     <div class="row">
         <button class="collapse_button col-xs-1" [ngClass]="{expandedClass : expanded}"><img class="button_image" src="{{arrowSrc}}" alt="submit"></button>
-        <input type="text" class="group_name " id="group_name" class="col-xs-9"
-            [(ngModel)]="groupName" maxlength="18" [attr.disabled]="enableEditIfNull"
+        <input type="text" class="group_name " id="group_name" class="col-xs-9" [(ngModel)]="groupName" maxlength="18" [attr.disabled]="enableEditIfNull"
             [class.editingName]="editingName" (keyup.enter)="editClick()">
-        <button class="edit_button col-xs-1" id="{{editBtn}}" (click)="editClick()"
-            [hidden]="!expanded"><img class="button_image" src="{{editSrc}}" alt="submit" [hidden]="!expanded"></button>
-        <button class="delete_button col-xs-1" id="{{deleteBtn}}" (click)="deleteGroup()"
-            [hidden]="!expanded"><img class="button_image" src="icon_delete.png" alt="submit" [hidden]="!expanded"></button>
+        <button class="edit_button col-xs-1" id="{{editBtn}}" (click)="editClick()" [hidden]="!expanded"><img class="button_image" src="{{editSrc}}" alt="submit" [hidden]="!expanded"></button>
+        <button class="delete_button col-xs-1" id="{{deleteBtn}}" (click)="deleteGroup()" [hidden]="!expanded"><img class="button_image" src="icon_delete.png" alt="submit" [hidden]="!expanded"></button>
     </div>
-    
+
     <hr class="line">
 </div>
 <div class="row">
     <div *ngIf='_authData == null'>
         <div class="myDragulaContainer" [dragula]='"drag-bag"'>
-            <note class="noteContainer col-xs-12 col-m-6 col-sm-4 col-md-3 col-lg-3"
-                 *ngFor="let note of notes | sortNotes" [hidden]="!expanded" 
-            [noteInNote]="note"
-             [text]="note.text" [title]="note.title"
-                [group]="note.group" [color]="note.color" id="{{note.$key}}"></note>
+           <note class="noteContainer col-xs-12 col-m-6 col-sm-4 col-md-3 col-lg-3" *ngFor="let note of notes | sortNotes"
+                [hidden]="!expanded" [noteInNote]="note" [text]="note.text" [title]="note.title" [group]="note.group" [color]="note.color"
+                id="{{note.$key}}" [groups]="groups" (noteChanged)="emitNotes(groups)">
+                </note>
 
         </div>
     </div>
     <div *ngIf='_authData != null'>
         <div class="myDragulaContainer" [dragula]='"drag-bag"'>
-
-            <note class="noteContainer col-xs-12 col-m-6 col-sm-4 col-md-3 col-lg-3" *ngFor="let note of notes | async | sortNotes" [hidden]="!expanded" [noteInNote]="note" [text]="note.text" [title]="note.title"
-                [group]="note.group" [color]="note.color" id="{{note.$key}}"></note>
+            <note class="noteContainer col-xs-12 col-m-6 col-sm-4 col-md-3 col-lg-3" *ngFor="let note of notes | async | sortNotes" [hidden]="!expanded"
+                [noteInNote]="note" [text]="note.text" [title]="note.title" [group]="note.group" [color]="note.color" id="{{note.$key}}"
+                [groups]="groups"></note>
         </div>
     </div>
 
@@ -47,6 +42,7 @@
                     <button id="rigth-button" type="button" class="btn btn-danger btn-md pull-right" data-dismiss="modal" (click)="deleteGroup()">Yes</button>
                     <a id="left-button" type="button" href="#" class="btn btn-primary btn-md pull-left" data-dismiss="modal">No</a>
                 </div>
+            
             </div>
         </div>
 
