@@ -3,6 +3,7 @@
 	<name>postnote</name>
 	<comment></comment>
 	<projects>
+	<Content Include="$1\$2.js"><DependentUpon>$2.ts</DependentUpon></Content>
 	</projects>
 	<buildSpec>
 		<buildCommand>

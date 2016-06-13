@@ -27,7 +27,7 @@ export class MenuComponent implements OnInit, CanReuse {
   routerCanReuse() {
     return false;
   }
-  
+
   showingCancel: boolean = false;
   adding: boolean = false;
   groupName: string = "";
@@ -44,7 +44,7 @@ export class MenuComponent implements OnInit, CanReuse {
 
     this._authData = this._ref.getAuth();
     //_postNote2.groupChanged.subscribe(this.getGroups);
-    
+
   }
 
   ngOnInit() {
@@ -89,12 +89,12 @@ export class MenuComponent implements OnInit, CanReuse {
   addGroup() {
     if (this.groupName.trim().length > 0) {
       let time = new Date().getTime();
-​
+
       if (this._authData != null) {
         this._ds.addGroupToGroups(this.groupName, time);
         this.getGroups();
         this.getTitles();
-​
+
       } else {
         let newGroup = new Group(this.groupName, time.toString());
         this._ls.saveGroup(newGroup);
@@ -102,9 +102,9 @@ export class MenuComponent implements OnInit, CanReuse {
         //TEMPORARY
         location.reload();
       }
-​
+
       this.clicked.emit('');
-      
+
       //Reset input after adding
       this.groupName = "";
       this.adding = false;
@@ -113,3 +113,5 @@ export class MenuComponent implements OnInit, CanReuse {
     }
   }
 }
+
+

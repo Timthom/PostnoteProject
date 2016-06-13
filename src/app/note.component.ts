@@ -52,6 +52,7 @@ export class NoteComponent implements OnInit {
   }
 
   isEditable: boolean = false;
+  delete_button: boolean = true;
   enabledIfNull: string = "";
   noteSelectedGroup: string = this.group;
   isPink: boolean = false;
@@ -152,7 +153,9 @@ export class NoteComponent implements OnInit {
       o._ls.deleteNote(o.noteInNote.$key);
       //TEMPORARY
       location.reload();
+
     }; }, 500);
+    this.delete_button = !this.delete_button;
   }
 }
 

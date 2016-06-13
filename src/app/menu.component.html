@@ -1,4 +1,7 @@
-<nav class="navbar">
+<nav class="navbar navbar-inverse cbp-af-header-shrink wow fadeInLeft"
+  data-wow-duration="1s" data-wow-delay=".5s" (onload)="delaySidebar">
+
+
   <!--<div id="sidebar-wrapper">
       <div id="sidebar_menu" class="sidebar-nav">
           <li class="sidebar-brand" >
@@ -24,11 +27,13 @@
       </p>
     </div>
     <hr>
-    <button class="addBtn btn btn-info btn-xs" [class.cancelable]="showingCancel" (click)="toggleInput()">
+    <button class="addBtn btn btn-info btn-xs" [class.cancelable]="showingCancel"
+      (click)="toggleInput()">
          {{buttonText}}
        </button>
     <form *ngIf="adding">
-      <input [(ngModel)]="groupName" type="text" id="categoryInput" placeholder="Name" (keyup.enter)="addGroup()" maxlength="18">
+      <input [(ngModel)]="groupName" type="text" id="categoryInput" placeholder="Name"
+        (keyup.enter)="addGroup()" maxlength="18">
       <button id="plusBtn" type="button" (click)="addGroup()">+</button>
     </form>
     <hr>
@@ -36,8 +41,25 @@
       <menuGroup *ngFor="let group of myGroups" [group]="group" (groupsChanged)="getGroups()"></menuGroup>
     </div>
     <div *ngIf='_authData != null'>
-      <menuGroup *ngFor="let group of myGroups | async" [group]="group" (groupsChanged)="getGroups()"></menuGroup>
+      <menuGroup *ngFor="let group of myGroups | async" [group]="group"
+        (groupsChanged)="getGroups()"></menuGroup>
     </div>
   </div>
+  <script>
+    (function delaySidebar() {
+             
+        
+        function myTimeout1() {
+                document.getElementById("delayNav").innerHTML = "2 seconds";
+                console.log("Före delay");
+                document.getElementById("delayNav").webkitAnimationName = "fadeIn 1s "; // Code for Chrome, Safari and Opera
+                document.getElementById("delayNav").animationName = "fadeIn 1s ";
+                console.log("Efter delay");
+                alert("Page is loaded");
+        }
+
+
+})();
+  </script>
 
 </nav>
