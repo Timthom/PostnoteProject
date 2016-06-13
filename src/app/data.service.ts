@@ -273,7 +273,7 @@ console.log(this._notes);
     /* Vill göra denna med promises om jag hinner //Marcus... */    
     getGroupNameFromId(id: string) {
         let notes = this._notes;
-        console.log(notes);
+        // console.log(notes);
     //this._notes.child(id).child('group').once('value').then((s) => (console.log(s.val())));
         return new Promise(function(resolve){
         

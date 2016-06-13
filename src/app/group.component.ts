@@ -5,6 +5,7 @@ import {DataService} from './data.service';
 import { AngularFire, defaultFirebase, FirebaseRef, FirebaseListObservable } from 'angularfire2';
 import { Injectable, Inject } from '@angular/core';
 import {Reverse} from './reverse.pipe';
+import {SortNotes} from './sort-notes.pipe';
 import {ValueService} from './value.service';
 import { Dragula } from 'ng2-dragula/ng2-dragula';
 import {LocalStorageService} from './localstorage.service';
@@ -16,7 +17,7 @@ import {LocalStorageService} from './localstorage.service';
   templateUrl: 'group.component.html',
   styleUrls: ['group.component.css'],
   directives: [ROUTER_DIRECTIVES, NoteComponent, Dragula],
-  pipes: [Reverse]
+  pipes: [Reverse, SortNotes]
 })
 @RouteConfig([
 ])

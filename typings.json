@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "dragula": "registry:npm/dragula#3.6.8+20160410191048",
+    "lodash": "registry:npm/lodash#4.0.0+20160416211519",
     "moment": "registry:npm/moment#2.10.5+20160211003958"
   }
 }

@@ -8,6 +8,7 @@ import {Postnote2App} from './postNote2.component';
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {Reverse} from './reverse.pipe';
+import {SortNotes} from './sort-notes.pipe';
 import {DropdownComponent} from './dropdown.component';
 import { AngularFire, defaultFirebase, FirebaseRef, FirebaseListObservable } from 'angularfire2';
 import { Dragula } from 'ng2-dragula/ng2-dragula';
@@ -22,7 +23,7 @@ import {FirstLetter} from './first-letter.pipe';
     templateUrl: 'creator.component.html',
     styleUrls: ['creator.component.css'],
     directives: [ROUTER_DIRECTIVES, NoteComponent, DropdownComponent, Dragula],
-    pipes: [Reverse, FirstLetter],
+    pipes: [Reverse, FirstLetter, SortNotes],
     providers: [LocalStorageService]
 })
 @RouteConfig([
