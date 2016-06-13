@@ -113,7 +113,7 @@ export class UserHandlerComponent {
                 var result = currentExpire - lastExpire;
                 console.log(result);
             
-                if(result >= 10) { 
+                if(result >= 1800) { 
                     o.logoutUser();                   
                     if(o.count === 1) {
                         setTimeout(function() {
