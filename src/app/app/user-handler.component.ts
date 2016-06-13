@@ -6,7 +6,6 @@ import {LoginComponent} from '../login.components/login.component';
 import {Postnote2App} from '../postnote2.component';
 import {MenuComponent} from '../menu.component';
 import {LogoutComponent} from '../logout/logout.component';
-import {CanReuse} from "@angular/router-deprecated";
 import { LocalStorageService } from '../localstorage.service'
 import {Input, Inject, Injectable} from '@angular/core';
 import { defaultFirebase, FirebaseRef } from 'angularfire2';
@@ -21,34 +20,30 @@ import { defaultFirebase, FirebaseRef } from 'angularfire2';
     providers: [LocalStorageService],
 })
 
-export class UserHandlerComponent implements CanReuse  {
-    
-    routerCanReuse() {  
-        return false;
-    }
+export class UserHandlerComponent {
     
     switchWindow = false;
     loggingOut = false;
     loggingIn = false;
-    createUser = false;    
+    createUser = false;
+    count = 0; 
     
     constructor(private _authServiceHandler: AuthorizationService, private _router: Router, @Inject(FirebaseRef) private _ref: Firebase) {
-        console.log("Refreshing???");
+        this.count = 0;
     }
 
     isAuth() {
         return this._authServiceHandler.isAuthenticated();
     }
 
-        logoutUser() {
-            //console.log("Loggas ut?");
-          this._authServiceHandler.killAuth();
-          this.switchWindow = false;
-          this.loggingOut = false;
-          this.loggingIn = false;   
-          // this._router.renavigate();
-          // this._router.parent.navigate(['UserHandlerRoute']);   
-        }
+    logoutUser() {
+        this._router.parent.navigate(['UserHandlerRoute']); 
+        this._authServiceHandler.killAuth();
+        this.switchWindow = false;
+        this.loggingOut = false;
+        this.loggingIn = false;
+        this.count++;     
+    }
         
         switchTo(): boolean {
             return this.switchWindow;
@@ -118,12 +113,15 @@ export class UserHandlerComponent implements CanReuse  {
                 var result = currentExpire - lastExpire;
                 console.log(result);
             
-                if(result >= 1000) {
-                    // o.value = false;      
-                    o.logoutUser();   
-                    alert("Your session has expired. Please log in again!");    
-                } else {
-                    // o.value = true;              
+                if(result >= 10) { 
+                    o.logoutUser();                   
+                    if(o.count === 1) {
+                        setTimeout(function() {
+                        alert("Your session has expired. Please log in again!");
+                        o.count = 0;
+                        }, 1000)
+                    }   
+                } else {            
                     var ref = new Firebase("https://dazzling-fire-7472.firebaseio.com/users");
                     ref.child(authData.uid).once('value', function(snapshot) {
                             ref.child(authData.uid).update({

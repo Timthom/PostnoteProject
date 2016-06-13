@@ -26,7 +26,11 @@ import {LocalStorageService} from '../localstorage.service';
 })
 
 @RouteConfig([
-   // {path: '/route1', name:'UserHandlerRoute', component: UserHandlerComponent, useAsDefault : true},
+  {
+    path: "/",
+    name: 'UserHandlerRoute',
+    component: UserHandlerComponent
+  }
    
 ])
 
@@ -37,7 +41,3 @@ export class AppComponent{
      console.log("Funkar?");
   }
 }
-
-
- /* {path: '/route2', name:'AllNotes', component: Postnote2App},
-   {path: '/route3', name:'CreateUserAccount', component: CreateUserAccountComponent} */
