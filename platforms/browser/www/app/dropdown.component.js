@@ -18,20 +18,25 @@ var data_service_1 = require('./data.service');
 var common_1 = require('@angular/common');
 var ng2_bootstrap_1 = require('ng2-bootstrap/ng2-bootstrap');
 var core_2 = require('@angular/core');
+var localstorage_service_1 = require('./localstorage.service');
+var menu_component_1 = require('./menu.component');
+var menugroup_component_1 = require('./menugroup.component');
 var DropdownComponent = (function () {
-    function DropdownComponent(_ref, _ds) {
+    function DropdownComponent(_ref, _ds, _ls, _menu, _menuGroup) {
         this._ref = _ref;
         this._ds = _ds;
+        this._ls = _ls;
+        this._menu = _menu;
+        this._menuGroup = _menuGroup;
         this.changeGroup = new core_1.EventEmitter();
         this.changeNoteGroup = new core_1.EventEmitter();
         this.disabled = false;
         this.status = { isopen: false };
-        this.items = ['The first choice!',
-            'And another choice for you.', 'but wait! A third!'];
         this._authData = this._ref.getAuth();
+        //_menu.clicked.subscribe(this.getTitles());
+        //_menuGroup.groupsChanged.subscribe(this.getTitles());
     }
     DropdownComponent.prototype.toggled = function (open) {
-        console.log('Dropdown is now: ', open);
     };
     DropdownComponent.prototype.toggleDropdown = function ($event) {
         $event.preventDefault();
@@ -39,24 +44,24 @@ var DropdownComponent = (function () {
         this.status.isopen = !this.status.isopen;
     };
     DropdownComponent.prototype.ngOnInit = function () {
-        if (this._authData != null) {
-            this.getTitles();
-        }
+        this.getTitles();
     };
     DropdownComponent.prototype.getTitles = function () {
         var _this = this;
         if (this._authData != null) {
             this._ds.getAllGroups().then(function (titles) { return _this.groups = titles; });
         }
+        else {
+            this.groups = this._ls.getAllGroups();
+        }
     };
     DropdownComponent.prototype.selectGroup = function (group) {
-        if (this._authData != null) {
-            this.changeGroup.emit(group);
-            this.changeNoteGroup.emit(group);
-            var buttonText = document.getElementById('group_name');
-            buttonText.innerHTML = group;
-            console.log("Group selected " + group);
-        }
+        //Emits to creator?
+        this.changeGroup.emit(group);
+        //Emits to note component and group component?
+        this.changeNoteGroup.emit(group);
+        var buttonText = document.getElementById('group_name');
+        buttonText.innerHTML = group;
     };
     __decorate([
         core_1.Input(), 
@@ -78,7 +83,7 @@ var DropdownComponent = (function () {
         core_1.Component({
             moduleId: module.id,
             selector: 'dropdown',
-            providers: [router_deprecated_1.ROUTER_PROVIDERS],
+            providers: [router_deprecated_1.ROUTER_PROVIDERS, localstorage_service_1.LocalStorageService, menu_component_1.MenuComponent, menugroup_component_1.MenuGroupComponent],
             templateUrl: 'dropdown.component.html',
             styleUrls: ['dropdown.component.css'],
             directives: [router_deprecated_1.ROUTER_DIRECTIVES, ng2_bootstrap_1.DROPDOWN_DIRECTIVES, common_1.CORE_DIRECTIVES],
@@ -86,7 +91,7 @@ var DropdownComponent = (function () {
         }),
         router_deprecated_1.RouteConfig([]),
         __param(0, core_2.Inject(angularfire2_1.FirebaseRef)), 
-        __metadata('design:paramtypes', [Firebase, data_service_1.DataService])
+        __metadata('design:paramtypes', [Firebase, data_service_1.DataService, localstorage_service_1.LocalStorageService, menu_component_1.MenuComponent, menugroup_component_1.MenuGroupComponent])
     ], DropdownComponent);
     return DropdownComponent;
 }());

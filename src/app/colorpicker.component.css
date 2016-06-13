@@ -28,11 +28,6 @@
     transition: background-color 150ms ease-in-out, box-shadow 150ms ease-in-out;
 }
 
-.color_button:hover {
-    background-color: white;
-    box-shadow: 0px 1px 5px #5A5A5A;
-}
-
 .showing_colors {
     display: block;
 }

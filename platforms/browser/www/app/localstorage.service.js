@@ -11,37 +11,39 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var LocalStorageService = (function () {
     function LocalStorageService() {
-        console.log("inne i LocalStorageService constructor");
+        this.notes = new Array;
+        this.groups = new Array;
         if (!localStorage.getItem("savedNotes")) {
             this.notes = [];
         }
         else {
             this.notes = this.getAllNotes();
         }
-        this.groups = this.getAllGroups();
+        if (!localStorage.getItem("savedGroups")) {
+            this.groups = [];
+        }
+        else {
+            this.groups = this.getAllGroups();
+        }
     }
-    LocalStorageService.prototype.getAllNotes = function () {
-        this.notes = JSON.parse(localStorage.getItem("savedNotes"));
-        return this.notes;
-    };
     LocalStorageService.prototype.getAllGroups = function () {
-        this.groups = JSON.parse(localStorage.getItem("savedGroups"));
-        return this.groups;
+        if (JSON.parse(localStorage.getItem("savedGroups"))) {
+            this.groups = JSON.parse(localStorage.getItem("savedGroups"));
+            return this.groups;
+        }
+        else {
+            return [];
+        }
     };
     LocalStorageService.prototype.saveGroup = function (group) {
         this.groups.push(group);
         localStorage.setItem("savedGroups", JSON.stringify(this.groups));
     };
-    LocalStorageService.prototype.getNotesInGroup = function () {
-        //GET all notes in each group!?
-    };
     LocalStorageService.prototype.deleteGroup = function (groupkey) {
-        console.log(groupkey);
+        //The notes in group are removed in the components before this method is called
         for (var item in this.groups) {
-            console.log(item);
             if (groupkey == this.groups[item].$key) {
                 this.groups.splice(item, 1);
-                console.log(this.groups);
                 localStorage.setItem("savedGroups", JSON.stringify(this.groups));
                 //TO DO : Refresha menyn!
                 return;
@@ -49,10 +51,47 @@ var LocalStorageService = (function () {
         }
     };
     LocalStorageService.prototype.updateGroupName = function (groupkey, newName) {
+        var oldGroupName;
         for (var item in this.groups) {
             if (groupkey == this.groups[item].$key) {
+                oldGroupName = this.groups[item].name;
                 this.groups[item].name = newName;
                 localStorage.setItem("savedGroups", JSON.stringify(this.groups));
+            }
+        }
+        for (var item in this.notes) {
+            if (oldGroupName == this.notes[item].group) {
+                this.changeNoteGroup(this.notes[item].$key, newName); //change to new
+            }
+        }
+        localStorage.setItem("savedNotes", JSON.stringify(this.notes));
+    };
+    LocalStorageService.prototype.getAllNotes = function () {
+        this.notes = JSON.parse(localStorage.getItem("savedNotes"));
+        return this.notes;
+    };
+    LocalStorageService.prototype.getNotesInGroup = function (groupName) {
+        console.log("localStorage.getItem(savedNotes) : " + localStorage.getItem("savedNotes"));
+        if (localStorage.getItem("savedNotes")) {
+            this.notes = JSON.parse(localStorage.getItem("savedNotes"));
+            var groupNotes = new Array;
+            for (var _i = 0, _a = this.notes; _i < _a.length; _i++) {
+                var item = _a[_i];
+                if (item.group === groupName) {
+                    groupNotes.push(item);
+                }
+            }
+            return groupNotes;
+        }
+        else {
+            return [];
+        }
+    };
+    LocalStorageService.prototype.changeNoteGroup = function (key, newGroup) {
+        for (var item in this.notes) {
+            if (key == this.notes[item].$key) {
+                this.notes[item].group = newGroup;
+                localStorage.setItem("savedNotes", JSON.stringify(this.notes));
                 return;
             }
         }
@@ -60,7 +99,46 @@ var LocalStorageService = (function () {
     LocalStorageService.prototype.addNoteToNotes = function (note) {
         this.notes.push(note);
         localStorage.setItem("savedNotes", JSON.stringify(this.notes));
-        console.log(this.notes);
+    };
+    LocalStorageService.prototype.deleteNote = function (key) {
+        for (var item in this.notes) {
+            if (key == this.notes[item].$key) {
+                this.notes.splice(item, 1);
+                localStorage.setItem("savedNotes", JSON.stringify(this.notes));
+                //TO DO : Refresha
+                return;
+            }
+        }
+    };
+    LocalStorageService.prototype.updateNoteTitle = function (noteKey, newTitle) {
+        for (var item in this.notes) {
+            if (noteKey == this.notes[item].$key) {
+                this.notes[item].title = newTitle;
+                localStorage.setItem("savedNotes", JSON.stringify(this.notes));
+                //TO DO : Refresha
+                return;
+            }
+        }
+    };
+    LocalStorageService.prototype.updateNoteText = function (noteKey, newText) {
+        for (var item in this.notes) {
+            if (noteKey == this.notes[item].$key) {
+                this.notes[item].text = newText;
+                localStorage.setItem("savedNotes", JSON.stringify(this.notes));
+                //TO DO : Refresha
+                return;
+            }
+        }
+    };
+    LocalStorageService.prototype.updateNoteColor = function (noteKey, color) {
+        for (var item in this.notes) {
+            if (noteKey == this.notes[item].$key) {
+                this.notes[item].color = color;
+                localStorage.setItem("savedNotes", JSON.stringify(this.notes));
+                //TO DO : Refresha
+                return;
+            }
+        }
     };
     //For testing.... 
     LocalStorageService.prototype.clearing = function () {

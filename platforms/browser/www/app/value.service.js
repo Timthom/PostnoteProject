@@ -11,7 +11,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var ValueService = (function () {
     function ValueService() {
-        this._showSideBar = true;
+        this._showSideBar = false;
+        this._toggleExpand = false;
+        this._focusedId = '';
     }
     Object.defineProperty(ValueService.prototype, "showSideBar", {
         get: function () {
@@ -19,6 +21,27 @@ var ValueService = (function () {
         },
         set: function (b) {
             this._showSideBar = b;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ValueService.prototype, "toggleExpand", {
+        // getters and setter for the toggle arrow
+        get: function () {
+            return this._toggleExpand;
+        },
+        set: function (b) {
+            this._toggleExpand = b;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ValueService.prototype, "focusedId", {
+        get: function () {
+            return this._focusedId;
+        },
+        set: function (id) {
+            this._focusedId = id;
         },
         enumerable: true,
         configurable: true

@@ -5,13 +5,19 @@
 var map = {
     'firebase': 'vendor/firebase/lib/firebase-web.js',
     'angularfire2': 'vendor/angularfire2',
-    'moment': 'vendor/moment/moment.js'
+    'moment': 'vendor/moment/moment.js',
+    'ng2-dragula': 'vendor/ng2-dragula',
+    'dragula': 'vendor/dragula/dist/dragula.min.js'
 };
 /** User packages configuration. */
 var packages = {
     angularfire2: {
         defaultExtension: 'js',
         main: 'angularfire2.js'
+    },
+    'ng2-dragula': {
+        defaultExtension: 'js',
+        main: 'ng2-dragula.js'
     }
 };
 ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -35,6 +41,8 @@ var barrels = [
     'app/shared',
     'app/app',
     'app/headerbar',
+    'app/logout-component',
+    'app/logout',
 ];
 var cliSystemConfigPackages = {};
 barrels.forEach(function (barrelName) {

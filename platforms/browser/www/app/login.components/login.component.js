@@ -17,6 +17,7 @@ var LoginComponent = (function () {
         this._fb = _fb;
         this._authService = _authService;
         this._router = _router;
+        this.emitCreateUserAccount = new core_1.EventEmitter();
         this.error = false;
         this.errorMessage = '';
     }
@@ -38,6 +39,20 @@ var LoginComponent = (function () {
     LoginComponent.prototype.loginWithGoogle = function () {
         this._authService.loginGoogleAuth();
     };
+    LoginComponent.prototype.loginWithTwitter = function () {
+        this._authService.loginTwitterAuth();
+    };
+    LoginComponent.prototype.loginWithGitHub = function () {
+        this._authService.loginGitHubAuth();
+    };
+    LoginComponent.prototype.createAccountWindow = function () {
+        console.log("Create account click is working!");
+        this.emitCreateUserAccount.emit('');
+    };
+    __decorate([
+        core_1.Output(), 
+        __metadata('design:type', Object)
+    ], LoginComponent.prototype, "emitCreateUserAccount", void 0);
     LoginComponent = __decorate([
         core_1.Component({
             moduleId: module.id,

@@ -3,11 +3,11 @@
   <!--Top navbar-->
   <div class="navbar_item">
     <button class="backBtn">
-       <img class="btnImage" src="{{btnImage}}" (click)="openSideBar()" alt="backButton">
+       <img class="btnImage" src="{{btnImage}}" (click)="toggleSideBar()" alt="backButton">
    </button>
   </div>
   <div class="row">
-    <div class="shadow" [class.shadow_active]="statusCheckSideBar"></div>
+    <div class="shadow" [class.shadow_active]="statusCheckSideBar" (click)="toggleSideBar()"></div>
     <div class="col-xs-4" *ngIf="statusCheckSideBar == true">
       <menu (clicked)="addGroup()"></menu>
     </div>

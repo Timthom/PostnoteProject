@@ -71,11 +71,18 @@ function FirebaseListFactory(absoluteUrlOrDbRef, _a) {
 }
 exports.FirebaseListFactory = FirebaseListFactory;
 function firebaseListObservable(ref, _a) {
+var path = ref.toString();
+var b = false;
+if(path.substr(path.length - 6) === 'groups') {
+    b = true;
+    console.trace();
+}
     var preserveSnapshot = (_a === void 0 ? {} : _a).preserveSnapshot;
     var listObs = new firebase_list_observable_1.FirebaseListObservable(ref, function (obs) {
         var arr = [];
         var hasInitialLoad = false;
         ref.once('value', function (snap) {
+if(b) console.log('once value', snap, path, ref.toString());
             hasInitialLoad = true;
             obs.next(preserveSnapshot ? arr : arr.map(unwrapMapFn));
         }, function (err) {
@@ -85,6 +92,7 @@ function firebaseListObservable(ref, _a) {
             }
         });
         ref.on('child_added', function (child, prevKey) {
+if(b) console.log('child_added', child, prevKey);
             arr = onChildAdded(arr, child, prevKey);
             if (hasInitialLoad) {
                 obs.next(preserveSnapshot ? arr : arr.map(unwrapMapFn));
@@ -96,6 +104,7 @@ function firebaseListObservable(ref, _a) {
             }
         });
         ref.on('child_removed', function (child) {
+if(b) console.log('child_removed', child);
             arr = onChildRemoved(arr, child);
             if (hasInitialLoad) {
                 obs.next(preserveSnapshot ? arr : arr.map(unwrapMapFn));
@@ -107,6 +116,7 @@ function firebaseListObservable(ref, _a) {
             }
         });
         ref.on('child_changed', function (child, prevKey) {
+if(b) console.log('child_changed', child, prevKey);
             arr = onChildChanged(arr, child, prevKey);
             if (hasInitialLoad) {
                 obs.next(preserveSnapshot ? arr : arr.map(unwrapMapFn));
@@ -117,7 +127,10 @@ function firebaseListObservable(ref, _a) {
                 obs.complete();
             }
         });
-        return function () { return ref.off(); };
+        return function () { 
+if(b) console.log('off');
+            return ref.off(); 
+        };
     });
     return listObs;
 }

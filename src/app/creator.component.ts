@@ -36,7 +36,7 @@ export class CreatorComponent {
     selectedGroup: string = "noGroup";
     _authData;
     categoriesVisible: boolean = false;
-    colorCount: number = 0; 
+    colorCount: number = 0;
 
     constructor(private _ds: DataService, @Inject(FirebaseRef) private _ref: Firebase, private _ls: LocalStorageService) {
         this._authData = this._ref.getAuth();
@@ -71,38 +71,38 @@ export class CreatorComponent {
     }
 
     save(group: any) {
-        // if (this.title !== '' || this.text !== '') {
-            let time = new Date().getTime();
+        let time = new Date().getTime();
 
-            if (this._authData != null) {
-                this._ds.addNoteToNotes("", "", group, time, this.randomColor());
+        if (this._authData != null) {
+            this._ds.addNoteToNotes("", "", group, time, this.randomColor());
 
-            } else {
-                let newNote = new Note("", "", group, time.toString(), this.randomColor());
-                this._ls.addNoteToNotes(newNote);
-                this.getNotes(); //Update view
-            }
+        } else {
+            let newNote = new Note("", "", group, time.toString(), this.randomColor());
+            this._ls.addNoteToNotes(newNote);
+            this.getNotes(); //Update view
+        }
 
-            this.categoriesVisible = false; 
-            // this.title = '';
-            // this.text = '';
-        // }
+        this.categoriesVisible = false;
     }
 
     open() {
         this.categoriesVisible = !this.categoriesVisible;
     }
-    
-    randomColor () {
-       var colors = ["blue", "magenta", "yellow", "green", "pink", "orange"];
-       // if we want to pick a random color.......
-       //var color = colors[Math.floor(Math.random()*colors.length)];
-       var color = colors[this.colorCount];
-       this.colorCount++;
-       if(this.colorCount === 6){
-           this.colorCount = 0; 
-       }
-       return color;
-   }
-    
+
+    randomColor() {
+        var colors = ["blue", "magenta", "yellow", "green", "pink", "orange"];
+        // if we want to pick a random color.......
+        //var color = colors[Math.floor(Math.random()*colors.length)];
+        var color = colors[this.colorCount];
+        this.colorCount++;
+        if (this.colorCount === 6) {
+            this.colorCount = 0;
+        }
+        return color;
+    }
+
+    hideCategoryButtons() {
+        this.categoriesVisible = false;
+    }
+
 }
