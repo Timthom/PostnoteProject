@@ -134,18 +134,10 @@
 
 
 .text_field {
-
-  /*color: #404040;
-  width: 280px;
-  height: 219px;
-  margin: 10px;*/
-
- height: 200px;
- /* margin: 10px;*/
-
-  margin-bottom: 0;
- /* padding: 5px;*/
+  color: #404040;
   background-color: transparent;
+  height: 200px;
+  margin-bottom: 0;
   overflow: scroll;
   resize: none;
   border: none;

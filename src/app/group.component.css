@@ -13,13 +13,13 @@ button {
 }
 
 .group_name {
-    border: none;
+    border: none!important;
     outline: none;
     font-size: 28px;
     display: inline-block;
-    background: none;
-    text-align: left;
-   /* width: 35%;*/
+    color: #404040;
+    background-color: #F5F5F5;
+    text-align: center;
 }
 .group_name:hover{
      cursor: pointer;
@@ -31,8 +31,7 @@ button {
     /*visibility: hidden;*/
     background-color: transparent;
     margin-left: 0em;
-    /*float: right;*/
-    margin-right:10px;
+
 }
 
 .edit_button{
@@ -40,8 +39,7 @@ button {
     outline: none;
     /*visibility: hidden;*/
     background-color: transparent;
-    margin-left: 0em;
-   /* float: right;*/
+
 }
 
 /*.col-xs-4 {
