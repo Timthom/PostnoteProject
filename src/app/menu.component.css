@@ -8,7 +8,7 @@
     z-index: 1000;
     overflow:auto;
     width: 315px;
-   /* background-color: #EEEEEE;*/
+    background-color: #EEEEEE;
     box-shadow: 1px 0px 5px rgba(0,0,0,0.5);
 }
 

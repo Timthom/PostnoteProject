@@ -48,7 +48,7 @@ a {
 }
 .col-xs-10 {
     padding: 0;
-    margin: 1%;
+    margin: 1% 0 1% 0;
     width: 81.333333%
 }
 .col-xs-11 {
@@ -58,7 +58,7 @@ a {
 }
 .col-xs-offset-1 {
     padding: 0;
-    margin: 0 1% 0 9.333333%;
+    margin: 0 1% 0 8.333333%;
 }  
 
 
