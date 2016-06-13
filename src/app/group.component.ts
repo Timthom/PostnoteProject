@@ -107,6 +107,7 @@ export class GroupComponent {
     }
     this.clickedDelete.emit('');
   }
+  
   //
   editGroupName() {
     if (this._authData != null) {
@@ -163,6 +164,7 @@ export class GroupComponent {
       }
     }
   }
+
   // Toast
   public notification: any = {
     title: 'Postnote',
