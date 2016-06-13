@@ -113,19 +113,27 @@ button:not([disabled]):hover {
  
  
   @media all and (max-width: 415px) {
+        .col-xs-3 {
+          display: none;
+        }
+      .col-xs-6 {
+        width: 50%;
+        display: block;
+      }
       img {
         height: 90px;
         width: 90px;
         max-width: 90px;
         max-height: 90px;
     }
+
  }
  
 @media all and (min-width: 416px) {
-    .col-xs-6 {
-            width: 25%;
+        .col-xs-3 {
+          width: 25%;
+          display: block;
         }
-        
    img {
             height: 67.5px;
             width: 67.5px;

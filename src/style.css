@@ -38,7 +38,14 @@ a {
   margin: 1%;
   max-width: 98%;
 }
-
+.col-xs-6 {
+	width: 23%;
+}
+.col-xs-9 {
+	padding: 0;
+    	margin: 0 1% 0 1%;
+	width: 73%;
+}
 .col-xs-10 {
     padding: 0;
     margin: 1%;
@@ -52,7 +59,9 @@ a {
 .col-xs-offset-1 {
     padding: 0;
     margin: 0 1% 0 9.333333%;
-}
+}  
+
+
 @media only screen and (min-width: 600px) and (max-width: 767px) {
     /* For Landscape mode: */
     .col-m-1 {width: 6%;}
@@ -104,6 +113,7 @@ a {
         margin: 1%;
 	width: 23%;
 	}
+	
 	.delete_button {
 	background-size: 25px;
 	height: 25px;

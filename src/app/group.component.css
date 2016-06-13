@@ -3,6 +3,7 @@ button {
 }
 
 .line {
+   
     border: 0;
     margin-top: 8px;
     margin-left: 10px;
@@ -18,7 +19,7 @@ button {
     display: inline-block;
     background: none;
     text-align: left;
-    width: 35%;
+   /* width: 35%;*/
 }
 
 .delete_button {
@@ -27,7 +28,7 @@ button {
     /*visibility: hidden;*/
     background-color: transparent;
     margin-left: 0em;
-    float: right;
+    /*float: right;*/
     margin-right:10px;
 }
 
@@ -37,7 +38,7 @@ button {
     /*visibility: hidden;*/
     background-color: transparent;
     margin-left: 0em;
-    float: right;
+   /* float: right;*/
 }
 
 /*.col-xs-4 {

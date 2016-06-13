@@ -1,22 +1,32 @@
-
 <div class="groupContainer row" id={{groupName}} (click)="groupExpand()">
-    <button class="collapse_button" [ngClass] = "{expandedClass : expanded}"><img class="button_image" src="{{arrowSrc}}" alt="submit"></button>
-    <input type="text" class="group_name " id="group_name" [(ngModel)]="groupName" maxlength="18" [attr.disabled]="enableEditIfNull" [class.editingName]="editingName" (keyup.enter)="editClick()">
-    <button class="delete_button" id="{{deleteBtn}}" (click)="deleteGroup()" [hidden]="!expanded"><img class="button_image" src="icon_delete.png" alt="submit" [hidden]="!expanded"></button>
-    <button class="edit_button" id="{{editBtn}}" (click)="editClick()" [hidden]="!expanded"><img class="button_image" src="{{editSrc}}" alt="submit" [hidden]="!expanded"></button>
+    <div class="row">
+        <button class="collapse_button col-xs-1" [ngClass]="{expandedClass : expanded}"><img class="button_image" src="{{arrowSrc}}" alt="submit"></button>
+        <input type="text" class="group_name " id="group_name" class="col-xs-9"
+            [(ngModel)]="groupName" maxlength="18" [attr.disabled]="enableEditIfNull"
+            [class.editingName]="editingName" (keyup.enter)="editClick()">
+        <button class="edit_button col-xs-1" id="{{editBtn}}" (click)="editClick()"
+            [hidden]="!expanded"><img class="button_image" src="{{editSrc}}" alt="submit" [hidden]="!expanded"></button>
+        <button class="delete_button col-xs-1" id="{{deleteBtn}}" (click)="deleteGroup()"
+            [hidden]="!expanded"><img class="button_image" src="icon_delete.png" alt="submit" [hidden]="!expanded"></button>
+    </div>
+    
     <hr class="line">
 </div>
-<div  class="row">
+<div class="row">
     <div *ngIf='_authData == null'>
         <div class="myDragulaContainer" [dragula]='"drag-bag"'>
-        <note  class="noteContainer col-xs-12 col-m-6 col-sm-4 col-md-3 col-lg-3" *ngFor="let note of notes" [hidden]="!expanded" [noteInNote]="note" [text]="note.text" [title]="note.title"
-            [group]="note.group" [color]="note.color" id="{{note.$key}}"></note>
-            </div>
+            <note class="noteContainer col-xs-12 col-m-6 col-sm-4 col-md-3 col-lg-3"
+                *ngFor="let note of notes" [hidden]="!expanded" [noteInNote]="note"
+                [text]="note.text" [title]="note.title" [group]="note.group"
+                [color]="note.color" id="{{note.$key}}"></note>
+        </div>
     </div>
     <div *ngIf='_authData != null'>
         <div class="myDragulaContainer" [dragula]='"drag-bag"'>
-        <note   class="noteContainer col-xs-12 col-m-6 col-sm-4 col-md-3 col-lg-3" *ngFor="let note of notes | async" [hidden]="!expanded" [noteInNote]="note" [text]="note.text" [title]="note.title"
-            [group]="note.group" [color]="note.color" id="{{note.$key}}"></note>
-            </div>
+            <note class="noteContainer col-xs-12 col-m-6 col-sm-4 col-md-3 col-lg-3"
+                *ngFor="let note of notes | async" [hidden]="!expanded"
+                [noteInNote]="note" [text]="note.text" [title]="note.title"
+                [group]="note.group" [color]="note.color" id="{{note.$key}}"></note>
+        </div>
     </div>
 </div>
