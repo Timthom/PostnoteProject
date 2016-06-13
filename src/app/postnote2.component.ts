@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, ViewChild, AfterViewInit, ViewChildren, QueryList} from '@angular/core';
 import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from '@angular/router-deprecated';
 import { AngularFire, defaultFirebase, FirebaseRef, FirebaseListObservable } from 'angularfire2';
 import {NoteComponent} from './note.component';
@@ -25,14 +25,27 @@ import { MenuGroupComponent } from './menugroup.component';
     pipes: []
 })
 
-export class Postnote2App implements OnInit {
+export class Postnote2App implements OnInit, AfterViewInit{
+    
+    allNotes: any;
+    allGroups: any;
 
     _authData;
 
     @Output() groupChanged = new EventEmitter();
+    
+    @ViewChild(MenuComponent)
+    private menuComponent : MenuComponent;
+    
+    @ViewChildren(GroupComponent)
+    private groupComponents : QueryList<GroupComponent>;
+    
+    @ViewChild(CreatorComponent)
+    private creatorComponent : CreatorComponent;
+    
+    
 
     btnImage: string = 'icon_menu.png';
-    allGroups: any;
     statusCheckSideBar: boolean = this._vs._showSideBar;
     constructor( @Inject(FirebaseRef) private _ref: Firebase, private _ds: DataService, private _vs: ValueService, private _ls: LocalStorageService, private _menuGroup: MenuGroupComponent) {
         this._authData = this._ref.getAuth();
@@ -41,7 +54,7 @@ export class Postnote2App implements OnInit {
 
     ngOnInit() {
         this.getGroups();
-
+        this.getNotes();
     }
 
     getGroups() {
@@ -52,7 +65,19 @@ export class Postnote2App implements OnInit {
             this.allGroups = this._ls.getAllGroups();
         }
     }
+    
+    getNotes() {
 
+        if (this._authData != null) {
+            this._ds.getAllNotes().then(notes => this.allNotes = notes);
+        } else {
+            this.allNotes = this._ls.getAllNotes();
+        }
+    }
+    groupsChanged(groups : any){
+        //this.allGroups = groups;
+        //this.getGroups;
+    }
     addGroup() {
         this.getGroups();
     }
@@ -72,4 +97,15 @@ export class Postnote2App implements OnInit {
         }
     }
     
+
+    ngAfterViewInit(){
+        
+    }
+    
+    updateNotes() {
+        //this.menuComponent.getTitles; //funkar ändå..
+        this.groupComponents.toArray().forEach((child)=>child.getNotes());
+        this.creatorComponent.getNotes();
+    }
+
 }

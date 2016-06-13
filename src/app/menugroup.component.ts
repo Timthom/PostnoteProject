@@ -28,6 +28,9 @@ export class MenuGroupComponent implements OnInit {
   notes: any;
 
   @Input()
+  groups: any;
+  
+  @Input()
   group;
   _authData;
   editSrc: string = 'icon_edit.png';
@@ -52,15 +55,23 @@ export class MenuGroupComponent implements OnInit {
   }
 
   deleteGroup() {
+    //remove from shared model
+    for (var item in this.groups) {
+            if (this.group.$key == this.groups[item].$key) {
+                this.groups.splice(item, 1);
+                break;
+            }
+    }
+    //remove from firebase
     if (this._authData != null) {
       this._ds.deleteGroup(this.group.$key);
-    } else {
+    } else {//remove from local storage
       this._ls.deleteGroup(this.group.$key);
       //TEMPORARY
-      location.reload();
+      //location.reload();
     }
     this._tx._toggleExpand = false;
-    this.groupsChanged.emit('');
+    this.groupsChanged.emit(this.groups);
   }
 
 
@@ -69,10 +80,12 @@ export class MenuGroupComponent implements OnInit {
       this._ds.updateGroupName(this.group.$key, this.group.name);
     } else {
       this._ls.updateGroupName(this.group.$key, this.group.name);
+      //Not sure how this can work!
+      
       //TEMPORARY
-      location.reload();
+      //location.reload();
     }
-    this.groupsChanged.emit('');
+    //this.groupsChanged.emit('');
   }
 
   getContent() {
@@ -99,12 +112,10 @@ export class MenuGroupComponent implements OnInit {
       if (this._authData != null) {
         let content = this.getContent();
         // changes notes in the group to the new group
-
-
         for (let key of content) {
           this._ds.changeNoteGroup(key, this.group.name);
         }
-      } else {
+      } else { //if not logged in
         for (let note of this.notes) {
           this._ls.changeNoteGroup(note.$key, this.group.name);
           

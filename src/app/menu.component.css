@@ -1,14 +1,15 @@
 .navbar {
     border-radius: 0px;
+    border: none;
     margin-top: 50px;
     margin-left: -15px;
     position: fixed;
     display: block;
     height: 100%; 
     z-index: 1000;
-    overflow:auto;
+    overflow: auto;
     width: 315px;
-   /* background-color: #EEEEEE;*/
+    background-color: #EEEEEE;
     box-shadow: 1px 0px 5px rgba(0,0,0,0.5);
 }
 
@@ -93,7 +94,7 @@ hr{
     background-color: #A0A0A0;
 }
 
-#wrapper {
+/*#wrapper {
     overflow: scroll;
 }
 #wrapper ul{
@@ -101,7 +102,7 @@ hr{
 }
 #wrapper ul:hover{
     color: gray;
-}
+}*/
 
 /*
 *Thomas busar :)

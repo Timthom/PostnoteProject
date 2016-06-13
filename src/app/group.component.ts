@@ -24,6 +24,9 @@ import {LocalStorageService} from './localstorage.service';
 
 export class GroupComponent {
   @Input()
+  groups: any;
+  
+  @Input()
   group;
 
   @Input()
@@ -33,7 +36,9 @@ export class GroupComponent {
   note;
 
   @Output() clickedDelete = new EventEmitter();
-
+  @Output() notesChanged = new EventEmitter();
+  
+  @Input()
   notes: any;
 
   newName: string = "";
@@ -51,7 +56,6 @@ export class GroupComponent {
 
   ngOnInit() {
     this.getNotes();
-
   }
 
   getNotes() {
@@ -80,6 +84,13 @@ export class GroupComponent {
   }
 
   deleteGroup() {
+     //remove from shared model
+    for (var item in this.groups) {
+            if (this.group.$key == this.groups[item].$key) {
+                this.groups.splice(item, 1);
+                break;
+            }
+    }
     if (this._authData != null) {
       //To be able to iterate through all notes
       let content = this.getContent();
@@ -90,7 +101,7 @@ export class GroupComponent {
       this._ds.deleteGroup(this.group.$key);
       this.clickedDelete.emit('');
       this._tx._toggleExpand = false;
-    } else {
+    } else {//if not logged in
       //Removes notes of the group
       for (let note of this.notes) {
         this._ls.deleteNote(note.$key);
@@ -98,19 +109,29 @@ export class GroupComponent {
 
       this._ls.deleteGroup(this.group.$key);
       //TEMPORARY
-      location.reload();
+      //location.reload();
     }
     this.clickedDelete.emit('');
   }
-  //
+  
+  
   editGroupName() {
+    //change name in shared model
+    for (var index in this.groups) {
+            if (this.group.$key == this.groups[index].$key) {
+                this.groups[index].name = this.groupName;
+                break;
+            }
+    }
     if (this._authData != null) {
       this._ds.updateGroupName(this.group.$key, this.groupName);
     } else {
       this._ls.updateGroupName(this.group.$key, this.groupName);
       //TEMPORARY
-      location.reload();
+      //location.reload();
     }
+    this.clickedDelete.emit(''); //Also works for edits!
+
   }
 
   // Enable inputfield to edit text in field when user click on pen icon else disable inputfield
@@ -156,4 +177,8 @@ export class GroupComponent {
       this.arrowSrc = 'icon_expand.png';
     }
   }
+  emitNotes(groups : any){
+    this.notesChanged.emit('');
+  }
+  
 }

@@ -29,10 +29,19 @@ import {FirstLetter} from './first-letter.pipe';
 @RouteConfig([
 ])
 export class CreatorComponent {
+    @Input()
+    groups: any;
+    @Input()
+    notes: any;
+
+    @Output()
+    notesChanged = new EventEmitter();
+
+
     title: string = "";
     text: string = "";
-    notes: any;
-    groups: any;
+
+
     selectedGroup: string = "noGroup";
     _authData;
     categoriesVisible: boolean = false;
@@ -44,7 +53,6 @@ export class CreatorComponent {
 
     ngOnInit() {
         this.getNotes();
-        this.getGroups();
     }
 
     getGroups() {
@@ -79,9 +87,10 @@ export class CreatorComponent {
         } else {
             let newNote = new Note("", "", group, time.toString(), this.randomColor());
             this._ls.addNoteToNotes(newNote);
-            this.getNotes(); //Update view
-        }
+            this.notesChanged.emit('');
 
+        }
+        this.getNotes(); //Update view
         this.categoriesVisible = false;
     }
 
@@ -103,6 +112,12 @@ export class CreatorComponent {
 
     hideCategoryButtons() {
         this.categoriesVisible = false;
+    }
+
+
+    noteChanged() {
+        this.notesChanged.emit('');
+        //this.getNotes();
     }
 
 }

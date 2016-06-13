@@ -30,10 +30,11 @@ export class DropdownComponent implements OnInit {
     @Output() changeGroup = new EventEmitter();
     @Input() noteGroup: string;
     @Output() changeNoteGroup = new EventEmitter();
+    @Input() groups: any;
     public disabled: boolean = false;
     public status: { isopen: boolean } = { isopen: false };
+
     _authData;
-    groups: any;
 
     public toggled(open: boolean): void {
     }
@@ -44,15 +45,15 @@ export class DropdownComponent implements OnInit {
         this.status.isopen = !this.status.isopen;
     }
 
+
+
     constructor( @Inject(FirebaseRef) private _ref: Firebase, private _ds: DataService, private _ls: LocalStorageService, private _menu: MenuComponent, private _menuGroup: MenuGroupComponent) {
         this._authData = this._ref.getAuth();
-        //_menu.clicked.subscribe(this.getTitles());
-        //_menuGroup.groupsChanged.subscribe(this.getTitles());
-
+      
     }
 
     ngOnInit() {
-        this.getTitles();
+        //this.getTitles();
     }
 
     getTitles() {
