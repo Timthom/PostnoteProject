@@ -1,6 +1,6 @@
 <div (click)="$event.preventDefault()">
   <div class="btn-group dropup" dropdown [(isOpen)]="status.isopen">
-    <button id="group_name" type="button" class="group_button dropdown_image" dropdownToggle [disabled]="disabled">
+    <button id="group_name" type="button" class="group_button dropdown_image" dropdownToggle [disabled]="disabled" (click)="checkSession()">
     </button>
     <ul class="dropdown-menu" role="menu" aria-labelledby="single-button">
 

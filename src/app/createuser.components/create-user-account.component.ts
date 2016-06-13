@@ -63,6 +63,6 @@ export class CreateUserAccountComponent implements OnInit {
     
     switchBackToLoginComponent() {
         this.emitLoginUserAccountWindow.emit('');
-        console.log("GoBack button is working!!!");
+        // console.log("GoBack button is working!!!");
     }
 }

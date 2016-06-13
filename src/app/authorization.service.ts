@@ -7,7 +7,10 @@ declare var Firebase: any;
 export class AuthorizationService {
     
     _userLoggedInSucceed;
-
+    user: any;
+    expire: any;
+    value: any;
+    
     constructor(@Inject(FirebaseRef) private _ref: Firebase) {}
 
     createUserAccount(user: User) {
@@ -24,6 +27,9 @@ export class AuthorizationService {
     }
 
     loginUser(user: User) {
+        
+        this.user = null;
+        
         this._ref.authWithPassword({
             email: user.email,
             password: user.password
@@ -35,64 +41,280 @@ export class AuthorizationService {
             
             } else {
                 localStorage.setItem('token', authData.token);
-                console.log(authData);  
+                console.log(authData.password.email);  
                 alert("Du är nu inloggad!");
+                
+                var d = new Date();
+                var n = d.getTime();
+                
+                var ref = new Firebase("https://dazzling-fire-7472.firebaseio.com/users");
+            
+                ref.child(authData.uid).once('value', function(snapshot) {
+                    
+                    ref.child(authData.uid).update({
+                    provider: authData.provider,
+                    email: authData.password.email,
+                    expire: n       
+                     
+                    });
+                });      
             }        
         }); 
     }
     
     loginFacebookAuth() {
+        
+        this.user = null;
+        
         this._ref.authWithOAuthPopup("facebook", function(error, authData) {
             if (error) {
-                console.log("Login Failed!", error);
-            } else {
+                
+                console.log("Login Failed!", error); 
+                
+                if (error.code === "TRANSPORT_UNAVAILABLE") {
+                    
+                    // fall-back to browser redirects, and pick up the session
+                    // automatically when we come back to the origin page
+                    ref.authWithOAuthRedirect("facebook", function(error) {
+                             
+                    console.log("Authenticated successfully with payload:", authData);
+                    localStorage.setItem('token', authData.token);
+                    console.log(authData.facebook.email);
+                
+                    var d = new Date();
+                    var n = d.getTime(); 
+                
+                    var ref = new Firebase("https://dazzling-fire-7472.firebaseio.com/users");
+            
+                    ref.child(authData.uid).once('value', function(snapshot) {
+                    
+                        ref.child(authData.uid).update({
+                            provider: authData.provider,
+                            email: authData.facebook.email,
+                            expire: n       
+                        
+                            });
+                        });     
+                     });
+                }          
+            } 
+            
+            else if(authData) {
                 console.log("Authenticated successfully with payload:", authData);
                 localStorage.setItem('token', authData.token);
+                console.log(authData.facebook.email);
+                
+                var d = new Date();
+                var n = d.getTime();
+                
+                var ref = new Firebase("https://dazzling-fire-7472.firebaseio.com/users");
+            
+                ref.child(authData.uid).once('value', function(snapshot) {
+                    
+                    ref.child(authData.uid).update({
+                    provider: authData.provider,
+                    email: authData.facebook.email,
+                    expire: n       
+                        
+                    });
+                });
             }
-        }, { remember: "sessionOnly" 
+        }, { remember: "default", scope: "email"
     });
 }
     
     loginGoogleAuth() {
+        
+        this.user = null;
+        
         this._ref.authWithOAuthPopup("google", function(error, authData) {
             if (error) {
-                console.log("Login Failed!", error);
-            } else {
+                
+                console.log("Login Failed!", error); 
+                
+                if (error.code === "TRANSPORT_UNAVAILABLE") {
+                    
+                    // fall-back to browser redirects, and pick up the session
+                    // automatically when we come back to the origin page
+                    ref.authWithOAuthRedirect("google", function(error) {
+                             
+                    console.log("Authenticated successfully with payload:", authData);
+                    localStorage.setItem('token', authData.token);
+                    console.log(authData.google.email);
+                
+                    var d = new Date();
+                    var n = d.getTime(); 
+                
+                    var ref = new Firebase("https://dazzling-fire-7472.firebaseio.com/users");
+            
+                    ref.child(authData.uid).once('value', function(snapshot) {
+                    
+                        ref.child(authData.uid).update({
+                            provider: authData.provider,
+                            email: authData.google.email,
+                            expire: n       
+                        
+                            });
+                        });     
+                     });
+                }          
+            } 
+            
+            else if(authData) {
                 console.log("Authenticated successfully with payload:", authData);
                 localStorage.setItem('token', authData.token);
+                console.log(authData.google.email);
+                
+                var d = new Date();
+                var n = d.getTime();
+                
+                var ref = new Firebase("https://dazzling-fire-7472.firebaseio.com/users");
+            
+                ref.child(authData.uid).once('value', function(snapshot) {
+                    
+                    ref.child(authData.uid).update({
+                    provider: authData.provider,
+                    email: authData.google.email,
+                    expire: n       
+                        
+                    });
+                });
             }
-        }, { remember: "sessionOnly" 
+        }, { remember: "default", scope: "email"
     });
 }
 
     loginTwitterAuth() {
+        
+        this.user = null;
+        
         this._ref.authWithOAuthPopup("twitter", function(error, authData) {
             if (error) {
-                console.log("Login Failed!", error);
-            } else {
+                
+                console.log("Login Failed!", error); 
+                
+                if (error.code === "TRANSPORT_UNAVAILABLE") {
+                    
+                    // fall-back to browser redirects, and pick up the session
+                    // automatically when we come back to the origin page
+                    ref.authWithOAuthRedirect("twitter", function(error) {
+                             
+                    console.log("Authenticated successfully with payload:", authData);
+                    localStorage.setItem('token', authData.token);
+                    console.log(authData.twitter.username);
+                
+                    var d = new Date();
+                    var n = d.getTime(); 
+                
+                    var ref = new Firebase("https://dazzling-fire-7472.firebaseio.com/users");
+            
+                    ref.child(authData.uid).once('value', function(snapshot) {
+                    
+                        ref.child(authData.uid).update({
+                            provider: authData.provider,
+                            email: authData.twitter.username,
+                            expire: n       
+                        
+                            });
+                        });     
+                     });
+                }          
+            } 
+            
+            else if(authData) {
                 console.log("Authenticated successfully with payload:", authData);
                 localStorage.setItem('token', authData.token);
+                console.log(authData.twitter.username);
+                
+                var d = new Date();
+                var n = d.getTime();
+                
+                var ref = new Firebase("https://dazzling-fire-7472.firebaseio.com/users");
+            
+                ref.child(authData.uid).once('value', function(snapshot) {
+                    
+                    ref.child(authData.uid).update({
+                    provider: authData.provider,
+                    email: authData.twitter.username,
+                    expire: n       
+                        
+                    });
+                });
             }
-        }, { remember: "sessionOnly" 
+        }, { remember: "default", scope: "username"
     });
 }
 
     loginGitHubAuth() {
+        
+        this.user = null;
+        
         this._ref.authWithOAuthPopup("github", function(error, authData) {
             if (error) {
-                console.log("Login Failed!", error);
-            } else {
+                
+                console.log("Login Failed!", error); 
+                
+                if (error.code === "TRANSPORT_UNAVAILABLE") {
+                    
+                    // fall-back to browser redirects, and pick up the session
+                    // automatically when we come back to the origin page
+                    ref.authWithOAuthRedirect("github", function(error) {
+                             
+                    console.log("Authenticated successfully with payload:", authData);
+                    localStorage.setItem('token', authData.token);
+                    console.log(authData.github.email);
+                
+                    var d = new Date();
+                    var n = d.getTime(); 
+                
+                    var ref = new Firebase("https://dazzling-fire-7472.firebaseio.com/users");
+            
+                    ref.child(authData.uid).once('value', function(snapshot) {
+                    
+                        ref.child(authData.uid).update({
+                            provider: authData.provider,
+                            email: authData.github.email,
+                            expire: n       
+                        
+                            });
+                        });     
+                     });
+                }          
+            } 
+            
+            else if(authData) {
                 console.log("Authenticated successfully with payload:", authData);
                 localStorage.setItem('token', authData.token);
+                console.log(authData.github.email);
+                
+                var d = new Date();
+                var n = d.getTime();
+                
+                var ref = new Firebase("https://dazzling-fire-7472.firebaseio.com/users");
+            
+                ref.child(authData.uid).once('value', function(snapshot) {
+                    
+                    ref.child(authData.uid).update({
+                    provider: authData.provider,
+                    email: authData.github.email,
+                    expire: n       
+                        
+                    });
+                });
             }
-        }, { remember: "sessionOnly" 
+        }, { remember: "default", scope: "user"
     });
 }
-        
+    
     isAuthenticated(): boolean {
        
         if(localStorage.getItem('token') == null) {
             localStorage.getItem('token');
+        }
+
+        if(this._ref.getAuth() != null && this.user == null) {
+            console.log(this.user);
+            this.getLoggedInUser().then(res => this.user = res);
         }
          
         return localStorage.getItem('token') !== null; 
@@ -102,4 +324,20 @@ export class AuthorizationService {
         this._ref.unauth();
         localStorage.removeItem('token');
     }
+    
+    getLoggedInUser() {
+        var authData = this._ref.getAuth();
+        var ref = new Firebase("https://dazzling-fire-7472.firebaseio.com/users/" + authData.uid);
+        return ref.once("value").then((snapshot) => {
+            return snapshot.val().email;
+        });
+     }
+     
+     returnLoggedInUser() {
+         return this.user;
+     }   
+     
+     getValue() {
+         return this.value;
+     }
 }

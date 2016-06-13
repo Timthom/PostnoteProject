@@ -26,19 +26,18 @@ import {LocalStorageService} from '../localstorage.service';
 })
 
 @RouteConfig([
-   // {path: '/route1', name:'UserHandlerRoute', component: UserHandlerComponent, useAsDefault : true},
+  {
+    path: "/",
+    name: 'UserHandlerRoute',
+    component: UserHandlerComponent
+  }
    
 ])
 
 export class AppComponent{
   
-  constructor(private _dragulaService: DragulaService, private _dhs: DragulaHelperService) {
+  constructor(private _dragulaService: DragulaService, private _dhs: DragulaHelperService, private _authServiceHandler: AuthorizationService) {
     this._dhs._configureDragula(_dragulaService);
      console.log("Funkar?");
   }
- 
 }
-
-
- /* {path: '/route2', name:'AllNotes', component: Postnote2App},
-   {path: '/route3', name:'CreateUserAccount', component: CreateUserAccountComponent} */

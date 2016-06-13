@@ -40,13 +40,14 @@ export class NoteComponent implements OnInit {
   color;
 
   _authData;
+  test: any;
 
   ngOnInit() {
     this.colorInit(this.color);
   }
 
 
-  constructor( @Inject(FirebaseRef) private _ref: Firebase, private _ds: DataService, private _ls: LocalStorageService) {
+  constructor(@Inject(FirebaseRef) private _ref: Firebase, private _ds: DataService, private _ls: LocalStorageService) {
     this._authData = this._ref.getAuth();
   }
 
@@ -66,6 +67,7 @@ export class NoteComponent implements OnInit {
   }
   
   save() {
+    
       if (this._authData != null) {
         this._ds.updateNoteTitle(this.noteInNote.$key, this.title);
         this._ds.updateNoteText(this.noteInNote.$key, this.text);
@@ -142,13 +144,15 @@ export class NoteComponent implements OnInit {
   }
 
   deleteClick() {
-    if (this._authData != null) {
-      this._ds.deleteNote(this.noteInNote.$key);
+    var o = this;
+    setTimeout(function() {
+      if (o._authData != null) {
+      o._ds.deleteNote(o.noteInNote.$key);
     } else {
-      this._ls.deleteNote(this.noteInNote.$key);
+      o._ls.deleteNote(o.noteInNote.$key);
       //TEMPORARY
       location.reload();
-    }
+    }; }, 500);
   }
-
 }
+
