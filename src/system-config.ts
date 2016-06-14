@@ -8,6 +8,7 @@ const map: any = {
   'moment': 'vendor/moment/moment.js',
   
   'ng2-dragula': 'vendor/ng2-dragula',
+  'ng2-toastr': 'vendor/ng2-toastr',
   'dragula': 'vendor/dragula/dist/dragula.min.js',
   'lodash': 'node_modules/lodash/lodash.js',
   'desandro-classie': 'vendor/desandro-classie/classie.js'
@@ -24,6 +25,10 @@ const packages: any = {
   'ng2-dragula': {
     defaultExtension: 'js',
     main: 'ng2-dragula.js'
+  },
+  'ng2-toastr': {
+    defaultExtension: 'js',
+    main: 'ng2-toastr.js'
   },
   'desandro-classie': {
     defaultExtension: 'js',

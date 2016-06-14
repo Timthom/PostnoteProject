@@ -72,8 +72,4 @@ export class DropdownComponent implements OnInit {
         var buttonText: HTMLElement = document.getElementById('group_name');
         buttonText.innerHTML = group;
     }
-    
-    checkSession() {
-        console.log("klafösdfds");  
-    }
 }
