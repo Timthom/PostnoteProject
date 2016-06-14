@@ -26,7 +26,7 @@ import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 export class GroupComponent {
   @Input()
   groups: any;
-  
+
   @Input()
   group;
 
@@ -38,7 +38,7 @@ export class GroupComponent {
 
   @Output() clickedDelete = new EventEmitter();
   @Output() notesChanged = new EventEmitter();
-  
+
   @Input()
   notes: any;
 
@@ -52,12 +52,12 @@ export class GroupComponent {
   _authData;
   groupId;
 
-  constructor( @Inject(FirebaseRef) 
-  private _ref: Firebase, 
-  private _ds: DataService,
-  private _tx: ValueService, 
-  private _ls: LocalStorageService, 
-  public toastr: ToastsManager) {
+  constructor( @Inject(FirebaseRef)
+  private _ref: Firebase,
+    private _ds: DataService,
+    private _tx: ValueService,
+    private _ls: LocalStorageService,
+    public toastr: ToastsManager) {
     this._authData = this._ref.getAuth();
   }
 
@@ -65,7 +65,7 @@ export class GroupComponent {
     this.getNotes();
   }
 
-  saveId(){
+  saveId() {
     this._tx._focusedId = this.group.$key;
     console.log(this._tx._focusedId);
   }
@@ -96,14 +96,13 @@ export class GroupComponent {
   }
 
   deleteGroup() {
-     //remove from shared model
-     console.log('DELETE GROUP IN GROUP !!!');
-     console.log(this.groupId);
+    //remove from shared model
+    console.log('DELETE GROUP IN GROUP !!!');
     for (var item in this.groups) {
-            if (this.group.$key == this.groups[item].$key) {
-                this.groups.splice(item, 1);
-                break;
-            }
+      if (this._tx._focusedId == this.groups[item].$key) {
+        this.groups.splice(item, 1);
+        break;
+      }
     }
     if (this._authData != null) {
       //To be able to iterate through all notes
@@ -125,19 +124,18 @@ export class GroupComponent {
       //TEMPORARY
       //location.reload();
     }
-    console.log(this.groupId);
     this.clickedDelete.emit('');
     this.toastr.success('hallelujah!', 'group deleted!');
   }
-  
-  
+
+
   editGroupName() {
     //change name in shared model
     for (var index in this.groups) {
-            if (this.group.$key == this.groups[index].$key) {
-                this.groups[index].name = this.groupName;
-                break;
-            }
+      if (this.group.$key == this.groups[index].$key) {
+        this.groups[index].name = this.groupName;
+        break;
+      }
     }
     if (this._authData != null) {
       this._ds.updateGroupName(this.group.$key, this.groupName);
@@ -195,9 +193,9 @@ export class GroupComponent {
       }
     }
   }
-  emitNotes(groups : any){
+  emitNotes(groups: any) {
     this.notesChanged.emit('');
   }
 
-  
+
 }
