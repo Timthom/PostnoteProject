@@ -30,10 +30,10 @@ const packages: any = {
     defaultExtension: 'js',
     main: 'ng2-toastr.js'
   },
-  'desandro-classie': {
-    defaultExtension: 'js',
-    main: 'classie.js'
-  }
+  // 'desandro-classie': {
+  //   defaultExtension: 'js',
+  //   main: 'classie.js'
+  // }
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
