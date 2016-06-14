@@ -19,9 +19,9 @@ export class AuthorizationService {
             password: user.password
         }, function(error, userData) {
             if (error) {
-                alert('E-post adressen finns redan. Välj en annan!');
+                alert('The email address is already exists. Choose another one!');
             } else {
-                alert("Registreringen lyckades");
+                alert("Your account has been successfully created!");
             }
         });
     }
@@ -37,12 +37,12 @@ export class AuthorizationService {
         },  function(error, authData) {
             
             if (error) {
-                alert("Fel användarnamn eller lösenord. Försök igen!");
+                alert("Wrong username or password. Please try again!");
             
             } else {
                 localStorage.setItem('token', authData.token);
                 console.log(authData.password.email);  
-                alert("Du är nu inloggad!");
+                alert("You are now logged in!");
                 
                 var d = new Date();
                 var n = d.getTime();

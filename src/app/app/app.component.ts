@@ -41,8 +41,4 @@ export class AppComponent{
     this._dhs._configureDragula(_dragulaService);
      console.log("Funkar?");
   }
-
-  test() {
-    this.toastr.success('You are awesome!', 'Success!');
-  }
 }
