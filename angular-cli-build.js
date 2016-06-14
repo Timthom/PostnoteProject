@@ -23,7 +23,8 @@ module.exports = function(defaults) {
       'contra/dist/contra.min.js',
       'crossvent/dist/crossvent.min.js',
       //.....................................
-      'desandro-classie/classie.js'
+      'desandro-classie/classie.js',
+      'ng2-toastr/**/*'
     ]
   });
 };
