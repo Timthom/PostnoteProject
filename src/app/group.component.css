@@ -35,6 +35,12 @@ button {
     margin-right:10px;
 }
 
+.ifButtons{
+    float: right;
+    height: 48px;
+    margin-right: 80px;
+}
+
 .edit_button{
     border: none;
     outline: none;
