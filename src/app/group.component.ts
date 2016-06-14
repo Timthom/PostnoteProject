@@ -67,7 +67,6 @@ export class GroupComponent {
 
   saveId() {
     this._tx._focusedId = this.group.$key;
-    console.log(this._tx._focusedId);
   }
 
   getNotes() {
