@@ -9,11 +9,12 @@ import {SortNotes} from './sort-notes.pipe';
 import {ValueService} from './value.service';
 import { Dragula } from 'ng2-dragula/ng2-dragula';
 import {LocalStorageService} from './localstorage.service';
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
 @Component({
   moduleId: module.id,
   selector: 'group',
-  providers: [ROUTER_PROVIDERS, LocalStorageService],
+  providers: [ROUTER_PROVIDERS, LocalStorageService, ToastsManager],
   templateUrl: 'group.component.html',
   styleUrls: ['group.component.css'],
   directives: [ROUTER_DIRECTIVES, NoteComponent, Dragula],
@@ -50,7 +51,11 @@ export class GroupComponent {
   editSrc: string = 'icon_edit.png';
   _authData;
 
-  constructor( @Inject(FirebaseRef) private _ref: Firebase, private _ds: DataService, private _tx: ValueService, private _ls: LocalStorageService) {
+  constructor( @Inject(FirebaseRef) 
+  private _ref: Firebase, 
+  private _ds: DataService, 
+  private _tx: ValueService, 
+  private _ls: LocalStorageService, public toastr: ToastsManager) {
     this._authData = this._ref.getAuth();
   }
 
@@ -113,6 +118,7 @@ export class GroupComponent {
       //location.reload();
     }
     this.clickedDelete.emit('');
+    this.toastr.success('hallelujah!', 'group deleted!');
   }
   
   
@@ -132,7 +138,7 @@ export class GroupComponent {
       //location.reload();
     }
     this.clickedDelete.emit(''); //Also works for edits!
-
+    this.toastr.success('hallelujah!', 'group updated!');
   }
 
   // Enable inputfield to edit text in field when user click on pen icon else disable inputfield

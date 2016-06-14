@@ -10,7 +10,7 @@
        <input type="text" class="group_name " id="group_name" [(ngModel)]="groupName" maxlength="18" [attr.disabled]="enableEditIfNull"
            [class.editingName]="editingName" (keyup.enter)="editClick()">
        <hr class="line">
-   </div>
+    </div>
 <div class="row">
     <div *ngIf='_authData == null'>
         <div class="myDragulaContainer" [dragula]='"drag-bag"'>
