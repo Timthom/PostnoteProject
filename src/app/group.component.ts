@@ -50,17 +50,24 @@ export class GroupComponent {
   enableEditIfNull: string = '';
   editSrc: string = 'icon_edit.png';
   _authData;
+  groupId;
 
   constructor( @Inject(FirebaseRef) 
   private _ref: Firebase, 
-  private _ds: DataService, 
+  private _ds: DataService,
   private _tx: ValueService, 
-  private _ls: LocalStorageService, public toastr: ToastsManager) {
+  private _ls: LocalStorageService, 
+  public toastr: ToastsManager) {
     this._authData = this._ref.getAuth();
   }
 
   ngOnInit() {
     this.getNotes();
+  }
+
+  saveId(){
+    this._tx._focusedId = this.group.$key;
+    console.log(this._tx._focusedId);
   }
 
   getNotes() {
@@ -91,6 +98,7 @@ export class GroupComponent {
   deleteGroup() {
      //remove from shared model
      console.log('DELETE GROUP IN GROUP !!!');
+     console.log(this.groupId);
     for (var item in this.groups) {
             if (this.group.$key == this.groups[item].$key) {
                 this.groups.splice(item, 1);
@@ -104,7 +112,7 @@ export class GroupComponent {
       for (let key of content) {
         this._ds.deleteNote(key);
       }
-      this._ds.deleteGroup(this.group.$key);
+      this._ds.deleteGroup(this._tx._focusedId);
       this.clickedDelete.emit('');
       this._tx._toggleExpand = false;
     } else {//if not logged in
@@ -113,10 +121,11 @@ export class GroupComponent {
         this._ls.deleteNote(note.$key);
       }
 
-      this._ls.deleteGroup(this.group.$key);
+      this._ls.deleteGroup(this._tx._focusedId);
       //TEMPORARY
       //location.reload();
     }
+    console.log(this.groupId);
     this.clickedDelete.emit('');
     this.toastr.success('hallelujah!', 'group deleted!');
   }
