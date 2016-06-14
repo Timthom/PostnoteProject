@@ -28,11 +28,11 @@
         (click)="save('noGroup')">
 
     <div *ngIf='_authData == null' id="categoryButtonContainer">
-        <button *ngFor="let group of groups | reverse" class="categoryButton"
+        <button *ngFor="let group of groups" class="categoryButton"
             (click)="save(group.name)" [class.categoryButtonVisible]="categoriesVisible">{{group.name | uppercase | firstLetter }}</button>
     </div>
     <div *ngIf='_authData != null' id="categoryButtonContainer">
-        <button *ngFor="let group of groups | async | reverse" class="categoryButton"
+        <button *ngFor="let group of groups | async" class="categoryButton"
             (click)="save(group.name)" [class.categoryButtonVisible]="categoriesVisible">{{group.name | uppercase | firstLetter}}</button>
     </div>
 

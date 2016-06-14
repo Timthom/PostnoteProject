@@ -51,7 +51,7 @@
 #categoryButtonContainer {
  display: block;
  outline: none;
- max-height: 200px;
+ max-height: 75%;
  width: 50px;
  border: none;
  position: fixed;
