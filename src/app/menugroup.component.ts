@@ -46,6 +46,10 @@ export class MenuGroupComponent implements OnInit {
     this.getNotes();
   }
 
+  saveId(){
+    this._tx._focusedId = this.group.$key;
+  }
+
   getNotes() {
     if (this._authData != null) {
       this._ds.getAllNotesInGroup(this.group.name).then(titles => this.notes = titles);
@@ -55,18 +59,21 @@ export class MenuGroupComponent implements OnInit {
   }
 
   deleteGroup() {
+    console.log("DELETE GROUP");
     //remove from shared model
     for (var item in this.groups) {
+      console.log("CHECKING " + this.groups[item].$key);
             if (this.group.$key == this.groups[item].$key) {
+                console.log("REMOVING no " + item);
                 this.groups.splice(item, 1);
                 break;
             }
     }
     //remove from firebase
     if (this._authData != null) {
-      this._ds.deleteGroup(this.group.$key);
+      this._ds.deleteGroup(this._tx._focusedId);
     } else {//remove from local storage
-      this._ls.deleteGroup(this.group.$key);
+      this._ls.deleteGroup(this._tx._focusedId);
       //TEMPORARY
       //location.reload();
     }
@@ -146,11 +153,6 @@ export class MenuGroupComponent implements OnInit {
 
   jumpToNote(note: string) {
     var element = document.getElementById(note);
-    element.scrollIntoView(true);
-  }
-
-  jumpToGroup(groupId: string) {
-    var element = document.getElementById(groupId);
     element.scrollIntoView(true);
   }
 

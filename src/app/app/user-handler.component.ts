@@ -82,13 +82,13 @@ export class UserHandlerComponent {
         }
         
         createUserAccount() {
-            // console.log("EventEmitter is working!?");
+            // //console.log("EventEmitter is working!?");
             this.loggingIn = false;
             this.createUser = true;
         }
         
         loginUser() {
-            // console.log("Back button is working in user-handler!");
+            // //console.log("Back button is working in user-handler!");
             this.loggingIn = true;
             this.createUser = false;
         }
@@ -107,11 +107,11 @@ export class UserHandlerComponent {
                 var lastExpire = (snapshot.val().expire / 1000);  
                 var currentExpire = (n / 1000);
             
-                console.log(lastExpire);
-                console.log(currentExpire);
+                //console.log(lastExpire);
+                //console.log(currentExpire);
             
                 var result = currentExpire - lastExpire;
-                console.log(result);
+                //console.log(result);
             
                 if(result >= 1800) { 
                     o.logoutUser();                   
