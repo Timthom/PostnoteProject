@@ -1,4 +1,4 @@
-<div class="login col-xs-12 col-sm-6 col-md-4">
+<div class="login ">
     <div class="createAccountText" (click)="createAccountWindow()">Create Account</div>
     <form [ngFormModel]="myForm" (ngSubmit)="onLoggedIn()">
 
@@ -19,16 +19,16 @@
         </span>
     </div>
     <div class="row">
-        <button class="imageButtons  col-xs-3 col-xs-6" 
+        <button class="imageButtons  col-xs-3" 
             (click)="loginWithFacebook()"><img src="Facebook-color.png" alt="Facebook logo button"></button>
             
-        <button class="imageButtons  col-xs-3 col-xs-6"  
+        <button class="imageButtons  col-xs-3"  
             (click)="loginWithGoogle()"><img src="Google-color.png" alt="Google logo button"></button>
             
-        <button class="imageButtons  col-xs-3 col-xs-6"   
+        <button class="imageButtons  col-xs-3"   
             (click)="loginWithGitHub()"><img src="Github-color.png" alt="Github logoi button"></button>
             
-        <button class="imageButtons  col-xs-3 col-xs-6"   
+        <button class="imageButtons  col-xs-3"   
             (click)="loginWithTwitter()"><img src="Twitter-color.png" alt="Twitter logo button"></button>
     </div>
 </div>

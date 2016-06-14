@@ -5,17 +5,16 @@
         <input type="text" class="group_name  col-xs-9" id="group_name" [(ngModel)]="groupName"
             maxlength="18" [attr.disabled]="enableEditIfNull" [class.editingName]="editingName"
             (keyup.enter)="editClick()">
+            
         <div *ngIf="expanded" class="ifButtons">
             <button class="edit_button col-xs-1" id="{{editBtn}}" (click)="editClick()">
            <img class="button_image" src="{{editSrc}}" alt="submit"></button>
             <button class="delete_button col-xs-1" id="{{deleteBtn}}" (click)="saveId()">
            <img class="button_image" src="icon_delete.png" alt="submit" data-toggle="modal" data-target="#myModal"></button>
         </div>
-    </div>
-    <hr class="line">
-
-
+    </div>  
 </div>
+<hr class="line">
 <div class="row">
     <div *ngIf='_authData == null'>
         <div class="myDragulaContainer" [dragula]='"drag-bag"'>

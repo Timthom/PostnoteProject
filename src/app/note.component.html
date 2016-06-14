@@ -5,12 +5,13 @@
   <div (click)="editClick()" class="editDiv" [class.editDivHidden]="isEditable"></div>
 
   <div class="row titleBox">
-    <button class="delete_button col-xs-1 " [class.deleteButtonVisible]="isEditable"
+    <button class="delete_button" [class.deleteButtonVisible]="isEditable"
       (click)="deleteClick()">
     </button>
+    <div class="saveButton" [class.saveButtonVisible]="isEditable" (click)="save()"></div>
     <input type="text" [attr.disabled]="enabledIfNull" [class.selectedNoteTitle]="isEditable"
-      [(ngModel)]="title" class="title col-xs-10" maxlength="18" placeholder="Title">
-    <div class="saveButton col-xs-1 " [class.saveButtonVisible]="isEditable" (click)="save()"></div>
+      [(ngModel)]="title" class="title col-xs-10 col-xs-offset-1" maxlength="18" placeholder="Title">
+    
   </div>
   <br>
   <div class="row">
