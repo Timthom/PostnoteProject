@@ -198,5 +198,6 @@ export class GroupComponent {
   emitNotes(groups : any){
     this.notesChanged.emit('');
   }
+
   
 }
