@@ -11,7 +11,7 @@ const map: any = {
   'ng2-toastr': 'vendor/ng2-toastr',
   'dragula': 'vendor/dragula/dist/dragula.min.js',
   'lodash': 'node_modules/lodash/lodash.js',
-  'desandro-classie': 'vendor/desandro-classie/classie.js'
+  // 'desandro-classie': 'vendor/desandro-classie/classie.js'
 
   
 };
@@ -30,10 +30,10 @@ const packages: any = {
     defaultExtension: 'js',
     main: 'ng2-toastr.js'
   },
-  'desandro-classie': {
-    defaultExtension: 'js',
-    main: 'classie.js'
-  }
+  // 'desandro-classie': {
+  //   defaultExtension: 'js',
+  //   main: 'classie.js'
+  // }
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////

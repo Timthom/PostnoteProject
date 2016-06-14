@@ -11,8 +11,10 @@ import {HeaderbarComponent} from './headerbar/headerbar.component'
 import {ValueService} from './value.service';
 import { Injectable, Inject } from '@angular/core';
 import {CanReuse} from "@angular/router-deprecated";
-import {LocalStorageService} from './localStorage.service';
+import {LocalStorageService} from './localstorage.service';
 import { MenuGroupComponent } from './menugroup.component';
+import {enableProdMode} from '@angular/core';
+enableProdMode();
 
 
 @Component({
@@ -97,7 +99,6 @@ export class Postnote2App implements OnInit, AfterViewInit{
         }
     }
     
-
     ngAfterViewInit(){
         
     }

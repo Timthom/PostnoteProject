@@ -8,9 +8,9 @@
     <button class="delete_button col-xs-1 " [class.deleteButtonVisible]="isEditable"
       (click)="deleteClick()">
     </button>
-    <input [attr.disabled]="enabledIfNull" [class.selectedNoteTitle]="isEditable"
+    <input type="text" [attr.disabled]="enabledIfNull" [class.selectedNoteTitle]="isEditable"
       [(ngModel)]="title" class="title col-xs-10" maxlength="18" placeholder="Title">
-    <div class="saveButton" [class.saveButtonVisible]="isEditable" (click)="save()"></div>
+    <div class="saveButton col-xs-1 " [class.saveButtonVisible]="isEditable" (click)="save()"></div>
   </div>
   <br>
   <div class="row">

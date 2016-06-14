@@ -5,17 +5,18 @@
     margin-left: 10px;
     margin-right: 10px;
     height: 1px;
+    width: 98%;
     background-color:#404040;
 }
 
 .group_name {
-    border: none;
+    border: none!important;
     outline: none;
     font-size: 28px;
     display: inline-block;
-    background: none;
-    text-align: left;
-   /* width: 35%;*/
+    color: #404040;
+    background-color: #F5F5F5;
+    text-align: center;
 }
 .group_name:hover{
      cursor: pointer;
@@ -27,23 +28,21 @@
     /*visibility: hidden;*/
     background-color: transparent;
     margin-left: 0em;
-    /*float: right;*/
-    margin-right:10px;
+
 }
 
-.ifButtons{
+/*.ifButtons{
     float: right;
     height: 48px;
     margin-right: 70px;
-}
+}*/
 
 .edit_button{
     border: none;
     outline: none;
     /*visibility: hidden;*/
     background-color: transparent;
-    margin-left: 0em;
-   /* float: right;*/
+
 }
 
 /*.col-xs-4 {
