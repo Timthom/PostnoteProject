@@ -30,6 +30,14 @@ a {
 	margin-right: 0;
 }
 
+input{
+    -moz-appearance: none !important;
+    -webkit-appearance: none !important;
+    -webkit-text-fill-color: #404040; /* Override iOS / Android font color change */
+    -webkit-opacity:1; /* Override iOS opacity change affecting text & background color */
+    color: #404040; /* Override IE font color change */   
+}
+
 .col-xs-1 {
   padding: 0;
 }
@@ -114,17 +122,7 @@ a {
 	width: 23%;
 	}
 	
-	.delete_button {
-	background-size: 25px;
-	height: 25px;
-	width: 25px;
-	}
 
-	.edit_button {
-	background-size: 25px;
-	height: 25px;
-	width: 25px;
-	}
 }
 
 @media (min-width: 1200px) {

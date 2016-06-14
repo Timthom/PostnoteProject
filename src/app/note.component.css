@@ -32,15 +32,11 @@
   visibility: visible;
 
 }*/
-.titleBox {
-  /*margin: 0 6px 0 6px;*/
-}
+
 
 .delete_button {
-  visibility: hidden;
-
-  margin-top: 6px;
-
+   visibility: hidden;
+   margin-top: 6px;
    border-radius: 2px;
    float: left;
    background: none;
@@ -55,11 +51,7 @@
    z-index: 1000;
    transition: box-shadow 150ms ease-in-out, background-color 150ms ease-in-out;
 }
-@media all and (min-width) {
-  .delete_button {
-    height: 25px;
-  }
-}
+
 
 .deleteButtonVisible {
   visibility: visible;
@@ -100,12 +92,12 @@
 .saveButtonVisible {
   visibility: visible;
 }
-@media all and (min-width: 501px) {
+/*@media all and (min-width: 501px) {
   .edit_button {
     margin-top: 4px;
   }
 
-}
+}*/
 
 /*.edit_button:hover {
   box-shadow: 0px 1px 5px #5A5A5A; 
@@ -114,10 +106,15 @@
 }*/
 
 .title {
+ -moz-appearance: none !important;
+ -webkit-appearance: none !important; 
+ -webkit-appearance: textfield !important;
   color: #404040;
+  opacity: 1.0;
+  
   display: block;
-  height: 36px;
-  font-size: 28px;
+  height: 40px;
+  font-size: 2em !important;
   float: left;
   margin-top: 5px;
   padding-bottom: .7em;
@@ -131,9 +128,18 @@
 .title::-webkit-input-placeholder {
     color: #606060;
 }
-
+textarea {
+    -moz-appearance: none !important;
+    -webkit-appearance: none !important;
+    -webkit-text-fill-color: #404040; /* Override iOS / Android font color change */
+    -webkit-opacity:1; /* Override iOS opacity change affecting text & background color */
+    color: #404040; /* Override IE font color change */
+}
 
 .text_field {
+   -moz-appearance: none !important;
+ -webkit-appearance: none !important; 
+ -webkit-appearance: textfield !important;
   color: #404040;
   background-color: transparent;
   height: 200px;
