@@ -85,6 +85,7 @@ export class GroupComponent {
 
   deleteGroup() {
      //remove from shared model
+     console.log('DELETE GROUP IN GROUP !!!');
     for (var item in this.groups) {
             if (this.group.$key == this.groups[item].$key) {
                 this.groups.splice(item, 1);

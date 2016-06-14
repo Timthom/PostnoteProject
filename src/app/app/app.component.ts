@@ -13,11 +13,12 @@ import {MenuComponent} from '../menu.component';
 import { DragulaService } from 'ng2-dragula/ng2-dragula';
 import { DragulaHelperService } from '../dragula-helper.service';
 import {LocalStorageService} from '../localstorage.service';
+import { ToastsManager } from 'ng2-toastr/ng2-toastr'
 
 @Component({
   moduleId: module.id,
   selector: 'my-app',
-  providers: [ROUTER_PROVIDERS, DataService, AngularFire,ValueService, DragulaHelperService, LocalStorageService],
+  providers: [ROUTER_PROVIDERS, DataService, AngularFire,ValueService, DragulaHelperService, LocalStorageService, ToastsManager],
   viewProviders: [DragulaService],
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.css'],
@@ -36,8 +37,12 @@ import {LocalStorageService} from '../localstorage.service';
 
 export class AppComponent{
   
-  constructor(private _dragulaService: DragulaService, private _dhs: DragulaHelperService, private _authServiceHandler: AuthorizationService) {
+  constructor(private _dragulaService: DragulaService, private _dhs: DragulaHelperService, private _authServiceHandler: AuthorizationService, public toastr: ToastsManager) {
     this._dhs._configureDragula(_dragulaService);
      console.log("Funkar?");
+  }
+
+  test() {
+    this.toastr.success('You are awesome!', 'Success!');
   }
 }

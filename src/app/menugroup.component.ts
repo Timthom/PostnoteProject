@@ -55,9 +55,12 @@ export class MenuGroupComponent implements OnInit {
   }
 
   deleteGroup() {
+    console.log("DELETE GROUP");
     //remove from shared model
     for (var item in this.groups) {
+      console.log("CHECKING " + this.groups[item].$key);
             if (this.group.$key == this.groups[item].$key) {
+                console.log("REMOVING no " + item);
                 this.groups.splice(item, 1);
                 break;
             }
@@ -146,11 +149,6 @@ export class MenuGroupComponent implements OnInit {
 
   jumpToNote(note: string) {
     var element = document.getElementById(note);
-    element.scrollIntoView(true);
-  }
-
-  jumpToGroup(groupId: string) {
-    var element = document.getElementById(groupId);
     element.scrollIntoView(true);
   }
 

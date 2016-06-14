@@ -9,18 +9,18 @@
   <div class="row">
     <div class="shadow" [class.shadow_active]="statusCheckSideBar" (click)="toggleSideBar()"></div>
     <div class="col-xs-4" *ngIf="statusCheckSideBar == true">
-      <menu [myGroups] = "allGroups" (clicked)="addGroup()" (groupsChanged)="groupsChanged(groups)" ></menu>
+      <menu [myGroups]="allGroups" (clicked)="addGroup()" (groupsChanged)="groupsChanged(groups)"></menu>
     </div>
 
     <div class="note_groups">
       <div>
-        <creator [groups] = "allGroups" (notesChanged) ="updateNotes()"></creator>
+        <creator [groups]="allGroups" (notesChanged)="updateNotes()"></creator>
       </div>
-      
+
 
       <div *ngIf="_authData == null">
-        <group (clickedDelete)="deleteGroup()" (notesChanged)="updateNotes()" class="row" *ngFor="let group of allGroups"
-          [group]="group" [groupName]="group.name" [groups]="allGroups" onload="delaySidebar()">
+        <group (clickedDelete)="deleteGroup()" (notesChanged)="updateNotes()" class="row" *ngFor="let group of allGroups" [group]="group"
+          [groupName]="group.name" [groups]="allGroups" onload="delaySidebar()">
         </group>
       </div>
       <div *ngIf="_authData != null">

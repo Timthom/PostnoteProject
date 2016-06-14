@@ -1,10 +1,10 @@
-<div class="groupContainer row" id={{groupName}} (click)="groupExpand()">
+<div class="groupContainer row" (click)="groupExpand()">
     <div class="row">
         <button class="collapse_button col-xs-1" [ngClass]="{expandedClass : expanded}"><img class="button_image" src="{{arrowSrc}}" alt="submit"></button>
         <input type="text" class="group_name " id="group_name" class="col-xs-9" [(ngModel)]="groupName" maxlength="18" [attr.disabled]="enableEditIfNull"
             [class.editingName]="editingName" (keyup.enter)="editClick()">
-        <button class="edit_button col-xs-1" id="{{editBtn}}" (click)="editClick()" [hidden]="!expanded"><img class="button_image" src="{{editSrc}}" alt="submit" [hidden]="!expanded"></button>
-        <button class="delete_button col-xs-1" id="{{deleteBtn}}" (click)="deleteGroup()" [hidden]="!expanded"><img class="button_image" src="icon_delete.png" alt="submit" [hidden]="!expanded"></button>
+        <button class="edit_button col-xs-1" (click)="editClick()" [hidden]="!expanded"><img class="button_image" src="{{editSrc}}" alt="submit" [hidden]="!expanded"></button>
+        <button class="delete_button col-xs-1" [hidden]="!expanded" data-toggle="modal" data-target="#myModal"><img class="button_image" src="icon_delete.png" alt="submit" [hidden]="!expanded"></button>
     </div>
 
     <hr class="line">
@@ -28,7 +28,7 @@
     </div>
 
     <!--Modal-->
-    <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog">
         <div class="modal-dialog">
             <!-- Modal content-->
             <div class="modal-content">
