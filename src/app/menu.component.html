@@ -33,7 +33,7 @@
        </button>
     <form *ngIf="adding">
       <input [(ngModel)]="groupName" type="text" id="categoryInput" placeholder="Name"
-        (keyup.enter)="addGroup()" maxlength="18">
+        (keyup.enter)="addGroup()" maxlength="12">
       <button id="plusBtn" type="button" (click)="addGroup()">+</button>
     </form>
     <hr>

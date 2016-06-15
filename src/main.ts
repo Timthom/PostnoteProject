@@ -11,7 +11,9 @@ if (environment.production) {
 }
 
 let options = {
-  positionClass: 'toast-bottom-center'
+  positionClass: 'toast-bottom-left',
+  toastLife: 2000
+ 
 };
 
 // document.addEventListener('deviceready', () => {

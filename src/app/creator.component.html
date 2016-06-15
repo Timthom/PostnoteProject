@@ -25,14 +25,14 @@
         <p class="noCategoryHint" *ngIf="categoriesVisible">No category</p>
     </div>
 
-    <div *ngIf='_authData == null && categoriesVisible' id="categoryButtonContainer" >
+    <div *ngIf='_authData == null && categoriesVisible' id="categoryButtonContainer" (click)="hideCategoryButtons()">
         <div class="hintButtonContainer" *ngFor="let group of groups">
             <button class="categoryButton" (click)="save(group.name)" *ngIf="categoriesVisible">{{group.name | uppercase | firstLetter }}</button>
             <p class="categoryHint" *ngIf="categoriesVisible">{{group.name}}</p>
         </div>
 
     </div>
-    <div *ngIf='_authData != null && categoriesVisible' id="categoryButtonContainer">
+    <div *ngIf='_authData != null && categoriesVisible' id="categoryButtonContainer" (click)="hideCategoryButtons()">
         <div class="hintButtonContainer" *ngFor="let group of groups | async">
             <button class="categoryButton" (click)="save(group.name)" *ngIf="categoriesVisible">{{group.name | uppercase | firstLetter }}</button>
             <p class="categoryHint" *ngIf="categoriesVisible">{{group.name}}</p>
