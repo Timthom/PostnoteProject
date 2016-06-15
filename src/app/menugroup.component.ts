@@ -46,6 +46,10 @@ export class MenuGroupComponent implements OnInit {
     this.getNotes();
   }
 
+  saveId(){
+    this._tx._focusedId = this.group.$key;
+  }
+
   getNotes() {
     if (this._authData != null) {
       this._ds.getAllNotesInGroup(this.group.name).then(titles => this.notes = titles);
@@ -67,9 +71,9 @@ export class MenuGroupComponent implements OnInit {
     }
     //remove from firebase
     if (this._authData != null) {
-      this._ds.deleteGroup(this.group.$key);
+      this._ds.deleteGroup(this._tx._focusedId);
     } else {//remove from local storage
-      this._ls.deleteGroup(this.group.$key);
+      this._ls.deleteGroup(this._tx._focusedId);
       //TEMPORARY
       //location.reload();
     }

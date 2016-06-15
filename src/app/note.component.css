@@ -1,14 +1,10 @@
-/*.noteContainer {
- overflow: auto;
- box-shadow: 0px 2px 5px gray;
- max-width: 97%;
- margin: 1.5%;
- display: table-cell;
- position: relative;
- float: left;
-}*/
+.noteContainer {
+ 
+
+}
 .noteClass {
   height: 300px;
+  box-shadow: 0px 2px 5px gray;
 }
 
 
@@ -32,49 +28,49 @@
   visibility: visible;
 
 }*/
-.titleBox {
-  /*margin: 0 6px 0 6px;*/
-}
+
 
 .delete_button {
-  visibility: hidden;
-
-  margin-top: 6px;
-
+   visibility: hidden;
+   margin-top: 6px;
    border-radius: 2px;
-   float: left;
+   position: absolute;
+   top: 0;
+   left: 2px;
    background: none;
    background-image: url("../icon_delete.png");
    background-repeat: no-repeat;
    background-size: 100%;
    background-position: center;
-   height: 30px;
-   width: 8.33333333%;  
+   height: 25px;
+   width: 25px;  
    outline: none;
    border: none;
-   z-index: 1000;
    transition: box-shadow 150ms ease-in-out, background-color 150ms ease-in-out;
 }
-@media all and (min-width) {
-  .delete_button {
-    height: 25px;
-  }
-}
+
 
 .deleteButtonVisible {
   visibility: visible;
 }
 
 .saveButton {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: none;
   border-radius: 2px;
   visibility: hidden;
   background-image: url('icon_save.png');
-  background-size: 25px 25px;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-position: center;
   height: 25px;
-  width: 25px;
-  float: right;
-  margin-right: 6px;
+  width: 25px;  
+  outline: none;
+  border: none;
   margin-top: 6px;
+  transition: box-shadow 150ms ease-in-out, background-color 150ms ease-in-out;
 }
 /*.edit_button {
   margin-top: 6px;
@@ -95,12 +91,12 @@
 .saveButtonVisible {
   visibility: visible;
 }
-@media all and (min-width: 501px) {
+/*@media all and (min-width: 501px) {
   .edit_button {
     margin-top: 4px;
   }
 
-}
+}*/
 
 /*.edit_button:hover {
   box-shadow: 0px 1px 5px #5A5A5A; 
@@ -109,39 +105,51 @@
 }*/
 
 .title {
+ -moz-appearance: none !important;
+ -webkit-appearance: none !important; 
+ -webkit-appearance: textfield !important;
   color: #404040;
+  opacity: 1.0; 
   display: block;
-  height: 36px;
-  font-size: 28px;
+  height: 40px;
+  font-size: 2em !important;
   float: left;
   margin-top: 5px;
   padding-bottom: .7em;
   padding-top: .5em;
-  text-align: center;
   background-color: transparent;
   border: none;
   outline: none;
+  text-align: center;
 }
-
+ @-moz-document url-prefix() { 
+   .title { 
+     padding-bottom: 0!important;
+     padding-top: 0!important;
+     }
+    }
 .title::-webkit-input-placeholder {
     color: #606060;
 }
-
+textarea {
+    -moz-appearance: none !important;
+    -moz-text-fill-color: #404040; /* Override iOS / Android font color change */
+    -moz-opacity:1; 
+    -webkit-appearance: none !important;
+    -webkit-text-fill-color: #404040; /* Override iOS / Android font color change */
+    -webkit-opacity:1; /* Override iOS opacity change affecting text & background color */
+    color: #404040; /* Override IE font color change */
+}
 
 .text_field {
-
-  /*color: #404040;
-  width: 280px;
-  height: 219px;
-  margin: 10px;*/
-
- height: 200px;
- /* margin: 10px;*/
-
-  margin-bottom: 0;
- /* padding: 5px;*/
+   -moz-appearance: none !important;
+ -webkit-appearance: none !important; 
+ -webkit-appearance: textfield !important;
+  color: #404040;
   background-color: transparent;
-  overflow: scroll;
+  height: 200px;
+  margin-bottom: 0;
+  overflow: auto;
   resize: none;
   border: none;
   outline: none;

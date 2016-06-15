@@ -30,6 +30,20 @@ a {
 	margin-right: 0;
 }
 
+input{
+    -moz-appearance: none !important;
+    -webkit-appearance: none !important;
+    -webkit-text-fill-color: #404040; /* Override iOS / Android font color change */
+    -webkit-opacity:1; /* Override iOS opacity change affecting text & background color */
+    color: #404040; /* Override IE font color change */   
+}
+ @-moz-document url-prefix() { 
+   .title { 
+     padding-bottom: 0;
+     padding-top: 0;
+     }
+    }
+
 .col-xs-1 {
   padding: 0;
 }
@@ -48,7 +62,7 @@ a {
 }
 .col-xs-10 {
     padding: 0;
-    margin: 1%;
+    margin: 1% 0 1% 0;
     width: 81.333333%
 }
 .col-xs-11 {
@@ -58,7 +72,7 @@ a {
 }
 .col-xs-offset-1 {
     padding: 0;
-    margin: 0 1% 0 9.333333%;
+    margin: 0 1% 0 8.333333%;
 }  
 
 
@@ -85,7 +99,7 @@ a {
 	width: 31.333333%;
 	}
 	
-	.delete_button {
+/*	.delete_button {
 	background-size: 25px;
 	height: 25px;
 	width: 25px;
@@ -97,7 +111,7 @@ a {
 	background-size: 25px;
 	height: 25px;
 	width: 25px;
-	}
+	}*/
 
 
 }
@@ -114,17 +128,7 @@ a {
 	width: 23%;
 	}
 	
-	.delete_button {
-	background-size: 25px;
-	height: 25px;
-	width: 25px;
-	}
 
-	.edit_button {
-	background-size: 25px;
-	height: 25px;
-	width: 25px;
-	}
 }
 
 @media (min-width: 1200px) {

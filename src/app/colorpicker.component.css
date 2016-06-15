@@ -22,6 +22,11 @@
 .color_button {
     border-radius: 2px;
     position: absolute;
+    width: 25px;
+    height: 25px;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: center;
     bottom: 0;
     right: 0;
     outline: none;
