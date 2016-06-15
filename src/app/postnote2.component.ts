@@ -14,6 +14,7 @@ import {CanReuse} from "@angular/router-deprecated";
 import {LocalStorageService} from './localstorage.service';
 import { MenuGroupComponent } from './menugroup.component';
 import {enableProdMode} from '@angular/core';
+import { DropdownComponent } from './dropdown.component';
 enableProdMode();
 
 
@@ -23,7 +24,7 @@ enableProdMode();
     providers: [ROUTER_PROVIDERS, DataService, AngularFire, LocalStorageService, MenuGroupComponent],
     templateUrl: 'postnote2.component.html',
     styleUrls: ['postnote2.component.css'],
-    directives: [ROUTER_DIRECTIVES, NoteComponent, MenuComponent, GroupComponent, CreatorComponent, HeaderbarComponent],
+    directives: [ROUTER_DIRECTIVES, NoteComponent, MenuComponent, GroupComponent, CreatorComponent, HeaderbarComponent, DropdownComponent],
     pipes: []
 })
 
@@ -44,6 +45,8 @@ export class Postnote2App implements OnInit, AfterViewInit{
     
     @ViewChild(CreatorComponent)
     private creatorComponent : CreatorComponent;
+
+   
     
     
 
@@ -60,12 +63,12 @@ export class Postnote2App implements OnInit, AfterViewInit{
     }
 
     getGroups() {
-
         if (this._authData != null) {
             this._ds.getAllGroups().then(groups => this.allGroups = groups);
         } else {
             this.allGroups = this._ls.getAllGroups();
         }
+        
     }
     
     getNotes() {
@@ -76,9 +79,15 @@ export class Postnote2App implements OnInit, AfterViewInit{
             this.allNotes = this._ls.getAllNotes();
         }
     }
+
     groupsChanged(groups : any){
-        //this.allGroups = groups;
-        //this.getGroups;
+        this.creatorComponent.groupsChanged();
+        this.getGroups();
+        if(this.menuComponent != undefined){ //If we have access to the menu
+            this.menuComponent.getGroups();
+        }
+        
+       
     }
     addGroup() {
         this.getGroups();

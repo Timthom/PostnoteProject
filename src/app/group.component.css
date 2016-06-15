@@ -5,7 +5,6 @@
     margin-left: 10px;
     margin-right: 10px;
     height: 1px;
-    width: 98%;
     background-color:#404040;
 }
 
@@ -16,7 +15,7 @@
     display: inline-block;
     color: #404040;
     background-color: #F5F5F5;
-    text-align: center;
+    text-align: left;
 }
 .group_name:hover{
      cursor: pointer;

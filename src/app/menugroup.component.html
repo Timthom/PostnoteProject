@@ -3,7 +3,7 @@
     <input readonly class="title" id={{group.$key}} [(ngModel)]="group.name" (keyup.enter)="editing()"
         [class.editing]="editingName" maxlength="18">
     <button id="editBtn" (click)="editing()" [hidden]="!expanded"><img class="button_image" src="{{editSrc}}" alt="submit"></button>
-    <button id="deleteBtn" (click)="saveId()" [hidden]="!expanded" data-toggle="modal" data-target="#myModal"><img class="button_image" src="icon_delete.png" alt="submit" (click)="deleteGroup()"></button>
+    <button id="deleteBtn" (click)="saveId()" [hidden]="!expanded" data-toggle="modal" data-target="#myModal"><img class="button_image" src="icon_delete.png" alt="submit"></button>
 
     <ul *ngIf="expanded">
         <div *ngIf="_authData == null">

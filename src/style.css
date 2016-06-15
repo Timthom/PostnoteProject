@@ -37,6 +37,12 @@ input{
     -webkit-opacity:1; /* Override iOS opacity change affecting text & background color */
     color: #404040; /* Override IE font color change */   
 }
+ @-moz-document url-prefix() { 
+   .title { 
+     padding-bottom: 0;
+     padding-top: 0;
+     }
+    }
 
 .col-xs-1 {
   padding: 0;
