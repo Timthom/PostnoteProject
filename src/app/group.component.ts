@@ -34,6 +34,10 @@ export class GroupComponent {
   groupName;
 
   @Input()
+  focusedName;
+
+
+  @Input()
   note;
 
   @Output() clickedDelete = new EventEmitter();
@@ -67,7 +71,6 @@ export class GroupComponent {
 
   saveId(){
     this._tx._focusedId = this.group.$key;
-    console.log(this._tx._focusedId);
   }
 
   getNotes() {
@@ -97,8 +100,7 @@ export class GroupComponent {
 
   deleteGroup() {
      //remove from shared model
-     console.log('DELETE GROUP IN GROUP !!!');
-     console.log(this.groupId);
+    //  console.log(this.groupId);
     for (var item in this.groups) {
             if (this.group.$key == this.groups[item].$key) {
                 this.groups.splice(item, 1);
@@ -120,14 +122,12 @@ export class GroupComponent {
       for (let note of this.notes) {
         this._ls.deleteNote(note.$key);
       }
-
       this._ls.deleteGroup(this._tx._focusedId);
       //TEMPORARY
       //location.reload();
     }
     console.log(this.groupId);
     this.clickedDelete.emit('');
-    this.toastr.success('hallelujah!', 'group deleted!');
   }
   
   
@@ -197,6 +197,14 @@ export class GroupComponent {
   }
   emitNotes(groups : any){
     this.notesChanged.emit('');
+  }
+  // Getting name of pressed group
+  getFocusedName(){
+    // this.focusedName = this.group.name;
+    this._tx._focusedName = this.group.name;
+    this.focusedName = this._tx._focusedName;
+        // console.log('Ermin2 ', this.focusedName);
+        console.log('Ermin3 ' , this.focusedName);
   }
 
   
