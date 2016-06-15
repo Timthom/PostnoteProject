@@ -37,6 +37,7 @@ menu{
 	padding: 8px;
 	margin: auto;
 	font-size: 30px;
+	cursor: default;
 }
 
 .cbp-af-header-shrink {
