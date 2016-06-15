@@ -9,23 +9,23 @@
   <div class="row">
     <div class="shadow" [class.shadow_active]="statusCheckSideBar" (click)="toggleSideBar()"></div>
     <div class="col-xs-4" *ngIf="statusCheckSideBar == true">
-      <menu [myGroups]="allGroups" (clicked)="addGroup()" (groupsChanged)="groupsChanged(groups)"></menu>
+      <menu (clicked)="groupsChanged()" (groupsChanged)="groupsChanged(groups)"></menu>
     </div>
 
     <div class="note_groups">
       <div>
-        <creator [groups]="allGroups" (notesChanged)="updateNotes()"></creator>
+        <creator (notesChanged)="updateNotes()"></creator>
       </div>
 
 
       <div *ngIf="_authData == null">
-        <group (clickedDelete)="deleteGroup()" (notesChanged)="updateNotes()" class="row" *ngFor="let group of allGroups" [group]="group"
-          [groupName]="group.name" [groups]="allGroups" onload="delaySidebar()">
+        <group (clickedDelete)="groupsChanged()" (notesChanged)="updateNotes()" class="row" *ngFor="let group of allGroups" [group]="group"
+          [groupName]="group.name" onload="delaySidebar()">
         </group>
       </div>
       <div *ngIf="_authData != null">
-        <group (clickedDelete)="deleteGroup()" (notesChanged)="updateNotes()" class="row" *ngFor="let group of allGroups | async"
-          [group]="group" [groupName]="group.name" [groups]="allGroups">
+        <group (clickedDelete)="groupsChanged()" (notesChanged)="updateNotes()" class="row" *ngFor="let group of allGroups | async"
+          [group]="group" [groupName]="group.name">
         </group>
       </div>
     </div>

@@ -1,4 +1,4 @@
-import {Component, Inject, Pipe, EventEmitter, Input, Output} from '@angular/core';
+import {Component, Inject, Pipe, EventEmitter, Input, Output, ViewChild, ViewChildren, QueryList} from '@angular/core';
 import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from '@angular/router-deprecated';
 import {DataService} from './data.service';
 import {OnInit} from '@angular/core';
@@ -29,9 +29,11 @@ import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 @RouteConfig([
 ])
 export class CreatorComponent {
-    @Input()
+    @ViewChildren(NoteComponent)
+    private noteComponents: QueryList<NoteComponent>;
+
     groups: any;
-    @Input()
+
     notes: any;
 
     @Output()
@@ -53,6 +55,7 @@ export class CreatorComponent {
 
     ngOnInit() {
         this.getNotes();
+        this.getGroups();
     }
 
     getGroups() {
@@ -60,6 +63,7 @@ export class CreatorComponent {
             this._ds.getAllGroups().then(groups => this.groups = groups);
         } else {
             this.groups = this._ls.getAllGroups();
+
         }
     }
 
@@ -82,7 +86,7 @@ export class CreatorComponent {
         let time = new Date().getTime();
 
         if (this._authData != null) {
-            this._ds.addNoteToNotes("new note", "", group, time, this.randomColor()); 
+            this._ds.addNoteToNotes("new note", "", group, time, this.randomColor());
 
         } else {
             let newNote = new Note("new note", "", group, time.toString(), this.randomColor());
@@ -93,7 +97,7 @@ export class CreatorComponent {
         this.getNotes(); //Update view
         this.categoriesVisible = false;
 
-        if(group == "noGroup"){
+        if (group == "noGroup") {
             this.toastr.success('A new note was created');
         } else {
             this.toastr.success('A new note was created in ' + group);
@@ -123,12 +127,20 @@ export class CreatorComponent {
 
     noteChanged() {
         this.notesChanged.emit('');
-        //this.getNotes();
+        this.getNotes();
     }
 
+
     jumpToNote(note: string) {
-    var element = document.getElementById(note);
-    element.scrollIntoView(true);
-  }
+        var element = document.getElementById(note);
+        element.scrollIntoView(true);
+    }
+
+    groupsChanged() {
+        this.noteComponents.toArray().forEach((child) => child.groupsChanged());
+        this.getGroups();
+
+    }
+
 
 }
