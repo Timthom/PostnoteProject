@@ -125,7 +125,7 @@ export class GroupComponent {
     }
 
     this.clickedDelete.emit('');
-    this.toastr.success('group deleted!');
+    this.toastr.success('Group deleted!');
   }
 
 
@@ -145,7 +145,7 @@ export class GroupComponent {
       //location.reload();
     }
     this.clickedDelete.emit(''); //Also works for edits!
-    this.toastr.success('hallelujah!', 'group updated!');
+    this.toastr.success('Groupname changed!');
   }
 
   // Enable inputfield to edit text in field when user click on pen icon else disable inputfield
