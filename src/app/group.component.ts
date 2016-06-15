@@ -71,6 +71,7 @@ export class GroupComponent {
   saveId() {
     this._tx._focusedId = this.group.$key;
     this._tx._focusedName = this.group.name;
+    this._tx._focusedNoteKeys = this.getContent();
   }
 
   getNotes() {
@@ -108,7 +109,7 @@ export class GroupComponent {
     }
     if (this._authData != null) {
       //To be able to iterate through all notes
-      let content = this.getContent();
+      let content = this._tx._focusedNoteKeys;
       //Remove all notes in group
       for (let key of content) {
         this._ds.deleteNote(key);
