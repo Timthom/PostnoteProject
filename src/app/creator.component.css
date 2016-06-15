@@ -1,3 +1,7 @@
+#container {
+  min-height: 20px;
+}
+
 .inputTitle {
    height: 36px;
    font-size: 28px;
