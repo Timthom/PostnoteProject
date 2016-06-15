@@ -19,7 +19,7 @@
   </div>
 
   <dropdown class="group_dropdown" [class.visible_dropdown]="isEditable"
-    [noteGroup]="selectedNoteGroup" [groups] = "groups" (changeNoteGroup)="noteGroupChanged($event)"></dropdown>
+    [noteGroup]="selectedNoteGroup" (changeNoteGroup)="noteGroupChanged($event)"></dropdown>
 
   <colorpicker (changeColor)="colorChanged($event)" [class.visible_colorpicker]="isEditable"></colorpicker>
 

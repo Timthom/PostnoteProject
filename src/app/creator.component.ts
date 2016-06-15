@@ -1,4 +1,4 @@
-import {Component, Inject, Pipe, EventEmitter, Input, Output} from '@angular/core';
+import {Component, Inject, Pipe, EventEmitter, Input, Output, ViewChild, ViewChildren, QueryList} from '@angular/core';
 import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from '@angular/router-deprecated';
 import {DataService} from './data.service';
 import {OnInit} from '@angular/core';
@@ -29,9 +29,11 @@ import {FirstLetter} from './first-letter.pipe';
 @RouteConfig([
 ])
 export class CreatorComponent {
-    @Input()
+    @ViewChildren(NoteComponent)
+    private noteComponents: QueryList<NoteComponent>;
+
     groups: any;
-    @Input()
+
     notes: any;
 
     @Output()
@@ -53,6 +55,7 @@ export class CreatorComponent {
 
     ngOnInit() {
         this.getNotes();
+        this.getGroups();
     }
 
     getGroups() {
@@ -60,6 +63,7 @@ export class CreatorComponent {
             this._ds.getAllGroups().then(groups => this.groups = groups);
         } else {
             this.groups = this._ls.getAllGroups();
+
         }
     }
 
@@ -117,7 +121,14 @@ export class CreatorComponent {
 
     noteChanged() {
         this.notesChanged.emit('');
-        //this.getNotes();
+        this.getNotes();
     }
+
+    groupsChanged() {
+        this.noteComponents.toArray().forEach((child) => child.groupsChanged());
+        this.getGroups();
+
+    }
+
 
 }

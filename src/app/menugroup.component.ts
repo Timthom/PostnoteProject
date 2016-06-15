@@ -58,28 +58,29 @@ export class MenuGroupComponent implements OnInit {
     }
   }
 
-  deleteGroup() {
-    console.log("DELETE GROUP");
-    //remove from shared model
-    for (var item in this.groups) {
-      console.log("CHECKING " + this.groups[item].$key);
-            if (this.group.$key == this.groups[item].$key) {
-                console.log("REMOVING no " + item);
-                this.groups.splice(item, 1);
-                break;
-            }
-    }
-    //remove from firebase
-    if (this._authData != null) {
-      this._ds.deleteGroup(this._tx._focusedId);
-    } else {//remove from local storage
-      this._ls.deleteGroup(this._tx._focusedId);
-      //TEMPORARY
-      //location.reload();
-    }
-    this._tx._toggleExpand = false;
-    this.groupsChanged.emit(this.groups);
-  }
+//WILL NOT BE USED
+  // deleteGroup() {
+  //   console.log("DELETE GROUP");
+  //   //remove from shared model
+  //   // for (var item in this.groups) {
+  //   //   console.log("CHECKING " + this.groups[item].$key);
+  //   //         if (this.group.$key == this.groups[item].$key) {
+  //   //             console.log("REMOVING no " + item);
+  //   //             this.groups.splice(item, 1);
+  //   //             break;
+  //   //         }
+  //   // }
+  //   //remove from firebase
+  //   if (this._authData != null) {
+  //     this._ds.deleteGroup(this._tx._focusedId);
+  //   } else {//remove from local storage
+  //     this._ls.deleteGroup(this._tx._focusedId);
+  //     //TEMPORARY
+  //     //location.reload();
+  //   }
+  //   this._tx._toggleExpand = false;
+  //   this.groupsChanged.emit(this.groups);
+  // }
 
 
   editGroup() {
@@ -92,7 +93,7 @@ export class MenuGroupComponent implements OnInit {
       //TEMPORARY
       //location.reload();
     }
-    //this.groupsChanged.emit('');
+    this.groupsChanged.emit('');
   }
 
   getContent() {
