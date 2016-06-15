@@ -14,7 +14,7 @@ import { AngularFire, defaultFirebase, FirebaseRef, FirebaseListObservable } fro
 import { Dragula } from 'ng2-dragula/ng2-dragula';
 import {LocalStorageService} from './localstorage.service';
 import {FirstLetter} from './first-letter.pipe';
-
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
 
 @Component({
@@ -47,7 +47,7 @@ export class CreatorComponent {
     categoriesVisible: boolean = false;
     colorCount: number = 0;
 
-    constructor(private _ds: DataService, @Inject(FirebaseRef) private _ref: Firebase, private _ls: LocalStorageService) {
+    constructor(private _ds: DataService, @Inject(FirebaseRef) private _ref: Firebase, private _ls: LocalStorageService, public toastr: ToastsManager) {
         this._authData = this._ref.getAuth();
     }
 
@@ -82,16 +82,22 @@ export class CreatorComponent {
         let time = new Date().getTime();
 
         if (this._authData != null) {
-            this._ds.addNoteToNotes("", "", group, time, this.randomColor());
+            this._ds.addNoteToNotes("new note", "", group, time, this.randomColor()); 
 
         } else {
-            let newNote = new Note("", "", group, time.toString(), this.randomColor());
+            let newNote = new Note("new note", "", group, time.toString(), this.randomColor());
             this._ls.addNoteToNotes(newNote);
             this.notesChanged.emit('');
 
         }
         this.getNotes(); //Update view
         this.categoriesVisible = false;
+
+        if(group == "noGroup"){
+            this.toastr.success('A new note was created');
+        } else {
+            this.toastr.success('A new note was created in ' + group);
+        }
     }
 
     open() {
@@ -119,5 +125,10 @@ export class CreatorComponent {
         this.notesChanged.emit('');
         //this.getNotes();
     }
+
+    jumpToNote(note: string) {
+    var element = document.getElementById(note);
+    element.scrollIntoView(true);
+  }
 
 }

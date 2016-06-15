@@ -8,8 +8,8 @@ import {AngularFire, defaultFirebase, FirebaseRef, FirebaseListObservable} from 
 import {Injectable, Inject} from '@angular/core';
 import {CanReuse} from "@angular/router-deprecated";
 import {Group} from './group';
-
 import {LocalStorageService} from './localstorage.service';
+import {Reverse} from './reverse.pipe';
 //import {Postnote2App} from './postnote2.component';
 
 @Component({
@@ -19,7 +19,7 @@ import {LocalStorageService} from './localstorage.service';
   templateUrl: 'menu.component.html',
   styleUrls: ['menu.component.css'],
   directives: [ROUTER_DIRECTIVES, MenuGroupComponent],
-  pipes: []
+  pipes: [Reverse]
 })
 
 export class MenuComponent implements OnInit, CanReuse {
