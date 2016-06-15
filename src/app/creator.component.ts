@@ -67,8 +67,15 @@ export class CreatorComponent {
     getNotes() {
         if (this._authData != null) {
             this._ds.getAllNotesInGroup('noGroup').then(notes => this.notes = notes);
+          
         } else {
             this.notes = this._ls.getNotesInGroup('noGroup');
+              if(this.notes < 1) {
+                let time = new Date().getTime();
+                let newNote = new Note("Note", "Du har inga lappar än... skapa dem med plusknappen..", "noGroup", time.toString(), this.randomColor());
+                this._ls.addNoteToNotes(newNote);
+                this.notesChanged.emit('');
+            }
         }
     }
 
