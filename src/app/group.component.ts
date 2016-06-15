@@ -125,7 +125,7 @@ export class GroupComponent {
     }
 
     this.clickedDelete.emit('');
-    this.toastr.success('hallelujah!', 'group deleted!');
+    this.toastr.success('group deleted!');
   }
 
 
