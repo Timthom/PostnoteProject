@@ -92,8 +92,8 @@ _savedSibling: any;
       [1]: note.elementet som drogs...
       [2]: diven som den dras ifrån...
       */ 
-       console.log(`drag, value: `);
-       console.log(value);
+      //  console.log(`drag, value: `);
+      //  console.log(value);
       
       // if (this._canSaveSibling) {
         // this._canSaveSibling = false;
@@ -120,7 +120,6 @@ _savedSibling: any;
       */ 
        console.log(`drop, value: `);
        console.log(value);
-       this.updateEverySiblingOnRight();
        
        //Detta ger mig en sträng med id:t...
        //console.log(value[1].attributes[3].nodeValue);
@@ -131,12 +130,14 @@ _savedSibling: any;
       // this._canSaveSibling = true; 
       let id: string = value[1].attributes[3].nodeValue;
       let group: string;
-      // console.log(`cosnollen group = ${value[2].parentElement.parentElement.firstElementChild.id}`);
-      if (value[2].parentElement.parentElement.firstElementChild.id === '') {
-        // console.log('group är null');
+      // console.log(`cosnollen group1 = ${value[2].parentElement.firstElementChild.id}`);
+      // console.log(`cosnollen group2 = ${value[2].parentElement.parentElement.firstElementChild.id}`);
+      // console.log(`cosnollen group3 = ${value[2].parentElement.parentElement.parentElement.firstElementChild.firstElementChild.id}`);
+      if (value[2].parentElement.parentElement.parentElement.firstElementChild.firstElementChild.id === '') {
+        console.log('group är null');        
         group = 'noGroup'
       } else {
-        group = value[2].parentElement.parentElement.firstElementChild.id;
+        group = value[2].parentElement.parentElement.parentElement.firstElementChild.firstElementChild.id;
       }
       // console.log('1');
 
@@ -155,8 +156,8 @@ _savedSibling: any;
       /* Vill göra en kontroll på om den bytte till en annan grupp men måste läsa på om promises mer först... */
       // console.log('nu testar jag');
        let currentGroup: any = this._dataservice.getGroupNameFromId(id) ;
-      // console.log('2');
-      // currentGroup.then((result) => (console.log('inne i promisen: ' + result)));
+      currentGroup.then((result) => (console.log('inne i promisen där result: ' + result)));
+      currentGroup.then((result) => (this.updateAndIncreasePositionOnEverySiblingOnRightOnDrop(result, group, value[1], value[4])));
       // console.log('3');
       //  console.log(group + ' <--  + currentGroup:');
       //  console.log('6');
@@ -213,13 +214,32 @@ _savedSibling: any;
   }
   
   updateEverySiblingOnRight() {
-    console.log("här skall vi uppdatera positionene på this._savedSibling: ");
-    console.log(this._savedSibling);
+     console.log("här skall vi uppdatera positionene på this._savedSibling: ");
+     console.log(this._savedSibling);
     
-    if(this._savedSibling.nextSibling){
+    if(this._savedSibling.nextSibling){ //use nextElementSibling ffs
       this._savedSibling = this._savedSibling.nextSibling;
       this.updateEverySiblingOnRight();
     }
+  }
+ 
+  updateAndIncreasePositionOnEverySiblingOnRightOnDrop(newGroup: any, oldGroup: string, droppedNote: any, siblingNote: any) {   
+    let tempNote: any = droppedNote;
+    let getPos: any = this._dataservice.getPositionFromId(siblingNote.id);
+    getPos.then((result) => {
+      let tempPos = result;
+     
+      //Update the dropped note with the position that it took ergo the note on the right...
+      this._dataservice.updateNotePosition(tempNote.id, tempPos);
+      tempPos++; 
+      //Update the note on the right until the end of notes with position++...
+      while(tempNote) {
+        console.log(`inne i whileLoopen där tempPos = ${tempPos} och tempNote.id = ${tempNote.id}`);
+        tempNote = tempNote.nextElementSibling;
+        this._dataservice.updateNotePosition(tempNote.id, tempPos);
+        tempPos++;
+      }
+    });
   }
   
 }
