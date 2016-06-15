@@ -31,6 +31,14 @@ menu{
 	z-index: 10000;
 }
 
+.websiteTitle {
+	color: #404040;
+	width: 50%;
+	padding: 8px;
+	margin: auto;
+	font-size: 30px;
+}
+
 .cbp-af-header-shrink {
 	height: 50px;
 	opacity: 0.8;
@@ -43,6 +51,7 @@ menu{
 	background-color: transparent;
 	z-index: 2;
 	padding: 0;
+	float: left;
 }
 
 .btnImage{

@@ -137,12 +137,6 @@ export class CreatorComponent {
         this.getNotes();
     }
 
-
-    jumpToNote(note: string) {
-        var element = document.getElementById(note);
-        element.scrollIntoView(true);
-    }
-
     groupsChanged() {
         this.noteComponents.toArray().forEach((child) => child.groupsChanged());
         this.getGroups();
