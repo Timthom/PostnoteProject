@@ -28,6 +28,7 @@ export class GroupComponent {
   groups: any;
   notes: any;
 
+
   @Input()
   group;
 
@@ -43,7 +44,6 @@ export class GroupComponent {
 
   @Output() clickedDelete = new EventEmitter();
   @Output() notesChanged = new EventEmitter();
-
 
 
   newName: string = "";
@@ -71,6 +71,7 @@ export class GroupComponent {
 
   saveId() {
     this._tx._focusedId = this.group.$key;
+    this._tx._focusedName = this.group.name;
   }
 
   getNotes() {
@@ -99,13 +100,12 @@ export class GroupComponent {
   }
 
   deleteGroup() {
-     //remove from shared model
-    //  console.log(this.groupId);
+
     for (var item in this.groups) {
-            if (this.group.$key == this.groups[item].$key) {
-                this.groups.splice(item, 1);
-                break;
-            }
+      if (this._tx._focusedId == this.groups[item].$key) {
+        this.groups.splice(item, 1);
+        break;
+      }
     }
     if (this._authData != null) {
       //To be able to iterate through all notes
@@ -123,19 +123,20 @@ export class GroupComponent {
       }
       this._ls.deleteGroup(this._tx._focusedId);
     }
-
     this.clickedDelete.emit('');
+    this.toastr.success(this._tx._focusedName + ' deleted!');
+
   }
 
 
   editGroupName() {
-    // //change name in shared model
-    // for (var index in this.groups) {
-    //         if (this.group.$key == this.groups[index].$key) {
-    //             this.groups[index].name = this.groupName;
-    //             break;
-    //         }
-    // }
+    //change name in shared model
+    for (var index in this.groups) {
+      if (this.group.$key == this.groups[index].$key) {
+        this.groups[index].name = this.groupName;
+        break;
+      }
+    }
     if (this._authData != null) {
       this._ds.updateGroupName(this.group.$key, this.groupName);
     } else {
@@ -144,7 +145,9 @@ export class GroupComponent {
       //location.reload();
     }
     this.clickedDelete.emit(''); //Also works for edits!
-    this.toastr.success('Groupname changed!');
+
+    this.toastr.success(this.group.name + ' updated!');
+
   }
 
   // Enable inputfield to edit text in field when user click on pen icon else disable inputfield

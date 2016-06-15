@@ -42,4 +42,12 @@ export class ValueService {
       this._focusedName = name;
     }
 
+    get focusedName(){
+      return this._focusedName;
+    }
+
+    set focusedName(name:string){
+      this._focusedName = name;
+    }
+
 }
