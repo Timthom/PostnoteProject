@@ -67,6 +67,7 @@ export class GroupComponent {
 
   saveId() {
     this._tx._focusedId = this.group.$key;
+    this._tx._focusedName = this.group.name;
   }
 
   getNotes() {
@@ -124,7 +125,7 @@ export class GroupComponent {
       //location.reload();
     }
     this.clickedDelete.emit('');
-    this.toastr.success('hallelujah!', 'group deleted!');
+    this.toastr.success(this._tx._focusedName + ' deleted!');
   }
 
 
@@ -144,7 +145,7 @@ export class GroupComponent {
       //location.reload();
     }
     this.clickedDelete.emit(''); //Also works for edits!
-    this.toastr.success('hallelujah!', 'group updated!');
+    this.toastr.success(this.group.name + ' updated!');
   }
 
   // Enable inputfield to edit text in field when user click on pen icon else disable inputfield
@@ -192,9 +193,9 @@ export class GroupComponent {
       }
     }
   }
+
   emitNotes(groups: any) {
     this.notesChanged.emit('');
   }
-
 
 }
