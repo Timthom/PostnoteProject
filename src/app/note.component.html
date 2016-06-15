@@ -10,19 +10,19 @@
     </button>
     <div class="saveButton" [class.saveButtonVisible]="isEditable" (click)="save()"></div>
     <input type="text" [attr.disabled]="enabledIfNull" [class.selectedNoteTitle]="isEditable"
-      [(ngModel)]="title" class="title col-xs-10 col-xs-offset-1" maxlength="18" placeholder="Title">
-    
+      [(ngModel)]="title" class="title col-xs-10 col-xs-offset-1" maxlength="18"
+      placeholder="Title">
+
   </div>
   <br>
   <div class="row">
     <textarea [attr.disabled]="enabledIfNull" [class.selectedNoteText]="isEditable"
-      [(ngModel)]="text" class="text_field col-xs-10 col-xs-offset-1" placeholder="Make a note ..."></textarea>
+      [(ngModel)]="text" class="text_field col-xs-10 col-xs-offset-1"
+      placeholder="Make a note ..."></textarea>
   </div>
 
   <dropdown class="group_dropdown" [class.visible_dropdown]="isEditable"
-    [noteGroup]="selectedNoteGroup" [groups] = "groups" (changeNoteGroup)="noteGroupChanged($event)"></dropdown>
+    [noteGroup]="selectedNoteGroup" [groups]="groups" (changeNoteGroup)="noteGroupChanged($event)"></dropdown>
 
   <colorpicker (changeColor)="colorChanged($event)" [class.visible_colorpicker]="isEditable"></colorpicker>
-
-
 </div>

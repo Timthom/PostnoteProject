@@ -54,7 +54,6 @@ note {
     height: 300px;
 }*/
 note .noteContainer {
- box-shadow: 0px 2px 5px gray;
  height: 300px;
  display: table-cell;
  position: relative;

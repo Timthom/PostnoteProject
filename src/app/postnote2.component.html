@@ -1,14 +1,14 @@
 <!--<headerbar (openSideBar)="openSideBar($event)"></headerbar>-->
-<div class="container-fluid">
+<div  class="container-fluid">
   <!--Top navbar-->
-  <div class="navbar_item navbar-inverse cbp-af-header">
-    <button class="backBtn" (click)="toggleSideBar()">
+  <div class="navbar_item cbp-af-header">
+    <button class="backBtn" (click)="toggleSideBar()" >
        <img class="btnImage" src="{{btnImage}}"  alt="backButton">
    </button>
   </div>
   <div class="row">
     <div class="shadow" [class.shadow_active]="statusCheckSideBar" (click)="toggleSideBar()"></div>
-    <div class="col-xs-4" *ngIf="statusCheckSideBar == true">
+    <div   class="  col-xs-4" *ngIf="statusCheckSideBar == true">
       <menu [myGroups]="allGroups" (clicked)="addGroup()" (groupsChanged)="groupsChanged(groups)"></menu>
     </div>
 
@@ -30,4 +30,5 @@
       </div>
     </div>
   </div>
+
 </div>
