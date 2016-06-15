@@ -45,7 +45,6 @@ export class GroupComponent {
   @Output() clickedDelete = new EventEmitter();
   @Output() notesChanged = new EventEmitter();
 
-
   newName: string = "";
   contentList: string[];
   arrowSrc: string = 'icon_expand.png';

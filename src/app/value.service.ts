@@ -7,6 +7,7 @@ export class ValueService {
   _toggleExpand:boolean = false;
   _focusedId:string = '';
   _focusedName:string = '';
+  _focusedNoteKeys:string[];
 
   constructor() {}
   
@@ -41,4 +42,13 @@ export class ValueService {
     set focusedName(name:string){
       this._focusedName = name;
     }
+
+    get focusedNoteKeys(){
+      return this._focusedNoteKeys;
+    }
+
+    set focusedNoteKeys(keys:string[]){
+      this._focusedNoteKeys = keys;
+    }
+
 }
