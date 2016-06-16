@@ -36,10 +36,6 @@ export class GroupComponent {
   groupName;
 
   @Input()
-  focusedName;
-
-
-  @Input()
   note;
 
   @Output() clickedDelete = new EventEmitter();
@@ -63,6 +59,7 @@ export class GroupComponent {
     private _ls: LocalStorageService,
     public toastr: ToastsManager) {
     this._authData = this._ref.getAuth();
+        
   }
 
   ngOnInit() {
@@ -71,7 +68,6 @@ export class GroupComponent {
 
   saveId() {
     this._tx._focusedId = this.group.$key;
-    this._tx._focusedName = this.group.name;
   }
 
   getNotes() {
@@ -124,7 +120,6 @@ export class GroupComponent {
       this._ls.deleteGroup(this._tx._focusedId);
     }
     this.clickedDelete.emit('');
-    this.toastr.success(this._tx._focusedName + ' deleted!');
 
   }
 
@@ -198,14 +193,4 @@ export class GroupComponent {
   emitNotes(groups: any) {
     this.notesChanged.emit('');
   }
-  // Getting name of pressed group
-  getFocusedName(){
-    // this.focusedName = this.group.name;
-    this._tx._focusedName = this.group.name;
-    this.focusedName = this._tx._focusedName;
-        // console.log('Ermin2 ', this.focusedName);
-        console.log('Ermin3 ' , this.focusedName);
-  }
-
-
 }
