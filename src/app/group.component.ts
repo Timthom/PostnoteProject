@@ -24,9 +24,11 @@ import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 ])
 
 export class GroupComponent {
-  @Input()
+
   groups: any;
-  
+  notes: any;
+
+
   @Input()
   group;
 
@@ -34,13 +36,14 @@ export class GroupComponent {
   groupName;
 
   @Input()
+  focusedName;
+
+
+  @Input()
   note;
 
   @Output() clickedDelete = new EventEmitter();
   @Output() notesChanged = new EventEmitter();
-  
-  @Input()
-  notes: any;
 
   newName: string = "";
   contentList: string[];
@@ -52,12 +55,12 @@ export class GroupComponent {
   _authData;
   groupId;
 
-  constructor( @Inject(FirebaseRef) 
-  private _ref: Firebase, 
-  private _ds: DataService,
-  private _tx: ValueService, 
-  private _ls: LocalStorageService, 
-  public toastr: ToastsManager) {
+  constructor( @Inject(FirebaseRef)
+  private _ref: Firebase,
+    private _ds: DataService,
+    private _tx: ValueService,
+    private _ls: LocalStorageService,
+    public toastr: ToastsManager) {
     this._authData = this._ref.getAuth();
   }
 
@@ -65,9 +68,10 @@ export class GroupComponent {
     this.getNotes();
   }
 
-  saveId(){
+  saveId() {
     this._tx._focusedId = this.group.$key;
-    console.log(this._tx._focusedId);
+    this._tx._focusedName = this.group.name;
+    this._tx._focusedNoteKeys = this.getContent();
   }
 
   getNotes() {
@@ -96,48 +100,41 @@ export class GroupComponent {
   }
 
   deleteGroup() {
-     //remove from shared model
-     console.log('DELETE GROUP IN GROUP !!!');
-     console.log(this.groupId);
+    
     for (var item in this.groups) {
-            if (this.group.$key == this.groups[item].$key) {
-                this.groups.splice(item, 1);
-                break;
-            }
+      if (this._tx._focusedId == this.groups[item].$key) {
+        this.groups.splice(item, 1);
+        break;
+      }
     }
     if (this._authData != null) {
       //To be able to iterate through all notes
-      let content = this.getContent();
+      let content = this._tx._focusedNoteKeys;
       //Remove all notes in group
       for (let key of content) {
         this._ds.deleteNote(key);
       }
       this._ds.deleteGroup(this._tx._focusedId);
-      this.clickedDelete.emit('');
       this._tx._toggleExpand = false;
     } else {//if not logged in
       //Removes notes of the group
       for (let note of this.notes) {
         this._ls.deleteNote(note.$key);
       }
-
       this._ls.deleteGroup(this._tx._focusedId);
-      //TEMPORARY
-      //location.reload();
     }
-    console.log(this.groupId);
     this.clickedDelete.emit('');
-    this.toastr.success('hallelujah!', 'group deleted!');
+    this.toastr.success(this._tx._focusedName + ' deleted!');
   }
-  
-  
+
+
   editGroupName() {
     //change name in shared model
     for (var index in this.groups) {
-            if (this.group.$key == this.groups[index].$key) {
-                this.groups[index].name = this.groupName;
-                break;
-            }
+      if (this.group.$key == this.groups[index].$key) {
+        this.groups[index].name = this.groupName;
+        break;
+      }
     }
     if (this._authData != null) {
       this._ds.updateGroupName(this.group.$key, this.groupName);
@@ -147,13 +144,12 @@ export class GroupComponent {
       //location.reload();
     }
     this.clickedDelete.emit(''); //Also works for edits!
-    this.toastr.success('hallelujah!', 'group updated!');
+    this.toastr.success('Group-name updated!');
   }
 
   // Enable inputfield to edit text in field when user click on pen icon else disable inputfield
   editClick() {
     this.editingName = !this.editingName;
-
     if (this.editingName) {
       this.enableEditIfNull = null;
       this.editSrc = 'icon_save.png';
@@ -195,9 +191,15 @@ export class GroupComponent {
       }
     }
   }
-  emitNotes(groups : any){
+  emitNotes(groups: any) {
     this.notesChanged.emit('');
   }
-
-  
+  // Getting name of pressed group
+  getFocusedName(){
+    // this.focusedName = this.group.name;
+    this._tx._focusedName = this.group.name;
+    this.focusedName = this._tx._focusedName;
+        // console.log('Ermin2 ', this.focusedName);
+        console.log('Ermin3 ' , this.focusedName);
+  }
 }

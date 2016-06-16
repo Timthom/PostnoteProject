@@ -1,4 +1,4 @@
-import {Component, Inject, Pipe, EventEmitter, Input, Output} from '@angular/core';
+import {Component, Inject, Pipe, EventEmitter, Input, Output, ViewChild, ViewChildren, QueryList} from '@angular/core';
 import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from '@angular/router-deprecated';
 import {DataService} from './data.service';
 import {OnInit} from '@angular/core';
@@ -14,7 +14,7 @@ import { AngularFire, defaultFirebase, FirebaseRef, FirebaseListObservable } fro
 import { Dragula } from 'ng2-dragula/ng2-dragula';
 import {LocalStorageService} from './localstorage.service';
 import {FirstLetter} from './first-letter.pipe';
-
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
 
 @Component({
@@ -29,9 +29,11 @@ import {FirstLetter} from './first-letter.pipe';
 @RouteConfig([
 ])
 export class CreatorComponent {
-    @Input()
+    @ViewChildren(NoteComponent)
+    private noteComponents: QueryList<NoteComponent>;
+
     groups: any;
-    @Input()
+
     notes: any;
 
     @Output()
@@ -47,12 +49,13 @@ export class CreatorComponent {
     categoriesVisible: boolean = false;
     colorCount: number = 0;
 
-    constructor(private _ds: DataService, @Inject(FirebaseRef) private _ref: Firebase, private _ls: LocalStorageService) {
+    constructor(private _ds: DataService, @Inject(FirebaseRef) private _ref: Firebase, private _ls: LocalStorageService, public toastr: ToastsManager) {
         this._authData = this._ref.getAuth();
     }
 
     ngOnInit() {
         this.getNotes();
+        this.getGroups();
     }
 
     getGroups() {
@@ -60,6 +63,7 @@ export class CreatorComponent {
             this._ds.getAllGroups().then(groups => this.groups = groups);
         } else {
             this.groups = this._ls.getAllGroups();
+
         }
     }
 
@@ -67,8 +71,15 @@ export class CreatorComponent {
     getNotes() {
         if (this._authData != null) {
             this._ds.getAllNotesInGroup('noGroup').then(notes => this.notes = notes);
+          
         } else {
             this.notes = this._ls.getNotesInGroup('noGroup');
+              if(this.notes < 1) {
+                let time = new Date().getTime();
+                let newNote = new Note("Note", "Du har inga lappar än... skapa dem med plusknappen..", "noGroup", time.toString(), this.randomColor());
+                this._ls.addNoteToNotes(newNote);
+                this.notesChanged.emit('');
+            }
         }
     }
 
@@ -82,16 +93,22 @@ export class CreatorComponent {
         let time = new Date().getTime();
 
         if (this._authData != null) {
-            this._ds.addNoteToNotes("", "", group, time, this.randomColor());
+            this._ds.addNoteToNotes("new note", "", group, time, this.randomColor());
 
         } else {
-            let newNote = new Note("", "", group, time.toString(), this.randomColor());
+            let newNote = new Note("new note", "", group, time.toString(), this.randomColor());
             this._ls.addNoteToNotes(newNote);
             this.notesChanged.emit('');
 
         }
         this.getNotes(); //Update view
         this.categoriesVisible = false;
+
+        if (group == "noGroup") {
+            this.toastr.success('A new note was created');
+        } else {
+            this.toastr.success('A new note was created in ' + group);
+        }
     }
 
     open() {
@@ -117,7 +134,14 @@ export class CreatorComponent {
 
     noteChanged() {
         this.notesChanged.emit('');
-        //this.getNotes();
+        this.getNotes();
     }
+
+    groupsChanged() {
+        this.noteComponents.toArray().forEach((child) => child.groupsChanged());
+        this.getGroups();
+
+    }
+
 
 }

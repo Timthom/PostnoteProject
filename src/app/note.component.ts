@@ -1,4 +1,4 @@
-import {Component, OnInit, Output, EventEmitter} from '@angular/core';
+import {Component, OnInit, Output, EventEmitter, ViewChild, ViewChildren, QueryList} from '@angular/core';
 import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from '@angular/router-deprecated';
 import {AngularFire} from 'angularfire2';
 import {FirebaseListObservable} from 'angularfire2';
@@ -24,7 +24,10 @@ import {LocalStorageService} from './localstorage.service';
 ])
 
 export class NoteComponent implements OnInit {
-  
+
+  @ViewChildren(DropdownComponent)
+  private dropdownComponents: QueryList<DropdownComponent>;
+
   @Input()
   noteInNote;
 
@@ -39,10 +42,10 @@ export class NoteComponent implements OnInit {
 
   @Input()
   color;
-  
+
   @Input()
   groups: any;
-  
+
   @Output()
   noteChanged = new EventEmitter();
 
@@ -54,7 +57,7 @@ export class NoteComponent implements OnInit {
   }
 
 
-  constructor(@Inject(FirebaseRef) private _ref: Firebase, private _ds: DataService, private _ls: LocalStorageService) {
+  constructor( @Inject(FirebaseRef) private _ref: Firebase, private _ds: DataService, private _ls: LocalStorageService) {
     this._authData = this._ref.getAuth();
   }
 
@@ -73,17 +76,25 @@ export class NoteComponent implements OnInit {
     this.isEditable = true;
     this.enabledIfNull = null;
   }
-  
+
   save() {
-      if (this._authData != null) {
-        this._ds.updateNoteTitle(this.noteInNote.$key, this.title);
-        this._ds.updateNoteText(this.noteInNote.$key, this.text);
-      } else {
-        this._ls.updateNoteTitle(this.noteInNote.$key, this.title);
-        this._ls.updateNoteText(this.noteInNote.$key, this.text);
-        //Emit to postnote2
-        this.noteChanged.emit('');
-      }
+    if(this.noteSelectedGroup == undefined){ //If no group selected
+      this.noteSelectedGroup = this.group; //use the same one
+    }
+    if (this._authData != null) {
+      this._ds.updateNoteTitle(this.noteInNote.$key, this.title);
+      this._ds.updateNoteText(this.noteInNote.$key, this.text);
+      this._ds.changeNoteGroup(this.noteInNote.$key, this.noteSelectedGroup);//moved
+
+    } else {
+      this._ls.updateNoteTitle(this.noteInNote.$key, this.title);
+      this._ls.updateNoteText(this.noteInNote.$key, this.text);
+      this._ls.changeNoteGroup(this.noteInNote.$key, this.noteSelectedGroup);//moved
+
+      
+    }
+  
+      this.noteChanged.emit('');
     this.isEditable = false;
     this.enabledIfNull = "";
 
@@ -92,15 +103,6 @@ export class NoteComponent implements OnInit {
   //Emitted from dropdown
   noteGroupChanged(event) {
     this.noteSelectedGroup = event;
-
-    if (this._authData != null) {
-      this._ds.changeNoteGroup(this.noteInNote.$key, this.noteSelectedGroup);
-    } else {
-      this._ls.changeNoteGroup(this.noteInNote.$key, this.noteSelectedGroup);
-      //TEMPORARY
-      //location.reload();
-    }
-    //this.noteChanged.emit(''); uppdateras m.h.a. editclick??
   }
 
   colorChanged(event) {
@@ -154,14 +156,20 @@ export class NoteComponent implements OnInit {
 
   deleteClick() {
     var o = this;
-    setTimeout(function() {
-      if (o._authData != null) {
+
+    if (o._authData != null) {
       o._ds.deleteNote(o.noteInNote.$key);
     } else {
       o._ls.deleteNote(o.noteInNote.$key);
-      o.noteChanged.emit('');
-    }; }, 500);
+
+    };
+
+    o.noteChanged.emit('');
     this.delete_button = !this.delete_button;
+  }
+
+  groupsChanged() {
+    this.dropdownComponents.toArray().forEach((child) => child.getTitles());
   }
 }
 

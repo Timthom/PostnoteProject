@@ -39,6 +39,7 @@ export class LocalStorageService {
     saveGroup(group: Group) {
         this.groups.push(group);
         localStorage.setItem("savedGroups", JSON.stringify(this.groups));
+        //this.printAll();
     }
 
 
@@ -49,10 +50,11 @@ export class LocalStorageService {
             if (groupkey == this.groups[item].$key) {
                 this.groups.splice(item, 1);
                 localStorage.setItem("savedGroups", JSON.stringify(this.groups));
-                //TO DO : Refresha menyn!
+                //this.printAll();
                 return;
             }
         }
+
     }
 
     updateGroupName(groupkey: string, newName: string) {
@@ -71,6 +73,7 @@ export class LocalStorageService {
             }
         }
         localStorage.setItem("savedNotes", JSON.stringify(this.notes));
+        //this.printAll();
 
     }
 
@@ -100,15 +103,17 @@ export class LocalStorageService {
             if (key == this.notes[item].$key) {
                 this.notes[item].group = newGroup;
                 localStorage.setItem("savedNotes", JSON.stringify(this.notes));
+                //this.printAll();
                 return;
             }
         }
+        
     }
 
     addNoteToNotes(note: Note) {
         this.notes.push(note);
         localStorage.setItem("savedNotes", JSON.stringify(this.notes));
-        console.log("ADD NOTE TO LS");
+        //this.printAll();
     }
 
     deleteNote(key: string) {
@@ -116,11 +121,11 @@ export class LocalStorageService {
             if (key == this.notes[item].$key) {
                 this.notes.splice(item, 1);
                 localStorage.setItem("savedNotes", JSON.stringify(this.notes));
-                //TO DO : Refresha
+                //this.printAll();
                 return;
             }
         }
-
+        
     }
     
     updateNoteTitle(noteKey : string, newTitle: string){
@@ -128,7 +133,7 @@ export class LocalStorageService {
             if (noteKey == this.notes[item].$key) {
                 this.notes[item].title = newTitle;
                 localStorage.setItem("savedNotes", JSON.stringify(this.notes));
-                //TO DO : Refresha
+                //this.printAll();
                 return;
             }
         }
@@ -139,7 +144,7 @@ export class LocalStorageService {
             if (noteKey == this.notes[item].$key) {
                 this.notes[item].text = newText;
                 localStorage.setItem("savedNotes", JSON.stringify(this.notes));
-                //TO DO : Refresha
+                //this.printAll();
                 return;
             }
         }
@@ -150,7 +155,7 @@ export class LocalStorageService {
             if (noteKey == this.notes[item].$key) {
                 this.notes[item].color = color;
                 localStorage.setItem("savedNotes", JSON.stringify(this.notes));
-                //TO DO : Refresha
+                //this.printAll();
                 return;
             }
         }
@@ -163,6 +168,13 @@ export class LocalStorageService {
         localStorage.setItem("savedGroups", JSON.stringify(this.groups));
         this.notes = [];
         localStorage.setItem("savedNotes", JSON.stringify(this.notes));
+    }
+
+    printAll() {
+        console.log("Notes in local: ");
+        console.log(this.notes);
+        console.log("Groups in local: ");
+        console.log(this.groups);
     }
 
 }

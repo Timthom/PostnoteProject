@@ -1,38 +1,40 @@
 <nav class="navbar  wow fadeInLeft" data-wow-duration=".35s"
   data-wow-delay="0s">
-  <!-- Sidebar -->
-  <br/>
-  <div *ngIf='_authData == null'>
-    <p *ngFor="let note of titles" (click)="jumpToNote(note.$key)">
-      {{note.title}}
-    </p>
-  </div>
-  <div *ngIf='_authData != null'>
-    <p *ngFor="let note of titles | async" (click)="jumpToNote(note.$key)">
-      {{note.title}}
-    </p>
-  </div>
-  <hr>
-  <button class="addBtn btn btn-info btn-xs" [class.cancelable]="showingCancel"
-    (click)="toggleInput()">
+    <!-- Sidebar -->
+    <br/>
+    <div *ngIf='_authData == null'>
+      <p *ngFor="let note of titles | reverse" (click)="jumpToNote(note.$key)">
+        {{note.title}}
+      </p>
+    </div>
+    <div *ngIf='_authData != null'>
+      <p *ngFor="let note of titles | async | reverse" (click)="jumpToNote(note.$key)">
+        {{note.title}}
+      </p>
+    </div>
+    <hr>
+    <button class="addBtn btn btn-info btn-xs" [class.cancelable]="showingCancel"
+      (click)="toggleInput()">
          {{buttonText}}
        </button>
-  <form *ngIf="adding">
-    <input [(ngModel)]="groupName" type="text" id="categoryInput" placeholder="Name"
-      (keyup.enter)="addGroup()" maxlength="18">
-    <button id="plusBtn" type="button" (click)="addGroup()">+</button>
-  </form>
-  <hr>
-  <div *ngIf='_authData == null'>
-    <menuGroup *ngFor="let group of myGroups" [groups]="myGroups" [group]="group"
-      (groupsChanged)="groupsChanged(groups)"></menuGroup>
-  </div>
-  <div *ngIf='_authData != null'>
-    <menuGroup *ngFor="let group of myGroups | async" [group]="group"
-      (groupsChanged)="groupsChanged(groups)" [groups]="myGroups"></menuGroup>
-  </div>
-  <!--</div>-->
- <!-- <script>
+    <form *ngIf="adding">
+      <input [(ngModel)]="groupName" type="text" id="categoryInput" placeholder="Name"
+        (keyup.enter)="addGroup()" maxlength="12">
+      <button id="plusBtn" type="button" (click)="addGroup()">
+        +
+      </button>
+    </form>
+    <hr>
+    <div *ngIf='_authData == null'>
+      <menuGroup *ngFor="let group of myGroups" [group]="group" (groupsChanged)="groupsChanged(groups)"></menuGroup>
+    </div>
+    <div *ngIf='_authData != null'>
+      <menuGroup *ngFor="let group of myGroups | async" [group]="group"
+        (groupsChanged)="groupsChanged(groups)">
+      </menuGroup>
+    </div>
+    <!--</div>-->
+    <!-- <script>
     (function delaySidebar() {
              
         
@@ -47,4 +49,4 @@
 })();
   </script>-->
 
-</nav>
+  </nav>

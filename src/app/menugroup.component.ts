@@ -29,7 +29,7 @@ export class MenuGroupComponent implements OnInit {
 
   @Input()
   groups: any;
-  
+
   @Input()
   group;
   _authData;
@@ -46,7 +46,7 @@ export class MenuGroupComponent implements OnInit {
     this.getNotes();
   }
 
-  saveId(){
+  saveId() {
     this._tx._focusedId = this.group.$key;
   }
 
@@ -58,28 +58,29 @@ export class MenuGroupComponent implements OnInit {
     }
   }
 
-  deleteGroup() {
-    console.log("DELETE GROUP");
-    //remove from shared model
-    for (var item in this.groups) {
-      console.log("CHECKING " + this.groups[item].$key);
-            if (this.group.$key == this.groups[item].$key) {
-                console.log("REMOVING no " + item);
-                this.groups.splice(item, 1);
-                break;
-            }
-    }
-    //remove from firebase
-    if (this._authData != null) {
-      this._ds.deleteGroup(this._tx._focusedId);
-    } else {//remove from local storage
-      this._ls.deleteGroup(this._tx._focusedId);
-      //TEMPORARY
-      //location.reload();
-    }
-    this._tx._toggleExpand = false;
-    this.groupsChanged.emit(this.groups);
-  }
+  //WILL NOT BE USED
+  // deleteGroup() {
+  //   console.log("DELETE GROUP");
+  //   //remove from shared model
+  //   // for (var item in this.groups) {
+  //   //   console.log("CHECKING " + this.groups[item].$key);
+  //   //         if (this.group.$key == this.groups[item].$key) {
+  //   //             console.log("REMOVING no " + item);
+  //   //             this.groups.splice(item, 1);
+  //   //             break;
+  //   //         }
+  //   // }
+  //   //remove from firebase
+  //   if (this._authData != null) {
+  //     this._ds.deleteGroup(this._tx._focusedId);
+  //   } else {//remove from local storage
+  //     this._ls.deleteGroup(this._tx._focusedId);
+  //     //TEMPORARY
+  //     //location.reload();
+  //   }
+  //   this._tx._toggleExpand = false;
+  //   this.groupsChanged.emit(this.groups);
+  // }
 
 
   editGroup() {
@@ -88,11 +89,11 @@ export class MenuGroupComponent implements OnInit {
     } else {
       this._ls.updateGroupName(this.group.$key, this.group.name);
       //Not sure how this can work!
-      
+
       //TEMPORARY
       //location.reload();
     }
-    //this.groupsChanged.emit('');
+    this.groupsChanged.emit('');
   }
 
   getContent() {
@@ -125,7 +126,7 @@ export class MenuGroupComponent implements OnInit {
       } else { //if not logged in
         for (let note of this.notes) {
           this._ls.changeNoteGroup(note.$key, this.group.name);
-          
+
         }
       }
       this.editSrc = 'icon_edit.png';
@@ -136,24 +137,32 @@ export class MenuGroupComponent implements OnInit {
   }
 
   toggleExpand() {
-    if (this.arrowSrc == 'icon_hide.png') {
-      this.expanded = false;
-    } else {
-      this.expanded = true;
-    }
-    // this.expanded = this._tx._toggleExpand;
-
-    if (this.expanded) {
-      this.arrowSrc = 'icon_hide.png';
-    }
-    else {
-      this.arrowSrc = 'icon_expand.png';
+    this.jumpToGroup(this.group.name);
+    let content = this.getContent();
+    if (!this.editingName) {
+      if (this.arrowSrc == 'icon_hide.png') {
+        this.expanded = false;
+      } else {
+        this.expanded = true;
+      }
+      // this.expanded = this._tx._toggleExpand;
+      if (this.expanded) {
+        this.arrowSrc = 'icon_hide.png';
+      }
+      else {
+        this.arrowSrc = 'icon_expand.png';
+      }
     }
   }
 
   jumpToNote(note: string) {
-    var element = document.getElementById(note);
-    element.scrollIntoView(true);
+    var element = document.getElementById(note).offsetTop-(window.innerHeight/12);
+    window.scrollTo(0, element);
+  }
+
+  jumpToGroup(group: string) {
+    var element = document.getElementById(group).offsetTop-(window.innerHeight/12);
+    window.scrollTo(0, element);
   }
 
 }
