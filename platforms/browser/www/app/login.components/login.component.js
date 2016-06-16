@@ -46,7 +46,6 @@ var LoginComponent = (function () {
         this._authService.loginGitHubAuth();
     };
     LoginComponent.prototype.createAccountWindow = function () {
-        console.log("Create account click is working!");
         this.emitCreateUserAccount.emit('');
     };
     __decorate([

@@ -10,15 +10,20 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var authorization_service_1 = require("../authorization.service");
+var data_service_1 = require('../data.service');
 var LogoutComponent = (function () {
-    function LogoutComponent(_authService) {
+    function LogoutComponent(_authService, _ds) {
         this._authService = _authService;
+        this._ds = _ds;
         this.emitLogout = new core_1.EventEmitter();
     }
     LogoutComponent.prototype.ngOnInit = function () {
     };
     LogoutComponent.prototype.logout = function () {
         this.emitLogout.emit('');
+    };
+    LogoutComponent.prototype.loggedInUser = function () {
+        return this._authService.returnLoggedInUser();
     };
     __decorate([
         core_1.Output(), 
@@ -31,7 +36,7 @@ var LogoutComponent = (function () {
             templateUrl: 'logout.component.html',
             styleUrls: ['logout.component.css']
         }), 
-        __metadata('design:paramtypes', [authorization_service_1.AuthorizationService])
+        __metadata('design:paramtypes', [authorization_service_1.AuthorizationService, data_service_1.DataService])
     ], LogoutComponent);
     return LogoutComponent;
 }());

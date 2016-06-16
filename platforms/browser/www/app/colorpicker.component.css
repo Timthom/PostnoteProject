@@ -22,15 +22,15 @@
 .color_button {
     border-radius: 2px;
     position: absolute;
+    width: 25px;
+    height: 25px;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: center;
     bottom: 0;
     right: 0;
     outline: none;
     transition: background-color 150ms ease-in-out, box-shadow 150ms ease-in-out;
-}
-
-.color_button:hover {
-    background-color: white;
-    box-shadow: 0px 1px 5px #5A5A5A;
 }
 
 .showing_colors {

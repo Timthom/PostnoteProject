@@ -1,8 +1,5 @@
-button {
-    margin-top: 4px;
-}
-
 .line {
+   
     border: 0;
     margin-top: 8px;
     margin-left: 10px;
@@ -12,13 +9,13 @@ button {
 }
 
 .group_name {
-    border: none;
+    border: none!important;
     outline: none;
     font-size: 28px;
     display: inline-block;
-    background: none;
+    color: #404040;
+    background-color: #F5F5F5;
     text-align: left;
-    width: 35%;
 }
 .group_name:hover{
      cursor: pointer;
@@ -30,20 +27,24 @@ button {
     /*visibility: hidden;*/
     background-color: transparent;
     margin-left: 0em;
-    float: right;
-    margin-right:10px;
+
 }
+
+/*.ifButtons{
+    float: right;
+    height: 48px;
+    margin-right: 70px;
+}*/
 
 .edit_button{
     border: none;
     outline: none;
     /*visibility: hidden;*/
     background-color: transparent;
-    margin-left: 0em;
-    float: right;
+
 }
 
-.col-xs-4 {
+/*.col-xs-4 {
   padding: 0px;
 }
 
@@ -51,6 +52,13 @@ note {
     margin: 10px;
     width: 300px;
     height: 300px;
+}*/
+note .noteContainer {
+ box-shadow: 0px 2px 5px gray;
+ height: 300px;
+ display: table-cell;
+ position: relative;
+ float: left;
 }
 
 .collapse_button{
@@ -78,10 +86,10 @@ input{
 }
 /*Modal css*/
 #rigth-button{
-    width: 40%;
+    width: 70%;
 }
 #left-button{
-    width: 40%;
+    width: 70%;
 }
 .modal-body{
     font-size: 1.5em;
@@ -89,3 +97,18 @@ input{
 .modal-title{
     font-size: 2em;
 }
+#myModal{
+    margin-top: 50px;
+}
+
+.test{
+    width: 50%;
+}
+
+/*.pull-right{
+    width: 100%;
+}
+
+.pull-left{
+    width: 100%;
+}*/

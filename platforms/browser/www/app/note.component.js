@@ -25,7 +25,9 @@ var NoteComponent = (function () {
         this._ref = _ref;
         this._ds = _ds;
         this._ls = _ls;
+        this.noteChanged = new core_1.EventEmitter();
         this.isEditable = false;
+        this.delete_button = true;
         this.enabledIfNull = "";
         this.noteSelectedGroup = this.group;
         this.isPink = false;
@@ -40,22 +42,22 @@ var NoteComponent = (function () {
         this.colorInit(this.color);
     };
     NoteComponent.prototype.editClick = function () {
-        //IF TODO
-        if (this.isEditable) {
-            if (this._authData != null) {
-                this._ds.updateNoteTitle(this.noteInNote.$key, this.title);
-                this._ds.updateNoteText(this.noteInNote.$key, this.text);
-            }
-            else {
-                this._ls.updateNoteTitle(this.noteInNote.$key, this.title);
-                this._ls.updateNoteText(this.noteInNote.$key, this.text);
-            }
-            this.enabledIfNull = "";
+        this.isEditable = true;
+        this.enabledIfNull = null;
+    };
+    NoteComponent.prototype.save = function () {
+        if (this._authData != null) {
+            this._ds.updateNoteTitle(this.noteInNote.$key, this.title);
+            this._ds.updateNoteText(this.noteInNote.$key, this.text);
         }
         else {
-            this.enabledIfNull = null;
+            this._ls.updateNoteTitle(this.noteInNote.$key, this.title);
+            this._ls.updateNoteText(this.noteInNote.$key, this.text);
+            //Emit to postnote2
+            this.noteChanged.emit('');
         }
-        this.isEditable = !this.isEditable;
+        this.isEditable = false;
+        this.enabledIfNull = "";
     };
     //Emitted from dropdown
     NoteComponent.prototype.noteGroupChanged = function (event) {
@@ -65,12 +67,10 @@ var NoteComponent = (function () {
         }
         else {
             this._ls.changeNoteGroup(this.noteInNote.$key, this.noteSelectedGroup);
-            //TEMPORARY
-            location.reload();
         }
+        //this.noteChanged.emit(''); uppdateras m.h.a. editclick??
     };
     NoteComponent.prototype.colorChanged = function (event) {
-        //IF TODO
         this.colorSwitch(event);
         this.isEditable = true;
         if (this._authData != null) {
@@ -117,14 +117,18 @@ var NoteComponent = (function () {
         }
     };
     NoteComponent.prototype.deleteClick = function () {
-        if (this._authData != null) {
-            this._ds.deleteNote(this.noteInNote.$key);
-        }
-        else {
-            this._ls.deleteNote(this.noteInNote.$key);
-            //TEMPORARY
-            location.reload();
-        }
+        var o = this;
+        setTimeout(function () {
+            if (o._authData != null) {
+                o._ds.deleteNote(o.noteInNote.$key);
+            }
+            else {
+                o._ls.deleteNote(o.noteInNote.$key);
+                o.noteChanged.emit('');
+            }
+            ;
+        }, 500);
+        this.delete_button = !this.delete_button;
     };
     __decorate([
         core_2.Input(), 
@@ -146,6 +150,14 @@ var NoteComponent = (function () {
         core_2.Input(), 
         __metadata('design:type', Object)
     ], NoteComponent.prototype, "color", void 0);
+    __decorate([
+        core_2.Input(), 
+        __metadata('design:type', Object)
+    ], NoteComponent.prototype, "groups", void 0);
+    __decorate([
+        core_1.Output(), 
+        __metadata('design:type', Object)
+    ], NoteComponent.prototype, "noteChanged", void 0);
     NoteComponent = __decorate([
         core_1.Component({
             moduleId: module.id,

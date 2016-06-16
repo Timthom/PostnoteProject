@@ -33,6 +33,9 @@ var MenuGroupComponent = (function () {
     MenuGroupComponent.prototype.ngOnInit = function () {
         this.getNotes();
     };
+    MenuGroupComponent.prototype.saveId = function () {
+        this._tx._focusedId = this.group.$key;
+    };
     MenuGroupComponent.prototype.getNotes = function () {
         var _this = this;
         if (this._authData != null) {
@@ -43,16 +46,25 @@ var MenuGroupComponent = (function () {
         }
     };
     MenuGroupComponent.prototype.deleteGroup = function () {
+        console.log("DELETE GROUP");
+        //remove from shared model
+        for (var item in this.groups) {
+            console.log("CHECKING " + this.groups[item].$key);
+            if (this.group.$key == this.groups[item].$key) {
+                console.log("REMOVING no " + item);
+                this.groups.splice(item, 1);
+                break;
+            }
+        }
+        //remove from firebase
         if (this._authData != null) {
-            this._ds.deleteGroup(this.group.$key);
+            this._ds.deleteGroup(this._tx._focusedId);
         }
         else {
-            this._ls.deleteGroup(this.group.$key);
-            //TEMPORARY
-            location.reload();
+            this._ls.deleteGroup(this._tx._focusedId);
         }
         this._tx._toggleExpand = false;
-        this.groupsChanged.emit('');
+        this.groupsChanged.emit(this.groups);
     };
     MenuGroupComponent.prototype.editGroup = function () {
         if (this._authData != null) {
@@ -60,10 +72,8 @@ var MenuGroupComponent = (function () {
         }
         else {
             this._ls.updateGroupName(this.group.$key, this.group.name);
-            //TEMPORARY
-            location.reload();
         }
-        this.groupsChanged.emit('');
+        //this.groupsChanged.emit('');
     };
     MenuGroupComponent.prototype.getContent = function () {
         var doneInLoopArray;
@@ -125,10 +135,10 @@ var MenuGroupComponent = (function () {
         var element = document.getElementById(note);
         element.scrollIntoView(true);
     };
-    MenuGroupComponent.prototype.jumpToGroup = function (groupId) {
-        var element = document.getElementById(groupId);
-        element.scrollIntoView(true);
-    };
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], MenuGroupComponent.prototype, "groups", void 0);
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Object)

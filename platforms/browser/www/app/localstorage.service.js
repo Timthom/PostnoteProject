@@ -71,7 +71,6 @@ var LocalStorageService = (function () {
         return this.notes;
     };
     LocalStorageService.prototype.getNotesInGroup = function (groupName) {
-        console.log("localStorage.getItem(savedNotes) : " + localStorage.getItem("savedNotes"));
         if (localStorage.getItem("savedNotes")) {
             this.notes = JSON.parse(localStorage.getItem("savedNotes"));
             var groupNotes = new Array;
@@ -99,6 +98,7 @@ var LocalStorageService = (function () {
     LocalStorageService.prototype.addNoteToNotes = function (note) {
         this.notes.push(note);
         localStorage.setItem("savedNotes", JSON.stringify(this.notes));
+        console.log("ADD NOTE TO LS");
     };
     LocalStorageService.prototype.deleteNote = function (key) {
         for (var item in this.notes) {
