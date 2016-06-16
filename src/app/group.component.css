@@ -114,9 +114,9 @@ input{
 .test{
     width: 50%;
 }
-span{
+/*span{
     color: red;
-}
+}*/
 
 .ifButtons{
     float: right;

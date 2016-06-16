@@ -35,8 +35,8 @@ export class GroupComponent {
   @Input()
   groupName;
 
-  @Input()
-  focusedName;
+  // @Input()
+  // focusedName;
 
 
   @Input()
@@ -70,7 +70,7 @@ export class GroupComponent {
 
   saveId() {
     this._tx._focusedId = this.group.$key;
-    this._tx._focusedName = this.group.name;
+    // this._tx._focusedName = this.group.name;
     this._tx._focusedNoteKeys = this.getContent();
   }
 
@@ -124,7 +124,7 @@ export class GroupComponent {
       this._ls.deleteGroup(this._tx._focusedId);
     }
     this.clickedDelete.emit('');
-    this.toastr.success(this._tx._focusedName + ' deleted!');
+    // this.toastr.success(this._tx._focusedName + ' deleted!');
   }
 
 
@@ -195,11 +195,11 @@ export class GroupComponent {
     this.notesChanged.emit('');
   }
   // Getting name of pressed group
-  getFocusedName(){
-    // this.focusedName = this.group.name;
-    this._tx._focusedName = this.group.name;
-    this.focusedName = this._tx._focusedName;
-        // console.log('Ermin2 ', this.focusedName);
-        console.log('Ermin3 ' , this.focusedName);
-  }
+  // getFocusedName(){
+  //   // this.focusedName = this.group.name;
+  //   this._tx._focusedName = this.group.name;
+  //   this.focusedName = this._tx._focusedName;
+  //       // console.log('Ermin2 ', this.focusedName);
+  //       console.log('Ermin3 ' , this.focusedName);
+  // }
 }
