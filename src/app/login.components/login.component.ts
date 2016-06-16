@@ -53,7 +53,6 @@ export class LoginComponent implements OnInit {
     }
     
     createAccountWindow() {
-        console.log("Create account click is working!");
         this.emitCreateUserAccount.emit('');
     }
 }
