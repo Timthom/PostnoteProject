@@ -1,10 +1,11 @@
 <!--<headerbar (openSideBar)="openSideBar($event)"></headerbar>-->
 <div class="container-fluid">
   <!--Top navbar-->
-  <div class="navbar_item navbar-inverse cbp-af-header">
+  <div class="navbar_item"  [style.background-color]="navbarColor">
     <button class="backBtn" (click)="toggleSideBar()">
        <img class="btnImage" src="{{btnImage}}"  alt="backButton">
    </button>
+   <h1 class="websiteTitle">PostNote</h1>
   </div>
   <div class="row">
     <div class="shadow" [class.shadow_active]="statusCheckSideBar" (click)="toggleSideBar()"></div>

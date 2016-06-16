@@ -46,12 +46,10 @@ export class Postnote2App implements OnInit, AfterViewInit{
     @ViewChild(CreatorComponent)
     private creatorComponent : CreatorComponent;
 
-   
-    
-    
-
+    navbarColor: string  = this.randomColor();
     btnImage: string = 'icon_menu.png';
     statusCheckSideBar: boolean = this._vs._showSideBar;
+
     constructor( @Inject(FirebaseRef) private _ref: Firebase, private _ds: DataService, private _vs: ValueService, private _ls: LocalStorageService, private _menuGroup: MenuGroupComponent) {
         this._authData = this._ref.getAuth();
         this._menuGroup.groupsChanged.subscribe(this.getGroups());
@@ -116,6 +114,13 @@ export class Postnote2App implements OnInit, AfterViewInit{
         //this.menuComponent.getTitles; //funkar ändå..
         this.groupComponents.toArray().forEach((child)=>child.getNotes());
         this.creatorComponent.getNotes();
+    }
+
+    randomColor() {
+        var colors = ["#F490B7", "#FFA334", "#F56D7E", "#8FD3CE", "#EEF66C", "mediumseagreen"];
+        var color = colors[Math.floor(Math.random()*colors.length)];
+
+        return color;
     }
 
 }
