@@ -25,13 +25,17 @@ button{
      cursor: pointer;
 }
 
+.groupContainer{
+    width: 100%;
+}
+
 .delete_button {
     border: none;
     outline: none;
     /*visibility: hidden;*/
     background-color: transparent;
     margin-left: 0em;
-
+    float: right;
 }
 
 /*.ifButtons{
@@ -45,7 +49,7 @@ button{
     outline: none;
     /*visibility: hidden;*/
     background-color: transparent;
-
+    float: right;
 }
 
 /*.col-xs-4 {
@@ -116,7 +120,6 @@ span{
 
 .ifButtons{
     float: right;
-    display: inline-block;
 }
 
 /*.pull-right{
