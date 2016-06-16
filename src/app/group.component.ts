@@ -160,7 +160,6 @@ export class GroupComponent {
       this.editGroupName();
       this.getNotes();
       this.editSrc = 'icon_edit.png';
-      this._tx._toggleExpand = false;
     }
   }
 
@@ -176,8 +175,7 @@ export class GroupComponent {
       this.expanded = this._tx._toggleExpand;
       if (this.expanded) {
         this.arrowSrc = 'icon_hide.png';
-      }
-      else {
+      } else {
         this.arrowSrc = 'icon_expand.png';
       }
     }
