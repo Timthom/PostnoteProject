@@ -1,5 +1,5 @@
 button{
-    margin-top: 5px;
+    margin-top: 8px;
 }
 
 .line {
@@ -21,6 +21,7 @@ button{
     background-color: transparent;
     text-align: left;
 }
+
 .group_name:hover{
      cursor: pointer;
 }
@@ -117,15 +118,3 @@ input{
 span{
     color: red;
 }
-
-.ifButtons{
-    float: right;
-}
-
-/*.pull-right{
-    width: 100%;
-}
-
-.pull-left{
-    width: 100%;
-}*/

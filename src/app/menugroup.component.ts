@@ -137,7 +137,6 @@ export class MenuGroupComponent implements OnInit {
   }
 
   toggleExpand() {
-    this.jumpToGroup(this.group.name);
     if (!this.editingName) {
       if (this.arrowSrc == 'icon_hide.png') {
         this._tx._toggleExpand = false;
