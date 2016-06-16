@@ -74,7 +74,6 @@ export class GroupComponent {
   }
 
   getContent() {
-    if (this._authData != null) {
       let doneInLoopArray;
       let arrayOfKeys: any[] = [];
 
@@ -87,11 +86,9 @@ export class GroupComponent {
       });
 
       return arrayOfKeys;
-    }
   }
 
   deleteGroup() {
-
     for (var item in this.groups) {
       if (this._tx._focusedId == this.groups[item].$key) {
         this.groups.splice(item, 1);
@@ -100,17 +97,15 @@ export class GroupComponent {
     }
     if (this._authData != null) {
       //To be able to iterate through all notes
-      let content = this._tx._focusedNoteKeys;
       //Remove all notes in group
-      for (let key of content) {
+      for (let key of this._tx._focusedNoteKeys) {
         this._ds.deleteNote(key);
       }
       this._ds.deleteGroup(this._tx._focusedId);
-      this._tx._toggleExpand = false;
     } else {//if not logged in
       //Removes notes of the group
-      for (let note of this.notes) {
-        this._ls.deleteNote(note.$key);
+      for (let note of this._tx._focusedNoteKeys) {
+        this._ls.deleteNote(note);
       }
       this._ls.deleteGroup(this._tx._focusedId);
     }
