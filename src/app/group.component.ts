@@ -28,6 +28,7 @@ export class GroupComponent {
   groups: any;
   notes: any;
 
+
   @Input()
   group;
 
@@ -35,12 +36,14 @@ export class GroupComponent {
   groupName;
 
   @Input()
+  focusedName;
+
+
+  @Input()
   note;
 
   @Output() clickedDelete = new EventEmitter();
   @Output() notesChanged = new EventEmitter();
-
-
 
   newName: string = "";
   contentList: string[];
@@ -67,6 +70,8 @@ export class GroupComponent {
 
   saveId() {
     this._tx._focusedId = this.group.$key;
+    this._tx._focusedName = this.group.name;
+    this._tx._focusedNoteKeys = this.getContent();
   }
 
   getNotes() {
@@ -95,21 +100,16 @@ export class GroupComponent {
   }
 
   deleteGroup() {
-    //remove from shared model
-    //console.log(this.groups);
-    // for (var item in this.groups) {
-    //   console.log("LOOPAR "+ item);
-    //   console.log("GROUP KEY " + this.group.$key);
-    //   console.log("LOOP KEY " + this.groups[item].$key);
-    //         if (this.group.$key == this.groups[item].$key) {
-    //             console.log("Removing item " + item);
-    //             this.groups.splice(item, 1);
-    //             //break;
-    //         }
-    // }
+    
+    for (var item in this.groups) {
+      if (this._tx._focusedId == this.groups[item].$key) {
+        this.groups.splice(item, 1);
+        break;
+      }
+    }
     if (this._authData != null) {
       //To be able to iterate through all notes
-      let content = this.getContent();
+      let content = this._tx._focusedNoteKeys;
       //Remove all notes in group
       for (let key of content) {
         this._ds.deleteNote(key);
@@ -123,20 +123,19 @@ export class GroupComponent {
       }
       this._ls.deleteGroup(this._tx._focusedId);
     }
-
     this.clickedDelete.emit('');
-    this.toastr.success('Group deleted!');
+    this.toastr.success(this._tx._focusedName + ' deleted!');
   }
 
 
   editGroupName() {
-    // //change name in shared model
-    // for (var index in this.groups) {
-    //         if (this.group.$key == this.groups[index].$key) {
-    //             this.groups[index].name = this.groupName;
-    //             break;
-    //         }
-    // }
+    //change name in shared model
+    for (var index in this.groups) {
+      if (this.group.$key == this.groups[index].$key) {
+        this.groups[index].name = this.groupName;
+        break;
+      }
+    }
     if (this._authData != null) {
       this._ds.updateGroupName(this.group.$key, this.groupName);
     } else {
@@ -145,13 +144,12 @@ export class GroupComponent {
       //location.reload();
     }
     this.clickedDelete.emit(''); //Also works for edits!
-    this.toastr.success('Groupname changed!');
+    this.toastr.success('Group-name updated!');
   }
 
   // Enable inputfield to edit text in field when user click on pen icon else disable inputfield
   editClick() {
     this.editingName = !this.editingName;
-
     if (this.editingName) {
       this.enableEditIfNull = null;
       this.editSrc = 'icon_save.png';
@@ -196,6 +194,12 @@ export class GroupComponent {
   emitNotes(groups: any) {
     this.notesChanged.emit('');
   }
-
-
+  // Getting name of pressed group
+  getFocusedName(){
+    // this.focusedName = this.group.name;
+    this._tx._focusedName = this.group.name;
+    this.focusedName = this._tx._focusedName;
+        // console.log('Ermin2 ', this.focusedName);
+        console.log('Ermin3 ' , this.focusedName);
+  }
 }
