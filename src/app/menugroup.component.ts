@@ -138,14 +138,13 @@ export class MenuGroupComponent implements OnInit {
 
   toggleExpand() {
     this.jumpToGroup(this.group.name);
-    let content = this.getContent();
     if (!this.editingName) {
       if (this.arrowSrc == 'icon_hide.png') {
-        this.expanded = false;
+        this._tx._toggleExpand = false;
       } else {
-        this.expanded = true;
+        this._tx._toggleExpand = true;
       }
-      // this.expanded = this._tx._toggleExpand;
+      this.expanded = this._tx._toggleExpand;
       if (this.expanded) {
         this.arrowSrc = 'icon_hide.png';
       }

@@ -18,7 +18,7 @@ button{
     font-size: 28px;
     display: inline-block;
     color: #404040;
-    background-color: #F5F5F5;
+    background-color: transparent;
     text-align: left;
 }
 .group_name:hover{
@@ -83,7 +83,7 @@ note .noteContainer {
 
 input{
     height: 40px;
-    width: 185px;
+    columns: 12;
     display: inline-block;
 }
 
