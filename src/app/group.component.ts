@@ -28,19 +28,10 @@ export class GroupComponent {
   groups: any;
   notes: any;
 
-
-  @Input()
-  group;
-
-  @Input()
-  groupName;
-
-  @Input()
-  focusedName;
-
-
-  @Input()
-  note;
+  @Input() group;
+  @Input() groupName;
+  @Input() focusedName;
+  @Input() note;
 
   @Output() clickedDelete = new EventEmitter();
   @Output() notesChanged = new EventEmitter();
@@ -100,7 +91,7 @@ export class GroupComponent {
   }
 
   deleteGroup() {
-    
+
     for (var item in this.groups) {
       if (this._tx._focusedId == this.groups[item].$key) {
         this.groups.splice(item, 1);
@@ -195,11 +186,11 @@ export class GroupComponent {
     this.notesChanged.emit('');
   }
   // Getting name of pressed group
-  getFocusedName(){
+  getFocusedName() {
     // this.focusedName = this.group.name;
     this._tx._focusedName = this.group.name;
     this.focusedName = this._tx._focusedName;
-        // console.log('Ermin2 ', this.focusedName);
-        console.log('Ermin3 ' , this.focusedName);
+    // console.log('Ermin2 ', this.focusedName);
+    console.log('Ermin3 ', this.focusedName);
   }
 }
