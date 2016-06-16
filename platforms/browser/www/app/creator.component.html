@@ -1,24 +1,40 @@
-<div id="container">
-   <img class="createButton" src="icon_fab.png" (click)="open()">
-   <img class="createButton noCategoryHidden" [class.noCategoryVisible]="categoriesVisible" src="icon_fab_active.png" (click)="save('noGroup')">
+<div id="container" class="row">
+    <div *ngIf='_authData != null'>
+        <div class="myDragulaContainer" [dragula]='"drag-bag"'>
+            <note class="noteContainer col-xs-12 col-m-6 col-sm-4 col-md-3 col-lg-3"
+                *ngFor="let note of notes | async | reverse" [noteInNote]="note"
+                [text]="note.text" [title]="note.title" [group]="note.group"
+                id="{{note.$key}}" [color]="note.color">
+            </note>
+        </div>
+    </div>
+    <div *ngIf='_authData == null'>
+        <div class="myDragulaContainer" [dragula]='"drag-bag"'>
 
-   <div *ngIf='_authData == null' id="categoryGroupButton">
-       <button *ngFor="let group of groups | reverse" class="categoryButton" (click)="save(group.name)" [class.categoryButtonVisible]="categoriesVisible">{{group.name | uppercase | firstLetter }}</button>
-   </div>
-   <div *ngIf='_authData != null' id="categoryGroupButton">
-       <button *ngFor="let group of groups | async | reverse" class="categoryButton" (click)="save(group.name)" [class.categoryButtonVisible]="categoriesVisible">{{group.name | uppercase | firstLetter}}</button>
-   </div>
-   
-   <div *ngIf='_authData != null'>
-       <div class="myDragulaContainer" [dragula]='"drag-bag"'>
-           <note class="col-xs-4" *ngFor="let note of notes | async | reverse" [noteInNote]="note" [text]="note.text" [title]="note.title" [group]="note.group" id="{{note.$key}}" [color]="note.color">
-           </note>
-       </div>
-   </div>
-   <div *ngIf='_authData == null'>
-       <div class="myDragulaContainer" [dragula]='"drag-bag"'>
-           <note class="col-xs-4" *ngFor="let note of notes | reverse " [noteInNote]="note" [text]="note.text" [title]="note.title" [group]="note.group" id="{{note.$key}}" [color]="note.color">
-           </note>
-       </div>
-   </div>
+            <note class="noteContainer col-xs-12 col-m-6  col-sm-4 col-md-3 col-lg-3"
+                *ngFor="let note of notes | reverse" [noteInNote]="note"
+                [text]="note.text" [title]="note.title" [group]="note.group"
+                [groups] = "groups" (noteChanged) = "noteChanged()"
+                id="{{note.$key}}" [color]="note.color">
+            </note>
+        </div>
+    </div>
+
+
+    <div class="shadow" *ngIf='categoriesVisible' (click)="hideCategoryButtons()"></div>
+
+    <img class="createButton" src="icon_fab.png" (click)="open()">
+    <img class="createButton noCategory" *ngIf='categoriesVisible' src="icon_fab_active.png"
+        (click)="save('noGroup')">
+
+    <div *ngIf='_authData == null' id="categoryButtonContainer">
+        <button *ngFor="let group of groups | reverse" class="categoryButton"
+            (click)="save(group.name)" [class.categoryButtonVisible]="categoriesVisible">{{group.name | uppercase | firstLetter }}</button>
+    </div>
+    <div *ngIf='_authData != null' id="categoryButtonContainer">
+        <button *ngFor="let group of groups | async | reverse" class="categoryButton"
+            (click)="save(group.name)" [class.categoryButtonVisible]="categoriesVisible">{{group.name | uppercase | firstLetter}}</button>
+    </div>
+
+
 </div>

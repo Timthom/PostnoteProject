@@ -18,16 +18,20 @@ var data_service_1 = require('./data.service');
 var angularfire2_1 = require('angularfire2');
 var core_2 = require('@angular/core');
 var reverse_pipe_1 = require('./reverse.pipe');
+var sort_notes_pipe_1 = require('./sort-notes.pipe');
 var value_service_1 = require('./value.service');
 var ng2_dragula_1 = require('ng2-dragula/ng2-dragula');
 var localstorage_service_1 = require('./localstorage.service');
+var ng2_toastr_1 = require('ng2-toastr/ng2-toastr');
 var GroupComponent = (function () {
-    function GroupComponent(_ref, _ds, _tx, _ls) {
+    function GroupComponent(_ref, _ds, _tx, _ls, toastr) {
         this._ref = _ref;
         this._ds = _ds;
         this._tx = _tx;
         this._ls = _ls;
+        this.toastr = toastr;
         this.clickedDelete = new core_1.EventEmitter();
+        this.notesChanged = new core_1.EventEmitter();
         this.newName = "";
         this.arrowSrc = 'icon_expand.png';
         this.expanded = this._tx._toggleExpand;
@@ -38,6 +42,10 @@ var GroupComponent = (function () {
     }
     GroupComponent.prototype.ngOnInit = function () {
         this.getNotes();
+    };
+    GroupComponent.prototype.saveId = function () {
+        this._tx._focusedId = this.group.$key;
+        console.log(this._tx._focusedId);
     };
     GroupComponent.prototype.getNotes = function () {
         var _this = this;
@@ -62,6 +70,15 @@ var GroupComponent = (function () {
         }
     };
     GroupComponent.prototype.deleteGroup = function () {
+        //remove from shared model
+        console.log('DELETE GROUP IN GROUP !!!');
+        console.log(this.groupId);
+        for (var item in this.groups) {
+            if (this.group.$key == this.groups[item].$key) {
+                this.groups.splice(item, 1);
+                break;
+            }
+        }
         if (this._authData != null) {
             //To be able to iterate through all notes
             var content = this.getContent();
@@ -70,7 +87,7 @@ var GroupComponent = (function () {
                 var key = content_1[_i];
                 this._ds.deleteNote(key);
             }
-            this._ds.deleteGroup(this.group.$key);
+            this._ds.deleteGroup(this._tx._focusedId);
             this.clickedDelete.emit('');
             this._tx._toggleExpand = false;
         }
@@ -80,22 +97,28 @@ var GroupComponent = (function () {
                 var note = _b[_a];
                 this._ls.deleteNote(note.$key);
             }
-            this._ls.deleteGroup(this.group.$key);
-            //TEMPORARY
-            location.reload();
+            this._ls.deleteGroup(this._tx._focusedId);
         }
+        console.log(this.groupId);
         this.clickedDelete.emit('');
+        this.toastr.success('hallelujah!', 'group deleted!');
     };
-    //
     GroupComponent.prototype.editGroupName = function () {
+        //change name in shared model
+        for (var index in this.groups) {
+            if (this.group.$key == this.groups[index].$key) {
+                this.groups[index].name = this.groupName;
+                break;
+            }
+        }
         if (this._authData != null) {
             this._ds.updateGroupName(this.group.$key, this.groupName);
         }
         else {
             this._ls.updateGroupName(this.group.$key, this.groupName);
-            //TEMPORARY
-            location.reload();
         }
+        this.clickedDelete.emit(''); //Also works for edits!
+        this.toastr.success('hallelujah!', 'group updated!');
     };
     // Enable inputfield to edit text in field when user click on pen icon else disable inputfield
     GroupComponent.prototype.editClick = function () {
@@ -129,20 +152,29 @@ var GroupComponent = (function () {
     // Expand category on click arrowBtn
     GroupComponent.prototype.groupExpand = function () {
         // Uffes idea:
-        if (this.arrowSrc == 'icon_hide.png') {
-            this._tx._toggleExpand = false;
-        }
-        else {
-            this._tx._toggleExpand = true;
-        }
-        this.expanded = this._tx._toggleExpand;
-        if (this.expanded) {
-            this.arrowSrc = 'icon_hide.png';
-        }
-        else {
-            this.arrowSrc = 'icon_expand.png';
+        if (!this.editingName) {
+            if (this.arrowSrc == 'icon_hide.png') {
+                this._tx._toggleExpand = false;
+            }
+            else {
+                this._tx._toggleExpand = true;
+            }
+            this.expanded = this._tx._toggleExpand;
+            if (this.expanded) {
+                this.arrowSrc = 'icon_hide.png';
+            }
+            else {
+                this.arrowSrc = 'icon_expand.png';
+            }
         }
     };
+    GroupComponent.prototype.emitNotes = function (groups) {
+        this.notesChanged.emit('');
+    };
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], GroupComponent.prototype, "groups", void 0);
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Object)
@@ -159,19 +191,27 @@ var GroupComponent = (function () {
         core_1.Output(), 
         __metadata('design:type', Object)
     ], GroupComponent.prototype, "clickedDelete", void 0);
+    __decorate([
+        core_1.Output(), 
+        __metadata('design:type', Object)
+    ], GroupComponent.prototype, "notesChanged", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], GroupComponent.prototype, "notes", void 0);
     GroupComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
             selector: 'group',
-            providers: [router_deprecated_1.ROUTER_PROVIDERS, localstorage_service_1.LocalStorageService],
+            providers: [router_deprecated_1.ROUTER_PROVIDERS, localstorage_service_1.LocalStorageService, ng2_toastr_1.ToastsManager],
             templateUrl: 'group.component.html',
             styleUrls: ['group.component.css'],
             directives: [router_deprecated_1.ROUTER_DIRECTIVES, note_component_1.NoteComponent, ng2_dragula_1.Dragula],
-            pipes: [reverse_pipe_1.Reverse]
+            pipes: [reverse_pipe_1.Reverse, sort_notes_pipe_1.SortNotes]
         }),
         router_deprecated_1.RouteConfig([]),
         __param(0, core_2.Inject(angularfire2_1.FirebaseRef)), 
-        __metadata('design:paramtypes', [Firebase, data_service_1.DataService, value_service_1.ValueService, localstorage_service_1.LocalStorageService])
+        __metadata('design:paramtypes', [Firebase, data_service_1.DataService, value_service_1.ValueService, localstorage_service_1.LocalStorageService, ng2_toastr_1.ToastsManager])
     ], GroupComponent);
     return GroupComponent;
 }());

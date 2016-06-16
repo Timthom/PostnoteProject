@@ -1,6 +1,6 @@
 nav.right {
 	position: fixed;
-	z-index: 500;
+	z-index: 100010;
 	display: block;
 	border-radius: 0px;
 	width: 100%;

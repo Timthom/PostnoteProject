@@ -93,8 +93,18 @@ var DragulaHelperService = (function () {
             [1]: note.elementet som drogs...
             [2]: diven som den dras ifrån...
             */
-            //  console.log(`drag, value: `);
-            //  console.log(value);
+            console.log("drag, value: ");
+            console.log(value);
+            // if (this._canSaveSibling) {
+            // this._canSaveSibling = false;
+            _this._savedSibling = value[1].nextSibling;
+            // console.log('next sibling: ');
+            // console.log(this._savedSibling);
+            // console.log('next sibling id: ');
+            // console.log(this._savedSibling.id);
+            // console.log('next sibling next sibling: ');
+            // console.log(this._savedSibling.nextSibling);
+            // }
         });
         dragulaService.drop.subscribe(function (value) {
             /*
@@ -107,11 +117,13 @@ var DragulaHelperService = (function () {
             */
             console.log("drop, value: ");
             console.log(value);
+            _this.updateEverySiblingOnRight();
             //Detta ger mig en sträng med id:t...
             //console.log(value[1].attributes[3].nodeValue);
             //Detta ger mig namnet på gruppen, varsam på att om man lägger i creator så är den tom...
             //  console.log(value[2].parentElement.firstElementChild.id);
             //  console.log(value[2].parentElement.firstElementChild.id === "");
+            // this._canSaveSibling = true; 
             var id = value[1].attributes[3].nodeValue;
             var group;
             // console.log(`cosnollen group = ${value[2].parentElement.parentElement.firstElementChild.id}`);
@@ -133,10 +145,10 @@ var DragulaHelperService = (function () {
             //    }
             // }); 
             /* Vill göra en kontroll på om den bytte till en annan grupp men måste läsa på om promises mer först... */
-            console.log('nu testar jag');
+            // console.log('nu testar jag');
             var currentGroup = _this._dataservice.getGroupNameFromId(id);
             // console.log('2');
-            currentGroup.then(function (result) { return (console.log('inne i promisen: ' + result)); });
+            // currentGroup.then((result) => (console.log('inne i promisen: ' + result)));
             // console.log('3');
             //  console.log(group + ' <--  + currentGroup:');
             //  console.log('6');
@@ -174,8 +186,8 @@ var DragulaHelperService = (function () {
             [2]: containern. som den är över ifrån...
             [3]: containers som den drogs ifrån...
             */
-            console.log("out, value: ");
-            console.log(value);
+            // console.log(`out, value: `);
+            // console.log(value);     
         });
     };
     DragulaHelperService.prototype.updateGroup = function (id, group) {
@@ -185,6 +197,14 @@ var DragulaHelperService = (function () {
         else {
             console.log('inloggad');
             this._dataservice.changeNoteGroup(id, group);
+        }
+    };
+    DragulaHelperService.prototype.updateEverySiblingOnRight = function () {
+        console.log("här skall vi uppdatera positionene på this._savedSibling: ");
+        console.log(this._savedSibling);
+        if (this._savedSibling.nextSibling) {
+            this._savedSibling = this._savedSibling.nextSibling;
+            this.updateEverySiblingOnRight();
         }
     };
     DragulaHelperService = __decorate([

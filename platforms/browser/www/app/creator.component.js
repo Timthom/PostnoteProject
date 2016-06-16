@@ -17,6 +17,7 @@ var data_service_1 = require('./data.service');
 var note_1 = require('./note');
 var note_component_1 = require('./note.component');
 var reverse_pipe_1 = require('./reverse.pipe');
+var sort_notes_pipe_1 = require('./sort-notes.pipe');
 var dropdown_component_1 = require('./dropdown.component');
 var angularfire2_1 = require('angularfire2');
 var ng2_dragula_1 = require('ng2-dragula/ng2-dragula');
@@ -27,6 +28,7 @@ var CreatorComponent = (function () {
         this._ds = _ds;
         this._ref = _ref;
         this._ls = _ls;
+        this.notesChanged = new core_1.EventEmitter();
         this.title = "";
         this.text = "";
         this.selectedGroup = "noGroup";
@@ -36,7 +38,6 @@ var CreatorComponent = (function () {
     }
     CreatorComponent.prototype.ngOnInit = function () {
         this.getNotes();
-        this.getGroups();
     };
     CreatorComponent.prototype.getGroups = function () {
         var _this = this;
@@ -62,7 +63,6 @@ var CreatorComponent = (function () {
         this.selectedGroup = event;
     };
     CreatorComponent.prototype.save = function (group) {
-        // if (this.title !== '' || this.text !== '') {
         var time = new Date().getTime();
         if (this._authData != null) {
             this._ds.addNoteToNotes("", "", group, time, this.randomColor());
@@ -70,12 +70,10 @@ var CreatorComponent = (function () {
         else {
             var newNote = new note_1.Note("", "", group, time.toString(), this.randomColor());
             this._ls.addNoteToNotes(newNote);
-            this.getNotes(); //Update view
+            this.notesChanged.emit('');
         }
+        this.getNotes(); //Update view
         this.categoriesVisible = false;
-        // this.title = '';
-        // this.text = '';
-        // }
     };
     CreatorComponent.prototype.open = function () {
         this.categoriesVisible = !this.categoriesVisible;
@@ -91,6 +89,25 @@ var CreatorComponent = (function () {
         }
         return color;
     };
+    CreatorComponent.prototype.hideCategoryButtons = function () {
+        this.categoriesVisible = false;
+    };
+    CreatorComponent.prototype.noteChanged = function () {
+        this.notesChanged.emit('');
+        //this.getNotes();
+    };
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], CreatorComponent.prototype, "groups", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], CreatorComponent.prototype, "notes", void 0);
+    __decorate([
+        core_1.Output(), 
+        __metadata('design:type', Object)
+    ], CreatorComponent.prototype, "notesChanged", void 0);
     CreatorComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
@@ -98,7 +115,7 @@ var CreatorComponent = (function () {
             templateUrl: 'creator.component.html',
             styleUrls: ['creator.component.css'],
             directives: [router_deprecated_1.ROUTER_DIRECTIVES, note_component_1.NoteComponent, dropdown_component_1.DropdownComponent, ng2_dragula_1.Dragula],
-            pipes: [reverse_pipe_1.Reverse, first_letter_pipe_1.FirstLetter],
+            pipes: [reverse_pipe_1.Reverse, first_letter_pipe_1.FirstLetter, sort_notes_pipe_1.SortNotes],
             providers: [localstorage_service_1.LocalStorageService]
         }),
         router_deprecated_1.RouteConfig([]),
