@@ -1,27 +1,31 @@
 <!--<headerbar (openSideBar)="openSideBar($event)"></headerbar>-->
-<div class="container">
+<div class="container-fluid">
   <!--Top navbar-->
-  <div class="navbar_item">
-    <button class="backBtn">
-       <img class="btnImage" src="{{btnImage}}" (click)="openSideBar()" alt="backButton">
+  <div class="navbar_item navbar-inverse cbp-af-header">
+    <button class="backBtn" (click)="toggleSideBar()">
+       <img class="btnImage" src="{{btnImage}}"  alt="backButton">
    </button>
   </div>
   <div class="row">
-    <div class="shadow" [class.shadow_active]="statusCheckSideBar"></div>
+    <div class="shadow" [class.shadow_active]="statusCheckSideBar" (click)="toggleSideBar()"></div>
     <div class="col-xs-4" *ngIf="statusCheckSideBar == true">
-      <menu (clicked)="addGroup()"></menu>
+      <menu [myGroups]="allGroups" (clicked)="addGroup()" (groupsChanged)="groupsChanged(groups)"></menu>
     </div>
 
     <div class="note_groups">
       <div>
-        <creator></creator>
+        <creator [groups]="allGroups" (notesChanged)="updateNotes()"></creator>
       </div>
+
+
       <div *ngIf="_authData == null">
-        <group (clickedDelete)="deleteGroup()" class="row" *ngFor="let group of allGroups" [group]="group" [groupName]="group.name">
+        <group (clickedDelete)="deleteGroup()" (notesChanged)="updateNotes()" class="row" *ngFor="let group of allGroups" [group]="group"
+          [groupName]="group.name" [groups]="allGroups" onload="delaySidebar()">
         </group>
       </div>
       <div *ngIf="_authData != null">
-        <group (clickedDelete)="deleteGroup()" class="row" *ngFor="let group of allGroups | async" [group]="group" [groupName]="group.name">
+        <group (clickedDelete)="deleteGroup()" (notesChanged)="updateNotes()" class="row" *ngFor="let group of allGroups | async"
+          [group]="group" [groupName]="group.name" [groups]="allGroups">
         </group>
       </div>
     </div>

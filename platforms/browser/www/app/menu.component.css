@@ -1,13 +1,14 @@
 .navbar {
     border-radius: 0px;
+    border: none;
     margin-top: 50px;
     margin-left: -15px;
     position: fixed;
     display: block;
     height: 100%; 
+    z-index: 1000;
     overflow: auto;
-    width: 300px;
-    z-index: 10;
+    width: 315px;
     background-color: #EEEEEE;
     box-shadow: 1px 0px 5px rgba(0,0,0,0.5);
 }
@@ -92,3 +93,33 @@ hr{
 #plusBtn:active {
     background-color: #A0A0A0;
 }
+
+/*#wrapper {
+    overflow: scroll;
+}
+#wrapper ul{
+    cursor: pointer;
+}
+#wrapper ul:hover{
+    color: gray;
+}*/
+
+/*
+*Thomas busar :)
+*/ 
+#delayNav {
+    -webkit-animation-name: fadeIn;  /* Chrome, Safari, Opera */
+    animation-name: fadeIn;
+}
+
+/* Chrome, Safari, Opera */
+@-webkit-keyframes fadeIn {
+  0% {opacity: 0;}
+  100% {opacity: 1;}
+}
+
+@keyframes fadeIn {
+  0% {opacity: 0;}
+  100% {opacity: 1;}
+}
+
