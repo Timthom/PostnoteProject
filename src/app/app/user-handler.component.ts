@@ -9,7 +9,6 @@ import {LogoutComponent} from '../logout/logout.component';
 import { LocalStorageService } from '../localstorage.service'
 import {Input, Inject, Injectable} from '@angular/core';
 import { defaultFirebase, FirebaseRef } from 'angularfire2';
-import { ToastsManager } from 'ng2-toastr/ng2-toastr'
 
 @Component({
     moduleId: module.id,
@@ -27,9 +26,11 @@ export class UserHandlerComponent {
     loggingOut = false;
     loggingIn = false;
     createUser = false;
-    sessionExpired = false;
+    count = 0; 
     
-    constructor(private _authServiceHandler: AuthorizationService, private _router: Router, @Inject(FirebaseRef) private _ref: Firebase, public toastr: ToastsManager) {}
+    constructor(private _authServiceHandler: AuthorizationService, private _router: Router, @Inject(FirebaseRef) private _ref: Firebase) {
+        this.count = 0;
+    }
 
     isAuth() {
         return this._authServiceHandler.isAuthenticated();
@@ -41,14 +42,7 @@ export class UserHandlerComponent {
         this.switchWindow = false;
         this.loggingOut = false;
         this.loggingIn = false;
-
-        if(this.sessionExpired) {
-            this.toastr.warning("Your session has expired. Please log in again!", "Alert!");
-        } else {
-            this.toastr.info("You've been successfully logged out!");
-        }
-
-        this.sessionExpired = false;   
+        this.count++;     
     }
         
         switchTo(): boolean {
@@ -64,6 +58,7 @@ export class UserHandlerComponent {
         }
         
         switchToLoginWindow() {
+            // this._router.parent.navigate(['LoginUserRoute']);
             if(this.createUser == true) {
                 this.loggingIn = false;
                 this.createUser = false;
@@ -79,6 +74,7 @@ export class UserHandlerComponent {
         
         switchToCreateAccountWindow() {
             this.switchWindow = true;
+            // this._router.parent.navigate(['CreateUserAccountRoute']);
         }
         
         isCreatingAccount() {    
@@ -86,11 +82,13 @@ export class UserHandlerComponent {
         }
         
         createUserAccount() {
+            // //console.log("EventEmitter is working!?");
             this.loggingIn = false;
             this.createUser = true;
         }
         
         loginUser() {
+            // //console.log("Back button is working in user-handler!");
             this.loggingIn = true;
             this.createUser = false;
         }
@@ -109,12 +107,20 @@ export class UserHandlerComponent {
                 var lastExpire = (snapshot.val().expire / 1000);  
                 var currentExpire = (n / 1000);
             
-                var result = currentExpire - lastExpire;
+                //console.log(lastExpire);
+                //console.log(currentExpire);
             
-                if(result >= 1800) {
-                    o.sessionExpired = true; 
-                    o.logoutUser();   
-
+                var result = currentExpire - lastExpire;
+                //console.log(result);
+            
+                if(result >= 1800) { 
+                    o.logoutUser();                   
+                    if(o.count === 1) {
+                        setTimeout(function() {
+                        alert("Your session has expired. Please log in again!");
+                        o.count = 0;
+                        }, 1000)
+                    }   
                 } else {            
                     var ref = new Firebase("https://dazzling-fire-7472.firebaseio.com/users");
                     ref.child(authData.uid).once('value', function(snapshot) {

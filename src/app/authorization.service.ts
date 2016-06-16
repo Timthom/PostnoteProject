@@ -1,40 +1,32 @@
 import {EventEmitter, Injectable, Inject} from "@angular/core";
 import {User} from "./user.interface";
-import { ToastsManager } from 'ng2-toastr/ng2-toastr'
 import { AngularFire, defaultFirebase, FirebaseRef, FirebaseListObservable } from 'angularfire2';
-
 declare var Firebase: any;
 
 @Injectable()
 export class AuthorizationService {
     
+    _userLoggedInSucceed;
     user: any;
     expire: any;
-    userExists: boolean;
+    value: any;
     
-    constructor(@Inject(FirebaseRef) private _ref: Firebase, public toastr: ToastsManager) {}
+    constructor(@Inject(FirebaseRef) private _ref: Firebase) {}
 
     createUserAccount(user: User) {
-
-        var that = this;
-
         this._ref.createUser({
             email: user.email,
             password: user.password
         }, function(error, userData) {
             if (error) {
-                that.toastr.error("The email address is already exists. Choose another one!", "Error!");
-                that.userExists = false;
+                alert('E-post adressen finns redan. Välj en annan!');
             } else {
-                that.toastr.success("Your account has been successfully created!", "Success!");
-                that.userExists = true;
+                alert("Registreringen lyckades");
             }
         });
     }
 
     loginUser(user: User) {
-
-        var that = this;
         
         this.user = null;
         
@@ -45,12 +37,12 @@ export class AuthorizationService {
         },  function(error, authData) {
             
             if (error) {
-                that.toastr.warning("Wrong username or password. Please try again!", "Alert!");
+                alert("Fel användarnamn eller lösenord. Försök igen!");
             
             } else {
                 localStorage.setItem('token', authData.token);
-                  
-                that.toastr.info("Welcome, You are now logged in!");
+                console.log(authData.password.email);  
+                alert("Du är nu inloggad!");
                 
                 var d = new Date();
                 var n = d.getTime();
@@ -77,7 +69,7 @@ export class AuthorizationService {
         this._ref.authWithOAuthPopup("facebook", function(error, authData) {
             if (error) {
                 
-                // console.log("Login Failed!", error); 
+                console.log("Login Failed!", error); 
                 
                 if (error.code === "TRANSPORT_UNAVAILABLE") {
                     
@@ -85,7 +77,9 @@ export class AuthorizationService {
                     // automatically when we come back to the origin page
                     ref.authWithOAuthRedirect("facebook", function(error) {
                              
+                    console.log("Authenticated successfully with payload:", authData);
                     localStorage.setItem('token', authData.token);
+                    console.log(authData.facebook.email);
                 
                     var d = new Date();
                     var n = d.getTime(); 
@@ -106,7 +100,9 @@ export class AuthorizationService {
             } 
             
             else if(authData) {
+                console.log("Authenticated successfully with payload:", authData);
                 localStorage.setItem('token', authData.token);
+                console.log(authData.facebook.email);
                 
                 var d = new Date();
                 var n = d.getTime();
@@ -134,7 +130,7 @@ export class AuthorizationService {
         this._ref.authWithOAuthPopup("google", function(error, authData) {
             if (error) {
                 
-                // console.log("Login Failed!", error); 
+                console.log("Login Failed!", error); 
                 
                 if (error.code === "TRANSPORT_UNAVAILABLE") {
                     
@@ -142,7 +138,9 @@ export class AuthorizationService {
                     // automatically when we come back to the origin page
                     ref.authWithOAuthRedirect("google", function(error) {
                              
+                    console.log("Authenticated successfully with payload:", authData);
                     localStorage.setItem('token', authData.token);
+                    console.log(authData.google.email);
                 
                     var d = new Date();
                     var n = d.getTime(); 
@@ -163,7 +161,9 @@ export class AuthorizationService {
             } 
             
             else if(authData) {
+                console.log("Authenticated successfully with payload:", authData);
                 localStorage.setItem('token', authData.token);
+                console.log(authData.google.email);
                 
                 var d = new Date();
                 var n = d.getTime();
@@ -199,7 +199,9 @@ export class AuthorizationService {
                     // automatically when we come back to the origin page
                     ref.authWithOAuthRedirect("twitter", function(error) {
                              
+                    console.log("Authenticated successfully with payload:", authData);
                     localStorage.setItem('token', authData.token);
+                    console.log(authData.twitter.username);
                 
                     var d = new Date();
                     var n = d.getTime(); 
@@ -220,7 +222,9 @@ export class AuthorizationService {
             } 
             
             else if(authData) {
+                console.log("Authenticated successfully with payload:", authData);
                 localStorage.setItem('token', authData.token);
+                console.log(authData.twitter.username);
                 
                 var d = new Date();
                 var n = d.getTime();
@@ -248,7 +252,7 @@ export class AuthorizationService {
         this._ref.authWithOAuthPopup("github", function(error, authData) {
             if (error) {
                 
-                // console.log("Login Failed!", error); 
+                console.log("Login Failed!", error); 
                 
                 if (error.code === "TRANSPORT_UNAVAILABLE") {
                     
@@ -256,7 +260,9 @@ export class AuthorizationService {
                     // automatically when we come back to the origin page
                     ref.authWithOAuthRedirect("github", function(error) {
                              
+                    console.log("Authenticated successfully with payload:", authData);
                     localStorage.setItem('token', authData.token);
+                    console.log(authData.github.email);
                 
                     var d = new Date();
                     var n = d.getTime(); 
@@ -277,7 +283,9 @@ export class AuthorizationService {
             } 
             
             else if(authData) {
+                console.log("Authenticated successfully with payload:", authData);
                 localStorage.setItem('token', authData.token);
+                console.log(authData.github.email);
                 
                 var d = new Date();
                 var n = d.getTime();
@@ -327,9 +335,9 @@ export class AuthorizationService {
      
      returnLoggedInUser() {
          return this.user;
-     }
-
-     returnCreateUserSucceed() {
-         return this.userExists;
+     }   
+     
+     getValue() {
+         return this.value;
      }
 }
