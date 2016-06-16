@@ -80,6 +80,7 @@ export class GroupComponent {
     } else {
       this.notes = this._ls.getNotesInGroup(this.groupName);
     }
+    console.log("GROUP " + this.group.name + "EXP: " + this.expanded);
   }
 
   getContent() {
@@ -115,7 +116,6 @@ export class GroupComponent {
         this._ds.deleteNote(key);
       }
       this._ds.deleteGroup(this._tx._focusedId);
-      this._tx._toggleExpand = false;
     } else {//if not logged in
       //Removes notes of the group
       for (let note of this.notes) {
@@ -123,6 +123,7 @@ export class GroupComponent {
       }
       this._ls.deleteGroup(this._tx._focusedId);
     }
+    this._tx._toggleExpand = false;
     this.clickedDelete.emit('');
     this.toastr.success(this._tx._focusedName + ' deleted!');
   }
@@ -175,7 +176,8 @@ export class GroupComponent {
 
   // Expand category on click arrowBtn
   groupExpand() {
-    // Uffes idea:
+    // Uffes idea:"
+    console.log("1. EXPAND GROUP " + this.group.name + "EXP : " + this.expanded);
     if (!this.editingName) {
       if (this.arrowSrc == 'icon_hide.png') {
         this._tx._toggleExpand = false;
@@ -183,12 +185,16 @@ export class GroupComponent {
         this._tx._toggleExpand = true;
       }
       this.expanded = this._tx._toggleExpand;
+      console.log("2. EXPAND GROUP " + this.group.name + "EXP : " + this.expanded);
+
       if (this.expanded) {
         this.arrowSrc = 'icon_hide.png';
       }
       else {
         this.arrowSrc = 'icon_expand.png';
       }
+      console.log("3. EXPAND GROUP " + this.group.name + "EXP : " + this.expanded);
+
     }
   }
   emitNotes(groups: any) {
