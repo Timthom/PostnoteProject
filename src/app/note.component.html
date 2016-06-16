@@ -11,7 +11,7 @@
     <div class="saveButton" [class.saveButtonVisible]="isEditable" (click)="save()"></div>
     <input type="text" [attr.disabled]="enabledIfNull" [class.selectedNoteTitle]="isEditable"
       [(ngModel)]="title" class="title col-xs-10 col-xs-offset-1" maxlength="18"
-      placeholder="Title">
+      placeholder="Title" autofocus>
 
   </div>
   <br>

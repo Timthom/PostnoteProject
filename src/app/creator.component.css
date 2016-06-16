@@ -20,6 +20,7 @@
    right: 20px;
    background-color: #404040;
    cursor: pointer;
+   outline: none;
    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
    z-index: 3;
 }
@@ -109,6 +110,7 @@
    width: 8.33333333%;
    cursor: pointer;
    border: none;
+   outline: none;
 }
 
 
