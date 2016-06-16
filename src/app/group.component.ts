@@ -100,7 +100,7 @@ export class GroupComponent {
   }
 
   deleteGroup() {
-
+    
     for (var item in this.groups) {
       if (this._tx._focusedId == this.groups[item].$key) {
         this.groups.splice(item, 1);
@@ -125,7 +125,6 @@ export class GroupComponent {
     }
     this.clickedDelete.emit('');
     this.toastr.success(this._tx._focusedName + ' deleted!');
-
   }
 
 
@@ -145,15 +144,12 @@ export class GroupComponent {
       //location.reload();
     }
     this.clickedDelete.emit(''); //Also works for edits!
-
-    this.toastr.success(this.group.name + ' updated!');
-
+    this.toastr.success('Group-name updated!');
   }
 
   // Enable inputfield to edit text in field when user click on pen icon else disable inputfield
   editClick() {
     this.editingName = !this.editingName;
-
     if (this.editingName) {
       this.enableEditIfNull = null;
       this.editSrc = 'icon_save.png';
@@ -206,6 +202,4 @@ export class GroupComponent {
         // console.log('Ermin2 ', this.focusedName);
         console.log('Ermin3 ' , this.focusedName);
   }
-
-
 }

@@ -1,3 +1,7 @@
+button{
+    margin-top: 5px;
+}
+
 .line {
    
     border: 0;
@@ -75,11 +79,13 @@ note .noteContainer {
 
 input{
     height: 40px;
+    width: 185px;
+    display: inline-block;
 }
+
 .editingName{
     border: 1px solid black;
     cursor: text;
-    
 }
 .editingName:hover{
     cursor: text;   
@@ -106,6 +112,11 @@ input{
 }
 span{
     color: red;
+}
+
+.ifButtons{
+    float: right;
+    display: inline-block;
 }
 
 /*.pull-right{
