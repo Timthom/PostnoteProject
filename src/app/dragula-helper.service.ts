@@ -3,6 +3,7 @@ import { AngularFire, defaultFirebase, FirebaseRef, FirebaseListObservable } fro
 import { DragulaService } from 'ng2-dragula/ng2-dragula';
 import {DataService} from './data.service';
 import { LocalStorageService } from './localstorage.service'
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
 @Injectable()
 export class DragulaHelperService {
@@ -11,7 +12,7 @@ _authData: any;
 // _canSaveSibling: boolean = true;
 _savedSibling: any;
 
-  constructor(private _dataservice: DataService,  @Inject(FirebaseRef) private _ref: Firebase, private _ls: LocalStorageService) {
+  constructor(private _dataservice: DataService,  @Inject(FirebaseRef) private _ref: Firebase, private _ls: LocalStorageService, public toastr: ToastsManager) {
     this._authData = this._ref.getAuth();
     
     /***** This is only because I dont know how to return the promise from dataservice *****/
@@ -92,8 +93,8 @@ _savedSibling: any;
       [1]: note.elementet som drogs...
       [2]: diven som den dras ifrån...
       */ 
-      //  console.log(`drag, value: `);
-      //  console.log(value);
+       console.log(`drag, value: `);
+       console.log(value);
       
       // if (this._canSaveSibling) {
         // this._canSaveSibling = false;
@@ -109,6 +110,7 @@ _savedSibling: any;
 
 
     });
+    
     dragulaService.drop.subscribe((value) => {
       /* 
       man får ut en array med fem index...
@@ -121,61 +123,36 @@ _savedSibling: any;
        console.log(`drop, value: `);
        console.log(value);
        
+       
        //Detta ger mig en sträng med id:t...
        //console.log(value[1].attributes[3].nodeValue);
        
        //Detta ger mig namnet på gruppen, varsam på att om man lägger i creator så är den tom...
-       //  console.log(value[2].parentElement.firstElementChild.id);
+       //  console.log(value[2].parentElement.parentElement.parentElement.firstElementChild.firstElementChild.id);
        //  console.log(value[2].parentElement.firstElementChild.id === "");
-      // this._canSaveSibling = true; 
+       // this._canSaveSibling = true; 
       let id: string = value[1].attributes[3].nodeValue;
       let group: string;
-      // console.log(`cosnollen group1 = ${value[2].parentElement.firstElementChild.id}`);
-      // console.log(`cosnollen group2 = ${value[2].parentElement.parentElement.firstElementChild.id}`);
-      // console.log(`cosnollen group3 = ${value[2].parentElement.parentElement.parentElement.firstElementChild.firstElementChild.id}`);
+      
       if (value[2].parentElement.parentElement.parentElement.firstElementChild.firstElementChild.id === '') {
         console.log('group är null');        
         group = 'noGroup'
       } else {
         group = value[2].parentElement.parentElement.parentElement.firstElementChild.firstElementChild.id;
       }
-      // console.log('1');
-
-      // this._notes.child(id).child('group').once('value').then(function(s) {
-      //   let currentGroup = s.val();
-      //   console.log('cg '+ currentGroup)
-        
-      //    if (currentGroup == group) {
-      //       console.log('dropped note in same group will not update group...')
-      //    } else {
-      //      this.updateGroup(id, group);
-      //    }
-  
-      // }); 
       
-      /* Vill göra en kontroll på om den bytte till en annan grupp men måste läsa på om promises mer först... */
-      // console.log('nu testar jag');
-       let currentGroup: any = this._dataservice.getGroupNameFromId(id) ;
-      currentGroup.then((result) => (console.log('inne i promisen där result: ' + result)));
-      currentGroup.then((result) => (this.updateAndIncreasePositionOnEverySiblingOnRightOnDrop(result, group, value[1], value[4])));
-      // console.log('3');
-      //  console.log(group + ' <--  + currentGroup:');
-      //  console.log('6');
-      //  console.log(currentGroup);
-      //  console.log('7');
-      // if (currentGroup == group) {
-      //   do nothing
-      // } else {
-      // console.log(`id = ${id}, group = ${group}`);
+      let getGroupInfo: any = this._dataservice.getGroupNameFromId(id);
+      getGroupInfo.then((result) => (this.updateAndIncreasePositionOnEverySiblingOnRightOnDrop(result, group, value[1], value[4])));
+
       if (this._authData != null) {
-        // console.log('inloggad');
         this._dataservice.changeNoteGroup(id, group);
       } else {
         this._ls.changeNoteGroup(id, group);
       }
-      // }
       
+      this.toastr.success('Note moved', 'Yippie');
     });
+    
     dragulaService.over.subscribe((value) => {
       /* 
       man får ut en array med fyra index...
@@ -189,6 +166,7 @@ _savedSibling: any;
       
      
     });
+    
     dragulaService.out.subscribe((value) => {
       /* 
       man får ut en array med fyra index...
@@ -199,7 +177,6 @@ _savedSibling: any;
       */ 
         // console.log(`out, value: `);
         // console.log(value);     
-
     });
     
   }
@@ -213,17 +190,19 @@ _savedSibling: any;
       }
   }
   
-  updateEverySiblingOnRight() {
-     console.log("här skall vi uppdatera positionene på this._savedSibling: ");
-     console.log(this._savedSibling);
+  // updateEverySiblingOnRight() {
+  //    console.log("här skall vi uppdatera positionene på this._savedSibling: ");
+  //    console.log(this._savedSibling);
     
-    if(this._savedSibling.nextSibling){ //use nextElementSibling ffs
-      this._savedSibling = this._savedSibling.nextSibling;
-      this.updateEverySiblingOnRight();
-    }
-  }
+  //   if(this._savedSibling.nextSibling){ //use nextElementSibling ffs
+  //     this._savedSibling = this._savedSibling.nextSibling;
+  //     this.updateEverySiblingOnRight();
+  //   }
+  // }
  
-  updateAndIncreasePositionOnEverySiblingOnRightOnDrop(newGroup: any, oldGroup: string, droppedNote: any, siblingNote: any) {   
+  updateAndIncreasePositionOnEverySiblingOnRightOnDrop(oldGroup: any, newGroup: string, droppedNote: any, siblingNote: any) {   
+    
+    console.log('om ente efter "här kommer notesen" så måsta jag strukturera om metoderna...');
     let tempNote: any = droppedNote;
     let getPos: any = this._dataservice.getPositionFromId(siblingNote.id);
     getPos.then((result) => {
@@ -239,7 +218,47 @@ _savedSibling: any;
         this._dataservice.updateNotePosition(tempNote.id, tempPos);
         tempPos++;
       }
+      this.updateAndDecreasePositionOnEverySiblingInPreviousGroup(oldGroup, droppedNote);
     });
+  }
+  
+  updateAndDecreasePositionOnEverySiblingInPreviousGroup(oldGroup: string, droppedNote: any) {
+    // let getWholeGroup: any = this._dataservice.getWholeCurrentGroupFromGroupName(oldGroup);
+    // getWholeGroup.then((result) => {
+    //   console.log('klar....');
+    // });
+    let getIdPromise: any = this._dataservice.getPositionFromId(droppedNote.id);
+    getIdPromise.then((prevPos) => {
+      console.log(`oldgroup = ${oldGroup}`);
+      let notesInGroup: any = this._dataservice.getAllNotesInGroup(oldGroup);
+      console.log('här kommer notesen...');
+      console.log(notesInGroup);
+      
+      notesInGroup.then(res => {
+        let doneInLoopArray;
+        let arrayOfKeys: any[] = [];
+        let arrayOfPos: any[] = [];
+        let self = this;
+
+        res.forEach(function (result) {
+          doneInLoopArray = result;
+        });
+
+        doneInLoopArray.forEach(function (note) {
+          console.log(`inne i loopen för att göra saker där prevPos = ${prevPos}, note.position = ${note.position}, note.$key = ${note.$key}`);
+          if (note.$key > prevPos) {
+            console.log(`positionen är större än prev...`);
+            self._dataservice.updateNotePosition(note.$key, (note.position - 1));
+          }
+
+        });
+      });
+      
+
+      
+    });
+    
+    
   }
   
 }
