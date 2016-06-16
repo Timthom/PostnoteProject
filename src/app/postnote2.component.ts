@@ -117,7 +117,7 @@ export class Postnote2App implements OnInit, AfterViewInit{
     }
 
     randomColor() {
-        var colors = ["#C25E85", "#CD7102", "#C33B4C", "#5DAB9C", "#BCC40A", "#0A813F"];
+        var colors = ["#F490B7", "#FFA334", "#F56D7E", "#8FD3CE", "#EEF66C", "mediumseagreen"];
         var color = colors[Math.floor(Math.random()*colors.length)];
 
         return color;
