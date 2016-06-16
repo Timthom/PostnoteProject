@@ -15,6 +15,7 @@ import { Dragula } from 'ng2-dragula/ng2-dragula';
 import {LocalStorageService} from './localstorage.service';
 import {FirstLetter} from './first-letter.pipe';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { Cookie } from 'ng2-cookies/ng2-cookies';
 
 
 @Component({
@@ -24,7 +25,7 @@ import { ToastsManager } from 'ng2-toastr/ng2-toastr';
     styleUrls: ['creator.component.css'],
     directives: [ROUTER_DIRECTIVES, NoteComponent, DropdownComponent, Dragula],
     pipes: [Reverse, FirstLetter, SortNotes],
-    providers: [LocalStorageService]
+    providers: [LocalStorageService, Cookie]
 })
 @RouteConfig([
 ])
@@ -56,6 +57,13 @@ export class CreatorComponent {
     ngOnInit() {
         this.getNotes();
         this.getGroups();
+
+        if(this.visits()){
+                let time = new Date().getTime();
+                let newNote = new Note("Welcome!!", "This is your first time here at PostNote, you can choose to log in or create your own account or you can just start using the app right now only on this device by using the addbutton in the bottom corner to add new notes like this one, or add a new category in the menu to the left!\n\nHave fun!" , "noGroup", time.toString(), this.randomColor());
+                this._ls.addNoteToNotes(newNote);
+                this.notesChanged.emit('');
+        }
     }
 
     getGroups() {
@@ -74,12 +82,6 @@ export class CreatorComponent {
           
         } else {
             this.notes = this._ls.getNotesInGroup('noGroup');
-              if(this.notes < 1) {
-                let time = new Date().getTime();
-                let newNote = new Note("Note", "Du har inga lappar än... skapa dem med plusknappen..", "noGroup", time.toString(), this.randomColor());
-                this._ls.addNoteToNotes(newNote);
-                this.notesChanged.emit('');
-            }
         }
     }
 
@@ -141,7 +143,20 @@ export class CreatorComponent {
         this.noteComponents.toArray().forEach((child) => child.groupsChanged());
         this.getGroups();
 
+    }    
+
+    visits() {
+        var count = Cookie.get('count');
+        if(count == null) {
+            Cookie.set('count','1');
+            console.log("first time here");
+            return true;
+        }else {
+            var newcount = +count + 1;
+            Cookie.delete('count');
+            Cookie.set('count', 'newcount', 1000000);
+            console.log("not first time here");
+            return false;
+        }
     }
-
-
 }
