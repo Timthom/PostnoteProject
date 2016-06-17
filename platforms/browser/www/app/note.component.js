@@ -20,12 +20,16 @@ var dropdown_component_1 = require('./dropdown.component');
 var colorpicker_component_1 = require('./colorpicker.component');
 var angularfire2_1 = require('angularfire2');
 var localstorage_service_1 = require('./localstorage.service');
+var dragula_helper_service_1 = require('./dragula-helper.service');
 var NoteComponent = (function () {
-    function NoteComponent(_ref, _ds, _ls) {
+    function NoteComponent(_ref, _ds, _ls, _dragulaHelper) {
         this._ref = _ref;
         this._ds = _ds;
         this._ls = _ls;
+        this._dragulaHelper = _dragulaHelper;
+        this.noteChanged = new core_1.EventEmitter();
         this.isEditable = false;
+        this.delete_button = true;
         this.enabledIfNull = "";
         this.noteSelectedGroup = this.group;
         this.isPink = false;
@@ -40,44 +44,61 @@ var NoteComponent = (function () {
         this.colorInit(this.color);
     };
     NoteComponent.prototype.editClick = function () {
-        //IF TODO
-        if (this.isEditable) {
-            if (this._authData != null) {
-                this._ds.updateNoteTitle(this.noteInNote.$key, this.title);
-                this._ds.updateNoteText(this.noteInNote.$key, this.text);
+        this.isEditable = true;
+        this.enabledIfNull = null;
+    };
+    NoteComponent.prototype.save = function () {
+        if (this.noteSelectedGroup == undefined) {
+            this.noteSelectedGroup = this.group; //use the same one
+        }
+        if (this._authData != null) {
+            this._ds.updateNoteTitle(this.noteInNote.$key, this.title);
+            this._ds.updateNoteText(this.noteInNote.$key, this.text);
+            this._ds.changeNoteGroup(this.noteInNote.$key, this.noteSelectedGroup); //moved
+            if (this.colorString != undefined) {
+                this._ds.updateNoteColor(this.noteInNote.$key, this.colorString); //moved
             }
-            else {
-                this._ls.updateNoteTitle(this.noteInNote.$key, this.title);
-                this._ls.updateNoteText(this.noteInNote.$key, this.text);
-            }
-            this.enabledIfNull = "";
         }
         else {
-            this.enabledIfNull = null;
+            this._ls.updateNoteTitle(this.noteInNote.$key, this.title);
+            this._ls.updateNoteText(this.noteInNote.$key, this.text);
+            this._ls.changeNoteGroup(this.noteInNote.$key, this.noteSelectedGroup); //moved
+            if (this.colorString != undefined) {
+                this._ls.updateNoteColor(this.noteInNote.$key, this.colorString); //moved
+            }
         }
-        this.isEditable = !this.isEditable;
+        this.noteChanged.emit('');
+        this.isEditable = false;
+        this.enabledIfNull = "";
     };
     //Emitted from dropdown
     NoteComponent.prototype.noteGroupChanged = function (event) {
+        var _this = this;
+        console.log("h\u00E4r kommer event " + event);
         this.noteSelectedGroup = event;
         if (this._authData != null) {
-            this._ds.changeNoteGroup(this.noteInNote.$key, this.noteSelectedGroup);
+            var getPosInfo = this._ds.getPositionFromId(this.noteInNote.$key);
+            var getOldGroupInfo = this._ds.getGroupNameFromId(this.noteInNote.$key);
+            Promise.all([getPosInfo, getOldGroupInfo]).then(function (result) {
+                var prevPos = result[0];
+                var oldGroup = result[1];
+                console.log("prevPos = " + prevPos + ", oldGroup = " + oldGroup + ", newGroup = " + _this.noteSelectedGroup);
+                _this._dragulaHelper.groupChangedByDropDown(oldGroup, _this.noteSelectedGroup, prevPos, _this.noteInNote.$key);
+                // this._ds.changeNoteGroup(this.noteInNote.$key, this.noteSelectedGroup);
+            });
         }
         else {
             this._ls.changeNoteGroup(this.noteInNote.$key, this.noteSelectedGroup);
-            //TEMPORARY
-            location.reload();
         }
+        //this.noteChanged.emit(''); uppdateras m.h.a. editclick??
     };
     NoteComponent.prototype.colorChanged = function (event) {
-        //IF TODO
         this.colorSwitch(event);
         this.isEditable = true;
+        this.colorString = event;
         if (this._authData != null) {
-            this._ds.updateNoteColor(this.noteInNote.$key, event);
         }
         else {
-            this._ls.updateNoteColor(this.noteInNote.$key, event);
         }
     };
     NoteComponent.prototype.resetColors = function () {
@@ -117,15 +138,25 @@ var NoteComponent = (function () {
         }
     };
     NoteComponent.prototype.deleteClick = function () {
-        if (this._authData != null) {
-            this._ds.deleteNote(this.noteInNote.$key);
+        var o = this;
+        if (o._authData != null) {
+            var getIdInfo = o._ds.getPositionFromId(o.noteInNote.$key);
+            getIdInfo.then(function (prevPos) { return o._dragulaHelper.updatePositionsInGroupAndThenDeleteNoteWhenPressingDelete(o.group, prevPos, o.noteInNote); });
         }
         else {
-            this._ls.deleteNote(this.noteInNote.$key);
-            //TEMPORARY
-            location.reload();
+            o._ls.deleteNote(o.noteInNote.$key);
         }
+        ;
+        o.noteChanged.emit('');
+        this.delete_button = !this.delete_button;
     };
+    NoteComponent.prototype.groupsChanged = function () {
+        this.dropdownComponents.toArray().forEach(function (child) { return child.getTitles(); });
+    };
+    __decorate([
+        core_1.ViewChildren(dropdown_component_1.DropdownComponent), 
+        __metadata('design:type', core_1.QueryList)
+    ], NoteComponent.prototype, "dropdownComponents", void 0);
     __decorate([
         core_2.Input(), 
         __metadata('design:type', Object)
@@ -146,6 +177,14 @@ var NoteComponent = (function () {
         core_2.Input(), 
         __metadata('design:type', Object)
     ], NoteComponent.prototype, "color", void 0);
+    __decorate([
+        core_2.Input(), 
+        __metadata('design:type', Object)
+    ], NoteComponent.prototype, "groups", void 0);
+    __decorate([
+        core_1.Output(), 
+        __metadata('design:type', Object)
+    ], NoteComponent.prototype, "noteChanged", void 0);
     NoteComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
@@ -158,7 +197,7 @@ var NoteComponent = (function () {
         }),
         router_deprecated_1.RouteConfig([]),
         __param(0, core_2.Inject(angularfire2_1.FirebaseRef)), 
-        __metadata('design:paramtypes', [Firebase, data_service_1.DataService, localstorage_service_1.LocalStorageService])
+        __metadata('design:paramtypes', [Firebase, data_service_1.DataService, localstorage_service_1.LocalStorageService, dragula_helper_service_1.DragulaHelperService])
     ], NoteComponent);
     return NoteComponent;
 }());

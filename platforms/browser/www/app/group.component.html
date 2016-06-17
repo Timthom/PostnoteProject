@@ -1,41 +1,57 @@
-<div class="container">
-    <div class="groupContainer" id={{groupName}} (click)="groupExpand()">
-        <button class="collapse_button" [ngClass]="{expandedClass : expanded}"><img class="button_image" src="{{arrowSrc}}" alt="submit"></button>
-        <input type="text" class="group_name " id="group_name" [(ngModel)]="groupName" maxlength="18" [attr.disabled]="enableEditIfNull"
+<button *ngIf="expanded" class="delete_button col-xs-1" id="{{deleteBtn}}" (click)="saveId()" *ngIf="groupName">
+           <img class="button_image" src="icon_delete.png" alt="submit" data-toggle="modal" data-target="#myModal"></button>
+    <button *ngIf="expanded" class="edit_button col-xs-1" id="{{editBtn}}" (click)="editClick()">
+           <img class="button_image" src="{{editSrc}}" alt="submit"></button>
+<div class="row" (click)="groupExpand()">
+    <div class="groupContainer" id={{groupName}}>
+        <button class="collapse_button col-xs-1" [ngClass]="{expandedClass : expanded}">
+           <img class="button_image" src="{{arrowSrc}}" alt="submit"></button>
+        <input type="text" class="group_name  col-xs-9" id="group_name" [(ngModel)]="groupName" maxlength="12" [attr.disabled]="enableEditIfNull"
             [class.editingName]="editingName" (keyup.enter)="editClick()">
-        <button class="delete_button" id="{{deleteBtn}}" [hidden]="!expanded"><img class="button_image" src="icon_delete.png" alt="submit" [hidden]="!expanded" data-toggle="modal" data-target="#myModal"></button>
-        <button class="edit_button" id="{{editBtn}}" (click)="editClick()" [hidden]="!expanded"><img class="button_image" src="{{editSrc}}" alt="submit" [hidden]="!expanded"></button>
-        <hr class="line">
     </div>
+</div>
+<hr class="line">
+<div class="row">
     <div *ngIf='_authData == null'>
         <div class="myDragulaContainer" [dragula]='"drag-bag"'>
-            <note class="col-xs-4" *ngFor="let note of notes" [hidden]="!expanded" [noteInNote]="note" [text]="note.text" [title]="note.title"
-                [group]="note.group" [color]="note.color" id="{{note.$key}}"></note>
+
+            <note class="noteContainer col-xs-12 col-m-6 col-sm-4 col-md-4 col-lg-3" 
+            *ngFor="let note of notes | sortNotes" [hidden]="!expanded"
+                [noteInNote]="note" [text]="note.text" [title]="note.title" 
+                [group]="note.group" [color]="note.color" id="{{note.$key}}"
+                [groups]="groups" (noteChanged)="emitNotes(groups)">
+            </note>
+
         </div>
     </div>
     <div *ngIf='_authData != null'>
         <div class="myDragulaContainer" [dragula]='"drag-bag"'>
-            <note class="col-xs-4" *ngFor="let note of notes | async" [hidden]="!expanded" [noteInNote]="note" [text]="note.text" [title]="note.title"
-                [group]="note.group" [color]="note.color" id="{{note.$key}}"></note>
+
+            <note class="noteContainer col-xs-12 col-m-6 col-sm-4 col-md-4 col-lg-3" *ngFor="let note of notes | async | sortNotes" [hidden]="!expanded"
+                [noteInNote]="note" [text]="note.text" [title]="note.title" [group]="note.group" [color]="note.color" id="{{note.$key}}"
+                [groups]="groups"></note>
         </div>
     </div>
 
     <!--Modal-->
-    <div class="modal fade" id="myModal" role="dialog">
-        <div class="modal-dialog">
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-sm">
             <!-- Modal content-->
             <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title text-center"><span class="glyphicon glyphicon-warning-sign"></span> <small>Delete</small></h4>
-                </div>
                 <div class="modal-body">
-                    <p class="text-center"><small>Are you sure you want to delete this item?</small></p>
+                    <p class="text-center"><small>Are you sure you want to delete this group ?</small></p>
                 </div>
                 <div class="modal-footer">
-                    <button id="rigth-button" type="button" class="btn btn-danger btn-md pull-right" data-dismiss="modal" (click)="deleteGroup()">Yes</button>
-                    <a id="left-button" type="button" href="#" class="btn btn-primary btn-md pull-left" data-dismiss="modal">No</a>
+                    <div class="test col-md-6 pull-right">
+                        <button id="rigth-button" type="button" class="btn btn-danger btn-md pull-right" data-dismiss="modal" (click)="deleteGroup()">Yes</button>
+                    </div>
+                    <div class="test col-md-6 pull-left">
+                        <button id="left-button" type="button" class="btn btn-primary btn-md pull-left" data-dismiss="modal">No</button>
+                    </div>
                 </div>
+
             </div>
         </div>
+
     </div>
 </div>

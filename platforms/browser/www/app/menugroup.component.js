@@ -33,6 +33,9 @@ var MenuGroupComponent = (function () {
     MenuGroupComponent.prototype.ngOnInit = function () {
         this.getNotes();
     };
+    MenuGroupComponent.prototype.saveId = function () {
+        this._tx._focusedId = this.group.$key;
+    };
     MenuGroupComponent.prototype.getNotes = function () {
         var _this = this;
         if (this._authData != null) {
@@ -42,26 +45,35 @@ var MenuGroupComponent = (function () {
             this.notes = this._ls.getNotesInGroup(this.group.name);
         }
     };
-    MenuGroupComponent.prototype.deleteGroup = function () {
-        if (this._authData != null) {
-            this._ds.deleteGroup(this.group.$key);
-        }
-        else {
-            this._ls.deleteGroup(this.group.$key);
-            //TEMPORARY
-            location.reload();
-        }
-        this._tx._toggleExpand = false;
-        this.groupsChanged.emit('');
-    };
+    //WILL NOT BE USED
+    // deleteGroup() {
+    //   console.log("DELETE GROUP");
+    //   //remove from shared model
+    //   // for (var item in this.groups) {
+    //   //   console.log("CHECKING " + this.groups[item].$key);
+    //   //         if (this.group.$key == this.groups[item].$key) {
+    //   //             console.log("REMOVING no " + item);
+    //   //             this.groups.splice(item, 1);
+    //   //             break;
+    //   //         }
+    //   // }
+    //   //remove from firebase
+    //   if (this._authData != null) {
+    //     this._ds.deleteGroup(this._tx._focusedId);
+    //   } else {//remove from local storage
+    //     this._ls.deleteGroup(this._tx._focusedId);
+    //     //TEMPORARY
+    //     //location.reload();
+    //   }
+    //   this._tx._toggleExpand = false;
+    //   this.groupsChanged.emit(this.groups);
+    // }
     MenuGroupComponent.prototype.editGroup = function () {
         if (this._authData != null) {
             this._ds.updateGroupName(this.group.$key, this.group.name);
         }
         else {
             this._ls.updateGroupName(this.group.$key, this.group.name);
-            //TEMPORARY
-            location.reload();
         }
         this.groupsChanged.emit('');
     };
@@ -107,28 +119,34 @@ var MenuGroupComponent = (function () {
         }
     };
     MenuGroupComponent.prototype.toggleExpand = function () {
-        if (this.arrowSrc == 'icon_hide.png') {
-            this.expanded = false;
-        }
-        else {
-            this.expanded = true;
-        }
-        // this.expanded = this._tx._toggleExpand;
-        if (this.expanded) {
-            this.arrowSrc = 'icon_hide.png';
-        }
-        else {
-            this.arrowSrc = 'icon_expand.png';
+        if (!this.editingName) {
+            if (this.arrowSrc == 'icon_hide.png') {
+                this._tx._toggleExpand = false;
+            }
+            else {
+                this._tx._toggleExpand = true;
+            }
+            this.expanded = this._tx._toggleExpand;
+            if (this.expanded) {
+                this.arrowSrc = 'icon_hide.png';
+            }
+            else {
+                this.arrowSrc = 'icon_expand.png';
+            }
         }
     };
     MenuGroupComponent.prototype.jumpToNote = function (note) {
-        var element = document.getElementById(note);
-        element.scrollIntoView(true);
+        var element = document.getElementById(note).offsetTop - (window.innerHeight / 12);
+        window.scrollTo(0, element);
     };
-    MenuGroupComponent.prototype.jumpToGroup = function (groupId) {
-        var element = document.getElementById(groupId);
-        element.scrollIntoView(true);
+    MenuGroupComponent.prototype.jumpToGroup = function (group) {
+        var element = document.getElementById(group).offsetTop - (window.innerHeight / 12);
+        window.scrollTo(0, element);
     };
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], MenuGroupComponent.prototype, "groups", void 0);
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Object)

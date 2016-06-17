@@ -1,29 +1,40 @@
 <!--<headerbar (openSideBar)="openSideBar($event)"></headerbar>-->
-<div class="container">
+<div  class="container-fluid">
   <!--Top navbar-->
-  <div class="navbar_item">
-    <button class="backBtn">
-       <img class="btnImage" src="{{btnImage}}" (click)="openSideBar()" alt="backButton">
+  <div class="navbar_item"  [style.background-color]="navbarColor">
+    <button class="backBtn" (click)="toggleSideBar()">
+       <img class="btnImage" src="{{btnImage}}"  alt="backButton">
    </button>
+   <h1 class="websiteTitle">PostNote</h1>
   </div>
   <div class="row">
-    <div class="shadow" [class.shadow_active]="statusCheckSideBar"></div>
+    <div class="shadow" [class.shadow_active]="statusCheckSideBar" (click)="toggleSideBar()"></div>
+
+  <!--  <div   class="  col-xs-4" *ngIf="statusCheckSideBar == true">
+      <menu [myGroups]="allGroups" (clicked)="addGroup()" (groupsChanged)="groupsChanged(groups)"></menu>-->
+
     <div class="col-xs-4" *ngIf="statusCheckSideBar == true">
-      <menu (clicked)="addGroup()"></menu>
+      <menu (clicked)="groupsChanged()" (groupsChanged)="groupsChanged(groups)"></menu>
+
     </div>
 
     <div class="note_groups">
       <div>
-        <creator></creator>
+        <creator (notesChanged)="updateNotes()"></creator>
       </div>
+
+
       <div *ngIf="_authData == null">
-        <group (clickedDelete)="deleteGroup()" class="row" *ngFor="let group of allGroups" [group]="group" [groupName]="group.name">
+        <group (clickedDelete)="groupsChanged()" (notesChanged)="updateNotes()" class="row" *ngFor="let group of allGroups" [group]="group"
+          [groupName]="group.name" onload="delaySidebar()">
         </group>
       </div>
-      <div *ngIf="_authData != null">
-        <group (clickedDelete)="deleteGroup()" class="row" *ngFor="let group of allGroups | async" [group]="group" [groupName]="group.name">
+      <div *ngIf="_authData != null && _token != null">
+        <group (clickedDelete)="groupsChanged()" (notesChanged)="updateNotes()" class="row" *ngFor="let group of allGroups | async"
+          [group]="group" [groupName]="group.name">
         </group>
       </div>
     </div>
   </div>
+
 </div>

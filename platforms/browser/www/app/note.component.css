@@ -1,86 +1,112 @@
-.noteContainer {
- overflow: auto;
- box-shadow: 0px 2px 5px gray;
- height: 300px;
- width: 100%;
- display: table-cell;
- position: relative;
-}
 
-.noteContainer:hover .edit_button{
-  visibility: visible;
-}
-
-.noteContainer:hover .delete_button{
-  visibility: visible;
+.noteClass {
+  height: 300px;
+  box-shadow: 0px 2px 5px gray;
 }
 
 .delete_button {
-   border-radius: 2px;
    visibility: hidden;
-   float: left;
-   margin-left: 6px;
    margin-top: 6px;
+   border-radius: 2px;
+   position: absolute;
+   top: 0;
+   left: 2px;
+   background: none;
+   background-image: url('icon_delete.png');
+   background-repeat: no-repeat;
+   background-size: 100%;
+   background-position: center;
+   height: 25px;
+   width: 25px;  
    outline: none;
+   border: none;
    transition: box-shadow 150ms ease-in-out, background-color 150ms ease-in-out;
 }
 
-.delete_button:hover {
-  box-shadow: 0px 1px 5px #5A5A5A ;
-  background-color: #F44336 ;
+
+.deleteButtonVisible {
+  visibility: visible;
 }
 
-.edit_button {
+.saveButton {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: none;
   border-radius: 2px;
   visibility: hidden;
-  background-image: url('icon_edit.png');
-  background-size: 25px 25px;
+  background-image: url('icon_save.png');
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-position: center;
   height: 25px;
-  width: 25px;
-  float: right;
-  margin-right: 6px;
+  width: 25px;  
+  outline: none;
+  border: none;
   margin-top: 6px;
-  cursor: pointer;
   transition: box-shadow 150ms ease-in-out, background-color 150ms ease-in-out;
 }
 
-.edit_button:hover {
-  box-shadow: 0px 1px 5px #5A5A5A; 
-  background-color: #4CAF50;
+.saveButtonVisible {
+  visibility: visible;
 }
 
 .title {
+ -moz-appearance: none !important;
+ -webkit-appearance: none !important; 
+ -webkit-appearance: textfield !important;
+  color: #404040;
+  opacity: 1.0; 
   display: block;
-  height: 30px;
-  width: 200px;
-  font-size: 25px;
+  height: 40px;
+  font-size: 2em !important;
   float: left;
-  padding-bottom: 4px;
   margin-top: 5px;
-  margin-left: 19px;
-  margin-right: 19px;
-  text-align: center;
+  padding-bottom: .7em;
+  padding-top: .5em;
   background-color: transparent;
   border: none;
   outline: none;
+  text-align: center;
 }
 
+ @-moz-document url-prefix() { 
+   .title { 
+     padding-bottom: 0!important;
+     padding-top: 0!important;
+     }
+    }
+    
 .title::-webkit-input-placeholder {
-    color: black;
+    color: #606060;
+}
+textarea {
+    -moz-appearance: none !important;
+    -moz-text-fill-color: #404040; /* Override iOS / Android font color change */
+    -moz-opacity:1; 
+    -webkit-appearance: none !important;
+    -webkit-text-fill-color: #404040; /* Override iOS / Android font color change */
+    -webkit-opacity:1; /* Override iOS opacity change affecting text & background color */
+    color: #404040; /* Override IE font color change */
 }
 
 .text_field {
-   width: 280px;
-  height: 219px;
-  margin: 10px;
-  margin-bottom: 0;
-  padding: 5px;
+   -moz-appearance: none !important;
+ -webkit-appearance: none !important; 
+ -webkit-appearance: textfield !important;
+  color: #404040;
   background-color: transparent;
-  overflow: scroll;
+  height: 200px;
+  margin-bottom: 0;
+  overflow: auto;
   resize: none;
   border: none;
   outline: none;
-  overflow: auto;
+  
+}
+
+.text_field::-webkit-input-placeholder {
+  color: #606060;
 }
 
 .selectedNoteTitle {
@@ -89,13 +115,6 @@
 
 .selectedNoteText {
   border: dashed 1px black;
-  padding-top: 4px;
-  padding-left: 4px;
-}
-
-.savable {
-  background-image: url('icon_save.png');
-  visibility: visible;
 }
 
 .visible_dropdown {
@@ -104,7 +123,10 @@
 
 dropdown {
   visibility: hidden;
-  float: left;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  /*margin: 0 0 6px 6px;*/
 }
 
 colorpicker {
@@ -112,8 +134,8 @@ colorpicker {
   position: absolute;
   right: 0;
   bottom: 0;
-  padding-bottom: 6px;
-  padding-right: 6px;
+  margin: 0 6px 6px 0;
+
 }
 
 .visible_colorpicker {
@@ -142,3 +164,4 @@ colorpicker {
 .green_color {
     background-color: mediumseagreen;
 }
+

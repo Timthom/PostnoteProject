@@ -5,6 +5,7 @@
     margin-bottom: 6px;
     padding: 0px;
     border: none;
+    outline: none;
     border-radius: 2px;
     background-color: transparent;
     transition: box-shadow 150ms ease-in-out, background-color 150ms ease-in-out;
@@ -14,16 +15,11 @@
     background-image: url('icon_group.png');
     background-repeat: no-repeat;
     background-size: 100%;
-}
-
-.group_button:hover {
-    background-color: white;
-    box-shadow: 0px 1px 5px #5A5A5A;
+    background-position: center;
 }
 
 .btn-group.open .dropdown-toggle {
-    background-color: white;
-    box-shadow: 0px 1px 5px #5A5A5A;
+    box-shadow: none;
 }
 
 ul {

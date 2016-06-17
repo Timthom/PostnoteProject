@@ -13,17 +13,17 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 };
 var core_1 = require('@angular/core');
 var angularfire2_1 = require('angularfire2');
+require('rxjs/add/operator/map');
 var DataService = (function () {
     function DataService(_ref, _af) {
         this._ref = _ref;
         this._af = _af;
         if (this._ref.getAuth() == null) {
-            console.log('return#1');
             return;
         }
         //Varför sker det här?
         if (localStorage.getItem('token') == null) {
-            console.log('return#2');
+            // console.log('return#2');
             return;
         }
         var token = localStorage.getItem('token');
@@ -33,19 +33,17 @@ var DataService = (function () {
             else {
             }
         }, {
-            remember: "sessionOnly"
+            remember: "default"
         });
         var authData = _ref.getAuth();
+        this._afUserInfo = _af.database.list('/users/' + authData.uid);
         this._afNotes = _af.database.list('/users/' + authData.uid + '/notes');
         this._afGroups = _af.database.list('/users/' + authData.uid + '/groups', {
             query: {
                 orderByChild: 'timeStamp'
             }
         });
-        console.log('nu kommer notesen!');
-        console.log(this._notes);
         this._notes = _ref.child('/users/' + authData.uid + '/notes');
-        console.log(this._notes);
         this._groups = _ref.child('/users/' + authData.uid + '/groups');
     }
     //returns all notes in the DB...
@@ -59,13 +57,12 @@ var DataService = (function () {
             else {
             }
         }, {
-            remember: "sessionOnly"
+            remember: "default"
         });
-        console.log(token);
         return Promise.resolve(this._afNotes);
     };
     //adds a new note(FirebaseListObservable with random id) to the database...
-    DataService.prototype.addNoteToNotes = function (title, text, group, time, color) {
+    DataService.prototype.addNoteToNotes = function (title, text, group, time, color, position) {
         if (this._ref.getAuth() == null)
             return;
         var token = localStorage.getItem('token');
@@ -75,12 +72,10 @@ var DataService = (function () {
             else {
             }
         }, {
-            remember: "sessionOnly"
+            remember: "default"
         });
         console.log(token);
-        console.log(this._notes.ref);
-        this._notes.push({ 'title': title, 'text': text, 'group': group, 'timeStamp': (time * -1), 'color': color });
-        console.log(Firebase);
+        this._notes.push({ 'title': title, 'text': text, 'group': group, 'timeStamp': (time * -1), 'color': color, 'position': position });
     };
     //updates the notes title with the chosen id...
     DataService.prototype.updateNoteTitle = function (id, newTitle) {
@@ -93,7 +88,7 @@ var DataService = (function () {
             else {
             }
         }, {
-            remember: "sessionOnly"
+            remember: "default"
         });
         this._notes.child(id).update({ 'title': newTitle });
     };
@@ -108,7 +103,7 @@ var DataService = (function () {
             else {
             }
         }, {
-            remember: "sessionOnly"
+            remember: "default"
         });
         this._notes.child(id).update({ 'text': newText });
     };
@@ -127,7 +122,7 @@ var DataService = (function () {
             else {
             }
         }, {
-            remember: "sessionOnly"
+            remember: "default"
         });
         this._notes.child(id).remove();
     };
@@ -142,7 +137,7 @@ var DataService = (function () {
             else {
             }
         }, {
-            remember: "sessionOnly"
+            remember: "default"
         });
         var authData = this._ref.getAuth();
         //console.log(authData);
@@ -165,7 +160,7 @@ var DataService = (function () {
             else {
             }
         }, {
-            remember: "sessionOnly"
+            remember: "default"
         });
         return Promise.resolve(this._afGroups);
     };
@@ -180,7 +175,7 @@ var DataService = (function () {
             else {
             }
         }, {
-            remember: "sessionOnly"
+            remember: "default"
         });
         this._groups.push({ 'name': name, 'timeStamp': (time * -1) });
     };
@@ -193,7 +188,7 @@ var DataService = (function () {
             else {
             }
         }, {
-            remember: "sessionOnly"
+            remember: "default"
         });
         this._groups.child(id).update({ 'name': name });
     };
@@ -206,7 +201,7 @@ var DataService = (function () {
             else {
             }
         }, {
-            remember: "sessionOnly"
+            remember: "default"
         });
         this._groups.child(id).remove();
     };
@@ -219,23 +214,25 @@ var DataService = (function () {
             else {
             }
         }, {
-            remember: "sessionOnly"
+            remember: "default"
         });
         this._notes.child(id).update({ 'group': group });
     };
     /* Vill göra denna med promises om jag hinner //Marcus... */
     DataService.prototype.getGroupNameFromId = function (id) {
         var notes = this._notes;
-        console.log(notes);
-        //this._notes.child(id).child('group').once('value').then((s) => (console.log(s.val())));
         return new Promise(function (resolve) {
-            //this._notes.child(id).child('group').once('value').then((s) => resolve(s.val()));
-            //resolve(this._notes.child(id).child('group').once('value').then((s) => (s.val())));
             notes.child(id).child('group').on('value', function (s) { return resolve(s.val()); });
-            // console.log(notes, abc);
-            // resolve(abc);
-            //resolve('hej');
         });
+    };
+    DataService.prototype.getPositionFromId = function (id) {
+        var notes = this._notes;
+        return new Promise(function (resolve) {
+            notes.child(id).child('position').on('value', function (s) { return resolve(s.val()); });
+        });
+    };
+    DataService.prototype.updateNotePosition = function (id, position) {
+        this._notes.child(id).update({ 'position': position });
     };
     DataService = __decorate([
         core_1.Injectable(),

@@ -24,7 +24,8 @@ module.exports = function(defaults) {
       'crossvent/dist/crossvent.min.js',
       //.....................................
       // 'desandro-classie/classie.js',
-      'ng2-toastr/**/*'
+      'ng2-toastr/**/*',
+      'ng2-cookies/**'
     ]
   });
 };

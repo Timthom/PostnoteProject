@@ -1,47 +1,20 @@
-.creator {
- overflow: auto;
- background-color: #FFFFFF ;
- box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.5);
- height: 300px;
- width: 300px;
- margin: 10px;
- display: table-cell; 
- float: left;
+
+#container {
+  min-height: 20px;
 }
+
 
 .inputTitle {
-  height: 28px;
-  width: 200px;
-  font-size: 25px;
-  margin-left: 50px;
-  margin-top: 5px;
-  text-align: center;
-  background-color: rgba(255, 255, 255, 0);
-  border: none;
-  outline: none;
-  padding: 1px 1px 5px 1px;
-}
-
-.inputTitle::-webkit-input-placeholder {
-   color: #505050 ;
-}
-
-.inputText {
-  width: 280px;
-  height: 221px;
-  margin: 10px;
-  margin-bottom: 0;
-  padding: 5px;
-  background-color: rgba(255, 255, 255, 0);
-  overflow: scroll;
-  resize: none;
-  border: none;
-  outline: none;
-  overflow: auto;
-}
-
-.inputText::-webkit-input-placeholder {
-   color: #505050 ;
+   height: 36px;
+   font-size: 28px;
+   float: left;
+   margin-top: 5px;
+   text-align: center;
+   background-color: rgba(255, 255, 255, 0);
+   border: none;
+   outline: none;
+   padding-bottom: .7em;
+   padding-top: .5em;
 }
 
 .createButton {
@@ -53,24 +26,26 @@
    right: 20px;
    background-color: #404040;
    cursor: pointer;
+   outline: none;
    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
    z-index: 3;
+   float: right;
 }
 
-.noCategoryHidden {
-  display: none;
+.noCategoryHint {
+  position: fixed;
+  bottom: 20px;
+  right: 80px;
 }
 
-.noCategoryVisible {
-  display: block;
+.noCategory {
   box-shadow: none;
 }
 
-#categoryGroupButton {
- display:block;
+#categoryButtonContainer {
  outline: none;
- max-height: 200px;
- width: 50px;
+ max-height: 75%;
+ width: 400px;
  border: none;
  position: fixed;
  bottom: 80px;
@@ -80,8 +55,26 @@
  overflow: auto;
 }
 
+.hintButtonContainer {
+  display: inline-block;
+  width: inherit;
+}
+
+p {
+  float: right;
+  z-index: 3;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 2px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  padding: 0 4px 0 4px;
+  margin: 15px 10px 15px 10px;
+}
+
+.categoryHint {
+  margin: 15px 19px 15px 10px;
+}
+
 .categoryButton {
- display:none;
  outline: none;
  height: 30px;
  width: 30px;
@@ -89,33 +82,61 @@
  border: none;
  float: right;
  margin: 10px;
- background-color: #FFFFFF ;
+ background-color: #FFFFFF;
  box-shadow: 0 3px 7px rgba(0, 0, 0, 0.5);
  z-index: 4;
-}
-
-.categoryButtonVisible {
- display: block;
-}
-
-#S {
- bottom: 90px;
-}
-
-note {
-   margin: 10px;
-   width: 300px;
-   height: 300px;
 }
 
 .col-xs-4 {
  padding: 0px;
 }
 
-dropdown {
- border: none;
-}
-
 .myDragulaContainer {
  cursor: -webkit-grab;
 }
+
+.shadow {
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+  background-color: rgba(238, 238, 238, 0.7);
+}
+
+.inputText {
+   height: 200px;
+   margin-bottom: 0;
+   background-color: rgba(255, 255, 255, 0);
+   overflow: scroll;
+   resize: none;
+   border: none;
+   outline: none;
+   overflow: auto;
+}
+
+
+.inputText::-webkit-input-placeholder {
+    color: #505050;
+}
+
+
+/*note {
+    margin: 10px;
+    width: 300px;
+    height: 300px;
+}*/
+
+.noteContainer {
+ /*max-height: 300px;
+ max-width: 300px;*/
+ display: table-cell;
+ position: relative;
+ float: left;
+}
+
+.myDragulaContainer {
+  cursor: -webkit-grab;
+}
+

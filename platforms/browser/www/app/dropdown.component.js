@@ -33,8 +33,6 @@ var DropdownComponent = (function () {
         this.disabled = false;
         this.status = { isopen: false };
         this._authData = this._ref.getAuth();
-        //_menu.clicked.subscribe(this.getTitles());
-        //_menuGroup.groupsChanged.subscribe(this.getTitles());
     }
     DropdownComponent.prototype.toggled = function (open) {
     };
@@ -79,6 +77,10 @@ var DropdownComponent = (function () {
         core_1.Output(), 
         __metadata('design:type', Object)
     ], DropdownComponent.prototype, "changeNoteGroup", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], DropdownComponent.prototype, "groups", void 0);
     DropdownComponent = __decorate([
         core_1.Component({
             moduleId: module.id,

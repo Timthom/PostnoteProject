@@ -2,8 +2,9 @@
     <div *ngIf='_authData != null'>
         <div class="myDragulaContainer" [dragula]='"drag-bag"'>
 
+
             <note class="noteContainer col-xs-12 col-m-6 col-sm-6 col-md-4 col-lg-3"
-                *ngFor="let note of notes | async | reverse" [noteInNote]="note"
+                *ngFor="let note of notes | async | sortNotes" [noteInNote]="note"
                 [text]="note.text" [title]="note.title" [group]="note.group"
                 id="{{note.$key}}" [color]="note.color" (noteChanged)="noteChanged()">
             </note>
@@ -12,10 +13,10 @@
     <div *ngIf='_authData == null'>
         <div class="myDragulaContainer" [dragula]='"drag-bag"'>
 
-            <note class="noteContainer col-xs-12 col-m-6  col-sm-6 col-md-4 col-lg-3"
-                *ngFor="let note of notes | reverse" [noteInNote]="note"
-                [text]="note.text" [title]="note.title" [group]="note.group"
-                (noteChanged)="noteChanged()" id="{{note.$key}}" [color]="note.color">
+            <note class="noteContainer col-xs-12 col-m-6  col-sm-6 col-md-4 col-lg-3" 
+            *ngFor="let note of notes | sortNotes" [noteInNote]="note"
+                [text]="note.text" [title]="note.title" [group]="note.group" (noteChanged)="noteChanged()"
+                id="{{note.$key}}" [color]="note.color">
 
             </note>
         </div>
@@ -37,7 +38,6 @@
             <button class="categoryButton" (click)="save(group.name)" *ngIf="categoriesVisible">{{group.name | uppercase | firstLetter }}</button>
             <p class="categoryHint" *ngIf="categoriesVisible">{{group.name}}</p>
         </div>
-
     </div>
     <div *ngIf='_authData != null && categoriesVisible' id="categoryButtonContainer"
         (click)="hideCategoryButtons()">

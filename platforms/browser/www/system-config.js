@@ -7,7 +7,10 @@ var map = {
     'angularfire2': 'vendor/angularfire2',
     'moment': 'vendor/moment/moment.js',
     'ng2-dragula': 'vendor/ng2-dragula',
-    'dragula': 'vendor/dragula/dist/dragula.min.js'
+    'ng2-toastr': 'vendor/ng2-toastr',
+    'dragula': 'vendor/dragula/dist/dragula.min.js',
+    'lodash': 'node_modules/lodash/lodash.js',
+    'ng2-cookies': 'vendor/ng2-cookies'
 };
 /** User packages configuration. */
 var packages = {
@@ -18,6 +21,14 @@ var packages = {
     'ng2-dragula': {
         defaultExtension: 'js',
         main: 'ng2-dragula.js'
+    },
+    'ng2-toastr': {
+        defaultExtension: 'js',
+        main: 'ng2-toastr.js'
+    },
+    'ng2-cookies': {
+        defaultExtension: 'js',
+        main: 'ng2-cookies.js'
     }
 };
 ////////////////////////////////////////////////////////////////////////////////////////////////

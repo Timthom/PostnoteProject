@@ -14,6 +14,7 @@ var ValueService = (function () {
         this._showSideBar = false;
         this._toggleExpand = false;
         this._focusedId = '';
+        this._focusedNoteKeys = [];
     }
     Object.defineProperty(ValueService.prototype, "showSideBar", {
         get: function () {
@@ -42,6 +43,16 @@ var ValueService = (function () {
         },
         set: function (id) {
             this._focusedId = id;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ValueService.prototype, "focusedNoteKeys", {
+        get: function () {
+            return this._focusedNoteKeys;
+        },
+        set: function (keys) {
+            this._focusedNoteKeys = keys;
         },
         enumerable: true,
         configurable: true

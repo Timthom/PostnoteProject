@@ -36,8 +36,6 @@ var AngularFire = (function () {
         this.fbUrl = fbUrl;
         this.auth = auth;
         this.database = database;
-        this.list = database.list.bind(database);
-        this.object = database.object.bind(database);
     }
     AngularFire = __decorate([
         core_1.Injectable(),
@@ -54,20 +52,29 @@ function getAbsUrl(root, url) {
     return url;
 }
 exports.COMMON_PROVIDERS = [
-    core_1.provide(tokens_1.FirebaseRef, {
-        useFactory: function (url) { return new Firebase(url); },
-        deps: [tokens_1.FirebaseUrl] }),
+    {
+        provide: tokens_1.FirebaseRef,
+        useFactory: _getFirebase,
+        deps: [tokens_1.FirebaseUrl]
+    },
     auth_1.FirebaseAuth,
     AngularFire,
     database_1.FirebaseDatabase
 ];
+function _getFirebase(url) {
+    return new Firebase(url);
+}
 exports.FIREBASE_PROVIDERS = [
     exports.COMMON_PROVIDERS,
-    core_1.provide(auth_backend_1.AuthBackend, {
-        useFactory: function (ref) { return new firebase_sdk_auth_backend_1.FirebaseSdkAuthBackend(ref, false); },
+    {
+        provide: auth_backend_1.AuthBackend,
+        useFactory: _getAuthBackend,
         deps: [tokens_1.FirebaseRef]
-    })
+    }
 ];
+function _getAuthBackend(ref) {
+    return new firebase_sdk_auth_backend_1.FirebaseSdkAuthBackend(ref, false);
+}
 exports.defaultFirebase = function (url) {
     return core_1.provide(tokens_1.FirebaseUrl, {
         useValue: url

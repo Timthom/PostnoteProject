@@ -30,6 +30,17 @@ function isEmptyObject(obj) {
     return Object.keys(obj).length === 0 && JSON.stringify(obj) === JSON.stringify({});
 }
 exports.isEmptyObject = isEmptyObject;
+function unwrapMapFn(snapshot) {
+    var unwrapped = isPresent(snapshot.val()) ? snapshot.val() : { $value: null };
+    if ((/string|number|boolean/).test(typeof unwrapped)) {
+        unwrapped = {
+            $value: unwrapped
+        };
+    }
+    unwrapped.$key = snapshot.key();
+    return unwrapped;
+}
+exports.unwrapMapFn = unwrapMapFn;
 function checkForUrlOrFirebaseRef(urlOrRef, cases) {
     if (isString(urlOrRef)) {
         return cases.isUrl();

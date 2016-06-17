@@ -45,8 +45,6 @@ export class DropdownComponent implements OnInit {
         this.status.isopen = !this.status.isopen;
     }
 
-
-
     constructor( @Inject(FirebaseRef) private _ref: Firebase, private _ds: DataService, private _ls: LocalStorageService, private _menu: MenuComponent, private _menuGroup: MenuGroupComponent) {
         this._authData = this._ref.getAuth();
       
@@ -69,7 +67,5 @@ export class DropdownComponent implements OnInit {
         this.changeGroup.emit(group);
         //Emits to note component and group component?
         this.changeNoteGroup.emit(group);
-        var buttonText: HTMLElement = document.getElementById('group_name');
-        buttonText.innerHTML = group;
     }
 }

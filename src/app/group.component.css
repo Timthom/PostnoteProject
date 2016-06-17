@@ -1,7 +1,3 @@
-button{
-    margin-top: 5px;
-}
-
 .line {
    
     border: 0;
@@ -13,17 +9,16 @@ button{
 }
 
 .group_name {
-    border: none!important;
+    border: none;
     outline: none;
     font-size: 28px;
     display: inline-block;
     color: #404040;
     background-color: transparent;
     text-align: left;
+    cursor: pointer;
 }
-.group_name:hover{
-     cursor: pointer;
-}
+
 
 .groupContainer{
     width: 100%;
@@ -67,32 +62,31 @@ note .noteContainer {
  position: relative;
  float: left;
 }
-
 .collapse_button{
     float: left;
     border: none;
     outline: none;
     background-color: transparent;
 }
-
 .button_image{
+    margin-top: 10px;
     height: 30px;
     width: 30px;
 }
 
 input{
     height: 40px;
-    width: 185px;
+    columns: 12;
     display: inline-block;
 }
 
 .editingName{
-    border: 1px solid black;
     cursor: text;
+    border: 1px solid black;
+    background-color: white;
+    border-radius: 2px;
 }
-.editingName:hover{
-    cursor: text;   
-}
+
 /*Modal css*/
 #rigth-button{
     width: 70%;
@@ -109,22 +103,10 @@ input{
 #myModal{
     margin-top: 50px;
 }
-
 .test{
     width: 50%;
 }
-span{
-    color: red;
-}
-
 .ifButtons{
     float: right;
 }
 
-/*.pull-right{
-    width: 100%;
-}
-
-.pull-left{
-    width: 100%;
-}*/

@@ -10,7 +10,7 @@ import {CanReuse} from "@angular/router-deprecated";
 import {Group} from './group';
 import {LocalStorageService} from './localstorage.service';
 import {Reverse} from './reverse.pipe';
-//import {Postnote2App} from './postnote2.component';
+import {ToastsManager} from 'ng2-toastr/ng2-toastr';
 
 @Component({
   moduleId: module.id,
@@ -27,7 +27,7 @@ export class MenuComponent implements OnInit, CanReuse {
   routerCanReuse() {
     return false;
   }
-  
+
   myGroups: any;
   notes: any;
 
@@ -36,14 +36,14 @@ export class MenuComponent implements OnInit, CanReuse {
   groupName: string = "";
   titles: any;
   buttonText: string = "Add category";
-  
+
   checkSideBar: boolean = this._vs._showSideBar;
   _authData;
 
   @Output() clicked = new EventEmitter();
 
 
-  constructor( @Inject(FirebaseRef) private _ref: Firebase, private _ds: DataService, private _vs: ValueService, private _ls: LocalStorageService) {
+  constructor( @Inject(FirebaseRef) private _ref: Firebase, private _ds: DataService, private _vs: ValueService, private _ls: LocalStorageService, public toastr: ToastsManager) {
 
     this._authData = this._ref.getAuth();
     //_postNote2.groupChanged.subscribe(this.getGroups);
@@ -56,7 +56,8 @@ export class MenuComponent implements OnInit, CanReuse {
   }
 
   getTitles() {
-    if (this._authData != null) {
+    const token = localStorage.getItem('token');
+        if (this._authData != null && token != null) {
       this._ds.getAllNotes().then(titles => this.titles = titles);
       this._ds.getAllNotesInGroup('noGroup').then(notes => this.titles = notes);
     } else {
@@ -65,7 +66,8 @@ export class MenuComponent implements OnInit, CanReuse {
   }
 
   getGroups() {
-    if (this._authData != null) {
+    const token = localStorage.getItem('token');
+        if (this._authData != null && token != null) {
       this._ds.getAllGroups().then(groups => this.myGroups = groups);
     } else {
       this.myGroups = this._ls.getAllGroups();
@@ -74,7 +76,7 @@ export class MenuComponent implements OnInit, CanReuse {
 
 
   jumpToNote(note: string) {
-    var element = document.getElementById(note).offsetTop-(window.innerHeight/11);
+    var element = document.getElementById(note).offsetTop - (window.innerHeight / 11);
     window.scrollTo(0, element);
   }
 
@@ -88,34 +90,59 @@ export class MenuComponent implements OnInit, CanReuse {
     }
   }
 
+  getContent() {
+    let doneInLoopArray;
+    let arrayOfNames: any[] = [];
+
+    this.myGroups.forEach(function (result) {
+      doneInLoopArray = result;
+    });
+
+    doneInLoopArray.forEach(function (group) {
+      arrayOfNames.push(group.name);
+    });
+
+    return arrayOfNames;
+  }
+
   addGroup() {
     if (this.groupName.trim().length > 0) {
       let time = new Date().getTime();
 
-      if (this._authData != null) {
+        const token = localStorage.getItem('token');
+        if (this._authData != null && token != null) {
+
+        let content = this.getContent();
+        for (let name of content) {
+          if (this.groupName == name) {
+            this.toastr.error('Groupname already exists');
+            return;
+          }
+        }
         this._ds.addGroupToGroups(this.groupName, time);
         this.getGroups();
         this.getTitles();
 
       } else {
+        for (var group of this.myGroups) {
+          if (this.groupName == group.name) {
+            this.toastr.error('Groupname already exists');
+            return;
+          }
+        }
         let newGroup = new Group(this.groupName, time.toString());
         this._ls.saveGroup(newGroup);
         this.getGroups();
-        //TEMPORARY
-        //location.reload();
       }
-
       this.clicked.emit('');
-
-      //Reset input after adding
       this.groupName = "";
       this.adding = false;
       this.showingCancel = !this.showingCancel;
       this.buttonText = "Add category";
     }
   }
-  
-  groupsChanged(groups : any){
+
+  groupsChanged(groups: any) {
     this.clicked.emit('');
   }
 }

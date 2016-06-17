@@ -10,6 +10,7 @@ import {DropdownComponent} from './dropdown.component';
 import {ColorpickerComponent} from './colorpicker.component';
 import { defaultFirebase, FirebaseRef } from 'angularfire2';
 import {LocalStorageService} from './localstorage.service';
+import { DragulaHelperService } from './dragula-helper.service';
 
 @Component({
   moduleId: module.id,
@@ -56,8 +57,7 @@ export class NoteComponent implements OnInit {
     this.colorInit(this.color);
   }
 
-
-  constructor( @Inject(FirebaseRef) private _ref: Firebase, private _ds: DataService, private _ls: LocalStorageService) {
+  constructor(@Inject(FirebaseRef) private _ref: Firebase, private _ds: DataService, private _ls: LocalStorageService, private _dragulaHelper: DragulaHelperService) {
     this._authData = this._ref.getAuth();
   }
 
@@ -71,6 +71,7 @@ export class NoteComponent implements OnInit {
   isBlue: boolean = false;
   isYellow: boolean = true;
   isGreen: boolean = false;
+  colorString: string; //for saving event from colorPicker
 
   editClick() {
     this.isEditable = true;
@@ -78,23 +79,29 @@ export class NoteComponent implements OnInit {
   }
 
   save() {
-    if(this.noteSelectedGroup == undefined){ //If no group selected
+    if (this.noteSelectedGroup == undefined) { //If no group selected
       this.noteSelectedGroup = this.group; //use the same one
     }
     if (this._authData != null) {
       this._ds.updateNoteTitle(this.noteInNote.$key, this.title);
       this._ds.updateNoteText(this.noteInNote.$key, this.text);
       this._ds.changeNoteGroup(this.noteInNote.$key, this.noteSelectedGroup);//moved
+      if (this.colorString != undefined) { //If new color has been chosen
+        this._ds.updateNoteColor(this.noteInNote.$key, this.colorString);//moved
+      }
+
 
     } else {
       this._ls.updateNoteTitle(this.noteInNote.$key, this.title);
       this._ls.updateNoteText(this.noteInNote.$key, this.text);
       this._ls.changeNoteGroup(this.noteInNote.$key, this.noteSelectedGroup);//moved
+      if (this.colorString != undefined) { //If new color has been chosen
+        this._ls.updateNoteColor(this.noteInNote.$key, this.colorString);//moved
+      }
 
-      
     }
-  
-      this.noteChanged.emit('');
+
+    this.noteChanged.emit('');
     this.isEditable = false;
     this.enabledIfNull = "";
 
@@ -102,16 +109,34 @@ export class NoteComponent implements OnInit {
 
   //Emitted from dropdown
   noteGroupChanged(event) {
+    console.log(`här kommer event ${event}`);
+
     this.noteSelectedGroup = event;
+
+    if (this._authData != null) {
+      let getPosInfo: any = this._ds.getPositionFromId(this.noteInNote.$key);
+      let getOldGroupInfo: any = this._ds.getGroupNameFromId(this.noteInNote.$key);
+      Promise.all([getPosInfo, getOldGroupInfo]).then((result) => {
+        let prevPos = result[0];
+        let oldGroup = result[1];
+        console.log(`prevPos = ${prevPos}, oldGroup = ${oldGroup}, newGroup = ${this.noteSelectedGroup}`);
+        this._dragulaHelper.groupChangedByDropDown(oldGroup, this.noteSelectedGroup, prevPos, this.noteInNote.$key);
+        // this._ds.changeNoteGroup(this.noteInNote.$key, this.noteSelectedGroup);
+      });
+    } else {
+      this._ls.changeNoteGroup(this.noteInNote.$key, this.noteSelectedGroup);
+      //TEMPORARY
+      //location.reload();
+    }
+    //this.noteChanged.emit(''); uppdateras m.h.a. editclick??
   }
 
   colorChanged(event) {
     this.colorSwitch(event);
     this.isEditable = true;
+    this.colorString = event;
     if (this._authData != null) {
-      this._ds.updateNoteColor(this.noteInNote.$key, event);
     } else {
-      this._ls.updateNoteColor(this.noteInNote.$key, event);
     }
   }
 
@@ -158,7 +183,9 @@ export class NoteComponent implements OnInit {
     var o = this;
 
     if (o._authData != null) {
-      o._ds.deleteNote(o.noteInNote.$key);
+     
+      let getIdInfo: any = o._ds.getPositionFromId(o.noteInNote.$key);
+      getIdInfo.then(prevPos => o._dragulaHelper.updatePositionsInGroupAndThenDeleteNoteWhenPressingDelete(o.group, prevPos, o.noteInNote));   
     } else {
       o._ls.deleteNote(o.noteInNote.$key);
 

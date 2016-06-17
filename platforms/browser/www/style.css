@@ -15,7 +15,170 @@ h1 {
     font-size: 5em;
 }
 
+a {
+    display: block;
+    padding: 3px 10px;
+    clear: both;
+    font-weight: 400;
+    line-height: 1.42857143;
+    color: #333;
+    white-space: nowrap;
+}
+
 .row {
 	margin-left: 0;
 	margin-right: 0;
+}
+
+input{
+    -moz-appearance: none !important;
+    -webkit-appearance: none !important;
+    -webkit-text-fill-color: #404040; /* Override iOS / Android font color change */
+    -webkit-opacity:1; /* Override iOS opacity change affecting text & background color */
+    color: #404040; /* Override IE font color change */   
+}
+ @-moz-document url-prefix() { 
+   .title { 
+     padding-bottom: 0!important;
+     padding-top: 0!important;
+     }
+    }
+
+/*
+* Animation class menu aside
+*/
+@-webkit-keyframes fadeInLeft {
+  0% {
+    opacity: 1;
+    -webkit-transform: translate3d(-100%, 0, 0);
+            transform: translate3d(-100%, 0, 0);
+  }
+
+  100% {
+    opacity: 1;
+    -webkit-transform: none;
+            transform: none;
+  }
+}
+
+@keyframes fadeInLeft {
+  0% {
+    opacity: 1;
+    -webkit-transform: translate3d(-100%, 0, 0);
+            transform: translate3d(-100%, 0, 0);
+  }
+
+  100% {
+    opacity: 1;
+    -webkit-transform: none;
+            transform: none;
+  }
+}
+
+.fadeInLeft {
+  -webkit-animation-name: fadeInLeft;
+          animation-name: fadeInLeft;
+}
+/*END-------------------*/
+.col-xs-1 {
+  padding: 0;
+}
+.col-xs-12 {
+  padding: 0;
+  margin: 1%;
+  max-width: 98%;
+}
+.col-xs-6 {
+	width: 23%;
+}
+.col-xs-9 {
+	padding: 0;
+    	margin: 0 1% 0 1%;
+	width: 73%;
+}
+.col-xs-10 {
+    padding: 0;
+    margin: 1% 0 1% 0;
+    width: 81.333333%
+}
+.col-xs-11 {
+	padding: 0;
+	margin: 1%;
+	width: 88.666667%
+}
+.col-xs-offset-1 {
+    padding: 0;
+    margin: 0 1% 0 8.333333%;
+}  
+
+
+@media only screen and (min-width: 600px) and (max-width: 767px) {
+    /* For Landscape mode: */
+    .col-m-1 {width: 6%;}
+    .col-m-2 {width: 14%;}
+    .col-m-3 {width: 23%;}
+    .col-m-4 {width: 31%;}
+    .col-m-5 {width: 39;}
+    .col-m-6 {width: 48%;}
+    .col-m-7 {width: 56%;}
+    .col-m-8 {width: 64%;}
+    .col-m-9 {width: 73%;}
+    .col-m-10 {width: 81%;}
+    .col-m-11 {width: 89%;}
+    .col-m-12 {width: 98%;}
+}
+
+@media (min-width: 768px) {
+	.col-sm-4 {
+	padding: 0;
+        margin: 1%;
+	width: 31.333333%;
+	}
+	.col-sm-6 {
+	padding: 0;
+        margin: 1%;
+	width: 48%;
+	}
+
+}
+
+
+@media (min-width: 992px) {
+	.col-md-4 {
+	padding: 0;
+        margin: 1%;
+	width: 31.333333%;
+	}
+	.col-md-3 {
+	padding: 0;
+        margin: 1%;
+	width: 23%;
+	}
+	
+
+}
+
+@media (min-width: 1200px) {
+	
+	.col-lg-3 {
+	padding: 0;
+        margin: 1%;
+	width: 23%;	
+	}
+}
+
+ cbp-af-header {
+	/*background-color: #EEEEEE;*/
+	margin-bottom: 0px;
+	border-radius: 0px;
+	display: block;
+	width: 100%;
+	height: 100px;
+	box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.5);
+	position: fixed;
+	z-index: 10000;
+}
+.cbp-af-header-shrink {
+	height: 50px;
+	opacity: 0.8;
 }

@@ -38,6 +38,7 @@ var LocalStorageService = (function () {
     LocalStorageService.prototype.saveGroup = function (group) {
         this.groups.push(group);
         localStorage.setItem("savedGroups", JSON.stringify(this.groups));
+        //this.printAll();
     };
     LocalStorageService.prototype.deleteGroup = function (groupkey) {
         //The notes in group are removed in the components before this method is called
@@ -45,7 +46,7 @@ var LocalStorageService = (function () {
             if (groupkey == this.groups[item].$key) {
                 this.groups.splice(item, 1);
                 localStorage.setItem("savedGroups", JSON.stringify(this.groups));
-                //TO DO : Refresha menyn!
+                //this.printAll();
                 return;
             }
         }
@@ -65,13 +66,13 @@ var LocalStorageService = (function () {
             }
         }
         localStorage.setItem("savedNotes", JSON.stringify(this.notes));
+        //this.printAll();
     };
     LocalStorageService.prototype.getAllNotes = function () {
         this.notes = JSON.parse(localStorage.getItem("savedNotes"));
         return this.notes;
     };
     LocalStorageService.prototype.getNotesInGroup = function (groupName) {
-        console.log("localStorage.getItem(savedNotes) : " + localStorage.getItem("savedNotes"));
         if (localStorage.getItem("savedNotes")) {
             this.notes = JSON.parse(localStorage.getItem("savedNotes"));
             var groupNotes = new Array;
@@ -92,6 +93,7 @@ var LocalStorageService = (function () {
             if (key == this.notes[item].$key) {
                 this.notes[item].group = newGroup;
                 localStorage.setItem("savedNotes", JSON.stringify(this.notes));
+                //this.printAll();
                 return;
             }
         }
@@ -99,13 +101,14 @@ var LocalStorageService = (function () {
     LocalStorageService.prototype.addNoteToNotes = function (note) {
         this.notes.push(note);
         localStorage.setItem("savedNotes", JSON.stringify(this.notes));
+        //this.printAll();
     };
     LocalStorageService.prototype.deleteNote = function (key) {
         for (var item in this.notes) {
             if (key == this.notes[item].$key) {
                 this.notes.splice(item, 1);
                 localStorage.setItem("savedNotes", JSON.stringify(this.notes));
-                //TO DO : Refresha
+                //this.printAll();
                 return;
             }
         }
@@ -115,7 +118,7 @@ var LocalStorageService = (function () {
             if (noteKey == this.notes[item].$key) {
                 this.notes[item].title = newTitle;
                 localStorage.setItem("savedNotes", JSON.stringify(this.notes));
-                //TO DO : Refresha
+                //this.printAll();
                 return;
             }
         }
@@ -125,7 +128,7 @@ var LocalStorageService = (function () {
             if (noteKey == this.notes[item].$key) {
                 this.notes[item].text = newText;
                 localStorage.setItem("savedNotes", JSON.stringify(this.notes));
-                //TO DO : Refresha
+                //this.printAll();
                 return;
             }
         }
@@ -135,7 +138,7 @@ var LocalStorageService = (function () {
             if (noteKey == this.notes[item].$key) {
                 this.notes[item].color = color;
                 localStorage.setItem("savedNotes", JSON.stringify(this.notes));
-                //TO DO : Refresha
+                //this.printAll();
                 return;
             }
         }
@@ -146,6 +149,12 @@ var LocalStorageService = (function () {
         localStorage.setItem("savedGroups", JSON.stringify(this.groups));
         this.notes = [];
         localStorage.setItem("savedNotes", JSON.stringify(this.notes));
+    };
+    LocalStorageService.prototype.printAll = function () {
+        console.log("Notes in local: ");
+        console.log(this.notes);
+        console.log("Groups in local: ");
+        console.log(this.groups);
     };
     LocalStorageService = __decorate([
         core_1.Injectable(), 

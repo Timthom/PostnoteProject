@@ -23,9 +23,6 @@ var LoginComponent = (function () {
     }
     LoginComponent.prototype.onLoggedIn = function () {
         this._authService.loginUser(this.myForm.value);
-        /* if(this._authService.loginSuccess()) {
-            this._router.parent.navigate(['PostnoteAppRoute']);
-        } */
     };
     LoginComponent.prototype.ngOnInit = function () {
         this.myForm = this._fb.group({
@@ -46,7 +43,6 @@ var LoginComponent = (function () {
         this._authService.loginGitHubAuth();
     };
     LoginComponent.prototype.createAccountWindow = function () {
-        console.log("Create account click is working!");
         this.emitCreateUserAccount.emit('');
     };
     __decorate([

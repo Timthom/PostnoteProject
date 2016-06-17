@@ -2,6 +2,7 @@
 .noteClass {
   box-shadow: 0px 2px 5px gray;
 }
+
 .box{
 	position: relative;
 	width: 100%;		/* desired width */
@@ -49,7 +50,7 @@
    top: 0;
    left: 2px;
    background: none;
-   background-image: url("../icon_delete.png");
+   background-image: url('icon_delete.png');
    background-repeat: no-repeat;
    background-size: 100%;
    background-position: center;
@@ -81,39 +82,12 @@
   outline: none;
   border: none;
   margin-top: 6px;
-  transition: box-shadow 150ms ease-in-out, background-color 150ms ease-in-out;
-}
-/*.edit_button {
-  margin-top: 6px;
-  border-radius: 2px;
-  visibility: hidden;
-  background-image: url('icon_edit.png');
-  background-repeat: no-repeat;
-  background-size: 100%;
-  background-position:  center;
-  height: 36px;
-  width: 8.33333333%; 
-  float: left;
   cursor: pointer;
-  transition: box-shadow 150ms ease-in-out, background-color 150ms ease-in-out;
-}*/
-
+}
 
 .saveButtonVisible {
   visibility: visible;
 }
-/*@media all and (min-width: 501px) {
-  .edit_button {
-    margin-top: 4px;
-  }
-
-}*/
-
-/*.edit_button:hover {
-  box-shadow: 0px 1px 5px #5A5A5A; 
-  background-color: #4CAF50;
-
-}*/
 
 .title {
  -moz-appearance: none !important;
@@ -133,12 +107,14 @@
   outline: none;
   text-align: center;
 }
+
  @-moz-document url-prefix() { 
    .title { 
      padding-bottom: 0!important;
      padding-top: 0!important;
      }
     }
+    
 .title::-webkit-input-placeholder {
     color: #606060;
 }

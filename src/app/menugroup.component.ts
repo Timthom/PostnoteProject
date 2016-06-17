@@ -137,15 +137,13 @@ export class MenuGroupComponent implements OnInit {
   }
 
   toggleExpand() {
-    this.jumpToGroup(this.group.name);
-    let content = this.getContent();
     if (!this.editingName) {
       if (this.arrowSrc == 'icon_hide.png') {
-        this.expanded = false;
+        this._tx._toggleExpand = false;
       } else {
-        this.expanded = true;
+        this._tx._toggleExpand = true;
       }
-      // this.expanded = this._tx._toggleExpand;
+      this.expanded = this._tx._toggleExpand;
       if (this.expanded) {
         this.arrowSrc = 'icon_hide.png';
       }
@@ -161,8 +159,14 @@ export class MenuGroupComponent implements OnInit {
   }
 
   jumpToGroup(group: string) {
+    for (var i = 0; i < this._tx._groupNames.length; i++) {
+      if (this.group.name == this._tx._groupNames[i]) {
+          this._tx._groupExpandeds[i] = "true";
+          console.log("this works?!");
+      }
+    }
     var element = document.getElementById(group).offsetTop-(window.innerHeight/12);
     window.scrollTo(0, element);
+    this.groupsChanged.emit('');
   }
-
 }

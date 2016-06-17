@@ -26,8 +26,6 @@ export let AngularFire = class AngularFire {
         this.fbUrl = fbUrl;
         this.auth = auth;
         this.database = database;
-        this.list = database.list.bind(database);
-        this.object = database.object.bind(database);
     }
 };
 AngularFire = __decorate([
@@ -42,20 +40,29 @@ function getAbsUrl(root, url) {
     return url;
 }
 export const COMMON_PROVIDERS = [
-    provide(FirebaseRef, {
-        useFactory: (url) => new Firebase(url),
-        deps: [FirebaseUrl] }),
+    {
+        provide: FirebaseRef,
+        useFactory: _getFirebase,
+        deps: [FirebaseUrl]
+    },
     FirebaseAuth,
     AngularFire,
     FirebaseDatabase
 ];
+function _getFirebase(url) {
+    return new Firebase(url);
+}
 export const FIREBASE_PROVIDERS = [
     COMMON_PROVIDERS,
-    provide(AuthBackend, {
-        useFactory: (ref) => new FirebaseSdkAuthBackend(ref, false),
+    {
+        provide: AuthBackend,
+        useFactory: _getAuthBackend,
         deps: [FirebaseRef]
-    })
+    }
 ];
+function _getAuthBackend(ref) {
+    return new FirebaseSdkAuthBackend(ref, false);
+}
 export const defaultFirebase = (url) => {
     return provide(FirebaseUrl, {
         useValue: url

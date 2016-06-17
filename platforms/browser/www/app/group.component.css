@@ -1,8 +1,9 @@
-button {
-    margin-top: 4px;
+button{
+    margin-top: 8px;
 }
 
 .line {
+   
     border: 0;
     margin-top: 8px;
     margin-left: 10px;
@@ -16,12 +17,22 @@ button {
     outline: none;
     font-size: 28px;
     display: inline-block;
-    background: none;
+    color: #404040;
+    background-color: transparent;
     text-align: left;
-    width: 35%;
+<<<<<<< HEAD
+  
 }
+
 .group_name:hover{
      cursor: pointer;
+=======
+    cursor: pointer;
+>>>>>>> 6bced9e9a7d97aacc1fe1bd181d6b8076d73aeb5
+}
+
+.groupContainer{
+    width: 100%;
 }
 
 .delete_button {
@@ -31,19 +42,23 @@ button {
     background-color: transparent;
     margin-left: 0em;
     float: right;
-    margin-right:10px;
 }
+
+/*.ifButtons{
+    float: right;
+    height: 48px;
+    margin-right: 70px;
+}*/
 
 .edit_button{
     border: none;
     outline: none;
     /*visibility: hidden;*/
     background-color: transparent;
-    margin-left: 0em;
     float: right;
 }
 
-.col-xs-4 {
+/*.col-xs-4 {
   padding: 0px;
 }
 
@@ -51,37 +66,45 @@ note {
     margin: 10px;
     width: 300px;
     height: 300px;
+}*/
+note .noteContainer {
+ height: 300px;
+ display: table-cell;
+ position: relative;
+ float: left;
 }
-
 .collapse_button{
     float: left;
     border: none;
     outline: none;
     background-color: transparent;
 }
-
 .button_image{
     height: 30px;
     width: 30px;
 }
-
+<<<<<<< HEAD
+=======
 input{
     height: 40px;
+    columns: 12;
+    display: inline-block;
 }
+>>>>>>> 6bced9e9a7d97aacc1fe1bd181d6b8076d73aeb5
+
 .editingName{
-    border: 1px solid black;
     cursor: text;
-    
+    border: 1px solid black;
+    background-color: white;
+    border-radius: 2px;
 }
-.editingName:hover{
-    cursor: text;   
-}
+
 /*Modal css*/
 #rigth-button{
-    width: 40%;
+    width: 70%;
 }
 #left-button{
-    width: 40%;
+    width: 70%;
 }
 .modal-body{
     font-size: 1.5em;
@@ -89,3 +112,13 @@ input{
 .modal-title{
     font-size: 2em;
 }
+#myModal{
+    margin-top: 50px;
+}
+.test{
+    width: 50%;
+}
+.ifButtons{
+    float: right;
+}
+

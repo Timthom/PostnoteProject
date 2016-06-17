@@ -23,7 +23,7 @@
         +
       </button>
     </form>
-    <hr>
+    <hr class="invisibleLine">
     <div *ngIf='_authData == null'>
       <menuGroup *ngFor="let group of myGroups" [group]="group" (groupsChanged)="groupsChanged(groups)"></menuGroup>
     </div>
