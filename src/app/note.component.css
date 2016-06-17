@@ -15,7 +15,7 @@
    top: 0;
    left: 2px;
    background: none;
-   background-image: url("../icon_delete.png");
+   background-image: url('icon_delete.png');
    background-repeat: no-repeat;
    background-size: 100%;
    background-position: center;
