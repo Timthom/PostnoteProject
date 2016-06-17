@@ -1,11 +1,18 @@
 {
   "_args": [
     [
-      "ng2-dragula@^1.1.9",
-      "/Users/iths/VSCodeWorkspace/postnote"
+      {
+        "name": "ng2-dragula",
+        "raw": "ng2-dragula@1.1.9",
+        "rawSpec": "1.1.9",
+        "scope": null,
+        "spec": "1.1.9",
+        "type": "version"
+      },
+      "/Users/iths/Documents/ITHS/Programutveckling-iPhone-och-Android/CommonProject/postnote"
     ]
   ],
-  "_from": "ng2-dragula@>=1.1.9 <2.0.0",
+  "_from": "ng2-dragula@1.1.9",
   "_id": "ng2-dragula@1.1.9",
   "_inCache": true,
   "_installable": true,
@@ -23,11 +30,11 @@
   "_phantomChildren": {},
   "_requested": {
     "name": "ng2-dragula",
-    "raw": "ng2-dragula@^1.1.9",
-    "rawSpec": "^1.1.9",
+    "raw": "ng2-dragula@1.1.9",
+    "rawSpec": "1.1.9",
     "scope": null,
-    "spec": ">=1.1.9 <2.0.0",
-    "type": "range"
+    "spec": "1.1.9",
+    "type": "version"
   },
   "_requiredBy": [
     "/"
@@ -35,8 +42,8 @@
   "_resolved": "https://registry.npmjs.org/ng2-dragula/-/ng2-dragula-1.1.9.tgz",
   "_shasum": "2b08fc018e350fa958efaa8d256a7867feb63a57",
   "_shrinkwrap": null,
-  "_spec": "ng2-dragula@^1.1.9",
-  "_where": "/Users/iths/VSCodeWorkspace/postnote",
+  "_spec": "ng2-dragula@1.1.9",
+  "_where": "/Users/iths/Documents/ITHS/Programutveckling-iPhone-och-Android/CommonProject/postnote",
   "author": {
     "email": "NathanWalker",
     "name": "NathanWalker"
@@ -107,20 +114,20 @@
   "homepage": "https://github.com/valor-software/ng2-dragula#readme",
   "keywords": [
     "angular2",
-    "angular2-dragula",
-    "dragula",
     "ng2",
+    "dragula",
+    "angular2-dragula",
     "ng2-dragula"
   ],
   "license": "MIT",
   "maintainers": [
     {
-      "name": "valorkin",
-      "email": "valorkin@gmail.com"
+      "email": "valorkin@gmail.com",
+      "name": "valorkin"
     },
     {
-      "name": "walkerrunpdx",
-      "email": "walkerrunpdx@gmail.com"
+      "email": "walkerrunpdx@gmail.com",
+      "name": "walkerrunpdx"
     }
   ],
   "name": "ng2-dragula",

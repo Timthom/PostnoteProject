@@ -8,6 +8,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
 var core_1 = require('@angular/core');
 var router_deprecated_1 = require('@angular/router-deprecated');
 var authorization_service_1 = require("../authorization.service");
@@ -17,31 +20,37 @@ var postnote2_component_1 = require('../postnote2.component');
 var menu_component_1 = require('../menu.component');
 var logout_component_1 = require('../logout/logout.component');
 var localstorage_service_1 = require('../localstorage.service');
+var core_2 = require('@angular/core');
+var angularfire2_1 = require('angularfire2');
+var ng2_toastr_1 = require('ng2-toastr/ng2-toastr');
 var UserHandlerComponent = (function () {
-    function UserHandlerComponent(_authServiceHandler, _router) {
+    function UserHandlerComponent(_authServiceHandler, _router, _ref, toastr) {
         this._authServiceHandler = _authServiceHandler;
         this._router = _router;
+        this._ref = _ref;
+        this.toastr = toastr;
         this.switchWindow = false;
         this.loggingOut = false;
         this.loggingIn = false;
         this.createUser = false;
-        console.log("Refreshing???");
+        this.sessionExpired = false;
     }
-    UserHandlerComponent.prototype.routerCanReuse = function () {
-        return false;
-    };
     UserHandlerComponent.prototype.isAuth = function () {
-        //console.log("Auth method is working!");
         return this._authServiceHandler.isAuthenticated();
     };
     UserHandlerComponent.prototype.logoutUser = function () {
-        //console.log("Loggas ut?");
+        this._router.parent.navigate(['UserHandlerRoute']);
         this._authServiceHandler.killAuth();
         this.switchWindow = false;
         this.loggingOut = false;
         this.loggingIn = false;
-        // this._router.renavigate();
-        // this._router.parent.navigate(['UserHandlerRoute']);
+        if (this.sessionExpired) {
+            this.toastr.warning("Your session has expired. Please log in again!", "Alert!");
+        }
+        else {
+            this.toastr.info("You've been successfully logged out!");
+        }
+        this.sessionExpired = false;
     };
     UserHandlerComponent.prototype.switchTo = function () {
         return this.switchWindow;
@@ -53,7 +62,6 @@ var UserHandlerComponent = (function () {
         return this.loggingIn;
     };
     UserHandlerComponent.prototype.switchToLoginWindow = function () {
-        // this._router.parent.navigate(['LoginUserRoute']);
         if (this.createUser == true) {
             this.loggingIn = false;
             this.createUser = false;
@@ -63,26 +71,48 @@ var UserHandlerComponent = (function () {
         }
     };
     UserHandlerComponent.prototype.switchToLogoutWindow = function () {
-        //console.log("Byter till logout!");
-        //console.log(this.loggingOut);
+        this.checkIfUserSessionHasExpired();
         this.loggingOut = !this.loggingOut;
     };
     UserHandlerComponent.prototype.switchToCreateAccountWindow = function () {
         this.switchWindow = true;
-        // this._router.parent.navigate(['CreateUserAccountRoute']);
     };
     UserHandlerComponent.prototype.isCreatingAccount = function () {
         return this.createUser;
     };
     UserHandlerComponent.prototype.createUserAccount = function () {
-        console.log("EventEmitter is working!?");
         this.loggingIn = false;
         this.createUser = true;
     };
     UserHandlerComponent.prototype.loginUser = function () {
-        console.log("Back button is working in user-handler!");
         this.loggingIn = true;
         this.createUser = false;
+    };
+    UserHandlerComponent.prototype.checkIfUserSessionHasExpired = function () {
+        var authData = this._ref.getAuth();
+        if (authData != null) {
+            var o = this;
+            var ref = new Firebase("https://dazzling-fire-7472.firebaseio.com/users/" + authData.uid);
+            ref.once("value").then(function (snapshot) {
+                var d = new Date();
+                var n = d.getTime();
+                var lastExpire = (snapshot.val().expire / 1000);
+                var currentExpire = (n / 1000);
+                var result = currentExpire - lastExpire;
+                if (result >= 1800) {
+                    o.sessionExpired = true;
+                    o.logoutUser();
+                }
+                else {
+                    var ref = new Firebase("https://dazzling-fire-7472.firebaseio.com/users");
+                    ref.child(authData.uid).once('value', function (snapshot) {
+                        ref.child(authData.uid).update({
+                            expire: n
+                        });
+                    });
+                }
+            });
+        }
     };
     UserHandlerComponent = __decorate([
         core_1.Component({
@@ -93,8 +123,9 @@ var UserHandlerComponent = (function () {
             directives: [router_deprecated_1.ROUTER_DIRECTIVES, create_user_account_component_1.CreateUserAccountComponent, login_component_1.LoginComponent, postnote2_component_1.Postnote2App, menu_component_1.MenuComponent, logout_component_1.LogoutComponent],
             outputs: ['_userLoggedOut'],
             providers: [localstorage_service_1.LocalStorageService],
-        }), 
-        __metadata('design:paramtypes', [authorization_service_1.AuthorizationService, router_deprecated_1.Router])
+        }),
+        __param(2, core_2.Inject(angularfire2_1.FirebaseRef)), 
+        __metadata('design:paramtypes', [authorization_service_1.AuthorizationService, router_deprecated_1.Router, Firebase, ng2_toastr_1.ToastsManager])
     ], UserHandlerComponent);
     return UserHandlerComponent;
 }());

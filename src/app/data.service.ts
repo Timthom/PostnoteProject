@@ -15,7 +15,7 @@ export class DataService {
     constructor( @Inject(FirebaseRef) private _ref: Firebase, private _af: AngularFire) {
 
         if (this._ref.getAuth() == null) {
-            console.log('return#1');
+            // console.log('return#1');
             return;
         }
         
@@ -47,10 +47,10 @@ export class DataService {
                 orderByChild: 'timeStamp'
             }
         });
-        console.log('nu kommer notesen!');
-console.log(this._notes);
+        // console.log('nu kommer notesen!');
+        // console.log(this._notes);
         this._notes = _ref.child('/users/' + authData.uid + '/notes');
-console.log(this._notes);
+        // console.log(this._notes);
         this._groups = _ref.child('/users/' + authData.uid + '/groups');
     }
 
@@ -70,7 +70,7 @@ console.log(this._notes);
         }, {
             remember: "default"
             });
-        console.log(token);
+        // console.log(token);
         return Promise.resolve(this._afNotes);
     }
 
@@ -91,10 +91,10 @@ console.log(this._notes);
             remember: "default"
             }); console.log(token);
 
-        console.log(this._notes.ref);
+        // console.log(this._notes.ref);
 
         this._notes.push({ 'title': title, 'text': text, 'group': group, 'timeStamp': (time * -1), 'color': color });
-        console.log(Firebase);
+        // console.log(Firebase);
     }
 
     //updates the notes title with the chosen id...

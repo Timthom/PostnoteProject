@@ -6,16 +6,16 @@
       </button>
    
   </nav>
-  <postnote2-app></postnote2-app>
+  <postnote2-app on-mouseover="checkIfUserSessionHasExpired()"></postnote2-app>
   
-  <div *ngIf="isLoggingOut()">
+  <div *ngIf="isLoggingOut()">  
     <logout-user class="logout_user" (emitLogout)="logoutUser()"></logout-user>
   </div>
 </div>
 
 <div *ngIf="switchTo()">
   <div *ngIf="!isAuth()">  
-    <postnote2-app></postnote2-app>
+    <postnote2-app on-mouseover="checkIfUserSessionHasExpired()"></postnote2-app>
   </div>
 </div>
  
@@ -34,5 +34,5 @@
       <create-user-account (emitLoginUserAccountWindow)="loginUser()"></create-user-account>
     </div>
     
-    <postnote2-app></postnote2-app>
+    <postnote2-app on-mouseover="checkIfUserSessionHasExpired()"></postnote2-app>
 </div>
