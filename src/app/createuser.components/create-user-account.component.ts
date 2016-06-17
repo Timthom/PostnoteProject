@@ -57,7 +57,6 @@ export class CreateUserAccountComponent implements OnInit {
     }
     
     switchBackToLoginComponent() {
-        console.log("3");
         this.emitLoginUserAccountWindow.emit('');
     }
 }

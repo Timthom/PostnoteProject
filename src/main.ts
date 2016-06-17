@@ -13,7 +13,7 @@ if (environment.production) {
 
 let options = {
   positionClass: 'toast-bottom-left',
-  toastLife: 2000
+  toastLife: 3000
  
 };
 
