@@ -12,7 +12,7 @@ function FirebaseObjectFactory(absoluteUrlOrDbRef, _a) {
     });
     return new firebase_object_observable_1.FirebaseObjectObservable(function (obs) {
         ref.on('value', function (snapshot) {
-            obs.next(preserveSnapshot ? snapshot : snapshot.val());
+            obs.next(preserveSnapshot ? snapshot : utils.unwrapMapFn(snapshot));
         }, function (err) {
             if (err) {
                 obs.error(err);

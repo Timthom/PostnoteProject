@@ -23,10 +23,7 @@ export class LoginComponent implements OnInit {
     constructor(private _fb: FormBuilder, private _authService: AuthorizationService, private _router: Router) {}
 
     onLoggedIn() {
-        this._authService.loginUser(this.myForm.value);
-        /* if(this._authService.loginSuccess()) {
-            this._router.parent.navigate(['PostnoteAppRoute']);
-        } */
+        this._authService.loginUser(this.myForm.value);  
     }
 
     ngOnInit():any {

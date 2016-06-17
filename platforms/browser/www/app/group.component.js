@@ -45,7 +45,7 @@ var GroupComponent = (function () {
     };
     GroupComponent.prototype.saveId = function () {
         this._tx._focusedId = this.group.$key;
-        console.log(this._tx._focusedId);
+        this._tx._focusedNoteKeys = this.getContent();
     };
     GroupComponent.prototype.getNotes = function () {
         var _this = this;
@@ -57,51 +57,42 @@ var GroupComponent = (function () {
         }
     };
     GroupComponent.prototype.getContent = function () {
-        if (this._authData != null) {
-            var doneInLoopArray_1;
-            var arrayOfKeys_1 = [];
-            this.notes.forEach(function (result) {
-                doneInLoopArray_1 = result;
-            });
-            doneInLoopArray_1.forEach(function (note) {
-                arrayOfKeys_1.push(note.$key);
-            });
-            return arrayOfKeys_1;
-        }
+        var doneInLoopArray;
+        var arrayOfKeys = [];
+        this.notes.forEach(function (result) {
+            doneInLoopArray = result;
+        });
+        doneInLoopArray.forEach(function (note) {
+            arrayOfKeys.push(note.$key);
+        });
+        return arrayOfKeys;
     };
     GroupComponent.prototype.deleteGroup = function () {
-        //remove from shared model
-        console.log('DELETE GROUP IN GROUP !!!');
-        console.log(this.groupId);
         for (var item in this.groups) {
-            if (this.group.$key == this.groups[item].$key) {
+            if (this._tx._focusedId == this.groups[item].$key) {
                 this.groups.splice(item, 1);
                 break;
             }
         }
         if (this._authData != null) {
             //To be able to iterate through all notes
-            var content = this.getContent();
             //Remove all notes in group
-            for (var _i = 0, content_1 = content; _i < content_1.length; _i++) {
-                var key = content_1[_i];
+            for (var _i = 0, _a = this._tx._focusedNoteKeys; _i < _a.length; _i++) {
+                var key = _a[_i];
                 this._ds.deleteNote(key);
             }
             this._ds.deleteGroup(this._tx._focusedId);
-            this.clickedDelete.emit('');
-            this._tx._toggleExpand = false;
         }
         else {
             //Removes notes of the group
-            for (var _a = 0, _b = this.notes; _a < _b.length; _a++) {
-                var note = _b[_a];
-                this._ls.deleteNote(note.$key);
+            for (var _b = 0, _c = this._tx._focusedNoteKeys; _b < _c.length; _b++) {
+                var note = _c[_b];
+                this._ls.deleteNote(note);
             }
             this._ls.deleteGroup(this._tx._focusedId);
         }
-        console.log(this.groupId);
+        this._tx._toggleExpand = false;
         this.clickedDelete.emit('');
-        this.toastr.success('hallelujah!', 'group deleted!');
     };
     GroupComponent.prototype.editGroupName = function () {
         //change name in shared model
@@ -118,7 +109,7 @@ var GroupComponent = (function () {
             this._ls.updateGroupName(this.group.$key, this.groupName);
         }
         this.clickedDelete.emit(''); //Also works for edits!
-        this.toastr.success('hallelujah!', 'group updated!');
+        this.toastr.success('Group-name updated!');
     };
     // Enable inputfield to edit text in field when user click on pen icon else disable inputfield
     GroupComponent.prototype.editClick = function () {
@@ -131,8 +122,8 @@ var GroupComponent = (function () {
             if (this._authData != null) {
                 var content = this.getContent();
                 // changes notes in the group to the new group
-                for (var _i = 0, content_2 = content; _i < content_2.length; _i++) {
-                    var key = content_2[_i];
+                for (var _i = 0, content_1 = content; _i < content_1.length; _i++) {
+                    var key = content_1[_i];
                     this._ds.changeNoteGroup(key, this.groupName);
                 }
             }
@@ -146,12 +137,11 @@ var GroupComponent = (function () {
             this.editGroupName();
             this.getNotes();
             this.editSrc = 'icon_edit.png';
-            this._tx._toggleExpand = false;
         }
     };
     // Expand category on click arrowBtn
     GroupComponent.prototype.groupExpand = function () {
-        // Uffes idea:
+        // Uffes idea:"
         if (!this.editingName) {
             if (this.arrowSrc == 'icon_hide.png') {
                 this._tx._toggleExpand = false;
@@ -174,10 +164,6 @@ var GroupComponent = (function () {
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Object)
-    ], GroupComponent.prototype, "groups", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
     ], GroupComponent.prototype, "group", void 0);
     __decorate([
         core_1.Input(), 
@@ -195,10 +181,6 @@ var GroupComponent = (function () {
         core_1.Output(), 
         __metadata('design:type', Object)
     ], GroupComponent.prototype, "notesChanged", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], GroupComponent.prototype, "notes", void 0);
     GroupComponent = __decorate([
         core_1.Component({
             moduleId: module.id,

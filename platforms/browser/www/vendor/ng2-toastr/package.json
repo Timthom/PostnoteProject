@@ -1,8 +1,15 @@
 {
   "_args": [
     [
-      "ng2-toastr@^0.2.0",
-      "/Users/iths/Desktop/postnote"
+      {
+        "name": "ng2-toastr",
+        "raw": "ng2-toastr@^0.2.0",
+        "rawSpec": "^0.2.0",
+        "scope": null,
+        "spec": ">=0.2.0 <0.3.0",
+        "type": "range"
+      },
+      "/Users/iths/Documents/ITHS/Programutveckling-iPhone-och-Android/CommonProject/postnote"
     ]
   ],
   "_from": "ng2-toastr@>=0.2.0 <0.3.0",
@@ -36,7 +43,7 @@
   "_shasum": "b1a6b60ae263ec07278e85f466cd45c979a46512",
   "_shrinkwrap": null,
   "_spec": "ng2-toastr@^0.2.0",
-  "_where": "/Users/iths/Desktop/postnote",
+  "_where": "/Users/iths/Documents/ITHS/Programutveckling-iPhone-och-Android/CommonProject/postnote",
   "author": {
     "name": "Derek Shi"
   },

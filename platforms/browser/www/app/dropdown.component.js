@@ -42,7 +42,7 @@ var DropdownComponent = (function () {
         this.status.isopen = !this.status.isopen;
     };
     DropdownComponent.prototype.ngOnInit = function () {
-        //this.getTitles();
+        this.getTitles();
     };
     DropdownComponent.prototype.getTitles = function () {
         var _this = this;

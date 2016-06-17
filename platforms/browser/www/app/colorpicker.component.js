@@ -21,6 +21,7 @@ var ColorpickerComponent = (function () {
     };
     ColorpickerComponent.prototype.selectColor = function (color) {
         this.changeColor.emit(color);
+        this.showingColors = false;
     };
     ColorpickerComponent.prototype.colorButtonClick = function () {
         this.showingColors = !this.showingColors;

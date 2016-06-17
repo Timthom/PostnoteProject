@@ -47,7 +47,7 @@ var AuthorizationService = (function () {
             }
             else {
                 localStorage.setItem('token', authData.token);
-                that.toastr.info("Welcome, You are now logged in!");
+                that.toastr.info("Welcome, you are now logged in to your account!");
                 var d = new Date();
                 var n = d.getTime();
                 var ref = new Firebase("https://dazzling-fire-7472.firebaseio.com/users");
@@ -62,14 +62,15 @@ var AuthorizationService = (function () {
         });
     };
     AuthorizationService.prototype.loginFacebookAuth = function () {
+        var that = this;
         this.user = null;
         this._ref.authWithOAuthPopup("facebook", function (error, authData) {
             if (error) {
-                // console.log("Login Failed!", error); 
                 if (error.code === "TRANSPORT_UNAVAILABLE") {
                     // fall-back to browser redirects, and pick up the session
                     // automatically when we come back to the origin page
                     ref.authWithOAuthRedirect("facebook", function (error) {
+                        that.toastr.info("Welcome, you are now logged in with " + authData.provider + "!");
                         localStorage.setItem('token', authData.token);
                         var d = new Date();
                         var n = d.getTime();
@@ -85,6 +86,7 @@ var AuthorizationService = (function () {
                 }
             }
             else if (authData) {
+                that.toastr.info("Welcome, you are now logged in with " + authData.provider + "!");
                 localStorage.setItem('token', authData.token);
                 var d = new Date();
                 var n = d.getTime();
@@ -101,14 +103,15 @@ var AuthorizationService = (function () {
         });
     };
     AuthorizationService.prototype.loginGoogleAuth = function () {
+        var that = this;
         this.user = null;
         this._ref.authWithOAuthPopup("google", function (error, authData) {
             if (error) {
-                // console.log("Login Failed!", error); 
                 if (error.code === "TRANSPORT_UNAVAILABLE") {
                     // fall-back to browser redirects, and pick up the session
                     // automatically when we come back to the origin page
                     ref.authWithOAuthRedirect("google", function (error) {
+                        that.toastr.info("Welcome, you are now logged in with " + authData.provider + "!");
                         localStorage.setItem('token', authData.token);
                         var d = new Date();
                         var n = d.getTime();
@@ -124,6 +127,7 @@ var AuthorizationService = (function () {
                 }
             }
             else if (authData) {
+                that.toastr.info("Welcome, you are now logged in with " + authData.provider + "!");
                 localStorage.setItem('token', authData.token);
                 var d = new Date();
                 var n = d.getTime();
@@ -140,14 +144,15 @@ var AuthorizationService = (function () {
         });
     };
     AuthorizationService.prototype.loginTwitterAuth = function () {
+        var that = this;
         this.user = null;
         this._ref.authWithOAuthPopup("twitter", function (error, authData) {
             if (error) {
-                console.log("Login Failed!", error);
                 if (error.code === "TRANSPORT_UNAVAILABLE") {
                     // fall-back to browser redirects, and pick up the session
                     // automatically when we come back to the origin page
                     ref.authWithOAuthRedirect("twitter", function (error) {
+                        that.toastr.info("Welcome, you are now logged in with " + authData.provider + "!");
                         localStorage.setItem('token', authData.token);
                         var d = new Date();
                         var n = d.getTime();
@@ -163,6 +168,7 @@ var AuthorizationService = (function () {
                 }
             }
             else if (authData) {
+                that.toastr.info("Welcome, you are now logged in with " + authData.provider + "!");
                 localStorage.setItem('token', authData.token);
                 var d = new Date();
                 var n = d.getTime();
@@ -179,14 +185,15 @@ var AuthorizationService = (function () {
         });
     };
     AuthorizationService.prototype.loginGitHubAuth = function () {
+        var that = this;
         this.user = null;
         this._ref.authWithOAuthPopup("github", function (error, authData) {
             if (error) {
-                // console.log("Login Failed!", error); 
                 if (error.code === "TRANSPORT_UNAVAILABLE") {
                     // fall-back to browser redirects, and pick up the session
                     // automatically when we come back to the origin page
                     ref.authWithOAuthRedirect("github", function (error) {
+                        that.toastr.info("Welcome, you are now logged in with " + authData.provider + "!");
                         localStorage.setItem('token', authData.token);
                         var d = new Date();
                         var n = d.getTime();
@@ -202,6 +209,7 @@ var AuthorizationService = (function () {
                 }
             }
             else if (authData) {
+                that.toastr.info("Welcome, you are now logged in with " + authData.provider + "!");
                 localStorage.setItem('token', authData.token);
                 var d = new Date();
                 var n = d.getTime();

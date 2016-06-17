@@ -20,6 +20,7 @@ var angularfire2_1 = require('angularfire2');
 var core_2 = require('@angular/core');
 var group_1 = require('./group');
 var localstorage_service_1 = require('./localstorage.service');
+var reverse_pipe_1 = require('./reverse.pipe');
 //import {Postnote2App} from './postnote2.component';
 var MenuComponent = (function () {
     function MenuComponent(_ref, _ds, _vs, _ls) {
@@ -41,11 +42,12 @@ var MenuComponent = (function () {
     };
     MenuComponent.prototype.ngOnInit = function () {
         this.getTitles();
-        //this.getGroups();
+        this.getGroups();
     };
     MenuComponent.prototype.getTitles = function () {
         var _this = this;
-        if (this._authData != null) {
+        var token = localStorage.getItem('token');
+        if (this._authData != null && token != null) {
             this._ds.getAllNotes().then(function (titles) { return _this.titles = titles; });
             this._ds.getAllNotesInGroup('noGroup').then(function (notes) { return _this.titles = notes; });
         }
@@ -55,7 +57,8 @@ var MenuComponent = (function () {
     };
     MenuComponent.prototype.getGroups = function () {
         var _this = this;
-        if (this._authData != null) {
+        var token = localStorage.getItem('token');
+        if (this._authData != null && token != null) {
             this._ds.getAllGroups().then(function (groups) { return _this.myGroups = groups; });
         }
         else {
@@ -63,8 +66,8 @@ var MenuComponent = (function () {
         }
     };
     MenuComponent.prototype.jumpToNote = function (note) {
-        var element = document.getElementById(note);
-        element.scrollIntoView(true);
+        var element = document.getElementById(note).offsetTop - (window.innerHeight / 11);
+        window.scrollTo(0, element);
     };
     MenuComponent.prototype.toggleInput = function () {
         this.adding = !this.adding;
@@ -79,7 +82,8 @@ var MenuComponent = (function () {
     MenuComponent.prototype.addGroup = function () {
         if (this.groupName.trim().length > 0) {
             var time = new Date().getTime();
-            if (this._authData != null) {
+            var token = localStorage.getItem('token');
+            if (this._authData != null && token != null) {
                 this._ds.addGroupToGroups(this.groupName, time);
                 this.getGroups();
                 this.getTitles();
@@ -98,17 +102,8 @@ var MenuComponent = (function () {
         }
     };
     MenuComponent.prototype.groupsChanged = function (groups) {
-        //this.myGroups = groups;
-        //console.log("GROUPS CHANGED MENU " + this.myGroups);
+        this.clicked.emit('');
     };
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], MenuComponent.prototype, "myGroups", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], MenuComponent.prototype, "notes", void 0);
     __decorate([
         core_1.Output(), 
         __metadata('design:type', Object)
@@ -121,7 +116,7 @@ var MenuComponent = (function () {
             templateUrl: 'menu.component.html',
             styleUrls: ['menu.component.css'],
             directives: [router_deprecated_1.ROUTER_DIRECTIVES, menugroup_component_1.MenuGroupComponent],
-            pipes: []
+            pipes: [reverse_pipe_1.Reverse]
         }),
         __param(0, core_2.Inject(angularfire2_1.FirebaseRef)), 
         __metadata('design:paramtypes', [Firebase, data_service_1.DataService, value_service_1.ValueService, localstorage_service_1.LocalStorageService])
