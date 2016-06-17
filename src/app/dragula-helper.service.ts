@@ -285,5 +285,84 @@ _savedSibling: any;
     
     
   }
+
+  updatePositionsInGroupAndThenDeleteNoteWhenPressingDelete(group: string, prevPos: number, noteInNote: any) {
+    console.log(`inne i updatePositionsInGroupWhenPressingDelete där group = ${group}`);
+    this._dataservice.deleteNote(noteInNote.$key);
+    let notesInGroup: any = this._dataservice.getAllNotesInGroup(group);
+    
+    notesInGroup.then(res => {
+        console.log(`inne i then...`);
+        let doneInLoopArray;
+        let arrayOfKeys: any[] = [];
+        let arrayOfPos: any[] = [];
+        let self = this;
+
+        res.forEach(function (result) {
+            doneInLoopArray = result;
+        });
+
+      doneInLoopArray.forEach(function (note) {
+        console.log(`inne i loopen för att göra saker där prevPos = ${prevPos}, note.position = ${note.position}, note.$key = ${note.$key}`);
+        if (note.position > prevPos) {
+          console.log(`positionen är större än prev...`);
+          self._dataservice.updateNotePosition(note.$key, (note.position - 1));
+        }
+      });
+    });
+  }
+
+
+      updatePositionsInGroup(group: string) {
+        console.log(`inne i updatePositionsInGroup där group = ${group}`);
+        let notesInGroup: any = this._dataservice.getAllNotesInGroup(group);
+        
+        notesInGroup.then(res => {
+            console.log(`inne i then...`);
+            let doneInLoopArray;
+            let arrayOfKeys: any[] = [];
+            let arrayOfPos: any[] = [];
+            let self = this;
+
+            res.forEach(function (result) {
+                doneInLoopArray = result;
+            });
+
+            doneInLoopArray.forEach(function (note) {
+                console.log(`inne i loopen för att göra saker där note.position = ${note.position}, note.position + 1 = ${note.position + 1} , note.$key = ${note.$key}`);
+                self._dataservice.updateNotePosition(note.$key, (note.position + 1));
+            });
+        });
+    }
+
+    groupChangedByDropDown(oldGroup: string, newgroup: string, prevPos: number, id: string){
+      this._dataservice.changeNoteGroup(id, newgroup);
+      this._dataservice.updateNotePosition(id, -1);
+      this.updatePositionsInGroup(newgroup);
+      this.changePreviousGroupWhenChangingThroughDropdown(oldGroup, prevPos);
+    }
+
+    changePreviousGroupWhenChangingThroughDropdown(oldGroup: string, prevPos: number){
+      let notesInGroup: any = this._dataservice.getAllNotesInGroup(oldGroup);
+    
+      notesInGroup.then(res => {
+        let doneInLoopArray;
+        let arrayOfKeys: any[] = [];
+        let arrayOfPos: any[] = [];
+        let self = this;
+
+      res.forEach(function (result) {
+        doneInLoopArray = result;
+      });
+
+      doneInLoopArray.forEach(function (note) {
+        console.log(`inne i loopen för att göra saker där prevPos = ${prevPos}, note.position = ${note.position}, note.$key = ${note.$key}`);
+        if (note.position > prevPos) {
+          console.log(`positionen är större än prev...`);
+          self._dataservice.updateNotePosition(note.$key, (note.position - 1));
+        }
+      });
+    });
+    }
   
 }

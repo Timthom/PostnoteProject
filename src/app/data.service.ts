@@ -288,14 +288,6 @@ export class DataService {
     
     updateNotePosition(id: string, position: number) {
         this._notes.child(id).update({ 'position': position });
-    }
-    
-    // getWholeCurrentGroupFromGroupName(group: string) {
-    //     let notes = this._notes;
-    //     return new Promise((resolve) => {
-    //         this._ref.child('users').child(this._ref.getAuth().uid).child('groups').child(group).on('value', (s) => console.log(s.val()));
-    //         this._ref.child('users').child(this._ref.getAuth().uid).child('groups').child(group).on('value', (s) => resolve(s.val()));
-    //     });      
-    // }   
+    } 
     
 }

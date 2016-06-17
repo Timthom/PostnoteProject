@@ -10,6 +10,7 @@ import {DropdownComponent} from './dropdown.component';
 import {ColorpickerComponent} from './colorpicker.component';
 import { defaultFirebase, FirebaseRef } from 'angularfire2';
 import {LocalStorageService} from './localstorage.service';
+import { DragulaHelperService } from './dragula-helper.service';
 
 @Component({
   moduleId: module.id,
@@ -54,7 +55,7 @@ export class NoteComponent implements OnInit {
   }
 
 
-  constructor(@Inject(FirebaseRef) private _ref: Firebase, private _ds: DataService, private _ls: LocalStorageService) {
+  constructor(@Inject(FirebaseRef) private _ref: Firebase, private _ds: DataService, private _ls: LocalStorageService, private _dragulaHelper: DragulaHelperService) {
     this._authData = this._ref.getAuth();
   }
 
@@ -91,10 +92,20 @@ export class NoteComponent implements OnInit {
 
   //Emitted from dropdown
   noteGroupChanged(event) {
+    console.log(`här kommer event ${event}`);
+
     this.noteSelectedGroup = event;
 
     if (this._authData != null) {
-      this._ds.changeNoteGroup(this.noteInNote.$key, this.noteSelectedGroup);
+      let getPosInfo: any = this._ds.getPositionFromId(this.noteInNote.$key);
+      let getOldGroupInfo: any = this._ds.getGroupNameFromId(this.noteInNote.$key);
+      Promise.all([getPosInfo, getOldGroupInfo]).then((result) => {
+        let prevPos = result[0];
+        let oldGroup = result[1];
+        console.log(`prevPos = ${prevPos}, oldGroup = ${oldGroup}, newGroup = ${this.noteSelectedGroup}`);
+        this._dragulaHelper.groupChangedByDropDown(oldGroup, this.noteSelectedGroup, prevPos, this.noteInNote.$key);
+        // this._ds.changeNoteGroup(this.noteInNote.$key, this.noteSelectedGroup);
+      });
     } else {
       this._ls.changeNoteGroup(this.noteInNote.$key, this.noteSelectedGroup);
       //TEMPORARY
@@ -157,42 +168,12 @@ export class NoteComponent implements OnInit {
     setTimeout(function() {
       if (o._authData != null) {
       let getIdInfo: any = o._ds.getPositionFromId(o.noteInNote.$key);
-      getIdInfo.then(prevPos => o.updatePositionsInGroupAndThenDeleteNoteWhenPressingDelete(o.group, prevPos));
-      
+      getIdInfo.then(prevPos => o._dragulaHelper.updatePositionsInGroupAndThenDeleteNoteWhenPressingDelete(o.group, prevPos, o.noteInNote));   
     } else {
       o._ls.deleteNote(o.noteInNote.$key);
       o.noteChanged.emit('');
     }; }, 500);
     this.delete_button = !this.delete_button;
   }
-
-  updatePositionsInGroupAndThenDeleteNoteWhenPressingDelete(group: string, prevPos: number) {
-    console.log(`inne i updatePositionsInGroupWhenPressingDelete där group = ${group}`);
-    this._ds.deleteNote(this.noteInNote.$key);
-    let notesInGroup: any = this._ds.getAllNotesInGroup(group);
-    
-    notesInGroup.then(res => {
-        console.log(`inne i then...`);
-        let doneInLoopArray;
-        let arrayOfKeys: any[] = [];
-        let arrayOfPos: any[] = [];
-        let self = this;
-
-        res.forEach(function (result) {
-            doneInLoopArray = result;
-        });
-
-      doneInLoopArray.forEach(function (note) {
-        console.log(`inne i loopen för att göra saker där prevPos = ${prevPos}, note.position = ${note.position}, note.$key = ${note.$key}`);
-        if (note.position > prevPos) {
-          console.log(`positionen är större än prev...`);
-          self._ds.updateNotePosition(note.$key, (note.position - 1));
-        }
-      });
-    });
-  }
-
-
-
 }
 

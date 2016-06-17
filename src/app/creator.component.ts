@@ -14,6 +14,7 @@ import { AngularFire, defaultFirebase, FirebaseRef, FirebaseListObservable } fro
 import { Dragula } from 'ng2-dragula/ng2-dragula';
 import {LocalStorageService} from './localstorage.service';
 import {FirstLetter} from './first-letter.pipe';
+import { DragulaHelperService } from './dragula-helper.service';
 
 
 
@@ -47,7 +48,7 @@ export class CreatorComponent {
     categoriesVisible: boolean = false;
     colorCount: number = 0;
 
-    constructor(private _ds: DataService, @Inject(FirebaseRef) private _ref: Firebase, private _ls: LocalStorageService) {
+    constructor(private _ds: DataService, @Inject(FirebaseRef) private _ref: Firebase, private _ls: LocalStorageService, private _dragulaHelper: DragulaHelperService) {
         this._authData = this._ref.getAuth();
     }
 
@@ -85,7 +86,7 @@ export class CreatorComponent {
         if (this._authData != null) {
             console.log(`inne i save med group = ${group}`);
             this._ds.addNoteToNotes("", "", group, time, this.randomColor(), -1);
-            this.updatePositionsInGroup(group);
+            this._dragulaHelper.updatePositionsInGroup(group);
 
         } else {
             let newNote = new Note("", "", group, time.toString(), this.randomColor());
@@ -122,28 +123,6 @@ export class CreatorComponent {
     noteChanged() {
         this.notesChanged.emit('');
         //this.getNotes();
-    }
-
-    updatePositionsInGroup(group: string) {
-        console.log(`inne i updatePositionsInGroup där group = ${group}`);
-        let notesInGroup: any = this._ds.getAllNotesInGroup(group);
-        
-        notesInGroup.then(res => {
-            console.log(`inne i then...`);
-            let doneInLoopArray;
-            let arrayOfKeys: any[] = [];
-            let arrayOfPos: any[] = [];
-            let self = this;
-
-            res.forEach(function (result) {
-                doneInLoopArray = result;
-            });
-
-            doneInLoopArray.forEach(function (note) {
-                console.log(`inne i loopen för att göra saker där note.position = ${note.position}, note.position + 1 = ${note.position + 1} , note.$key = ${note.$key}`);
-                self._ds.updateNotePosition(note.$key, (note.position + 1));
-            });
-        });
     }
 
 }
