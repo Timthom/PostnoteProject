@@ -2,7 +2,7 @@
     <div *ngIf='_authData != null'>
         <div class="myDragulaContainer" [dragula]='"drag-bag"'>
             <note class="noteContainer col-xs-12 col-m-6 col-sm-4 col-md-3 col-lg-3"
-                *ngFor="let note of notes | async | reverse" [noteInNote]="note"
+                *ngFor="let note of notes | async | sortNotes" [noteInNote]="note"
                 [text]="note.text" [title]="note.title" [group]="note.group"
                 id="{{note.$key}}" [color]="note.color">
             </note>
@@ -12,7 +12,7 @@
         <div class="myDragulaContainer" [dragula]='"drag-bag"'>
 
             <note class="noteContainer col-xs-12 col-m-6  col-sm-4 col-md-3 col-lg-3"
-                *ngFor="let note of notes | reverse" [noteInNote]="note"
+                *ngFor="let note of notes | sortNotes" [noteInNote]="note"
                 [text]="note.text" [title]="note.title" [group]="note.group"
                 [groups] = "groups" (noteChanged) = "noteChanged()"
                 id="{{note.$key}}" [color]="note.color">
@@ -28,11 +28,11 @@
         (click)="save('noGroup')">
 
     <div *ngIf='_authData == null' id="categoryButtonContainer">
-        <button *ngFor="let group of groups | reverse" class="categoryButton"
+        <button *ngFor="let group of groups | sortNotes" class="categoryButton"
             (click)="save(group.name)" [class.categoryButtonVisible]="categoriesVisible">{{group.name | uppercase | firstLetter }}</button>
     </div>
     <div *ngIf='_authData != null' id="categoryButtonContainer">
-        <button *ngFor="let group of groups | async | reverse" class="categoryButton"
+        <button *ngFor="let group of groups | async | sortNotes" class="categoryButton"
             (click)="save(group.name)" [class.categoryButtonVisible]="categoriesVisible">{{group.name | uppercase | firstLetter}}</button>
     </div>
 

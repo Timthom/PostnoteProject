@@ -80,9 +80,12 @@ export class CreatorComponent {
 
     save(group: any) {
         let time = new Date().getTime();
+        let self = this;
 
         if (this._authData != null) {
-            this._ds.addNoteToNotes("", "", group, time, this.randomColor());
+            console.log(`inne i save med group = ${group}`);
+            this._ds.addNoteToNotes("", "", group, time, this.randomColor(), -1);
+            this.updatePositionsInGroup(group);
 
         } else {
             let newNote = new Note("", "", group, time.toString(), this.randomColor());
@@ -90,7 +93,8 @@ export class CreatorComponent {
             this.notesChanged.emit('');
 
         }
-        this.getNotes(); //Update view
+
+        // this.getNotes(); //Update view // dont need it since calles fix...
         this.categoriesVisible = false;
     }
 
@@ -118,6 +122,28 @@ export class CreatorComponent {
     noteChanged() {
         this.notesChanged.emit('');
         //this.getNotes();
+    }
+
+    updatePositionsInGroup(group: string) {
+        console.log(`inne i updatePositionsInGroup där group = ${group}`);
+        let notesInGroup: any = this._ds.getAllNotesInGroup(group);
+        
+        notesInGroup.then(res => {
+            console.log(`inne i then...`);
+            let doneInLoopArray;
+            let arrayOfKeys: any[] = [];
+            let arrayOfPos: any[] = [];
+            let self = this;
+
+            res.forEach(function (result) {
+                doneInLoopArray = result;
+            });
+
+            doneInLoopArray.forEach(function (note) {
+                console.log(`inne i loopen för att göra saker där note.position = ${note.position}, note.position + 1 = ${note.position + 1} , note.$key = ${note.$key}`);
+                self._ds.updateNotePosition(note.$key, (note.position + 1));
+            });
+        });
     }
 
 }

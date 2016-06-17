@@ -93,12 +93,11 @@ _savedSibling: any;
       [1]: note.elementet som drogs...
       [2]: diven som den dras ifrån...
       */ 
-       console.log(`drag, value: `);
-       console.log(value);
+      //  console.log(`drag, value: `);
+      //  console.log(value);
       
       // if (this._canSaveSibling) {
         // this._canSaveSibling = false;
-        this._savedSibling = value[1].nextSibling;
         // console.log('next sibling: ');
         // console.log(this._savedSibling);
         // console.log('next sibling id: ');
@@ -142,7 +141,7 @@ _savedSibling: any;
       }
       
       let getGroupInfo: any = this._dataservice.getGroupNameFromId(id);
-      getGroupInfo.then((result) => (this.updateAndIncreasePositionOnEverySiblingOnRightOnDrop(result, group, value[1], value[4])));
+      getGroupInfo.then((result) => this.startUpdatingPositions(result, group, value[1], value[4]));
 
       if (this._authData != null) {
         this._dataservice.changeNoteGroup(id, group);
@@ -200,62 +199,89 @@ _savedSibling: any;
   //   }
   // }
  
-  updateAndIncreasePositionOnEverySiblingOnRightOnDrop(oldGroup: any, newGroup: string, droppedNote: any, siblingNote: any) {   
-    
-    console.log('om ente efter "här kommer notesen" så måsta jag strukturera om metoderna...');
-    let tempNote: any = droppedNote;
-    let getPos: any = this._dataservice.getPositionFromId(siblingNote.id);
-    getPos.then((result) => {
-      let tempPos = result;
-     
-      //Update the dropped note with the position that it took ergo the note on the right...
-      this._dataservice.updateNotePosition(tempNote.id, tempPos);
-      tempPos++; 
-      //Update the note on the right until the end of notes with position++...
-      while(tempNote) {
-        console.log(`inne i whileLoopen där tempPos = ${tempPos} och tempNote.id = ${tempNote.id}`);
-        tempNote = tempNote.nextElementSibling;
-        this._dataservice.updateNotePosition(tempNote.id, tempPos);
-        tempPos++;
-      }
-      this.updateAndDecreasePositionOnEverySiblingInPreviousGroup(oldGroup, droppedNote);
+  startUpdatingPositions(oldGroup: any, newGroup: string, droppedNote: any, siblingNote: any){
+
+    //Gets the position from droppedNote before it changes, and firesOfThe function...
+    let getIdPromise: any = this._dataservice.getPositionFromId(droppedNote.id);
+    getIdPromise.then((prevPos) => {
+      this.updateAndDecreasePositionOnEverySiblingInPreviousGroup(oldGroup, droppedNote, prevPos, newGroup, siblingNote);
+      // this.updateAndIncreasePositionOnEverySiblingOnRightOnDrop(oldGroup, newGroup, droppedNote, siblingNote);
     });
   }
+
+  updateAndIncreasePositionOnEverySiblingOnRightOnDrop(oldGroup: any, newGroup: string, droppedNote: any, siblingNote: any) {   
+    let tempNote: any = droppedNote;
+
+    //If there is siblings to the right of dropped items -> we must update their positions... If not -> we must take the siblings to the lefts position and ++...
+    if (siblingNote) {
+      console.log('finns en siblingNote till höger');
+      console.log(siblingNote);
+
+      let getPos: any = this._dataservice.getPositionFromId(siblingNote.id);
+      getPos.then((result) => {
+        let tempPos = result;
+      
+        //Update the dropped note with the position that it took ergo the note on the right...
+        this._dataservice.updateNotePosition(tempNote.id, tempPos);
+        tempNote = tempNote.nextElementSibling;
+        tempPos++; 
+        //Update the note on the right until the end of notes with position++...
+        while(tempNote) {
+          console.log('tempNote = ');
+          console.log(tempNote);
+          console.log(`inne i whileLoopen där tempPos = ${tempPos} och tempNote.id = ${tempNote.id}`);
+          this._dataservice.updateNotePosition(tempNote.id, tempPos);
+          tempNote = tempNote.nextElementSibling;
+          tempPos++;
+        }
+      });
+    } else {
+      console.log('finns ingen siblingnote till höger');
+      console.log(siblingNote);
+      console.log('finns prevsibling?');
+      console.log(droppedNote.previousElementSibling.id);
+      console.log('se ovan');
+
+      let getPos: any = this._dataservice.getPositionFromId(droppedNote.previousElementSibling.id);
+      getPos.then((result) => {
+        let tempPos = result;
+      
+        //Update the dropped note with the position (the note on the left + 1 ergo last position)...
+        this._dataservice.updateNotePosition(droppedNote.id, (result + 1));
+      });
+    }
+  }
   
-  updateAndDecreasePositionOnEverySiblingInPreviousGroup(oldGroup: string, droppedNote: any) {
+  updateAndDecreasePositionOnEverySiblingInPreviousGroup(oldGroup: string, droppedNote: any, prevPos: number, newGroup: string, siblingNote: any) {
     // let getWholeGroup: any = this._dataservice.getWholeCurrentGroupFromGroupName(oldGroup);
     // getWholeGroup.then((result) => {
     //   console.log('klar....');
     // });
-    let getIdPromise: any = this._dataservice.getPositionFromId(droppedNote.id);
-    getIdPromise.then((prevPos) => {
-      console.log(`oldgroup = ${oldGroup}`);
-      let notesInGroup: any = this._dataservice.getAllNotesInGroup(oldGroup);
-      console.log('här kommer notesen...');
-      console.log(notesInGroup);
-      
-      notesInGroup.then(res => {
-        let doneInLoopArray;
-        let arrayOfKeys: any[] = [];
-        let arrayOfPos: any[] = [];
-        let self = this;
+    console.log('här kommer droppedNote');
+    console.log(droppedNote);
+    console.log(`inne i updatde and decrease...`);
+    let notesInGroup: any = this._dataservice.getAllNotesInGroup(oldGroup);
+    
+    notesInGroup.then(res => {
+      let doneInLoopArray;
+      let arrayOfKeys: any[] = [];
+      let arrayOfPos: any[] = [];
+      let self = this;
 
-        res.forEach(function (result) {
-          doneInLoopArray = result;
-        });
+      res.forEach(function (result) {
+        doneInLoopArray = result;
+      });
 
-        doneInLoopArray.forEach(function (note) {
-          console.log(`inne i loopen för att göra saker där prevPos = ${prevPos}, note.position = ${note.position}, note.$key = ${note.$key}`);
-          if (note.$key > prevPos) {
-            console.log(`positionen är större än prev...`);
-            self._dataservice.updateNotePosition(note.$key, (note.position - 1));
-          }
-
-        });
+      doneInLoopArray.forEach(function (note) {
+        console.log(`inne i loopen för att göra saker där prevPos = ${prevPos}, note.position = ${note.position}, note.$key = ${note.$key}`);
+        if (note.position > prevPos) {
+          console.log(`positionen är större än prev...`);
+          self._dataservice.updateNotePosition(note.$key, (note.position - 1));
+        }
       });
       
 
-      
+    this.updateAndIncreasePositionOnEverySiblingOnRightOnDrop(oldGroup, newGroup, droppedNote, siblingNote);  
     });
     
     

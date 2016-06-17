@@ -48,9 +48,7 @@ export class DataService {
             }
         });
         console.log('nu kommer notesen!');
-console.log(this._notes);
         this._notes = _ref.child('/users/' + authData.uid + '/notes');
-console.log(this._notes);
         this._groups = _ref.child('/users/' + authData.uid + '/groups');
     }
 
@@ -75,7 +73,7 @@ console.log(this._notes);
     }
 
     //adds a new note(FirebaseListObservable with random id) to the database...
-    addNoteToNotes(title: string, text: string, group: string, time: number, color: string) {
+    addNoteToNotes(title: string, text: string, group: string, time: number, color: string, position: number) {
 
         if (this._ref.getAuth() == null) return;
 
@@ -93,7 +91,7 @@ console.log(this._notes);
 
         console.log(this._notes.ref);
 
-        this._notes.push({ 'title': title, 'text': text, 'group': group, 'timeStamp': (time * -1), 'color': color });
+        this._notes.push({ 'title': title, 'text': text, 'group': group, 'timeStamp': (time * -1), 'color': color, 'position': position });
         console.log(Firebase);
     }
 
