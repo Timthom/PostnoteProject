@@ -122,8 +122,8 @@ _savedSibling: any;
       [3]: diven som den dras ifrån...
       [4]: Sibling, den till höger om där den släpptes... om sist null...
       */ 
-      //  console.log(`drop, value: `);
-      //  console.log(value);
+       console.log(`drop, value: `);
+       console.log(value);
        
        
        //Detta ger mig en sträng med id:t...
@@ -136,8 +136,8 @@ _savedSibling: any;
       let id: string = value[1].attributes[3].nodeValue;
       let group: string;
       // console.log(`group är = ${value[2].parentElement.parentElement.parentElement.children[2].firstElementChild.id}`)
-      if (value[2].parentElement.parentElement.parentElement.children[2].firstElementChild.id === '') {
-        // console.log('group är null');        
+      if (!value[2].parentElement.parentElement.parentElement.children[2]) {
+        console.log('group är null');        
         group = 'noGroup'
       } else {
         group = value[2].parentElement.parentElement.parentElement.children[2].firstElementChild.id;
