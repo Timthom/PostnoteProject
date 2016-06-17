@@ -88,7 +88,6 @@ export class GroupComponent {
     for (var i = 0; i < this._tx._groupNames.length; i++) {
       if (this._tx._focusedName == this.group.name) {
         this._tx._groupExpandeds[i] = "true";
-        console.log("do THIS!");
       }
     }
   }
@@ -192,7 +191,6 @@ export class GroupComponent {
       for (var i = 0; i < this._tx._groupNames.length; i++) {
         if (this._tx._groupNames[i] == this.group.name) {
           this._tx._groupExpandeds[i] = "true";
-          console.log("do THIS!");
         }
       }
       console.log(this._tx._groupNames.length);
@@ -207,7 +205,6 @@ export class GroupComponent {
       if (this._tx._groupNames[i] == this.group.name) {
         this._tx._groupNames.splice(i, 1);
         this._tx._groupExpandeds.splice(i, 1);
-        console.log("do THIS!");
       }
     }
   }
@@ -243,7 +240,7 @@ export class GroupComponent {
     for (let booleans of this._tx._groupExpandeds) {
       console.log(booleans);
     }
-    console.log("=============")
+    console.log("=============");
   }
   emitNotes(groups: any) {
     this.notesChanged.emit('');
