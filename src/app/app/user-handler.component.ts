@@ -111,7 +111,7 @@ export class UserHandlerComponent {
             
                 var result = currentExpire - lastExpire;
             
-                if(result >= 10) {
+                if(result >= 1800) {
                     o.sessionExpired = true; 
                     o.logoutUser();   
 
