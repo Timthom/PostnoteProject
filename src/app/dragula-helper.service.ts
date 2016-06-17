@@ -205,7 +205,6 @@ _savedSibling: any;
     let getIdPromise: any = this._dataservice.getPositionFromId(droppedNote.id);
     getIdPromise.then((prevPos) => {
       this.updateAndDecreasePositionOnEverySiblingInPreviousGroup(oldGroup, droppedNote, prevPos, newGroup, siblingNote);
-      // this.updateAndIncreasePositionOnEverySiblingOnRightOnDrop(oldGroup, newGroup, droppedNote, siblingNote);
     });
   }
 

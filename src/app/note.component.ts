@@ -156,12 +156,43 @@ export class NoteComponent implements OnInit {
     var o = this;
     setTimeout(function() {
       if (o._authData != null) {
-      o._ds.deleteNote(o.noteInNote.$key);
+      let getIdInfo: any = o._ds.getPositionFromId(o.noteInNote.$key);
+      getIdInfo.then(prevPos => o.updatePositionsInGroupAndThenDeleteNoteWhenPressingDelete(o.group, prevPos));
+      
     } else {
       o._ls.deleteNote(o.noteInNote.$key);
       o.noteChanged.emit('');
     }; }, 500);
     this.delete_button = !this.delete_button;
   }
+
+  updatePositionsInGroupAndThenDeleteNoteWhenPressingDelete(group: string, prevPos: number) {
+    console.log(`inne i updatePositionsInGroupWhenPressingDelete där group = ${group}`);
+    this._ds.deleteNote(this.noteInNote.$key);
+    let notesInGroup: any = this._ds.getAllNotesInGroup(group);
+    
+    notesInGroup.then(res => {
+        console.log(`inne i then...`);
+        let doneInLoopArray;
+        let arrayOfKeys: any[] = [];
+        let arrayOfPos: any[] = [];
+        let self = this;
+
+        res.forEach(function (result) {
+            doneInLoopArray = result;
+        });
+
+      doneInLoopArray.forEach(function (note) {
+        console.log(`inne i loopen för att göra saker där prevPos = ${prevPos}, note.position = ${note.position}, note.$key = ${note.$key}`);
+        if (note.position > prevPos) {
+          console.log(`positionen är större än prev...`);
+          self._ds.updateNotePosition(note.$key, (note.position - 1));
+        }
+      });
+    });
+  }
+
+
+
 }
 
