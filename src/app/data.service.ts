@@ -15,13 +15,12 @@ export class DataService {
     constructor( @Inject(FirebaseRef) private _ref: Firebase, private _af: AngularFire) {
 
         if (this._ref.getAuth() == null) {
-            // console.log('return#1');
             return;
         }
         
         //Varför sker det här?
         if (localStorage.getItem('token') == null) {
-            console.log('return#2');
+            // console.log('return#2');
             return;
         }
         
@@ -47,10 +46,10 @@ export class DataService {
                 orderByChild: 'timeStamp'
             }
         });
-        // console.log('nu kommer notesen!');
-        // console.log(this._notes);
+
+
         this._notes = _ref.child('/users/' + authData.uid + '/notes');
-        // console.log(this._notes);
+
         this._groups = _ref.child('/users/' + authData.uid + '/groups');
     }
 
@@ -63,14 +62,14 @@ export class DataService {
         this._ref.authWithCustomToken(token, function (error, authData) {
 
             if (error) {
-                //console.log("Authentication Failed!", error);
+
             } else {
-                //console.log("Authenticated successfully with payload:", authData);
+
             }
         }, {
             remember: "default"
             });
-        // console.log(token);
+
         return Promise.resolve(this._afNotes);
     }
 
@@ -83,18 +82,18 @@ export class DataService {
         this._ref.authWithCustomToken(token, function (error, authData) {
 
             if (error) {
-                //console.log("Authentication Failed!", error);
+
             } else {
-                //console.log("Authenticated successfully with payload:", authData);
+
             }
         }, {
             remember: "default"
             }); console.log(token);
 
-        // console.log(this._notes.ref);
+
 
         this._notes.push({ 'title': title, 'text': text, 'group': group, 'timeStamp': (time * -1), 'color': color, 'position': position });
-        // console.log(Firebase);
+
     }
 
     //updates the notes title with the chosen id...
@@ -106,9 +105,9 @@ export class DataService {
         this._ref.authWithCustomToken(token, function (error, authData) {
 
             if (error) {
-                //console.log("Authentication Failed!", error);
+
             } else {
-                //console.log("Authenticated successfully with payload:", authData);
+
             }
         }, {
             remember: "default"
@@ -125,7 +124,7 @@ export class DataService {
         this._ref.authWithCustomToken(token, function (error, authData) {
 
             if (error) {
-                //console.log("Authentication Failed!", error);
+
             } else {
                 //console.log("Authenticated successfully with payload:", authData);
             }

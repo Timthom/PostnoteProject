@@ -36,7 +36,7 @@ p {
 
 .title{
     background: none;
-    border: none!important;
+    border: none;
     color: #404040;
     cursor: pointer;
     width: 55%;
@@ -45,6 +45,9 @@ p {
 .editing {
     color: #404040;
     cursor: text;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 2px;
 }
 
 .button_image{

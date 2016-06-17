@@ -1,6 +1,8 @@
+
 #container {
   min-height: 20px;
 }
+
 
 .inputTitle {
    height: 36px;
@@ -24,6 +26,7 @@
    right: 20px;
    background-color: #404040;
    cursor: pointer;
+   outline: none;
    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
    z-index: 3;
    float: right;
@@ -118,10 +121,16 @@ p {
     color: #505050;
 }
 
+
+/*note {
+    margin: 10px;
+    width: 300px;
+    height: 300px;
+}*/
+
 .noteContainer {
- box-shadow: 0px 2px 5px gray;
- max-height: 300px;
- /*max-width: 98%;*/
+ /*max-height: 300px;
+ max-width: 300px;*/
  display: table-cell;
  position: relative;
  float: left;
