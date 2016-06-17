@@ -34,6 +34,7 @@ export class Postnote2App implements OnInit, AfterViewInit{
     allGroups: any;
 
     _authData;
+    _token;
 
     @Output() groupChanged = new EventEmitter();
     
@@ -53,6 +54,7 @@ export class Postnote2App implements OnInit, AfterViewInit{
     constructor( @Inject(FirebaseRef) private _ref: Firebase, private _ds: DataService, private _vs: ValueService, private _ls: LocalStorageService, private _menuGroup: MenuGroupComponent) {
         this._authData = this._ref.getAuth();
         this._menuGroup.groupsChanged.subscribe(this.getGroups());
+        this._token = localStorage.getItem('token');
     }
 
     ngOnInit() {
@@ -61,7 +63,8 @@ export class Postnote2App implements OnInit, AfterViewInit{
     }
 
     getGroups() {
-        if (this._authData != null) {
+        const token = localStorage.getItem('token');
+        if (this._authData != null && token != null) {
             this._ds.getAllGroups().then(groups => this.allGroups = groups);
         } else {
             this.allGroups = this._ls.getAllGroups();
@@ -71,7 +74,8 @@ export class Postnote2App implements OnInit, AfterViewInit{
     
     getNotes() {
 
-        if (this._authData != null) {
+        const token = localStorage.getItem('token');
+        if (this._authData != null && token != null) {
             this._ds.getAllNotes().then(notes => this.allNotes = notes);
         } else {
             this.allNotes = this._ls.getAllNotes();

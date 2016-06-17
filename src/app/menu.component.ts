@@ -56,7 +56,8 @@ export class MenuComponent implements OnInit, CanReuse {
   }
 
   getTitles() {
-    if (this._authData != null) {
+    const token = localStorage.getItem('token');
+        if (this._authData != null && token != null) {
       this._ds.getAllNotes().then(titles => this.titles = titles);
       this._ds.getAllNotesInGroup('noGroup').then(notes => this.titles = notes);
     } else {
@@ -65,7 +66,8 @@ export class MenuComponent implements OnInit, CanReuse {
   }
 
   getGroups() {
-    if (this._authData != null) {
+    const token = localStorage.getItem('token');
+        if (this._authData != null && token != null) {
       this._ds.getAllGroups().then(groups => this.myGroups = groups);
     } else {
       this.myGroups = this._ls.getAllGroups();
@@ -92,10 +94,11 @@ export class MenuComponent implements OnInit, CanReuse {
     if (this.groupName.trim().length > 0) {
       let time = new Date().getTime();
 
-      if (this._authData != null) {
-        this._ds.addGroupToGroups(this.groupName, time);
-        this.getGroups();
-        this.getTitles();
+        const token = localStorage.getItem('token');
+        if (this._authData != null && token != null) {
+          this._ds.addGroupToGroups(this.groupName, time);
+          this.getGroups();
+          this.getTitles();
 
       } else {
         let newGroup = new Group(this.groupName, time.toString());

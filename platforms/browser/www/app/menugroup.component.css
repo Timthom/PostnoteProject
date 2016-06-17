@@ -7,13 +7,6 @@ p {
     cursor: pointer;
 }
 
-#container #deleteBtn{
-    visibility: visible;
-}
-#container #editBtn{
-    visibility: visible;
-}
-
 #container{
     padding-left: 10px;
     padding-right: 10px;
@@ -22,7 +15,6 @@ p {
 #editBtn, #deleteBtn{
     border: none;
     outline: none;
-    visibility: hidden;
     background-color: transparent;
 }
 
@@ -32,9 +24,13 @@ p {
     border: none;
 }
 
+.groupButtons{
+    float: right;
+    display: inline-block;
+}
+
 #editBtn,#deleteBtn{
     border-radius: 2px;
-    visibility: hidden;
     transition: background-color 150ms ease-in-out;
 }
 

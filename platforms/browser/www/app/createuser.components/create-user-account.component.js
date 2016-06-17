@@ -53,7 +53,6 @@ var CreateUserAccountComponent = (function () {
         });
     };
     CreateUserAccountComponent.prototype.switchBackToLoginComponent = function () {
-        console.log("3");
         this.emitLoginUserAccountWindow.emit('');
     };
     __decorate([

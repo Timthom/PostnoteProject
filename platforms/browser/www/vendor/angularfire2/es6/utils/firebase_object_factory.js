@@ -10,7 +10,7 @@ export function FirebaseObjectFactory(absoluteUrlOrDbRef, { preserveSnapshot, qu
     });
     return new FirebaseObjectObservable((obs) => {
         ref.on('value', (snapshot) => {
-            obs.next(preserveSnapshot ? snapshot : snapshot.val());
+            obs.next(preserveSnapshot ? snapshot : utils.unwrapMapFn(snapshot));
         }, err => {
             if (err) {
                 obs.error(err);

@@ -1,3 +1,7 @@
+button{
+    margin-top: 8px;
+}
+
 .line {
    
     border: 0;
@@ -14,11 +18,16 @@
     font-size: 28px;
     display: inline-block;
     color: #404040;
-    background-color: #F5F5F5;
+    background-color: transparent;
     text-align: left;
 }
+
 .group_name:hover{
      cursor: pointer;
+}
+
+.groupContainer{
+    width: 100%;
 }
 
 .delete_button {
@@ -27,7 +36,7 @@
     /*visibility: hidden;*/
     background-color: transparent;
     margin-left: 0em;
-
+    float: right;
 }
 
 /*.ifButtons{
@@ -41,7 +50,7 @@
     outline: none;
     /*visibility: hidden;*/
     background-color: transparent;
-
+    float: right;
 }
 
 /*.col-xs-4 {
@@ -60,26 +69,24 @@ note .noteContainer {
  position: relative;
  float: left;
 }
-
 .collapse_button{
     float: left;
     border: none;
     outline: none;
     background-color: transparent;
 }
-
 .button_image{
     height: 30px;
     width: 30px;
 }
-
 input{
     height: 40px;
+    columns: 12;
+    display: inline-block;
 }
 .editingName{
     border: 1px solid black;
     cursor: text;
-    
 }
 .editingName:hover{
     cursor: text;   
@@ -100,15 +107,10 @@ input{
 #myModal{
     margin-top: 50px;
 }
-
 .test{
     width: 50%;
 }
-
-/*.pull-right{
-    width: 100%;
+.ifButtons{
+    float: right;
 }
 
-.pull-left{
-    width: 100%;
-}*/

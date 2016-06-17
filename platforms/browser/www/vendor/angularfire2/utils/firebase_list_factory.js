@@ -75,63 +75,47 @@ function firebaseListObservable(ref, _a) {
     var listObs = new firebase_list_observable_1.FirebaseListObservable(ref, function (obs) {
         var arr = [];
         var hasInitialLoad = false;
-        ref.once('value', function (snap) {
-            hasInitialLoad = true;
-            obs.next(preserveSnapshot ? arr : arr.map(unwrapMapFn));
-        }, function (err) {
+        function err(err) {
             if (err) {
                 obs.error(err);
                 obs.complete();
             }
-        });
-        ref.on('child_added', function (child, prevKey) {
+        }
+        function value(snap) {
+            hasInitialLoad = true;
+            obs.next(preserveSnapshot ? arr : arr.map(utils.unwrapMapFn));
+        }
+        function child_added(child, prevKey) {
             arr = onChildAdded(arr, child, prevKey);
             if (hasInitialLoad) {
-                obs.next(preserveSnapshot ? arr : arr.map(unwrapMapFn));
+                obs.next(preserveSnapshot ? arr : arr.map(utils.unwrapMapFn));
             }
-        }, function (err) {
-            if (err) {
-                obs.error(err);
-                obs.complete();
-            }
-        });
-        ref.on('child_removed', function (child) {
+        }
+        function child_removed(child) {
             arr = onChildRemoved(arr, child);
             if (hasInitialLoad) {
-                obs.next(preserveSnapshot ? arr : arr.map(unwrapMapFn));
+                obs.next(preserveSnapshot ? arr : arr.map(utils.unwrapMapFn));
             }
-        }, function (err) {
-            if (err) {
-                obs.error(err);
-                obs.complete();
-            }
-        });
-        ref.on('child_changed', function (child, prevKey) {
+        }
+        function child_changed(child, prevKey) {
             arr = onChildChanged(arr, child, prevKey);
             if (hasInitialLoad) {
-                obs.next(preserveSnapshot ? arr : arr.map(unwrapMapFn));
+                obs.next(preserveSnapshot ? arr : arr.map(utils.unwrapMapFn));
             }
-        }, function (err) {
-            if (err) {
-                obs.error(err);
-                obs.complete();
-            }
-        });
-        return function () { return ref.off(); };
+        }
+        ref.once('value', value, err);
+        ref.on('child_added', child_added, err);
+        ref.on('child_removed', child_removed, err);
+        ref.on('child_changed', child_changed, err);
+        return function () {
+            ref.off('value', value);
+            ref.off('child_added', child_added);
+            ref.off('child_removed', child_removed);
+            ref.off('child_changed', child_changed);
+        };
     });
     return listObs;
 }
-function unwrapMapFn(snapshot) {
-    var unwrapped = snapshot.val();
-    if ((/string|number|boolean/).test(typeof unwrapped)) {
-        unwrapped = {
-            $value: unwrapped
-        };
-    }
-    unwrapped.$key = snapshot.key();
-    return unwrapped;
-}
-exports.unwrapMapFn = unwrapMapFn;
 function onChildAdded(arr, child, prevKey) {
     if (!arr.length) {
         return [child];
