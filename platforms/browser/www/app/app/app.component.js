@@ -26,7 +26,6 @@ var AppComponent = (function () {
         this._authServiceHandler = _authServiceHandler;
         this.toastr = toastr;
         this._dhs._configureDragula(_dragulaService);
-        console.log("Funkar?");
     }
     AppComponent = __decorate([
         core_1.Component({

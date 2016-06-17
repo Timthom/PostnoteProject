@@ -22,6 +22,16 @@ export function isEmptyObject(obj) {
     }
     return Object.keys(obj).length === 0 && JSON.stringify(obj) === JSON.stringify({});
 }
+export function unwrapMapFn(snapshot) {
+    var unwrapped = isPresent(snapshot.val()) ? snapshot.val() : { $value: null };
+    if ((/string|number|boolean/).test(typeof unwrapped)) {
+        unwrapped = {
+            $value: unwrapped
+        };
+    }
+    unwrapped.$key = snapshot.key();
+    return unwrapped;
+}
 export function checkForUrlOrFirebaseRef(urlOrRef, cases) {
     if (isString(urlOrRef)) {
         return cases.isUrl();

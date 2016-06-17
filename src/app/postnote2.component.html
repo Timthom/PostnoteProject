@@ -1,5 +1,5 @@
 <!--<headerbar (openSideBar)="openSideBar($event)"></headerbar>-->
-<div class="container-fluid">
+<div  class="container-fluid">
   <!--Top navbar-->
   <div class="navbar_item"  [style.background-color]="navbarColor">
     <button class="backBtn" (click)="toggleSideBar()">
@@ -9,8 +9,13 @@
   </div>
   <div class="row">
     <div class="shadow" [class.shadow_active]="statusCheckSideBar" (click)="toggleSideBar()"></div>
+
+  <!--  <div   class="  col-xs-4" *ngIf="statusCheckSideBar == true">
+      <menu [myGroups]="allGroups" (clicked)="addGroup()" (groupsChanged)="groupsChanged(groups)"></menu>-->
+
     <div class="col-xs-4" *ngIf="statusCheckSideBar == true">
       <menu (clicked)="groupsChanged()" (groupsChanged)="groupsChanged(groups)"></menu>
+
     </div>
 
     <div class="note_groups">
@@ -24,11 +29,12 @@
           [groupName]="group.name" onload="delaySidebar()">
         </group>
       </div>
-      <div *ngIf="_authData != null">
+      <div *ngIf="_authData != null && _token != null">
         <group (clickedDelete)="groupsChanged()" (notesChanged)="updateNotes()" class="row" *ngFor="let group of allGroups | async"
           [group]="group" [groupName]="group.name">
         </group>
       </div>
     </div>
   </div>
+
 </div>

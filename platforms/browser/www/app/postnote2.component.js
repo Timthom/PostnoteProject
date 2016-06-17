@@ -26,6 +26,7 @@ var core_3 = require('@angular/core');
 var localstorage_service_1 = require('./localstorage.service');
 var menugroup_component_1 = require('./menugroup.component');
 var core_4 = require('@angular/core');
+var dropdown_component_1 = require('./dropdown.component');
 core_4.enableProdMode();
 var Postnote2App = (function () {
     function Postnote2App(_ref, _ds, _vs, _ls, _menuGroup) {
@@ -35,10 +36,12 @@ var Postnote2App = (function () {
         this._ls = _ls;
         this._menuGroup = _menuGroup;
         this.groupChanged = new core_2.EventEmitter();
+        this.navbarColor = this.randomColor();
         this.btnImage = 'icon_menu.png';
         this.statusCheckSideBar = this._vs._showSideBar;
         this._authData = this._ref.getAuth();
         this._menuGroup.groupsChanged.subscribe(this.getGroups());
+        this._token = localStorage.getItem('token');
     }
     Postnote2App.prototype.ngOnInit = function () {
         this.getGroups();
@@ -46,7 +49,8 @@ var Postnote2App = (function () {
     };
     Postnote2App.prototype.getGroups = function () {
         var _this = this;
-        if (this._authData != null) {
+        var token = localStorage.getItem('token');
+        if (this._authData != null && token != null) {
             this._ds.getAllGroups().then(function (groups) { return _this.allGroups = groups; });
         }
         else {
@@ -55,7 +59,8 @@ var Postnote2App = (function () {
     };
     Postnote2App.prototype.getNotes = function () {
         var _this = this;
-        if (this._authData != null) {
+        var token = localStorage.getItem('token');
+        if (this._authData != null && token != null) {
             this._ds.getAllNotes().then(function (notes) { return _this.allNotes = notes; });
         }
         else {
@@ -63,8 +68,11 @@ var Postnote2App = (function () {
         }
     };
     Postnote2App.prototype.groupsChanged = function (groups) {
-        //this.allGroups = groups;
-        //this.getGroups;
+        this.creatorComponent.groupsChanged();
+        this.getGroups();
+        if (this.menuComponent != undefined) {
+            this.menuComponent.getGroups();
+        }
     };
     Postnote2App.prototype.addGroup = function () {
         this.getGroups();
@@ -90,6 +98,11 @@ var Postnote2App = (function () {
         this.groupComponents.toArray().forEach(function (child) { return child.getNotes(); });
         this.creatorComponent.getNotes();
     };
+    Postnote2App.prototype.randomColor = function () {
+        var colors = ["#F490B7", "#FFA334", "#F56D7E", "#8FD3CE", "#EEF66C", "mediumseagreen"];
+        var color = colors[Math.floor(Math.random() * colors.length)];
+        return color;
+    };
     __decorate([
         core_2.Output(), 
         __metadata('design:type', Object)
@@ -113,7 +126,7 @@ var Postnote2App = (function () {
             providers: [router_deprecated_1.ROUTER_PROVIDERS, data_service_1.DataService, angularfire2_1.AngularFire, localstorage_service_1.LocalStorageService, menugroup_component_1.MenuGroupComponent],
             templateUrl: 'postnote2.component.html',
             styleUrls: ['postnote2.component.css'],
-            directives: [router_deprecated_1.ROUTER_DIRECTIVES, note_component_1.NoteComponent, menu_component_1.MenuComponent, group_component_1.GroupComponent, creator_component_1.CreatorComponent, headerbar_component_1.HeaderbarComponent],
+            directives: [router_deprecated_1.ROUTER_DIRECTIVES, note_component_1.NoteComponent, menu_component_1.MenuComponent, group_component_1.GroupComponent, creator_component_1.CreatorComponent, headerbar_component_1.HeaderbarComponent, dropdown_component_1.DropdownComponent],
             pipes: []
         }),
         __param(0, core_3.Inject(angularfire2_1.FirebaseRef)), 

@@ -10,6 +10,7 @@ var map = {
     'ng2-toastr': 'vendor/ng2-toastr',
     'dragula': 'vendor/dragula/dist/dragula.min.js',
     'lodash': 'node_modules/lodash/lodash.js',
+    'ng2-cookies': 'vendor/ng2-cookies'
 };
 /** User packages configuration. */
 var packages = {
@@ -25,6 +26,10 @@ var packages = {
         defaultExtension: 'js',
         main: 'ng2-toastr.js'
     },
+    'ng2-cookies': {
+        defaultExtension: 'js',
+        main: 'ng2-cookies.js'
+    }
 };
 ////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************************************

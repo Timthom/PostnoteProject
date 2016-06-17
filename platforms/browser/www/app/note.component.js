@@ -46,38 +46,40 @@ var NoteComponent = (function () {
         this.enabledIfNull = null;
     };
     NoteComponent.prototype.save = function () {
+        if (this.noteSelectedGroup == undefined) {
+            this.noteSelectedGroup = this.group; //use the same one
+        }
         if (this._authData != null) {
             this._ds.updateNoteTitle(this.noteInNote.$key, this.title);
             this._ds.updateNoteText(this.noteInNote.$key, this.text);
+            this._ds.changeNoteGroup(this.noteInNote.$key, this.noteSelectedGroup); //moved
+            if (this.colorString != undefined) {
+                this._ds.updateNoteColor(this.noteInNote.$key, this.colorString); //moved
+            }
         }
         else {
             this._ls.updateNoteTitle(this.noteInNote.$key, this.title);
             this._ls.updateNoteText(this.noteInNote.$key, this.text);
-            //Emit to postnote2
-            this.noteChanged.emit('');
+            this._ls.changeNoteGroup(this.noteInNote.$key, this.noteSelectedGroup); //moved
+            if (this.colorString != undefined) {
+                this._ls.updateNoteColor(this.noteInNote.$key, this.colorString); //moved
+            }
         }
+        this.noteChanged.emit('');
         this.isEditable = false;
         this.enabledIfNull = "";
     };
     //Emitted from dropdown
     NoteComponent.prototype.noteGroupChanged = function (event) {
         this.noteSelectedGroup = event;
-        if (this._authData != null) {
-            this._ds.changeNoteGroup(this.noteInNote.$key, this.noteSelectedGroup);
-        }
-        else {
-            this._ls.changeNoteGroup(this.noteInNote.$key, this.noteSelectedGroup);
-        }
-        //this.noteChanged.emit(''); uppdateras m.h.a. editclick??
     };
     NoteComponent.prototype.colorChanged = function (event) {
         this.colorSwitch(event);
         this.isEditable = true;
+        this.colorString = event;
         if (this._authData != null) {
-            this._ds.updateNoteColor(this.noteInNote.$key, event);
         }
         else {
-            this._ls.updateNoteColor(this.noteInNote.$key, event);
         }
     };
     NoteComponent.prototype.resetColors = function () {
@@ -118,18 +120,23 @@ var NoteComponent = (function () {
     };
     NoteComponent.prototype.deleteClick = function () {
         var o = this;
-        setTimeout(function () {
-            if (o._authData != null) {
-                o._ds.deleteNote(o.noteInNote.$key);
-            }
-            else {
-                o._ls.deleteNote(o.noteInNote.$key);
-                o.noteChanged.emit('');
-            }
-            ;
-        }, 500);
+        if (o._authData != null) {
+            o._ds.deleteNote(o.noteInNote.$key);
+        }
+        else {
+            o._ls.deleteNote(o.noteInNote.$key);
+        }
+        ;
+        o.noteChanged.emit('');
         this.delete_button = !this.delete_button;
     };
+    NoteComponent.prototype.groupsChanged = function () {
+        this.dropdownComponents.toArray().forEach(function (child) { return child.getTitles(); });
+    };
+    __decorate([
+        core_1.ViewChildren(dropdown_component_1.DropdownComponent), 
+        __metadata('design:type', core_1.QueryList)
+    ], NoteComponent.prototype, "dropdownComponents", void 0);
     __decorate([
         core_2.Input(), 
         __metadata('design:type', Object)
