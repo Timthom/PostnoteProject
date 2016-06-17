@@ -1,8 +1,7 @@
 .logout {
   position: fixed;
-  width: 300px;
-  height: 110px;
-  right: 2.5%;
+  width: 100%;
+  height: auto;
   z-index: 15;
   top: 60px;
   background-color: #EEEEEE;
@@ -27,9 +26,10 @@
    text-align: center;
  }
  
- button {
+ .button {
     border-radius: 2px;
     margin-top: 10px;
+    margin-bottom: 3%;
     font-size: inherit;
     background-color: #F44336;
     color: #404040;
@@ -45,3 +45,15 @@
   p {
     margin: 5px 0 0 0;
   }
+  
+  @media all and (min-width: 600px) {
+  .logout {
+    width: 50%;
+    right: 2.5%;
+}
+}
+@media all and (min-width: 992px) {
+    .logout {
+  width: 320px;
+}
+}
