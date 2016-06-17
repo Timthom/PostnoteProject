@@ -1,6 +1,6 @@
-<button *ngIf="expanded" class="delete_button col-xs-1" id="{{deleteBtn}}" (click)="saveId()" *ngIf="groupName">
+<button [hidden]="!expanded" class="delete_button col-xs-1" id="{{deleteBtn}}" (click)="saveId()" *ngIf="groupName">
            <img class="button_image" src="icon_delete.png" alt="submit" data-toggle="modal" data-target="#myModal"></button>
-    <button *ngIf="expanded" class="edit_button col-xs-1" id="{{editBtn}}" (click)="editClick()">
+<button [hidden]="!expanded" class="edit_button col-xs-1" id="{{editBtn}}" (click)="editClick()">
            <img class="button_image" src="{{editSrc}}" alt="submit"></button>
 <div class="row" (click)="groupExpand()">
     <div class="groupContainer" id={{groupName}}>

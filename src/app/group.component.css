@@ -1,7 +1,3 @@
-button{
-    margin-top: 8px;
-}
-
 .line {
    
     border: 0;
@@ -73,6 +69,7 @@ note .noteContainer {
     background-color: transparent;
 }
 .button_image{
+    margin-top: 10px;
     height: 30px;
     width: 30px;
 }
