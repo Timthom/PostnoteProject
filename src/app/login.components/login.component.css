@@ -1,5 +1,5 @@
 .login {
-  position: absolute;
+  position: fixed;
   width: 320px;
   height: 250px;
   right: 2.5%;
@@ -10,8 +10,6 @@
   color: #404040;
   box-shadow: 0px 1px 5px rgba(0,0,0,0.5);
 }
-
-
 
 .input {
       width: 90%;

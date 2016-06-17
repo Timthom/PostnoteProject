@@ -149,13 +149,11 @@ export class CreatorComponent {
         var count = Cookie.get('count');
         if(count == null) {
             Cookie.set('count','1');
-            console.log("first time here");
             return true;
         }else {
             var newcount = +count + 1;
             Cookie.delete('count');
             Cookie.set('count', 'newcount', 1000000);
-            console.log("not first time here");
             return false;
         }
     }

@@ -104,7 +104,6 @@ export class MenuComponent implements OnInit, CanReuse {
         //TEMPORARY
         //location.reload();
       }
-
       this.clicked.emit('');
 
       //Reset input after adding

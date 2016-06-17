@@ -13,18 +13,22 @@ button{
 }
 
 .group_name {
-    border: none!important;
+    border: none;
     outline: none;
     font-size: 28px;
     display: inline-block;
     color: #404040;
     background-color: transparent;
     text-align: left;
+<<<<<<< HEAD
   
 }
 
 .group_name:hover{
      cursor: pointer;
+=======
+    cursor: pointer;
+>>>>>>> 6bced9e9a7d97aacc1fe1bd181d6b8076d73aeb5
 }
 
 .groupContainer{
@@ -79,14 +83,22 @@ note .noteContainer {
     height: 30px;
     width: 30px;
 }
+<<<<<<< HEAD
+=======
+input{
+    height: 40px;
+    columns: 12;
+    display: inline-block;
+}
+>>>>>>> 6bced9e9a7d97aacc1fe1bd181d6b8076d73aeb5
 
 .editingName{
-    border: 1px solid black;
     cursor: text;
+    border: 1px solid black;
+    background-color: white;
+    border-radius: 2px;
 }
-.editingName:hover{
-    cursor: text;   
-}
+
 /*Modal css*/
 #rigth-button{
     width: 70%;
