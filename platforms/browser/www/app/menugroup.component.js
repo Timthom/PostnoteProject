@@ -45,27 +45,29 @@ var MenuGroupComponent = (function () {
             this.notes = this._ls.getNotesInGroup(this.group.name);
         }
     };
-    MenuGroupComponent.prototype.deleteGroup = function () {
-        console.log("DELETE GROUP");
-        //remove from shared model
-        for (var item in this.groups) {
-            console.log("CHECKING " + this.groups[item].$key);
-            if (this.group.$key == this.groups[item].$key) {
-                console.log("REMOVING no " + item);
-                this.groups.splice(item, 1);
-                break;
-            }
-        }
-        //remove from firebase
-        if (this._authData != null) {
-            this._ds.deleteGroup(this._tx._focusedId);
-        }
-        else {
-            this._ls.deleteGroup(this._tx._focusedId);
-        }
-        this._tx._toggleExpand = false;
-        this.groupsChanged.emit(this.groups);
-    };
+    //WILL NOT BE USED
+    // deleteGroup() {
+    //   console.log("DELETE GROUP");
+    //   //remove from shared model
+    //   // for (var item in this.groups) {
+    //   //   console.log("CHECKING " + this.groups[item].$key);
+    //   //         if (this.group.$key == this.groups[item].$key) {
+    //   //             console.log("REMOVING no " + item);
+    //   //             this.groups.splice(item, 1);
+    //   //             break;
+    //   //         }
+    //   // }
+    //   //remove from firebase
+    //   if (this._authData != null) {
+    //     this._ds.deleteGroup(this._tx._focusedId);
+    //   } else {//remove from local storage
+    //     this._ls.deleteGroup(this._tx._focusedId);
+    //     //TEMPORARY
+    //     //location.reload();
+    //   }
+    //   this._tx._toggleExpand = false;
+    //   this.groupsChanged.emit(this.groups);
+    // }
     MenuGroupComponent.prototype.editGroup = function () {
         if (this._authData != null) {
             this._ds.updateGroupName(this.group.$key, this.group.name);
@@ -73,7 +75,7 @@ var MenuGroupComponent = (function () {
         else {
             this._ls.updateGroupName(this.group.$key, this.group.name);
         }
-        //this.groupsChanged.emit('');
+        this.groupsChanged.emit('');
     };
     MenuGroupComponent.prototype.getContent = function () {
         var doneInLoopArray;
@@ -117,23 +119,29 @@ var MenuGroupComponent = (function () {
         }
     };
     MenuGroupComponent.prototype.toggleExpand = function () {
-        if (this.arrowSrc == 'icon_hide.png') {
-            this.expanded = false;
-        }
-        else {
-            this.expanded = true;
-        }
-        // this.expanded = this._tx._toggleExpand;
-        if (this.expanded) {
-            this.arrowSrc = 'icon_hide.png';
-        }
-        else {
-            this.arrowSrc = 'icon_expand.png';
+        if (!this.editingName) {
+            if (this.arrowSrc == 'icon_hide.png') {
+                this._tx._toggleExpand = false;
+            }
+            else {
+                this._tx._toggleExpand = true;
+            }
+            this.expanded = this._tx._toggleExpand;
+            if (this.expanded) {
+                this.arrowSrc = 'icon_hide.png';
+            }
+            else {
+                this.arrowSrc = 'icon_expand.png';
+            }
         }
     };
     MenuGroupComponent.prototype.jumpToNote = function (note) {
-        var element = document.getElementById(note);
-        element.scrollIntoView(true);
+        var element = document.getElementById(note).offsetTop - (window.innerHeight / 12);
+        window.scrollTo(0, element);
+    };
+    MenuGroupComponent.prototype.jumpToGroup = function (group) {
+        var element = document.getElementById(group).offsetTop - (window.innerHeight / 12);
+        window.scrollTo(0, element);
     };
     __decorate([
         core_1.Input(), 

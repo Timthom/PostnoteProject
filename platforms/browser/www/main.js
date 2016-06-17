@@ -11,7 +11,8 @@ if (_1.environment.production) {
     core_1.enableProdMode();
 }
 var options = {
-    positionClass: 'toast-bottom-center'
+    positionClass: 'toast-bottom-left',
+    toastLife: 3000
 };
 document.addEventListener('deviceready', function () {
     platform_browser_dynamic_1.bootstrap(_2.AppComponent, [

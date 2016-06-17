@@ -67,7 +67,8 @@ export class CreatorComponent {
     }
 
     getGroups() {
-        if (this._authData != null) {
+        const token = localStorage.getItem('token');
+        if (this._authData != null && token != null) {
             this._ds.getAllGroups().then(groups => this.groups = groups);
         } else {
             this.groups = this._ls.getAllGroups();
@@ -77,7 +78,8 @@ export class CreatorComponent {
 
 
     getNotes() {
-        if (this._authData != null) {
+        const token = localStorage.getItem('token');
+        if (this._authData != null && token != null) {
             this._ds.getAllNotesInGroup('noGroup').then(notes => this.notes = notes);
           
         } else {
