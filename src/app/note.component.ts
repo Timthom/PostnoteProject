@@ -71,6 +71,7 @@ export class NoteComponent implements OnInit {
   isBlue: boolean = false;
   isYellow: boolean = true;
   isGreen: boolean = false;
+  colorString: string; //for saving event from colorPicker
 
   editClick() {
     this.isEditable = true;
@@ -78,23 +79,29 @@ export class NoteComponent implements OnInit {
   }
 
   save() {
-    if(this.noteSelectedGroup == undefined){ //If no group selected
+    if (this.noteSelectedGroup == undefined) { //If no group selected
       this.noteSelectedGroup = this.group; //use the same one
     }
     if (this._authData != null) {
       this._ds.updateNoteTitle(this.noteInNote.$key, this.title);
       this._ds.updateNoteText(this.noteInNote.$key, this.text);
       this._ds.changeNoteGroup(this.noteInNote.$key, this.noteSelectedGroup);//moved
+      if (this.colorString != undefined) { //If new color has been chosen
+        this._ds.updateNoteColor(this.noteInNote.$key, this.colorString);//moved
+      }
+
 
     } else {
       this._ls.updateNoteTitle(this.noteInNote.$key, this.title);
       this._ls.updateNoteText(this.noteInNote.$key, this.text);
       this._ls.changeNoteGroup(this.noteInNote.$key, this.noteSelectedGroup);//moved
+      if (this.colorString != undefined) { //If new color has been chosen
+        this._ls.updateNoteColor(this.noteInNote.$key, this.colorString);//moved
+      }
 
-      
     }
-  
-      this.noteChanged.emit('');
+
+    this.noteChanged.emit('');
     this.isEditable = false;
     this.enabledIfNull = "";
 
@@ -108,10 +115,9 @@ export class NoteComponent implements OnInit {
   colorChanged(event) {
     this.colorSwitch(event);
     this.isEditable = true;
+    this.colorString = event;
     if (this._authData != null) {
-      this._ds.updateNoteColor(this.noteInNote.$key, event);
     } else {
-      this._ls.updateNoteColor(this.noteInNote.$key, event);
     }
   }
 
