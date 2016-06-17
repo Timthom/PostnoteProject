@@ -37,7 +37,7 @@ export class GroupComponent {
 
   newName: string = "";
   contentList: string[];
-  arrowSrc: string = 'icon_expand.png';
+  arrowSrc: string;
   expanded: boolean;
   editingName: boolean = false;
   enableEditIfNull: string = '';
@@ -56,6 +56,33 @@ export class GroupComponent {
 
   ngOnInit() {
     this.getNotes();
+
+    // checks if name already exists, if not then adds it to array of group names.
+    // also adds a new "false" status of the groups expand.
+    let toPush = true;
+    for (let content of this._tx._groupNames) {
+      if (this.group.name == content) {
+        toPush = false;
+      }
+    }
+    if (toPush == true) {
+      this._tx._groupNames.push(this.group.name);
+      this._tx._groupExpandeds.push("false");
+    }
+
+    // updates each group with what status of expand it had before the re-rendering.
+    console.log(this._tx._groupNames.length);
+    for (var i = 0; i < this._tx._groupNames.length; i++) {
+      if (this.group.name == this._tx._groupNames[i]) {
+        if (this._tx._groupExpandeds[i] == "true") {
+          this.expanded = true;
+          this.arrowSrc = 'icon_hide.png';
+        } else {
+          this.expanded = false;
+          this.arrowSrc = 'icon_expand.png';
+        }
+      }
+    }
   }
 
   saveId() {
@@ -70,29 +97,6 @@ export class GroupComponent {
     } else {
       this.notes = this._ls.getNotesInGroup(this.groupName);
     }
-
-    let toPush = true;
-    for (let content of this._tx._groupNames) {
-      if (this.group.name == content) {
-        toPush = false;
-      }
-    }
-    if (toPush == true) {
-      this._tx._groupNames.push(this.group.name);
-      this._tx._groupExpandeds.push("false");
-    }
-
-    console.log(this._tx._groupNames.length);
-    for (var i = 0; i < this._tx._groupNames.length; i++) {
-      if (this.group.name == this._tx._groupNames[i]) {
-        if (this._tx._groupExpandeds[i] == "true") {
-          this.expanded = true;
-        } else {
-          this.expanded = false;
-        }
-      }
-    }
-
   }
 
   getContent() {
@@ -131,6 +135,7 @@ export class GroupComponent {
       }
       this._ls.deleteGroup(this._tx._focusedId);
     }
+    this.updateTX();
     this.clickedDelete.emit('');
     // this.toastr.success(this._tx._focusedName + ' deleted!');
   }
@@ -174,16 +179,29 @@ export class GroupComponent {
         }
       }
       this.enableEditIfNull = '';
+      this.updateTX();
+      this.editGroupName();
+      for (var i = 0; i < this._tx._groupNames.length; i++) {
+        if(this._tx._groupNames[i] == this.group.name){
+          this._tx._groupExpandeds[i] = "true";
+          console.log("do THIS!");
+        }
+      }
+      console.log(this._tx._groupNames.length);
+      this.getNotes();
+      this.editSrc = 'icon_edit.png';
+      this._tx._focusedName = this.group.name;
+    }
+  }
+
+  updateTX(){
       for (var i = 0; i < this._tx._groupNames.length; i++) {
         if(this._tx._groupNames[i] == this.group.name){
           this._tx._groupNames.splice(i, 1);
           this._tx._groupExpandeds.splice(i, 1);
+          console.log("do THIS!");
         }
       }
-      this.editGroupName();
-      this.getNotes();
-      this.editSrc = 'icon_edit.png';
-    }
   }
 
   // Expand category on click arrowBtn
@@ -202,9 +220,9 @@ export class GroupComponent {
         this.arrowSrc = 'icon_expand.png';
       }
     }
-    for (let content of this._tx._groupNames) {
-      console.log(content);
-    }
+    // for (let content of this._tx._groupNames) {
+    //   console.log(content);
+    // }
     for (var i = 0; i < this._tx._groupNames.length; i++) {
       if (this.group.name == this._tx._groupNames[i]) {
         if (this.expanded == true) {
