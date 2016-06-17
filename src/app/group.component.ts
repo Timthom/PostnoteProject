@@ -60,7 +60,6 @@ export class GroupComponent {
 
   saveId() {
     this._tx._focusedId = this.group.$key;
-    // this._tx._focusedName = this.group.name;
     this._tx._focusedNoteKeys = this.getContent();
   }
 
@@ -111,7 +110,6 @@ export class GroupComponent {
     }
     this._tx._toggleExpand = false;
     this.clickedDelete.emit('');
-    // this.toastr.success(this._tx._focusedName + ' deleted!');
   }
 
 
@@ -184,5 +182,4 @@ export class GroupComponent {
   emitNotes(groups: any) {
     this.notesChanged.emit('');
   }
-  
 }
