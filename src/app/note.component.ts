@@ -10,6 +10,7 @@ import {DropdownComponent} from './dropdown.component';
 import {ColorpickerComponent} from './colorpicker.component';
 import { defaultFirebase, FirebaseRef } from 'angularfire2';
 import {LocalStorageService} from './localstorage.service';
+import { DragulaHelperService } from './dragula-helper.service';
 
 @Component({
   moduleId: module.id,
@@ -56,8 +57,7 @@ export class NoteComponent implements OnInit {
     this.colorInit(this.color);
   }
 
-
-  constructor( @Inject(FirebaseRef) private _ref: Firebase, private _ds: DataService, private _ls: LocalStorageService) {
+  constructor(@Inject(FirebaseRef) private _ref: Firebase, private _ds: DataService, private _ls: LocalStorageService, private _dragulaHelper: DragulaHelperService) {
     this._authData = this._ref.getAuth();
   }
 
@@ -109,7 +109,26 @@ export class NoteComponent implements OnInit {
 
   //Emitted from dropdown
   noteGroupChanged(event) {
+    console.log(`här kommer event ${event}`);
+
     this.noteSelectedGroup = event;
+
+    if (this._authData != null) {
+      let getPosInfo: any = this._ds.getPositionFromId(this.noteInNote.$key);
+      let getOldGroupInfo: any = this._ds.getGroupNameFromId(this.noteInNote.$key);
+      Promise.all([getPosInfo, getOldGroupInfo]).then((result) => {
+        let prevPos = result[0];
+        let oldGroup = result[1];
+        console.log(`prevPos = ${prevPos}, oldGroup = ${oldGroup}, newGroup = ${this.noteSelectedGroup}`);
+        this._dragulaHelper.groupChangedByDropDown(oldGroup, this.noteSelectedGroup, prevPos, this.noteInNote.$key);
+        // this._ds.changeNoteGroup(this.noteInNote.$key, this.noteSelectedGroup);
+      });
+    } else {
+      this._ls.changeNoteGroup(this.noteInNote.$key, this.noteSelectedGroup);
+      //TEMPORARY
+      //location.reload();
+    }
+    //this.noteChanged.emit(''); uppdateras m.h.a. editclick??
   }
 
   colorChanged(event) {
@@ -164,7 +183,9 @@ export class NoteComponent implements OnInit {
     var o = this;
 
     if (o._authData != null) {
-      o._ds.deleteNote(o.noteInNote.$key);
+     
+      let getIdInfo: any = o._ds.getPositionFromId(o.noteInNote.$key);
+      getIdInfo.then(prevPos => o._dragulaHelper.updatePositionsInGroupAndThenDeleteNoteWhenPressingDelete(o.group, prevPos, o.noteInNote));   
     } else {
       o._ls.deleteNote(o.noteInNote.$key);
 
