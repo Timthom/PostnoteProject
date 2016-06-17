@@ -32,6 +32,7 @@ export class GroupComponent {
   @Input() groupName;
   @Input() note;
 
+
   @Output() clickedDelete = new EventEmitter();
   @Output() notesChanged = new EventEmitter();
 
@@ -60,7 +61,6 @@ export class GroupComponent {
 
   saveId() {
     this._tx._focusedId = this.group.$key;
-    // this._tx._focusedName = this.group.name;
     this._tx._focusedNoteKeys = this.getContent();
   }
 
@@ -70,22 +70,21 @@ export class GroupComponent {
     } else {
       this.notes = this._ls.getNotesInGroup(this.groupName);
     }
-    console.log("GROUP " + this.group.name + "EXP: " + this.expanded);
   }
 
   getContent() {
-      let doneInLoopArray;
-      let arrayOfKeys: any[] = [];
+    let doneInLoopArray;
+    let arrayOfKeys: any[] = [];
 
-      this.notes.forEach(function (result) {
-        doneInLoopArray = result;
-      });
+    this.notes.forEach(function (result) {
+      doneInLoopArray = result;
+    });
 
-      doneInLoopArray.forEach(function (note) {
-        arrayOfKeys.push(note.$key);
-      });
+    doneInLoopArray.forEach(function (note) {
+      arrayOfKeys.push(note.$key);
+    });
 
-      return arrayOfKeys;
+    return arrayOfKeys;
   }
 
   deleteGroup() {
@@ -111,7 +110,6 @@ export class GroupComponent {
     }
     this._tx._toggleExpand = false;
     this.clickedDelete.emit('');
-    // this.toastr.success(this._tx._focusedName + ' deleted!');
   }
 
 
@@ -162,7 +160,6 @@ export class GroupComponent {
   // Expand category on click arrowBtn
   groupExpand() {
     // Uffes idea:"
-    console.log("1. EXPAND GROUP " + this.group.name + "EXP : " + this.expanded);
     if (!this.editingName) {
       if (this.arrowSrc == 'icon_hide.png') {
         this._tx._toggleExpand = false;
@@ -170,19 +167,16 @@ export class GroupComponent {
         this._tx._toggleExpand = true;
       }
       this.expanded = this._tx._toggleExpand;
-      console.log("2. EXPAND GROUP " + this.group.name + "EXP : " + this.expanded);
 
       if (this.expanded) {
         this.arrowSrc = 'icon_hide.png';
       } else {
         this.arrowSrc = 'icon_expand.png';
       }
-      console.log("3. EXPAND GROUP " + this.group.name + "EXP : " + this.expanded);
 
     }
   }
   emitNotes(groups: any) {
     this.notesChanged.emit('');
   }
-  
 }
