@@ -69,7 +69,5 @@ export class DropdownComponent implements OnInit {
         this.changeGroup.emit(group);
         //Emits to note component and group component?
         this.changeNoteGroup.emit(group);
-        var buttonText: HTMLElement = document.getElementById('group_name');
-        buttonText.innerHTML = group;
     }
 }
