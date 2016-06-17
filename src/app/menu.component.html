@@ -36,7 +36,7 @@
         (keyup.enter)="addGroup()" maxlength="12">
       <button id="plusBtn" type="button" (click)="addGroup()">+</button>
     </form>
-    <hr>
+    <hr class="invisibleLine">
     <div *ngIf='_authData == null'>
       <menuGroup *ngFor="let group of myGroups" [group]="group" (groupsChanged)="groupsChanged(groups)"></menuGroup>
     </div>
