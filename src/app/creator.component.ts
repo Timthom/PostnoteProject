@@ -99,7 +99,7 @@ export class CreatorComponent {
 
         if (this._authData != null) {
             console.log(`inne i save med group = ${group}`);
-            this._ds.addNoteToNotes("", "", group, time, this.randomColor(), -1);
+            this._ds.addNoteToNotes("new note", "", group, time, this.randomColor(), -1);
             this._dragulaHelper.updatePositionsInGroup(group);
 
         } else {
