@@ -6,7 +6,6 @@ export class ValueService {
   _showSideBar:boolean = false;
   _toggleExpand:boolean = false;
   _focusedId:string = '';
-  _focusedName:string = '';
   _focusedNoteKeys:string[] = [];
 
   constructor() {}
@@ -34,13 +33,6 @@ export class ValueService {
     
     set focusedId(id:string){
       this._focusedId = id;
-    }
-    // Getting and settting focused Name
-    get focusedName(){
-      return this._focusedName;
-    }
-    set focusedName(name:string){
-      this._focusedName = name;
     }
 
     get focusedNoteKeys(){

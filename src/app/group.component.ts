@@ -30,7 +30,6 @@ export class GroupComponent {
 
   @Input() group;
   @Input() groupName;
-  @Input() focusedName;
   @Input() note;
 
   @Output() clickedDelete = new EventEmitter();
@@ -61,7 +60,6 @@ export class GroupComponent {
 
   saveId() {
     this._tx._focusedId = this.group.$key;
-    this._tx._focusedName = this.group.name;
     this._tx._focusedNoteKeys = this.getContent();
   }
 
@@ -112,7 +110,6 @@ export class GroupComponent {
     }
     this._tx._toggleExpand = false;
     this.clickedDelete.emit('');
-    this.toastr.success(this._tx._focusedName + ' deleted!');
   }
 
 
@@ -184,13 +181,5 @@ export class GroupComponent {
   }
   emitNotes(groups: any) {
     this.notesChanged.emit('');
-  }
-  // Getting name of pressed group
-  getFocusedName() {
-    // this.focusedName = this.group.name;
-    this._tx._focusedName = this.group.name;
-    this.focusedName = this._tx._focusedName;
-    // console.log('Ermin2 ', this.focusedName);
-    console.log('Ermin3 ', this.focusedName);
   }
 }
