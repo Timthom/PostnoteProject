@@ -69,25 +69,21 @@ note .noteContainer {
  position: relative;
  float: left;
 }
-
 .collapse_button{
     float: left;
     border: none;
     outline: none;
     background-color: transparent;
 }
-
 .button_image{
     height: 30px;
     width: 30px;
 }
-
 input{
     height: 40px;
     columns: 12;
     display: inline-block;
 }
-
 .editingName{
     border: 1px solid black;
     cursor: text;
@@ -111,11 +107,10 @@ input{
 #myModal{
     margin-top: 50px;
 }
-
 .test{
     width: 50%;
 }
-
 .ifButtons{
     float: right;
 }
+
