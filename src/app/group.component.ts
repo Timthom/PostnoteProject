@@ -38,7 +38,7 @@ export class GroupComponent {
   newName: string = "";
   contentList: string[];
   arrowSrc: string = 'icon_expand.png';
-  expanded: boolean = this._tx._toggleExpand;
+  expanded: boolean;
   editingName: boolean = false;
   enableEditIfNull: string = '';
   editSrc: string = 'icon_edit.png';
@@ -56,6 +56,28 @@ export class GroupComponent {
 
   ngOnInit() {
     this.getNotes();
+    if (this._tx._groupExpandeds.length != this._tx._groupNames.length) {
+      for (let content of this._tx._groupNames) {
+        this._tx._groupExpandeds.push("false");
+      }
+    }
+
+    for(let content of this._tx._groupNames){
+      if(this.group.name != content){
+        this._tx._groupNames.push(this.group.name);
+      }
+    }
+
+    console.log(this._tx._groupNames.length);
+    for (var i = 0; i < this._tx._groupNames.length; i++) {
+      if (this.group.name == this._tx._groupNames[i]) {
+        if (this._tx._groupExpandeds[i] == "true") {
+          this.expanded = true;
+        } else {
+          this.expanded = false;
+        }
+      }
+    }
   }
 
   saveId() {
@@ -70,22 +92,22 @@ export class GroupComponent {
     } else {
       this.notes = this._ls.getNotesInGroup(this.groupName);
     }
-    console.log("GROUP " + this.group.name + "EXP: " + this.expanded);
+
   }
 
   getContent() {
-      let doneInLoopArray;
-      let arrayOfKeys: any[] = [];
+    let doneInLoopArray;
+    let arrayOfKeys: any[] = [];
 
-      this.notes.forEach(function (result) {
-        doneInLoopArray = result;
-      });
+    this.notes.forEach(function (result) {
+      doneInLoopArray = result;
+    });
 
-      doneInLoopArray.forEach(function (note) {
-        arrayOfKeys.push(note.$key);
-      });
+    doneInLoopArray.forEach(function (note) {
+      arrayOfKeys.push(note.$key);
+    });
 
-      return arrayOfKeys;
+    return arrayOfKeys;
   }
 
   deleteGroup() {
@@ -109,7 +131,6 @@ export class GroupComponent {
       }
       this._ls.deleteGroup(this._tx._focusedId);
     }
-    this._tx._toggleExpand = false;
     this.clickedDelete.emit('');
     // this.toastr.success(this._tx._focusedName + ' deleted!');
   }
@@ -140,6 +161,7 @@ export class GroupComponent {
     if (this.editingName) {
       this.enableEditIfNull = null;
       this.editSrc = 'icon_save.png';
+      this.expanded = true;
     } else {
       if (this._authData != null) {
         let content = this.getContent();
@@ -156,33 +178,44 @@ export class GroupComponent {
       this.editGroupName();
       this.getNotes();
       this.editSrc = 'icon_edit.png';
+      this.expanded = true;
     }
   }
 
   // Expand category on click arrowBtn
   groupExpand() {
-    // Uffes idea:"
-    console.log("1. EXPAND GROUP " + this.group.name + "EXP : " + this.expanded);
+    // Uffes idea:
     if (!this.editingName) {
-      if (this.arrowSrc == 'icon_hide.png') {
+      /*if (this.arrowSrc == 'icon_hide.png') {
         this._tx._toggleExpand = false;
       } else {
         this._tx._toggleExpand = true;
-      }
-      this.expanded = this._tx._toggleExpand;
-      console.log("2. EXPAND GROUP " + this.group.name + "EXP : " + this.expanded);
-
+      }*/
+      this.expanded = !this.expanded;
       if (this.expanded) {
         this.arrowSrc = 'icon_hide.png';
       } else {
         this.arrowSrc = 'icon_expand.png';
       }
-      console.log("3. EXPAND GROUP " + this.group.name + "EXP : " + this.expanded);
-
+    }
+    for (let content of this._tx._groupNames) {
+      console.log(content);
+    }
+    for (var i = 0; i < this._tx._groupNames.length; i++) {
+      if (this.group.name == this._tx._groupNames[i]) {
+        if (this.expanded == true) {
+          this._tx._groupExpandeds[i] = "true";
+        } else {
+          this._tx._groupExpandeds[i] = "false";
+        }
+      }
+    }
+    for (let booleans of this._tx._groupExpandeds) {
+      console.log(booleans);
     }
   }
   emitNotes(groups: any) {
     this.notesChanged.emit('');
   }
-  
+
 }
