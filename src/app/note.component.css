@@ -44,7 +44,7 @@
   outline: none;
   border: none;
   margin-top: 6px;
-  transition: box-shadow 150ms ease-in-out, background-color 150ms ease-in-out;
+  cursor: pointer;
 }
 
 .saveButtonVisible {
