@@ -56,28 +56,6 @@ export class GroupComponent {
 
   ngOnInit() {
     this.getNotes();
-    if (this._tx._groupExpandeds.length != this._tx._groupNames.length) {
-      for (let content of this._tx._groupNames) {
-        this._tx._groupExpandeds.push("false");
-      }
-    }
-
-    for(let content of this._tx._groupNames){
-      if(this.group.name != content){
-        this._tx._groupNames.push(this.group.name);
-      }
-    }
-
-    console.log(this._tx._groupNames.length);
-    for (var i = 0; i < this._tx._groupNames.length; i++) {
-      if (this.group.name == this._tx._groupNames[i]) {
-        if (this._tx._groupExpandeds[i] == "true") {
-          this.expanded = true;
-        } else {
-          this.expanded = false;
-        }
-      }
-    }
   }
 
   saveId() {
@@ -91,6 +69,28 @@ export class GroupComponent {
       this._ds.getAllNotesInGroup(this.groupName).then(notes => this.notes = notes);
     } else {
       this.notes = this._ls.getNotesInGroup(this.groupName);
+    }
+
+    let toPush = true;
+    for (let content of this._tx._groupNames) {
+      if (this.group.name == content) {
+        toPush = false;
+      }
+    }
+    if (toPush == true) {
+      this._tx._groupNames.push(this.group.name);
+      this._tx._groupExpandeds.push("false");
+    }
+
+    console.log(this._tx._groupNames.length);
+    for (var i = 0; i < this._tx._groupNames.length; i++) {
+      if (this.group.name == this._tx._groupNames[i]) {
+        if (this._tx._groupExpandeds[i] == "true") {
+          this.expanded = true;
+        } else {
+          this.expanded = false;
+        }
+      }
     }
 
   }
@@ -161,7 +161,6 @@ export class GroupComponent {
     if (this.editingName) {
       this.enableEditIfNull = null;
       this.editSrc = 'icon_save.png';
-      this.expanded = true;
     } else {
       if (this._authData != null) {
         let content = this.getContent();
@@ -175,10 +174,15 @@ export class GroupComponent {
         }
       }
       this.enableEditIfNull = '';
+      for (var i = 0; i < this._tx._groupNames.length; i++) {
+        if(this._tx._groupNames[i] == this.group.name){
+          this._tx._groupNames.splice(i, 1);
+          this._tx._groupExpandeds.splice(i, 1);
+        }
+      }
       this.editGroupName();
       this.getNotes();
       this.editSrc = 'icon_edit.png';
-      this.expanded = true;
     }
   }
 

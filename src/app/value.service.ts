@@ -10,7 +10,7 @@ export class ValueService {
   _focusedNoteKeys:string[] = [];
   _groupNames:string[] = [];
   _groupExpandeds:string[] = [];
-  _groupCount:number = 0;
+  // _groupCount:number = 0;
 
   constructor() {}
   
@@ -70,11 +70,11 @@ export class ValueService {
       this._groupExpandeds = names;
     }
 
-    get groupCount(){
-      return this._groupCount;
-    }
+    // get groupCount(){
+    //   return this._groupCount;
+    // }
 
-    set groupCount(savedNumber:number){
-      this._groupCount = savedNumber;
-    }
+    // set groupCount(savedNumber:number){
+    //   this._groupCount = savedNumber;
+    // }
 }
