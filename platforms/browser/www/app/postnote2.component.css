@@ -1,9 +1,9 @@
-creator{
+/*creator{
 	margin-top: 25px;
 	float: left;
 	width: 100%;
 	margin-top: 10px;
-}
+}*/
 
 menu{
     width: 100%;
@@ -12,7 +12,7 @@ menu{
 	margin: 0px;
 	z-index: 0;
 }
-.container{
+.container-fluid{
 	/*position: absolute;*/
 	width: 100%;
 	padding: 0px;
@@ -28,7 +28,12 @@ menu{
 	height: 50px;
 	box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.5);
 	position: fixed;
-	z-index: 20;
+	z-index: 10000;
+}
+
+.cbp-af-header-shrink {
+	height: 50px;
+	opacity: 0.8;
 }
 
 .backBtn{
@@ -47,6 +52,7 @@ menu{
 
 .note_groups{
 	margin-top: 50px;
+	margin-bottom: 70px;
 }
 
 .shadow {

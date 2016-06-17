@@ -28,19 +28,9 @@ export class GroupComponent {
   groups: any;
   notes: any;
 
-
-  @Input()
-  group;
-
-  @Input()
-  groupName;
-
-  @Input()
-  focusedName;
-
-
-  @Input()
-  note;
+  @Input() group;
+  @Input() groupName;
+  @Input() note;
 
   @Output() clickedDelete = new EventEmitter();
   @Output() notesChanged = new EventEmitter();
@@ -70,7 +60,7 @@ export class GroupComponent {
 
   saveId() {
     this._tx._focusedId = this.group.$key;
-    this._tx._focusedName = this.group.name;
+    // this._tx._focusedName = this.group.name;
     this._tx._focusedNoteKeys = this.getContent();
   }
 
@@ -80,10 +70,10 @@ export class GroupComponent {
     } else {
       this.notes = this._ls.getNotesInGroup(this.groupName);
     }
+    console.log("GROUP " + this.group.name + "EXP: " + this.expanded);
   }
 
   getContent() {
-    if (this._authData != null) {
       let doneInLoopArray;
       let arrayOfKeys: any[] = [];
 
@@ -96,11 +86,9 @@ export class GroupComponent {
       });
 
       return arrayOfKeys;
-    }
   }
 
   deleteGroup() {
-    
     for (var item in this.groups) {
       if (this._tx._focusedId == this.groups[item].$key) {
         this.groups.splice(item, 1);
@@ -109,22 +97,21 @@ export class GroupComponent {
     }
     if (this._authData != null) {
       //To be able to iterate through all notes
-      let content = this._tx._focusedNoteKeys;
       //Remove all notes in group
-      for (let key of content) {
+      for (let key of this._tx._focusedNoteKeys) {
         this._ds.deleteNote(key);
       }
       this._ds.deleteGroup(this._tx._focusedId);
-      this._tx._toggleExpand = false;
     } else {//if not logged in
       //Removes notes of the group
-      for (let note of this.notes) {
-        this._ls.deleteNote(note.$key);
+      for (let note of this._tx._focusedNoteKeys) {
+        this._ls.deleteNote(note);
       }
       this._ls.deleteGroup(this._tx._focusedId);
     }
+    this._tx._toggleExpand = false;
     this.clickedDelete.emit('');
-    this.toastr.success(this._tx._focusedName + ' deleted!');
+    // this.toastr.success(this._tx._focusedName + ' deleted!');
   }
 
 
@@ -169,13 +156,13 @@ export class GroupComponent {
       this.editGroupName();
       this.getNotes();
       this.editSrc = 'icon_edit.png';
-      this._tx._toggleExpand = false;
     }
   }
 
   // Expand category on click arrowBtn
   groupExpand() {
-    // Uffes idea:
+    // Uffes idea:"
+    console.log("1. EXPAND GROUP " + this.group.name + "EXP : " + this.expanded);
     if (!this.editingName) {
       if (this.arrowSrc == 'icon_hide.png') {
         this._tx._toggleExpand = false;
@@ -183,23 +170,19 @@ export class GroupComponent {
         this._tx._toggleExpand = true;
       }
       this.expanded = this._tx._toggleExpand;
+      console.log("2. EXPAND GROUP " + this.group.name + "EXP : " + this.expanded);
+
       if (this.expanded) {
         this.arrowSrc = 'icon_hide.png';
-      }
-      else {
+      } else {
         this.arrowSrc = 'icon_expand.png';
       }
+      console.log("3. EXPAND GROUP " + this.group.name + "EXP : " + this.expanded);
+
     }
   }
   emitNotes(groups: any) {
     this.notesChanged.emit('');
   }
-  // Getting name of pressed group
-  getFocusedName(){
-    // this.focusedName = this.group.name;
-    this._tx._focusedName = this.group.name;
-    this.focusedName = this._tx._focusedName;
-        // console.log('Ermin2 ', this.focusedName);
-        console.log('Ermin3 ' , this.focusedName);
-  }
+  
 }

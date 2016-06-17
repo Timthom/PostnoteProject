@@ -31,6 +31,7 @@ export class ColorpickerComponent implements OnInit {
     
     selectColor(color: string){
       this.changeColor.emit(color);
+      this.showingColors = false;
     }
     
     colorButtonClick() {

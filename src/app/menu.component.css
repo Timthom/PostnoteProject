@@ -78,6 +78,11 @@ hr{
     box-shadow: inset 0 1px 2px rgba(0,0,0,0.5);
 }
 
+.invisibleLine {
+    background-color: transparent;
+    margin-bottom: 0;
+}
+
 #plusBtn{
     border: none;
     height: 22px;

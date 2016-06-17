@@ -41,7 +41,7 @@ var MenuComponent = (function () {
     };
     MenuComponent.prototype.ngOnInit = function () {
         this.getTitles();
-        this.getGroups();
+        //this.getGroups();
     };
     MenuComponent.prototype.getTitles = function () {
         var _this = this;
@@ -88,8 +88,6 @@ var MenuComponent = (function () {
                 var newGroup = new group_1.Group(this.groupName, time.toString());
                 this._ls.saveGroup(newGroup);
                 this.getGroups();
-                //TEMPORARY
-                location.reload();
             }
             this.clicked.emit('');
             //Reset input after adding
@@ -99,6 +97,18 @@ var MenuComponent = (function () {
             this.buttonText = "Add category";
         }
     };
+    MenuComponent.prototype.groupsChanged = function (groups) {
+        //this.myGroups = groups;
+        //console.log("GROUPS CHANGED MENU " + this.myGroups);
+    };
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], MenuComponent.prototype, "myGroups", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], MenuComponent.prototype, "notes", void 0);
     __decorate([
         core_1.Output(), 
         __metadata('design:type', Object)

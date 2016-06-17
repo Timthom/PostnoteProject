@@ -91,7 +91,6 @@ export class NoteComponent implements OnInit {
       this._ls.updateNoteText(this.noteInNote.$key, this.text);
       this._ls.changeNoteGroup(this.noteInNote.$key, this.noteSelectedGroup);//moved
 
-      
     }
   
       this.noteChanged.emit('');
