@@ -20,7 +20,15 @@ button{
     color: #404040;
     background-color: transparent;
     text-align: left;
+<<<<<<< HEAD
+  
+}
+
+.group_name:hover{
+     cursor: pointer;
+=======
     cursor: pointer;
+>>>>>>> 6bced9e9a7d97aacc1fe1bd181d6b8076d73aeb5
 }
 
 .groupContainer{
@@ -60,7 +68,6 @@ note {
     height: 300px;
 }*/
 note .noteContainer {
- box-shadow: 0px 2px 5px gray;
  height: 300px;
  display: table-cell;
  position: relative;
@@ -76,11 +83,14 @@ note .noteContainer {
     height: 30px;
     width: 30px;
 }
+<<<<<<< HEAD
+=======
 input{
     height: 40px;
     columns: 12;
     display: inline-block;
 }
+>>>>>>> 6bced9e9a7d97aacc1fe1bd181d6b8076d73aeb5
 
 .editingName{
     cursor: text;
