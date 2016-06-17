@@ -159,8 +159,14 @@ export class MenuGroupComponent implements OnInit {
   }
 
   jumpToGroup(group: string) {
+    for (var i = 0; i < this._tx._groupNames.length; i++) {
+      if (this.group.name == this._tx._groupNames[i]) {
+          this._tx._groupExpandeds[i] = "true";
+          console.log("this works?!");
+      }
+    }
     var element = document.getElementById(group).offsetTop-(window.innerHeight/12);
     window.scrollTo(0, element);
+    this.groupsChanged.emit('');
   }
-
 }

@@ -67,7 +67,9 @@ export class GroupComponent {
     }
     if (toPush == true) {
       this._tx._groupNames.push(this.group.name);
-      this._tx._groupExpandeds.push("false");
+      if(this._tx._groupNames.length >= this._tx._groupCount){
+        this._tx._groupExpandeds.push("false");
+      }
     }
 
     // updates each group with what status of expand it had before the re-rendering.
@@ -83,11 +85,16 @@ export class GroupComponent {
         }
       }
     }
+    for (var i = 0; i < this._tx._groupNames.length; i++) {
+      if (this._tx._focusedName == this.group.name) {
+        this._tx._groupExpandeds[i] = "true";
+        console.log("do THIS!");
+      }
+    }
   }
 
   saveId() {
     this._tx._focusedId = this.group.$key;
-    // this._tx._focusedName = this.group.name;
     this._tx._focusedNoteKeys = this.getContent();
   }
 
@@ -115,6 +122,7 @@ export class GroupComponent {
   }
 
   deleteGroup() {
+    this._tx._groupCount = this._tx._groupNames.length;
     for (var item in this.groups) {
       if (this._tx._focusedId == this.groups[item].$key) {
         this.groups.splice(item, 1);
@@ -182,7 +190,7 @@ export class GroupComponent {
       this.updateTX();
       this.editGroupName();
       for (var i = 0; i < this._tx._groupNames.length; i++) {
-        if(this._tx._groupNames[i] == this.group.name){
+        if (this._tx._groupNames[i] == this.group.name) {
           this._tx._groupExpandeds[i] = "true";
           console.log("do THIS!");
         }
@@ -194,14 +202,14 @@ export class GroupComponent {
     }
   }
 
-  updateTX(){
-      for (var i = 0; i < this._tx._groupNames.length; i++) {
-        if(this._tx._groupNames[i] == this.group.name){
-          this._tx._groupNames.splice(i, 1);
-          this._tx._groupExpandeds.splice(i, 1);
-          console.log("do THIS!");
-        }
+  updateTX() {
+    for (var i = 0; i < this._tx._groupNames.length; i++) {
+      if (this._tx._groupNames[i] == this.group.name) {
+        this._tx._groupNames.splice(i, 1);
+        this._tx._groupExpandeds.splice(i, 1);
+        console.log("do THIS!");
       }
+    }
   }
 
   // Expand category on click arrowBtn
@@ -235,6 +243,7 @@ export class GroupComponent {
     for (let booleans of this._tx._groupExpandeds) {
       console.log(booleans);
     }
+    console.log("=============")
   }
   emitNotes(groups: any) {
     this.notesChanged.emit('');
