@@ -1,19 +1,5 @@
-<nav class="navbar  wow fadeInLeft"
-  data-wow-duration="1s" data-wow-delay=".25s">
-
-
-  <!--<div id="sidebar-wrapper">
-      <div id="sidebar_menu" class="sidebar-nav">
-          <li class="sidebar-brand" >
-            <a id="menu-toggle" (click)="closeSideBar()" >
-              <span id="main_icon" class="glyphicon glyphicon-pencil">
-              </span>
-            </a>
-          </li>
-        </div>
-    </div>-->
-
-  <!--<div id="wrapper">-->
+<nav class="navbar  wow fadeInLeft" data-wow-duration=".35s"
+  data-wow-delay="0s">
     <!-- Sidebar -->
     <br/>
     <div *ngIf='_authData == null'>
@@ -34,7 +20,9 @@
     <form *ngIf="adding">
       <input [(ngModel)]="groupName" type="text" id="categoryInput" placeholder="Name"
         (keyup.enter)="addGroup()" maxlength="12">
-      <button id="plusBtn" type="button" (click)="addGroup()">+</button>
+      <button id="plusBtn" type="button" (click)="addGroup()">
+        +
+      </button>
     </form>
     <hr class="invisibleLine">
     <div *ngIf='_authData == null'>
@@ -42,24 +30,23 @@
     </div>
     <div *ngIf='_authData != null'>
       <menuGroup *ngFor="let group of myGroups | async" [group]="group"
-        (groupsChanged)="groupsChanged(groups)"></menuGroup>
+        (groupsChanged)="groupsChanged(groups)">
+      </menuGroup>
     </div>
-  <!--</div>-->
-  <script>
+    <!--</div>-->
+    <!-- <script>
     (function delaySidebar() {
              
         
         function myTimeout1() {
                 document.getElementById("delayNav").innerHTML = "2 seconds";
                 console.log("Före delay");
-                document.getElementById("delayNav").webkitAnimationName = "fadeIn 1s "; // Code for Chrome, Safari and Opera
-                document.getElementById("delayNav").animationName = "fadeIn 1s ";
-                console.log("Efter delay");
-                alert("Page is loaded");
+                document.getElementById("delayNav").webkitAnimationName = "fadeInLeft 1s "; // Code for Chrome, Safari and Opera
+                document.getElementById("delayNav").animationName = "fadeInLeft 1s ";
         }
 
 
 })();
-  </script>
+  </script>-->
 
-</nav>
+  </nav>

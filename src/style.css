@@ -39,11 +39,47 @@ input{
 }
  @-moz-document url-prefix() { 
    .title { 
-     padding-bottom: 0;
-     padding-top: 0;
+     padding-bottom: 0!important;
+     padding-top: 0!important;
      }
     }
 
+/*
+* Animation class menu aside
+*/
+@-webkit-keyframes fadeInLeft {
+  0% {
+    opacity: 1;
+    -webkit-transform: translate3d(-100%, 0, 0);
+            transform: translate3d(-100%, 0, 0);
+  }
+
+  100% {
+    opacity: 1;
+    -webkit-transform: none;
+            transform: none;
+  }
+}
+
+@keyframes fadeInLeft {
+  0% {
+    opacity: 1;
+    -webkit-transform: translate3d(-100%, 0, 0);
+            transform: translate3d(-100%, 0, 0);
+  }
+
+  100% {
+    opacity: 1;
+    -webkit-transform: none;
+            transform: none;
+  }
+}
+
+.fadeInLeft {
+  -webkit-animation-name: fadeInLeft;
+          animation-name: fadeInLeft;
+}
+/*END-------------------*/
 .col-xs-1 {
   padding: 0;
 }
@@ -98,30 +134,21 @@ input{
         margin: 1%;
 	width: 31.333333%;
 	}
-	
-/*	.delete_button {
-	background-size: 25px;
-	height: 25px;
-	width: 25px;
+	.col-sm-6 {
+	padding: 0;
+        margin: 1%;
+	width: 48%;
 	}
-
-
-
-	.edit_button {
-	background-size: 25px;
-	height: 25px;
-	width: 25px;
-	}*/
-
 
 }
 
 
 @media (min-width: 992px) {
-	/*.col-md-4 {
+	.col-md-4 {
 	padding: 0;
         margin: 1%;
-	}*/
+	width: 31.333333%;
+	}
 	.col-md-3 {
 	padding: 0;
         margin: 1%;

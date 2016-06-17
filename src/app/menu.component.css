@@ -11,6 +11,8 @@
     width: 315px;
     background-color: #EEEEEE;
     box-shadow: 1px 0px 5px rgba(0,0,0,0.5);
+    -webkit-transition: -webkit-transform 0.3s;
+    transition: transform 0.3s;
 }
 
 p{
@@ -112,19 +114,4 @@ hr{
 /*
 *Thomas busar :)
 */ 
-#delayNav {
-    -webkit-animation-name: fadeIn;  /* Chrome, Safari, Opera */
-    animation-name: fadeIn;
-}
-
-/* Chrome, Safari, Opera */
-@-webkit-keyframes fadeIn {
-  0% {opacity: 0;}
-  100% {opacity: 1;}
-}
-
-@keyframes fadeIn {
-  0% {opacity: 0;}
-  100% {opacity: 1;}
-}
 

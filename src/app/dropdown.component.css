@@ -5,6 +5,7 @@
     margin-bottom: 6px;
     padding: 0px;
     border: none;
+    outline: none;
     border-radius: 2px;
     background-color: transparent;
     transition: box-shadow 150ms ease-in-out, background-color 150ms ease-in-out;
