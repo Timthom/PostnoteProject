@@ -29,7 +29,7 @@
           [groupName]="group.name" onload="delaySidebar()">
         </group>
       </div>
-      <div *ngIf="_authData != null && _token != null">
+      <div *ngIf="_authData != null">
         <group (clickedDelete)="groupsChanged()" (notesChanged)="updateNotes()" class="row" *ngFor="let group of allGroups | async"
           [group]="group" [groupName]="group.name">
         </group>
