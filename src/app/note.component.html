@@ -1,28 +1,22 @@
-<div class="noteClass" [class.pink_color]="isPink" [class.magenta_color]="isMagenta"
-  [class.orange_color]="isOrange" [class.blue_color]="isBlue" [class.yellow_color]="isYellow"
-  [class.green_color]="isGreen">
-
-  <div (click)="editClick()" class="editDiv" [class.editDivHidden]="isEditable"></div>
+<div class="noteClass" [class.pink_color]="isPink" [class.magenta_color]="isMagenta" [class.orange_color]="isOrange" [class.blue_color]="isBlue"
+  [class.yellow_color]="isYellow" [class.green_color]="isGreen">
 
   <div class="row titleBox">
-    <button class="delete_button" [class.deleteButtonVisible]="isEditable"
-      (click)="deleteClick()">
+    <button class="delete_button" [class.deleteButtonVisible]="isEditable" (click)="deleteClick()">
     </button>
     <div class="saveButton" [class.saveButtonVisible]="isEditable" (click)="save()"></div>
-    <input type="text" [attr.disabled]="enabledIfNull" [class.selectedNoteTitle]="isEditable"
-      [(ngModel)]="title" class="title col-xs-10 col-xs-offset-1" maxlength="18" placeholder="Title ...">
-    
+    <input type="text" (click)="editClick()" [class.selectedNoteTitle]="isEditable" [(ngModel)]="title" class="title col-xs-10 col-xs-offset-1"
+      maxlength="12" placeholder="Title ...">
+
   </div>
   <br>
   <div class="row">
-    <textarea [attr.disabled]="enabledIfNull" [class.selectedNoteText]="isEditable"
-      [(ngModel)]="text" class="text_field col-xs-10 col-xs-offset-1" placeholder="Make a note ..."></textarea>
+    <textarea (click)="editClick()" [class.selectedNoteText]="isEditable" [(ngModel)]="text" class="text_field col-xs-10 col-xs-offset-1"
+      placeholder="Make a note ..."></textarea>
   </div>
 
-  <dropdown class="group_dropdown" [class.visible_dropdown]="isEditable"
-    [noteGroup]="selectedNoteGroup" (changeNoteGroup)="noteGroupChanged($event)"></dropdown>
+  <dropdown class="group_dropdown" [class.visible_dropdown]="isEditable" [noteGroup]="selectedNoteGroup" (changeNoteGroup)="noteGroupChanged($event)"></dropdown>
 
   <colorpicker (changeColor)="colorChanged($event)" [class.visible_colorpicker]="isEditable"></colorpicker>
-
 
 </div>
