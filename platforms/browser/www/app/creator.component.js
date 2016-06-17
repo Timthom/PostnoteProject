@@ -25,12 +25,14 @@ var localstorage_service_1 = require('./localstorage.service');
 var first_letter_pipe_1 = require('./first-letter.pipe');
 var ng2_toastr_1 = require('ng2-toastr/ng2-toastr');
 var ng2_cookies_1 = require('ng2-cookies/ng2-cookies');
+var dragula_helper_service_1 = require('./dragula-helper.service');
 var CreatorComponent = (function () {
-    function CreatorComponent(_ds, _ref, _ls, toastr) {
+    function CreatorComponent(_ds, _ref, _ls, toastr, _dragulaHelper) {
         this._ds = _ds;
         this._ref = _ref;
         this._ls = _ls;
         this.toastr = toastr;
+        this._dragulaHelper = _dragulaHelper;
         this.notesChanged = new core_1.EventEmitter();
         this.title = "";
         this.text = "";
@@ -76,15 +78,18 @@ var CreatorComponent = (function () {
     };
     CreatorComponent.prototype.save = function (group) {
         var time = new Date().getTime();
+        var self = this;
         if (this._authData != null) {
-            this._ds.addNoteToNotes("new note", "", group, time, this.randomColor());
+            console.log("inne i save med group = " + group);
+            this._ds.addNoteToNotes("", "", group, time, this.randomColor(), -1);
+            this._dragulaHelper.updatePositionsInGroup(group);
         }
         else {
             var newNote = new note_1.Note("new note", "", group, time.toString(), this.randomColor());
             this._ls.addNoteToNotes(newNote);
             this.notesChanged.emit('');
         }
-        this.getNotes(); //Update view
+        // this.getNotes(); //Update view // dont need it since calles fix...
         this.categoriesVisible = false;
         if (group == "noGroup") {
             this.toastr.success('A new note was created');
@@ -122,14 +127,12 @@ var CreatorComponent = (function () {
         var count = ng2_cookies_1.Cookie.get('count');
         if (count == null) {
             ng2_cookies_1.Cookie.set('count', '1');
-            console.log("first time here");
             return true;
         }
         else {
             var newcount = +count + 1;
             ng2_cookies_1.Cookie.delete('count');
             ng2_cookies_1.Cookie.set('count', 'newcount', 1000000);
-            console.log("not first time here");
             return false;
         }
     };
@@ -153,7 +156,7 @@ var CreatorComponent = (function () {
         }),
         router_deprecated_1.RouteConfig([]),
         __param(1, core_1.Inject(angularfire2_1.FirebaseRef)), 
-        __metadata('design:paramtypes', [data_service_1.DataService, Firebase, localstorage_service_1.LocalStorageService, ng2_toastr_1.ToastsManager])
+        __metadata('design:paramtypes', [data_service_1.DataService, Firebase, localstorage_service_1.LocalStorageService, ng2_toastr_1.ToastsManager, dragula_helper_service_1.DragulaHelperService])
     ], CreatorComponent);
     return CreatorComponent;
 }());

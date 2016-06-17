@@ -99,7 +99,7 @@ var UserHandlerComponent = (function () {
                 var lastExpire = (snapshot.val().expire / 1000);
                 var currentExpire = (n / 1000);
                 var result = currentExpire - lastExpire;
-                if (result >= 10) {
+                if (result >= 1800) {
                     o.sessionExpired = true;
                     o.logoutUser();
                 }

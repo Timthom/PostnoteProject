@@ -20,11 +20,13 @@ var dropdown_component_1 = require('./dropdown.component');
 var colorpicker_component_1 = require('./colorpicker.component');
 var angularfire2_1 = require('angularfire2');
 var localstorage_service_1 = require('./localstorage.service');
+var dragula_helper_service_1 = require('./dragula-helper.service');
 var NoteComponent = (function () {
-    function NoteComponent(_ref, _ds, _ls) {
+    function NoteComponent(_ref, _ds, _ls, _dragulaHelper) {
         this._ref = _ref;
         this._ds = _ds;
         this._ls = _ls;
+        this._dragulaHelper = _dragulaHelper;
         this.noteChanged = new core_1.EventEmitter();
         this.isEditable = false;
         this.delete_button = true;
@@ -71,7 +73,24 @@ var NoteComponent = (function () {
     };
     //Emitted from dropdown
     NoteComponent.prototype.noteGroupChanged = function (event) {
+        var _this = this;
+        console.log("h\u00E4r kommer event " + event);
         this.noteSelectedGroup = event;
+        if (this._authData != null) {
+            var getPosInfo = this._ds.getPositionFromId(this.noteInNote.$key);
+            var getOldGroupInfo = this._ds.getGroupNameFromId(this.noteInNote.$key);
+            Promise.all([getPosInfo, getOldGroupInfo]).then(function (result) {
+                var prevPos = result[0];
+                var oldGroup = result[1];
+                console.log("prevPos = " + prevPos + ", oldGroup = " + oldGroup + ", newGroup = " + _this.noteSelectedGroup);
+                _this._dragulaHelper.groupChangedByDropDown(oldGroup, _this.noteSelectedGroup, prevPos, _this.noteInNote.$key);
+                // this._ds.changeNoteGroup(this.noteInNote.$key, this.noteSelectedGroup);
+            });
+        }
+        else {
+            this._ls.changeNoteGroup(this.noteInNote.$key, this.noteSelectedGroup);
+        }
+        //this.noteChanged.emit(''); uppdateras m.h.a. editclick??
     };
     NoteComponent.prototype.colorChanged = function (event) {
         this.colorSwitch(event);
@@ -121,7 +140,8 @@ var NoteComponent = (function () {
     NoteComponent.prototype.deleteClick = function () {
         var o = this;
         if (o._authData != null) {
-            o._ds.deleteNote(o.noteInNote.$key);
+            var getIdInfo = o._ds.getPositionFromId(o.noteInNote.$key);
+            getIdInfo.then(function (prevPos) { return o._dragulaHelper.updatePositionsInGroupAndThenDeleteNoteWhenPressingDelete(o.group, prevPos, o.noteInNote); });
         }
         else {
             o._ls.deleteNote(o.noteInNote.$key);
@@ -177,7 +197,7 @@ var NoteComponent = (function () {
         }),
         router_deprecated_1.RouteConfig([]),
         __param(0, core_2.Inject(angularfire2_1.FirebaseRef)), 
-        __metadata('design:paramtypes', [Firebase, data_service_1.DataService, localstorage_service_1.LocalStorageService])
+        __metadata('design:paramtypes', [Firebase, data_service_1.DataService, localstorage_service_1.LocalStorageService, dragula_helper_service_1.DragulaHelperService])
     ], NoteComponent);
     return NoteComponent;
 }());

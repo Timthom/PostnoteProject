@@ -6,7 +6,7 @@ import { LocalStorageService } from './localstorage.service'
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
 @Injectable()
-export class DragulaHelperService {
+export class DragulaHelperService{
 _notes: any;
 _authData: any;
 // _canSaveSibling: boolean = true;
@@ -14,7 +14,6 @@ _savedSibling: any;
 
   constructor(private _dataservice: DataService,  @Inject(FirebaseRef) private _ref: Firebase, private _ls: LocalStorageService, public toastr: ToastsManager) {
     this._authData = this._ref.getAuth();
-    
     /***** This is only because I dont know how to return the promise from dataservice *****/
     let authData = this._ref.getAuth();
    // this._notes = this._ref.child('/users/' + authData.uid + '/notes');
@@ -25,6 +24,7 @@ _savedSibling: any;
   ***********************************************************/
   
   _configureDragula(dragulaService: DragulaService) {
+    let self = this;
     dragulaService.setOptions('drag-bag', {
       isContainer: function (el) {
         /* Denna skriver ut själva notedivobjectet, här kommer man åt alla element inom notes... */
@@ -48,8 +48,11 @@ _savedSibling: any;
       //  console.log(handle);
       //  console.log(`moves, sibling: `);
       //  console.log(sibling);
-       
-        return true; // elements are always draggable by default
+        if (self.checkMobileUser()) {
+          return false;
+        } else {
+          return true; // elements are always draggable by default
+        }
       },
       accepts: function (el, target, source, sibling) {
        /* 
@@ -119,8 +122,8 @@ _savedSibling: any;
       [3]: diven som den dras ifrån...
       [4]: Sibling, den till höger om där den släpptes... om sist null...
       */ 
-       console.log(`drop, value: `);
-       console.log(value);
+      //  console.log(`drop, value: `);
+      //  console.log(value);
        
        
        //Detta ger mig en sträng med id:t...
@@ -132,9 +135,9 @@ _savedSibling: any;
        // this._canSaveSibling = true; 
       let id: string = value[1].attributes[3].nodeValue;
       let group: string;
-      console.log(`group är = ${value[2].parentElement.parentElement.parentElement.children[2].firstElementChild.id}`)
+      // console.log(`group är = ${value[2].parentElement.parentElement.parentElement.children[2].firstElementChild.id}`)
       if (value[2].parentElement.parentElement.parentElement.children[2].firstElementChild.id === '') {
-        console.log('group är null');        
+        // console.log('group är null');        
         group = 'noGroup'
       } else {
         group = value[2].parentElement.parentElement.parentElement.children[2].firstElementChild.id;
@@ -184,7 +187,7 @@ _savedSibling: any;
       if (this._authData) {
         this._ls.changeNoteGroup(id, group);
       } else {
-        console.log('inloggad');     
+        // console.log('inloggad');     
         this._dataservice.changeNoteGroup(id, group);        
       }
   }
@@ -213,8 +216,8 @@ _savedSibling: any;
 
     //If there is siblings to the right of dropped items -> we must update their positions... If not -> we must take the siblings to the lefts position and ++...
     if (siblingNote) {
-      console.log('finns en siblingNote till höger');
-      console.log(siblingNote);
+      // console.log('finns en siblingNote till höger');
+      // console.log(siblingNote);
 
       let getPos: any = this._dataservice.getPositionFromId(siblingNote.id);
       getPos.then((result) => {
@@ -226,20 +229,20 @@ _savedSibling: any;
         tempPos++; 
         //Update the note on the right until the end of notes with position++...
         while(tempNote) {
-          console.log('tempNote = ');
-          console.log(tempNote);
-          console.log(`inne i whileLoopen där tempPos = ${tempPos} och tempNote.id = ${tempNote.id}`);
+          // console.log('tempNote = ');
+          // console.log(tempNote);
+          // console.log(`inne i whileLoopen där tempPos = ${tempPos} och tempNote.id = ${tempNote.id}`);
           this._dataservice.updateNotePosition(tempNote.id, tempPos);
           tempNote = tempNote.nextElementSibling;
           tempPos++;
         }
       });
     } else {
-      console.log('finns ingen siblingnote till höger');
-      console.log(siblingNote);
-      console.log('finns prevsibling?');
-      console.log(droppedNote.previousElementSibling.id);
-      console.log('se ovan');
+      // console.log('finns ingen siblingnote till höger');
+      // console.log(siblingNote);
+      // console.log('finns prevsibling?');
+      // console.log(droppedNote.previousElementSibling.id);
+      // console.log('se ovan');
 
       let getPos: any = this._dataservice.getPositionFromId(droppedNote.previousElementSibling.id);
       getPos.then((result) => {
@@ -256,9 +259,9 @@ _savedSibling: any;
     // getWholeGroup.then((result) => {
     //   console.log('klar....');
     // });
-    console.log('här kommer droppedNote');
-    console.log(droppedNote);
-    console.log(`inne i updatde and decrease...`);
+    // console.log('här kommer droppedNote');
+    // console.log(droppedNote);
+    // console.log(`inne i updatde and decrease...`);
     let notesInGroup: any = this._dataservice.getAllNotesInGroup(oldGroup);
     
     notesInGroup.then(res => {
@@ -272,9 +275,9 @@ _savedSibling: any;
       });
 
       doneInLoopArray.forEach(function (note) {
-        console.log(`inne i loopen för att göra saker där prevPos = ${prevPos}, note.position = ${note.position}, note.$key = ${note.$key}`);
+        // console.log(`inne i loopen för att göra saker där prevPos = ${prevPos}, note.position = ${note.position}, note.$key = ${note.$key}`);
         if (note.position > prevPos) {
-          console.log(`positionen är större än prev...`);
+          // console.log(`positionen är större än prev...`);
           self._dataservice.updateNotePosition(note.$key, (note.position - 1));
         }
       });
@@ -287,12 +290,12 @@ _savedSibling: any;
   }
 
   updatePositionsInGroupAndThenDeleteNoteWhenPressingDelete(group: string, prevPos: number, noteInNote: any) {
-    console.log(`inne i updatePositionsInGroupWhenPressingDelete där group = ${group}`);
+    // console.log(`inne i updatePositionsInGroupWhenPressingDelete där group = ${group}`);
     this._dataservice.deleteNote(noteInNote.$key);
     let notesInGroup: any = this._dataservice.getAllNotesInGroup(group);
     
     notesInGroup.then(res => {
-        console.log(`inne i then...`);
+        // console.log(`inne i then...`);
         let doneInLoopArray;
         let arrayOfKeys: any[] = [];
         let arrayOfPos: any[] = [];
@@ -303,9 +306,9 @@ _savedSibling: any;
         });
 
       doneInLoopArray.forEach(function (note) {
-        console.log(`inne i loopen för att göra saker där prevPos = ${prevPos}, note.position = ${note.position}, note.$key = ${note.$key}`);
+        // console.log(`inne i loopen för att göra saker där prevPos = ${prevPos}, note.position = ${note.position}, note.$key = ${note.$key}`);
         if (note.position > prevPos) {
-          console.log(`positionen är större än prev...`);
+          // console.log(`positionen är större än prev...`);
           self._dataservice.updateNotePosition(note.$key, (note.position - 1));
         }
       });
@@ -314,11 +317,11 @@ _savedSibling: any;
 
 
       updatePositionsInGroup(group: string) {
-        console.log(`inne i updatePositionsInGroup där group = ${group}`);
+        // console.log(`inne i updatePositionsInGroup där group = ${group}`);
         let notesInGroup: any = this._dataservice.getAllNotesInGroup(group);
         
         notesInGroup.then(res => {
-            console.log(`inne i then...`);
+            // console.log(`inne i then...`);
             let doneInLoopArray;
             let arrayOfKeys: any[] = [];
             let arrayOfPos: any[] = [];
@@ -329,7 +332,7 @@ _savedSibling: any;
             });
 
             doneInLoopArray.forEach(function (note) {
-                console.log(`inne i loopen för att göra saker där note.position = ${note.position}, note.position + 1 = ${note.position + 1} , note.$key = ${note.$key}`);
+                // console.log(`inne i loopen för att göra saker där note.position = ${note.position}, note.position + 1 = ${note.position + 1} , note.$key = ${note.$key}`);
                 self._dataservice.updateNotePosition(note.$key, (note.position + 1));
             });
         });
@@ -356,13 +359,31 @@ _savedSibling: any;
       });
 
       doneInLoopArray.forEach(function (note) {
-        console.log(`inne i loopen för att göra saker där prevPos = ${prevPos}, note.position = ${note.position}, note.$key = ${note.$key}`);
+        // console.log(`inne i loopen för att göra saker där prevPos = ${prevPos}, note.position = ${note.position}, note.$key = ${note.$key}`);
         if (note.position > prevPos) {
-          console.log(`positionen är större än prev...`);
+          // console.log(`positionen är större än prev...`);
           self._dataservice.updateNotePosition(note.$key, (note.position - 1));
         }
       });
     });
+    }
+
+    //If the user is on a mobile phone, dragula should be disable since unneccessary sofar and it is hard to scroll of enabled...
+    checkMobileUser() {
+       if (navigator.userAgent.match(/Android/i)
+           || navigator.userAgent.match(/webOS/i)
+           || navigator.userAgent.match(/iPhone/i)
+           || navigator.userAgent.match(/iPad/i)
+           || navigator.userAgent.match(/iPod/i)
+           || navigator.userAgent.match(/BlackBerry/i)
+           || navigator.userAgent.match(/Windows Phone/i)
+       ) {
+           return true;
+       }
+       else {
+           return false;
+       }
+
     }
   
 }
