@@ -39,6 +39,5 @@ export class AppComponent{
   
   constructor(private _dragulaService: DragulaService, private _dhs: DragulaHelperService, private _authServiceHandler: AuthorizationService, public toastr: ToastsManager) {
     this._dhs._configureDragula(_dragulaService);
-     console.log("Funkar?");
   }
 }
