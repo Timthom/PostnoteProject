@@ -86,11 +86,6 @@ export class GroupComponent {
         }
       }
     }
-    for (var i = 0; i < this._tx._groupNames.length; i++) {
-      if (this._tx._focusedName == this.group.name) {
-        this._tx._groupExpandeds[i] = "true";
-      }
-    }
   }
 
   saveId() {
@@ -196,15 +191,15 @@ export class GroupComponent {
       console.log(this._tx._groupNames.length);
       this.getNotes();
       this.editSrc = 'icon_edit.png';
-      this._tx._focusedName = this.group.name;
     }
   }
 
+  // sets the groupname and status to new name with status = true. 
   updateTX() {
     for (var i = 0; i < this._tx._groupNames.length; i++) {
       if (this._tx._groupNames[i] == this.group.name) {
-        this._tx._groupNames.splice(i, 1);
-        this._tx._groupExpandeds.splice(i, 1);
+        this._tx._groupNames[i] = this.groupName;
+        this._tx._groupExpandeds[i] = "true";
       }
     }
   }
@@ -225,9 +220,9 @@ export class GroupComponent {
         this.arrowSrc = 'icon_expand.png';
       }
     }
-    // for (let content of this._tx._groupNames) {
-    //   console.log(content);
-    // }
+    for (let content of this._tx._groupNames) {
+      console.log(content);
+    }
     for (var i = 0; i < this._tx._groupNames.length; i++) {
       if (this.group.name == this._tx._groupNames[i]) {
         if (this.expanded == true) {
