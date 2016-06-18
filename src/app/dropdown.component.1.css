@@ -34,19 +34,3 @@ ul {
 .dropup .dropdown-menu {
     margin-bottom: 4px;
 }
-
-@media all and (min-width: 600px) {
-  .group_button {
-   height: 40px;
-   width: 40px;  
-}
-
-}
-
-@media all and (min-width: 768px) {
-  .group_button {
-   height: 35px;
-   width: 35px;  
-}
-
-}
