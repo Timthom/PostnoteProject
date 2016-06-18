@@ -143,12 +143,6 @@ export class MenuGroupComponent implements OnInit {
 
   toggleExpand() {
     if (!this.editingName) {
-      /*if (this.arrowSrc == 'icon_hide.png') {
-        this._tx._toggleExpand = false;
-      } else {
-        this._tx._toggleExpand = true;
-      }
-      this.expanded = this._tx._toggleExpand;*/
       this.expanded = !this.expanded;
       if (this.expanded) {
         this.arrowSrc = 'icon_hide.png';
@@ -178,14 +172,14 @@ export class MenuGroupComponent implements OnInit {
   }
 
   jumpToGroup(group: string) {
-
-    var element = document.getElementById(group).offsetTop - (window.innerHeight / 12);
-    window.scrollTo(0, element);
+    this._tx._showSideBar = false;
     for (var i = 0; i < this._tx._groupNames.length; i++) {
       if (this.group.name == this._tx._groupNames[i]) {
         this._tx._groupExpandeds[i] = "true";
         console.log("this works?!");
       }
     }
+    var element = document.getElementById(group).offsetTop - (window.innerHeight / 12);
+    window.scrollTo(0, element);
   }
 }

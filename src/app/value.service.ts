@@ -4,9 +4,10 @@ import { Injectable } from '@angular/core';
 export class ValueService {
 
   _showSideBar: boolean = false;
-  _toggleExpand: boolean = false;
+  _toggleDelete: boolean = true;
+  _toggleCreate: boolean = false;
   _focusedId: string = '';
-  //_focusedName: string = '';
+  _focusedName: string = '';
   _focusedNoteKeys: string[] = [];
   _groupNames: string[] = [];
   _groupExpandeds: string[] = [];
@@ -23,12 +24,20 @@ export class ValueService {
   }
 
   // getters and setter for the toggle arrow
-  get toggleExpand() {
-    return this._toggleExpand;
+  get toggleDelete() {
+    return this._toggleDelete;
   }
 
-  set toggleExpand(b: boolean) {
-    this._toggleExpand = b;
+  set toggleDelete(b: boolean) {
+    this._toggleDelete = b;
+  }
+
+  get toggleCreate() {
+    return this._toggleCreate;
+  }
+
+  set toggleCreate(b: boolean) {
+    this._toggleCreate = b;
   }
 
   get focusedId() {
@@ -39,12 +48,12 @@ export class ValueService {
     this._focusedId = id;
   }
   // Getting and settting focused Name
-  /*get focusedName() {
+  get focusedName() {
     return this._focusedName;
   }
   set focusedName(name: string) {
     this._focusedName = name;
-  }*/
+  }
 
   get focusedNoteKeys() {
     return this._focusedNoteKeys;
