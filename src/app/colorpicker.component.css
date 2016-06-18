@@ -22,15 +22,19 @@
 .color_button {
     border-radius: 2px;
     position: absolute;
-    width: 25px;
-    height: 25px;
+    width: 45px;
+    height: 45px;
+    background-image: url("icon_palette.png");
     background-repeat: no-repeat;
     background-size: 100%;
     background-position: center;
     bottom: 0;
     right: 0;
+    border: none;
     outline: none;
-    transition: background-color 150ms ease-in-out, box-shadow 150ms ease-in-out;
+    border-radius: 2px;
+    background-color: transparent;
+    transition: box-shadow 150ms ease-in-out, background-color 150ms ease-in-out;
 }
 
 .showing_colors {
@@ -93,3 +97,18 @@
     border: 2px solid #0A813F;
 }
 
+@media all and (min-width: 600px) {
+  .color_button {
+   height: 40px;
+   width: 40px;  
+}
+
+}
+
+@media all and (min-width: 768px) {
+  .color_button {
+   height: 35px;
+   width: 35px;  
+}
+
+}
