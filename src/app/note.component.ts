@@ -100,9 +100,9 @@ export class NoteComponent implements OnInit {
       if (this.colorString != undefined) { //If new color has been chosen
         this._ls.updateNoteColor(this.noteInNote.$key, this.colorString);//moved
       }
-      console.log("old pos " + this.noteInNote.position);
-      console.log("new position " + this.position);
-      this._ls.updateNotePosition(this.noteInNote.$key, this.position);
+      // console.log("old pos " + this.noteInNote.position);
+      // console.log("new position " + this.position);
+      // this._ls.updateNotePosition(this.noteInNote.$key, this.position);
 
         // console.log('SAVE: här kommer alla i noGroup');
         // let tempNotes = this._ls.getNotesInGroup('noGroup');
