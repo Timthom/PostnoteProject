@@ -107,6 +107,14 @@
   text-align: center;
 }
 
+.title:hover {
+  cursor: -webkit-grab;
+}
+
+.title:focus {
+  cursor: text;
+}
+
  @-moz-document url-prefix() { 
    .title { 
      padding-bottom: 0!important;
@@ -142,6 +150,14 @@ textarea {
   border: none;
   outline: none;
   
+}
+
+.text_field:hover {
+  cursor: -webkit-grab;
+}
+
+.text_field:focus {
+  cursor: text;
 }
 
 .text_field::-webkit-input-placeholder {

@@ -150,6 +150,14 @@ export class DragulaHelperService {
       } else {
         this.startUpdatingPositions(this._ls.getGroupNameFromId(id), group, value[1], value[4]);
         this._ls.changeNoteGroup(id, group);
+
+      
+        // console.log('DROP: här kommer alla i noGroup');
+        // let tempNotes = this._ls.getNotesInGroup('noGroup');
+        // for (let note of tempNotes) {
+        //   this._ls.updateNotePosition(note.$key, note.position);
+        //   console.log(`note.title = ${note.title}, note.position = ${note.position}`);
+        // }
       }
 
       this.toastr.success('Note moved', 'Yippie');
@@ -256,12 +264,14 @@ export class DragulaHelperService {
           tempPos++;
         }
       } else {
-        this._ls.updateNotePosition(droppedNote.id, this._ls.getPositionFromId(droppedNote.previousElementSibling.id));
+        this._ls.updateNotePosition(droppedNote.id, (this._ls.getPositionFromId(droppedNote.previousElementSibling.id) +1));
       }
     }
   }
 
   updateAndDecreasePositionOnEverySiblingInPreviousGroup(oldGroup: string, droppedNote: any, prevPos: number, newGroup: string, siblingNote: any) {
+    console.log("inne i decrease och prevpos = " + prevPos);
+    
     // let getWholeGroup: any = this._dataservice.getWholeCurrentGroupFromGroupName(oldGroup);
     // getWholeGroup.then((result) => {
     //   console.log('klar....');
@@ -296,7 +306,9 @@ export class DragulaHelperService {
     } else {
       notesInGroup = this._ls.getNotesInGroup(oldGroup);
       for (var note of notesInGroup) {
+        // console.log("inne i for");
         if (note.position > prevPos) {
+          // console.log(`inne i decrease IF note.position = ${note.position}, prepos = ${prevPos}, oldgroup = ${note.group}`)
           this._ls.updateNotePosition(note.$key, (note.position - 1));
         }
       }
@@ -332,10 +344,21 @@ export class DragulaHelperService {
       let notesInGroup: any = this._ls.getNotesInGroup(group);
 
       for (var note of notesInGroup) {
+        // console.log("inne i for");
+        // console.log(note);
+        // console.log(`där note.position = ${note.position}, prevpos = ${prevPos}`);
         if (note.position > prevPos) {
-          this._ls.updateNotePosition(note.$key, (note.position - 1));
+                  // console.log(`inne i ifsatsen`);
+          this._ls.updateNotePosition(note.$key, ((note.position)-1));
         }
       }
+
+        // console.log('DELETE: här kommer alla i noGroup');
+        // let tempNotes = this._ls.getNotesInGroup('noGroup');
+        // for (let note of tempNotes) {
+        //   console.log(`note.title = ${note.title}, note.position = ${note.position}`);
+        // }
+
     }
   }
 

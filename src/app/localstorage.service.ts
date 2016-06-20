@@ -180,21 +180,24 @@ export class LocalStorageService {
     getGroupNameFromId(id: string) {
         for (var item in this.notes) {
             if (id == this.notes[item].$key) {
-                return this.notes[item].name;
+                return this.notes[item].group;
             }
         }
     }
 
     getPositionFromId(id: string) {
+        // console.log("INNE I GETPOS");
           for (var item in this.notes) {
+            //   console.log("INNE I FOR");
             if (id == this.notes[item].$key) {
+                // console.log("inne i getPOS och ID : " + id + " och titel : " + this.notes[item].title + " och position : " + this.notes[item].position);
                 return this.notes[item].position;
             }
         }
     }
 
     updateNotePosition(id: string, position: number) {
-        for (var item in this.notes) {
+     for (var item in this.notes) {
             if (id == this.notes[item].$key) {
                 this.notes[item].position = position;
                 localStorage.setItem("savedNotes", JSON.stringify(this.notes));

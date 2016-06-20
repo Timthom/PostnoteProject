@@ -45,6 +45,9 @@ export class NoteComponent implements OnInit {
   color;
 
   @Input()
+  position;
+
+  @Input()
   groups: any;
 
   @Output()
@@ -79,6 +82,7 @@ export class NoteComponent implements OnInit {
   }
 
   save() {
+    
     if (this.noteSelectedGroup == undefined) { //If no group selected
       this.noteSelectedGroup = this.group; //use the same one
     }
@@ -89,8 +93,6 @@ export class NoteComponent implements OnInit {
       if (this.colorString != undefined) { //If new color has been chosen
         this._ds.updateNoteColor(this.noteInNote.$key, this.colorString);//moved
       }
-
-
     } else {
       this._ls.updateNoteTitle(this.noteInNote.$key, this.title);
       this._ls.updateNoteText(this.noteInNote.$key, this.text);
@@ -98,6 +100,15 @@ export class NoteComponent implements OnInit {
       if (this.colorString != undefined) { //If new color has been chosen
         this._ls.updateNoteColor(this.noteInNote.$key, this.colorString);//moved
       }
+      console.log("old pos " + this.noteInNote.position);
+      console.log("new position " + this.position);
+      this._ls.updateNotePosition(this.noteInNote.$key, this.position);
+
+        // console.log('SAVE: här kommer alla i noGroup');
+        // let tempNotes = this._ls.getNotesInGroup('noGroup');
+        // for (let note of tempNotes) {
+        //   console.log(`note.title = ${note.title}, note.position = ${note.position}`);
+        // }
 
     }
 
@@ -109,7 +120,7 @@ export class NoteComponent implements OnInit {
 
   //Emitted from dropdown
   noteGroupChanged(event) {
-    console.log(`här kommer event ${event}`);
+    // console.log(`här kommer event ${event}`);
 
     this.noteSelectedGroup = event;
 
@@ -119,7 +130,7 @@ export class NoteComponent implements OnInit {
       Promise.all([getPosInfo, getOldGroupInfo]).then((result) => {
         let prevPos = result[0];
         let oldGroup = result[1];
-        console.log(`prevPos = ${prevPos}, oldGroup = ${oldGroup}, newGroup = ${this.noteSelectedGroup}`);
+        // console.log(`prevPos = ${prevPos}, oldGroup = ${oldGroup}, newGroup = ${this.noteSelectedGroup}`);
         this._dragulaHelper.groupChangedByDropDown(oldGroup, this.noteSelectedGroup, prevPos, this.noteInNote.$key);
         // this._ds.changeNoteGroup(this.noteInNote.$key, this.noteSelectedGroup);
       });
@@ -186,6 +197,7 @@ export class NoteComponent implements OnInit {
       let getIdInfo: any = o._ds.getPositionFromId(o.noteInNote.$key);
       getIdInfo.then(prevPos => o._dragulaHelper.updatePositionsInGroupAndThenDeleteNoteWhenPressingDelete(o.group, prevPos, o.noteInNote));   
     } else {
+      // console.log("deleteclick" + o.noteInNote.title + " pos: " + o.noteInNote.position);
       o._dragulaHelper.updatePositionsInGroupAndThenDeleteNoteWhenPressingDelete(o.group, o._ls.getPositionFromId(o.noteInNote.$key), o.noteInNote);   
     };
 
