@@ -60,8 +60,12 @@ export class CreatorComponent {
 
         if(this.visits()){
                 let time = new Date().getTime();
-                let newNote = new Note("Welcome!!", "This is your first time here at PostNote, you can choose to log in or create your own account or you can just start using the app right now only on this device by using the addbutton in the bottom corner to add new notes like this one, or add a new category in the menu to the left!\nHave fun!" , "noGroup", time.toString(), this.randomColor(), -1);
-                this._ls.addNoteToNotes(newNote);
+                
+                this._ls.addNoteToNotes(new Note("Welcome!", "Looks like this is your first time here at Postnote. Take a look at these notes for a small introduciton. \n\nIf you create an account you’ll be able to take all your notes with you on your phone or computer. Of course you can always use Postnote without signing in too. Your notes will then be saved locally until your next visit!" , "noGroup", time.toString(), this.randomColor(), -1));
+                
+                this._ls.addNoteToNotes(new Note("Great note", "If you press the button on the left side of the top bar a menu will be displayed. The menu gives you a view of all your notes and groups. If you press the name of a note or group Postnote will take you to that. It’s also here that you create new groups, simply by pressing the button that says ”Add group”." , "noGroup", time.toString(), this.randomColor(), -1));
+                
+                this._ls.addNoteToNotes(new Note("Awesome note", "You can post new notes by pressing the round button in the corner below. A list of your current groups will be displayed. If you haven’t created a group yet, the only option will be ”No group”. Select one, boom, you’ve just posted a note! Press it to edit it." , "noGroup", time.toString(), this.randomColor(), -1));
                 this.notesChanged.emit('');
         }
     }

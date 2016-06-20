@@ -29,7 +29,7 @@
         <img class="createButton" src="icon_fab.png" (click)="open()">
         <img class="createButton noCategory" *ngIf='categoriesVisible' src="icon_fab_active.png"
             (click)="save('noGroup')">
-        <p class="noCategoryHint" *ngIf="categoriesVisible">No category</p>
+        <p class="noCategoryHint" *ngIf="categoriesVisible">No group</p>
     </div>
 
     <div *ngIf='_authData == null && categoriesVisible' id="categoryButtonContainer"
