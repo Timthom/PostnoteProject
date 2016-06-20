@@ -122,7 +122,7 @@ export class MenuComponent implements OnInit, CanReuse {
         let content = this.getContent();
         for (let name of content) {
           if (this.groupName == name) {
-            this.toastr.error('Groupname already exists');
+            this.toastr.error('"' + name + '"' + ' already exists');
             return;
           }
         }
@@ -133,7 +133,7 @@ export class MenuComponent implements OnInit, CanReuse {
       } else {
         for (var group of this.myGroups) {
           if (this.groupName == group.name) {
-            this.toastr.error('Groupname already exists');
+            this.toastr.error('"' + name + '"' + ' already exists');
             return;
           }
         }
