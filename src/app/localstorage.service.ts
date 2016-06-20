@@ -29,8 +29,8 @@ export class LocalStorageService {
 
     getAllGroups() {
         if (JSON.parse(localStorage.getItem("savedGroups"))) {
-                    this.groups = JSON.parse(localStorage.getItem("savedGroups"));
-        return this.groups;
+            this.groups = JSON.parse(localStorage.getItem("savedGroups"));
+            return this.groups;
         } else {
             return [];
         }
@@ -83,7 +83,7 @@ export class LocalStorageService {
     }
 
     getNotesInGroup(groupName: string) {
-        if (localStorage.getItem("savedNotes")){
+        if (localStorage.getItem("savedNotes")) {
             this.notes = JSON.parse(localStorage.getItem("savedNotes"));
             let groupNotes = new Array;
             for (var item of this.notes) {
@@ -107,7 +107,7 @@ export class LocalStorageService {
                 return;
             }
         }
-        
+
     }
 
     addNoteToNotes(note: Note) {
@@ -125,10 +125,10 @@ export class LocalStorageService {
                 return;
             }
         }
-        
+
     }
-    
-    updateNoteTitle(noteKey : string, newTitle: string){
+
+    updateNoteTitle(noteKey: string, newTitle: string) {
         for (var item in this.notes) {
             if (noteKey == this.notes[item].$key) {
                 this.notes[item].title = newTitle;
@@ -138,8 +138,8 @@ export class LocalStorageService {
             }
         }
     }
-    
-    updateNoteText(noteKey : string, newText: string){
+
+    updateNoteText(noteKey: string, newText: string) {
         for (var item in this.notes) {
             if (noteKey == this.notes[item].$key) {
                 this.notes[item].text = newText;
@@ -149,7 +149,7 @@ export class LocalStorageService {
             }
         }
     }
-    
+
     updateNoteColor(noteKey: string, color: string) {
         for (var item in this.notes) {
             if (noteKey == this.notes[item].$key) {
@@ -177,4 +177,29 @@ export class LocalStorageService {
         console.log(this.groups);
     }
 
+    getGroupNameFromId(id: string) {
+        for (var item in this.notes) {
+            if (id == this.notes[item].$key) {
+                return this.notes[item].name;
+            }
+        }
+    }
+
+    getPositionFromId(id: string) {
+          for (var item in this.notes) {
+            if (id == this.notes[item].$key) {
+                return this.notes[item].position;
+            }
+        }
+    }
+
+    updateNotePosition(id: string, position: number) {
+        for (var item in this.notes) {
+            if (id == this.notes[item].$key) {
+                this.notes[item].position = position;
+                localStorage.setItem("savedNotes", JSON.stringify(this.notes));
+                return;
+            }
+        }
+    }
 }

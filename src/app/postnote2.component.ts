@@ -15,6 +15,7 @@ import {LocalStorageService} from './localstorage.service';
 import { MenuGroupComponent } from './menugroup.component';
 import {enableProdMode} from '@angular/core';
 import { DropdownComponent } from './dropdown.component';
+import {Reverse} from './reverse.pipe'
 enableProdMode();
 
 
@@ -25,7 +26,7 @@ enableProdMode();
     templateUrl: 'postnote2.component.html',
     styleUrls: ['postnote2.component.css'],
     directives: [ROUTER_DIRECTIVES, NoteComponent, MenuComponent, GroupComponent, CreatorComponent, HeaderbarComponent, DropdownComponent],
-    pipes: []
+    pipes: [Reverse]
 })
 
 export class Postnote2App implements OnInit, AfterViewInit{
