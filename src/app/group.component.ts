@@ -118,13 +118,20 @@ export class GroupComponent {
     let doneInLoopArray;
     let arrayOfKeys: any[] = [];
 
-    this.notes.forEach(function (result) {
-      doneInLoopArray = result;
-    });
+    if (this._authData != null) {
+      this.notes.forEach(function (result) {
+        doneInLoopArray = result;
+      });
 
-    doneInLoopArray.forEach(function (note) {
-      arrayOfKeys.push(note.$key);
-    });
+      doneInLoopArray.forEach(function (note) {
+        arrayOfKeys.push(note.$key);
+      });
+    } else {
+      let notesInGroup = this._ls.getNotesInGroup(this.groupName);
+      for(let content of notesInGroup){
+        arrayOfKeys.push(content.$key);
+      }
+    }
 
     return arrayOfKeys;
   }
