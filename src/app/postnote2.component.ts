@@ -90,7 +90,7 @@ export class Postnote2App implements OnInit, AfterViewInit{
             this.menuComponent.getGroups();
         }
         
-       
+       console.log("testing testing!");
     }
     addGroup() {
         this.getGroups();

@@ -37,6 +37,7 @@ export class MenuGroupComponent implements OnInit {
   editSrc: string = 'icon_edit.png';
 
   @Output() groupsChanged = new EventEmitter();
+  @Output() closeMenu = new EventEmitter();
 
   constructor( @Inject(FirebaseRef) private _ref: Firebase, private _ds: DataService, private _tx: ValueService, private _ls: LocalStorageService) {
 
@@ -173,14 +174,15 @@ export class MenuGroupComponent implements OnInit {
   }
 
   jumpToGroup(group: string) {
-    this._tx._showSideBar = false;
     for (var i = 0; i < this._tx._groupNames.length; i++) {
       if (this.group.name == this._tx._groupNames[i]) {
         this._tx._groupExpandeds[i] = "true";
         console.log("this works?!");
+        this.groupsChanged.emit('');
       }
     }
     var element = document.getElementById(group).offsetTop - (window.innerHeight / 12);
     window.scrollTo(0, element);
+    this.closeMenu.emit('');
   }
 }

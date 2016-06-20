@@ -42,6 +42,7 @@ export class MenuComponent implements OnInit, CanReuse {
   _authData;
 
   @Output() clicked = new EventEmitter();
+  @Output() closeMenu = new EventEmitter();
 
 
   constructor( @Inject(FirebaseRef)
@@ -60,6 +61,10 @@ export class MenuComponent implements OnInit, CanReuse {
   ngOnInit() {
     this.getTitles();
     this.getGroups();
+  }
+
+  closeMenuMethod(){
+    this.closeMenu.emit('');
   }
 
   getTitles() {
