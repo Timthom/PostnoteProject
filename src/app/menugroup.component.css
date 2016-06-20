@@ -40,6 +40,7 @@ p {
     color: #404040;
     cursor: pointer;
     width: 55%;
+    font-size: large;
 }
 
 .editing {

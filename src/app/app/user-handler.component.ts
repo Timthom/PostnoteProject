@@ -43,9 +43,9 @@ export class UserHandlerComponent {
         this.loggingIn = false;
 
         if(this.sessionExpired) {
-            this.toastr.warning("Your session has expired. Please log in again!", "Alert!");
+            this.toastr.warning("Your session has expired. Please sign in again!", "Alert!");
         } else {
-            this.toastr.info("You've been successfully logged out!");
+            this.toastr.info("You've been successfully signed out!");
         }
 
         this.sessionExpired = false;   

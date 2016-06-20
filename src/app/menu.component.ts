@@ -37,12 +37,13 @@ export class MenuComponent implements OnInit, CanReuse {
   adding: boolean = false;
   groupName: string = "";
   titles: any;
-  buttonText: string = "Add category";
+  buttonText: string = "Add group";
 
   checkSideBar: boolean = this._vs._showSideBar;
   _authData;
 
   @Output() clicked = new EventEmitter();
+  @Output() closeMenu = new EventEmitter();
 
 
   constructor( @Inject(FirebaseRef)
@@ -61,6 +62,10 @@ export class MenuComponent implements OnInit, CanReuse {
   ngOnInit() {
     this.getTitles();
     this.getGroups();
+  }
+
+  closeMenuMethod(){
+    this.closeMenu.emit('');
   }
 
   getTitles() {
@@ -94,7 +99,7 @@ export class MenuComponent implements OnInit, CanReuse {
     if (this.adding) {
       this.buttonText = "Cancel";
     } else {
-      this.buttonText = "Add category";
+      this.buttonText = "Add group";
     }
   }
 
@@ -123,7 +128,7 @@ export class MenuComponent implements OnInit, CanReuse {
         let content = this.getContent();
         for (let name of content) {
           if (this.groupName == name) {
-            this.toastr.error('Groupname already exists');
+            this.toastr.error('"' + name + '"' + ' already exists');
             return;
           }
         }
@@ -134,7 +139,7 @@ export class MenuComponent implements OnInit, CanReuse {
       } else {
         for (var group of this.myGroups) {
           if (this.groupName == group.name) {
-            this.toastr.error('Groupname already exists');
+            this.toastr.error('"' + name + '"' + ' already exists');
             return;
           }
         }

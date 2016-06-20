@@ -10,6 +10,7 @@ import {LocalStorageService} from './localstorage.service';
 import {MenuComponent} from './menu.component';
 import {MenuGroupComponent} from './menugroup.component';
 import {UserHandlerComponent} from './app/user-handler.component';
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
 
 @Component({
@@ -45,7 +46,7 @@ export class DropdownComponent implements OnInit {
         this.status.isopen = !this.status.isopen;
     }
 
-    constructor( @Inject(FirebaseRef) private _ref: Firebase, private _ds: DataService, private _ls: LocalStorageService, private _menu: MenuComponent, private _menuGroup: MenuGroupComponent) {
+    constructor( @Inject(FirebaseRef) private _ref: Firebase, private _ds: DataService, private _ls: LocalStorageService, private _menu: MenuComponent, private _menuGroup: MenuGroupComponent, public toastr: ToastsManager) {
         this._authData = this._ref.getAuth();
       
     }
@@ -67,5 +68,7 @@ export class DropdownComponent implements OnInit {
         this.changeGroup.emit(group);
         //Emits to note component and group component?
         this.changeNoteGroup.emit(group);
+        this.toastr.success('Moved note to ' + group);
+        
     }
 }
