@@ -183,6 +183,7 @@ export class MenuGroupComponent implements OnInit {
         this.groupsChanged.emit('');
       }
     }
+    this._tx._clickedGroup = this.group.name;//Saves the clicked group
     var element = document.getElementById(group).offsetTop - (window.innerHeight / 12);
     window.scrollTo(0, element);
     this.closeMenu.emit('');

@@ -262,4 +262,12 @@ export class GroupComponent {
     this.notesChanged.emit('');
   }
 
+  //Checks if this is the group that was jumped to,
+  //in that case calls ngOnInit (refreshes)
+  maybeExpand() {
+    if(this.group.name === this._tx._clickedGroup){
+      this.ngOnInit();
+    }
+  }
+
 }

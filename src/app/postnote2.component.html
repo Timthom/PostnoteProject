@@ -14,7 +14,7 @@
       <menu [myGroups]="allGroups" (clicked)="addGroup()" (groupsChanged)="groupsChanged(groups)"></menu>-->
 
     <div class="col-xs-4" *ngIf="statusCheckSideBar == true">
-      <menu (clicked)="groupsChanged()" (groupsChanged)="groupsChanged(groups)" (closeMenu)="toggleSideBar()"></menu>
+      <menu (clicked)="groupsChanged()" (groupsChanged)="groupsChanged(groups)" (closeMenu)="scrollEmit()"></menu>
 
     </div>
 

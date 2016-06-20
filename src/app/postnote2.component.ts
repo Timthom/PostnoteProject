@@ -128,4 +128,10 @@ export class Postnote2App implements OnInit, AfterViewInit{
         return color;
     }
 
+    scrollEmit(group : any) {
+        this.toggleSideBar();
+        this.groupComponents.toArray().forEach((child)=>child.maybeExpand());
+
+    }
+
 }
