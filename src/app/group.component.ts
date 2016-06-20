@@ -32,7 +32,6 @@ export class GroupComponent {
   @Input() groupName;
   @Input() note;
 
-
   @Output() clickedDelete = new EventEmitter();
   @Output() notesChanged = new EventEmitter();
 
@@ -60,21 +59,34 @@ export class GroupComponent {
 
     // checks if name already exists, if not then adds it to array of group names.
     // also adds a new "false" status of the groups expand.
-    let toPush = true;
-    for (let content of this._tx._groupNames) {
-      if (this.group.name == content) {
-        toPush = false;
+    if (this._tx._toggleDelete == true) {
+      let toPush = true;
+      for (let content of this._tx._groupNames) {
+        if (this.group.name == content) {
+          toPush = false;
+        }
       }
-    }
-    if (toPush == true) {
-      this._tx._groupNames.push(this.group.name);
-      if (this._tx._groupNames.length >= this._tx._groupCount) {
-        this._tx._groupExpandeds.push("false");
+      if (toPush == true) {
+        console.log("Adding group");
+        this._tx._groupNames.push(this.group.name);
+        if (this._tx._groupNames.length > this._tx._groupCount) {
+          this._tx._groupExpandeds.push("false");
+        }
       }
+    } else {
+      if (this._tx._toggleCreate == true) {
+        console.log("inside toPush");
+        this._tx._groupNames.unshift(this.group.name);
+        if (this._tx._groupNames.length > this._tx._groupCount) {
+          this._tx._groupExpandeds.unshift("false");
+        }
+        this._tx._toggleCreate = false;
+      }
+      this._tx._toggleDelete = true;
     }
 
     // updates each group with what status of expand it had before the re-rendering.
-    console.log(this._tx._groupNames.length);
+    // console.log(this._tx._groupNames.length);
     for (var i = 0; i < this._tx._groupNames.length; i++) {
       if (this.group.name == this._tx._groupNames[i]) {
         if (this._tx._groupExpandeds[i] == "true") {
@@ -86,15 +98,11 @@ export class GroupComponent {
         }
       }
     }
-    for (var i = 0; i < this._tx._groupNames.length; i++) {
-      if (this._tx._focusedName == this.group.name) {
-        this._tx._groupExpandeds[i] = "true";
-      }
-    }
   }
 
   saveId() {
     this._tx._focusedId = this.group.$key;
+    this._tx._focusedName = this.group.name;
     this._tx._focusedNoteKeys = this.getContent();
   }
 
@@ -122,6 +130,13 @@ export class GroupComponent {
   }
 
   deleteGroup() {
+    for (var i = 0; i < this._tx._groupNames.length; i++) {
+      if (this._tx._focusedName == this._tx._groupNames[i]) {
+        this._tx._groupNames.splice(i, 1);
+        this._tx._groupExpandeds.splice(i, 1);
+        this._tx._toggleDelete = false;
+      }
+    }
     this._tx._groupCount = this._tx._groupNames.length;
     for (var item in this.groups) {
       if (this._tx._focusedId == this.groups[item].$key) {
@@ -143,10 +158,8 @@ export class GroupComponent {
       }
       this._ls.deleteGroup(this._tx._focusedId);
     }
-    this.updateTX();
     this.clickedDelete.emit('');
   }
-
 
   editGroupName() {
     //change name in shared model
@@ -165,6 +178,7 @@ export class GroupComponent {
     }
     this.clickedDelete.emit(''); //Also works for edits!
     this.toastr.success('Group name updated!');
+    this._tx._toggleDelete = false;
   }
 
   // Enable inputfield to edit text in field when user click on pen icon else disable inputfield
@@ -196,15 +210,15 @@ export class GroupComponent {
       console.log(this._tx._groupNames.length);
       this.getNotes();
       this.editSrc = 'icon_edit.png';
-      this._tx._focusedName = this.group.name;
     }
   }
 
+  // sets the groupname and status to new name with status = true. 
   updateTX() {
     for (var i = 0; i < this._tx._groupNames.length; i++) {
       if (this._tx._groupNames[i] == this.group.name) {
-        this._tx._groupNames.splice(i, 1);
-        this._tx._groupExpandeds.splice(i, 1);
+        this._tx._groupNames[i] = this.groupName;
+        this._tx._groupExpandeds[i] = "true";
       }
     }
   }
@@ -213,11 +227,6 @@ export class GroupComponent {
   groupExpand() {
     // Uffes idea:
     if (!this.editingName) {
-      /*if (this.arrowSrc == 'icon_hide.png') {
-        this._tx._toggleExpand = false;
-      } else {
-        this._tx._toggleExpand = true;
-      }*/
       this.expanded = !this.expanded;
       if (this.expanded) {
         this.arrowSrc = 'icon_hide.png';
@@ -225,9 +234,9 @@ export class GroupComponent {
         this.arrowSrc = 'icon_expand.png';
       }
     }
-    // for (let content of this._tx._groupNames) {
-    //   console.log(content);
-    // }
+    for (let content of this._tx._groupNames) {
+      console.log(content);
+    }
     for (var i = 0; i < this._tx._groupNames.length; i++) {
       if (this.group.name == this._tx._groupNames[i]) {
         if (this.expanded == true) {
@@ -240,7 +249,7 @@ export class GroupComponent {
     for (let booleans of this._tx._groupExpandeds) {
       console.log(booleans);
     }
-    console.log("=============");
+    console.log("*===*");
   }
   emitNotes(groups: any) {
     this.notesChanged.emit('');

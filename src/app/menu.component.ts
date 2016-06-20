@@ -43,7 +43,13 @@ export class MenuComponent implements OnInit, CanReuse {
   @Output() clicked = new EventEmitter();
 
 
-  constructor( @Inject(FirebaseRef) private _ref: Firebase, private _ds: DataService, private _vs: ValueService, private _ls: LocalStorageService, public toastr: ToastsManager) {
+  constructor( @Inject(FirebaseRef)
+  private _ref: Firebase,
+    private _ds: DataService,
+    private _vs: ValueService,
+    private _ls: LocalStorageService,
+    public toastr: ToastsManager,
+    private _tx: ValueService) {
 
     this._authData = this._ref.getAuth();
     //_postNote2.groupChanged.subscribe(this.getGroups);
@@ -57,7 +63,7 @@ export class MenuComponent implements OnInit, CanReuse {
 
   getTitles() {
     const token = localStorage.getItem('token');
-        if (this._authData != null && token != null) {
+    if (this._authData != null && token != null) {
       this._ds.getAllNotes().then(titles => this.titles = titles);
       this._ds.getAllNotesInGroup('noGroup').then(notes => this.titles = notes);
     } else {
@@ -67,7 +73,7 @@ export class MenuComponent implements OnInit, CanReuse {
 
   getGroups() {
     const token = localStorage.getItem('token');
-        if (this._authData != null && token != null) {
+    if (this._authData != null && token != null) {
       this._ds.getAllGroups().then(groups => this.myGroups = groups);
     } else {
       this.myGroups = this._ls.getAllGroups();
@@ -109,8 +115,8 @@ export class MenuComponent implements OnInit, CanReuse {
     if (this.groupName.trim().length > 0) {
       let time = new Date().getTime();
 
-        const token = localStorage.getItem('token');
-        if (this._authData != null && token != null) {
+      const token = localStorage.getItem('token');
+      if (this._authData != null && token != null) {
 
         let content = this.getContent();
         for (let name of content) {
@@ -139,6 +145,9 @@ export class MenuComponent implements OnInit, CanReuse {
       this.adding = false;
       this.showingCancel = !this.showingCancel;
       this.buttonText = "Add category";
+      console.log("something happening in menu");
+      this._tx._toggleDelete = false;
+      this._tx._toggleCreate = true;
     }
   }
 
