@@ -25,7 +25,7 @@
     </form>
     <hr class="invisibleLine">
     <div *ngIf='_authData == null'>
-      <menuGroup *ngFor="let group of myGroups" [group]="group" (groupsChanged)="groupsChanged(groups)"></menuGroup>
+      <menuGroup *ngFor="let group of myGroups | reverse" [group]="group" (groupsChanged)="groupsChanged(groups)"></menuGroup>
     </div>
     <div *ngIf='_authData != null'>
       <menuGroup *ngFor="let group of myGroups | async" [group]="group"
