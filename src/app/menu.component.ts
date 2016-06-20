@@ -139,7 +139,7 @@ export class MenuComponent implements OnInit, CanReuse {
       } else {
         for (var group of this.myGroups) {
           if (this.groupName == group.name) {
-            this.toastr.error('"' + name + '"' + ' already exists');
+            this.toastr.error('"' + group.name + '"' + ' already exists');
             return;
           }
         }
