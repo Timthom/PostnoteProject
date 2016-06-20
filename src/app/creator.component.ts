@@ -60,7 +60,7 @@ export class CreatorComponent {
 
         if(this.visits()){
                 let time = new Date().getTime();
-                let newNote = new Note("Welcome!!", "This is your first time here at PostNote, you can choose to log in or create your own account or you can just start using the app right now only on this device by using the addbutton in the bottom corner to add new notes like this one, or add a new category in the menu to the left!\nHave fun!" , "noGroup", time.toString(), this.randomColor());
+                let newNote = new Note("Welcome!!", "This is your first time here at PostNote, you can choose to log in or create your own account or you can just start using the app right now only on this device by using the addbutton in the bottom corner to add new notes like this one, or add a new category in the menu to the left!\nHave fun!" , "noGroup", time.toString(), this.randomColor(), -1);
                 this._ls.addNoteToNotes(newNote);
                 this.notesChanged.emit('');
         }
@@ -103,7 +103,7 @@ export class CreatorComponent {
             this._dragulaHelper.updatePositionsInGroup(group);
 
         } else {
-            let newNote = new Note("new note", "", group, time.toString(), this.randomColor());
+            let newNote = new Note("new note", "", group, time.toString(), this.randomColor(), -1);
             this._ls.addNoteToNotes(newNote);
             this.notesChanged.emit('');
 
