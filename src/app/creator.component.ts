@@ -100,15 +100,14 @@ export class CreatorComponent {
         if (this._authData != null) {
             console.log(`inne i save med group = ${group}`);
             this._ds.addNoteToNotes("new note", "", group, time, this.randomColor(), -1);
-            this._dragulaHelper.updatePositionsInGroup(group);
 
         } else {
             let newNote = new Note("new note", "", group, time.toString(), this.randomColor(), -1);
             this._ls.addNoteToNotes(newNote);
             this.notesChanged.emit('');
-
         }
 
+        this._dragulaHelper.updatePositionsInGroup(group);
         // this.getNotes(); //Update view // dont need it since calles fix...
         this.categoriesVisible = false;
 
