@@ -135,7 +135,8 @@ export class MenuComponent implements OnInit, CanReuse {
         this._ds.addGroupToGroups(this.groupName, time);
         this.getGroups();
         this.getTitles();
-
+        this._tx._toggleDelete = false;
+      this._tx._toggleCreate = true;
       } else {
         for (var group of this.myGroups) {
           if (this.groupName == group.name) {
@@ -146,6 +147,8 @@ export class MenuComponent implements OnInit, CanReuse {
         let newGroup = new Group(this.groupName, time.toString());
         this._ls.saveGroup(newGroup);
         this.getGroups();
+        this._tx._toggleDelete = false;
+      this._tx._toggleCreate = true;
       }
       this.clicked.emit('');
       this.groupName = "";

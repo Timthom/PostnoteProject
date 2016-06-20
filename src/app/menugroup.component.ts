@@ -29,8 +29,6 @@ export class MenuGroupComponent implements OnInit {
   expanded: boolean;
   editingName: boolean = false;
   notes: any;
-
-  @Input()
   groups: any;
 
   @Input()
@@ -48,10 +46,69 @@ export class MenuGroupComponent implements OnInit {
 
   ngOnInit() {
     this.getNotes();
+
+    if (this._tx._toggleDelete == true) {
+      console.log("uffe working in toggleDelete == true");
+      this.initialAddOfGroups();
+    } else {
+      console.log("uffe working in toggleDelete == false");
+      this.addAnotherGroup();
+      this._tx._toggleDelete = true;
+    }
+
+    this.updateGroupStatuses();
+  }
+
+  initialAddOfGroups() {
+    // checks if name already exists, if not then adds it to array of group names.
+    // also adds a new "false" status of the groups expand.
+    let toPush = true;
+    for (let content of this._tx._groupNames) {
+      if (this.group.name == content) {
+        toPush = false;
+      }
+    }
+    if (toPush == true) {
+      console.log("Adding group");
+      this._tx._groupNames.push(this.group.name);
+      if (this._tx._groupNames.length > this._tx._groupCount) {
+        this._tx._groupExpandeds.push("false");
+      }
+    }
+  }
+
+  addAnotherGroup() {
+    if (this._tx._toggleCreate == true) {
+      console.log("inside toPush");
+      this._tx._groupNames.unshift(this.group.name);
+      if (this._tx._groupNames.length > this._tx._groupCount) {
+        this._tx._groupExpandeds.unshift("false");
+      }
+      console.log("uffe working in toggleCreate == true");
+      this._tx._toggleCreate = false;
+    }
+  }
+
+  updateGroupStatuses() {
+    // updates each group with what status of expand it had before the re-rendering.
+    // console.log(this._tx._groupNames.length);
+    for (var i = 0; i < this._tx._groupNames.length; i++) {
+      if (this.group.name == this._tx._groupNames[i]) {
+        if (this._tx._groupExpandeds[i] == "true") {
+          this.expanded = true;
+          this.arrowSrc = 'icon_hide.png';
+        } else {
+          this.expanded = false;
+          this.arrowSrc = 'icon_expand.png';
+        }
+      }
+    }
   }
 
   saveId() {
     this._tx._focusedId = this.group.$key;
+    this._tx._focusedName = this.group.name;
+    this._tx._focusedNoteKeys = this.getContent();
   }
 
   getNotes() {
@@ -88,27 +145,44 @@ export class MenuGroupComponent implements OnInit {
 
 
   editGroup() {
+    //change name in shared model
+    for (var index in this.groups) {
+      if (this.group.$key == this.groups[index].$key) {
+        this.groups[index].name = this.group.name;
+        break;
+      }
+    }
     if (this._authData != null) {
       this._ds.updateGroupName(this.group.$key, this.group.name);
     } else {
       this._ls.updateGroupName(this.group.$key, this.group.name);
-      //Not sure how this can work!
-
       //TEMPORARY
       //location.reload();
     }
-    this.groupsChanged.emit('');
+    this.groupsChanged.emit(''); //Also works for edits!
+    // this.toastr.success('Group name updated!');
+    this._tx._toggleDelete = false;
   }
 
   getContent() {
     let doneInLoopArray;
     let arrayOfKeys: any[] = [];
-    this.notes.forEach(function (result) {
-      doneInLoopArray = result;
-    });
-    doneInLoopArray.forEach(function (note) {
-      arrayOfKeys.push(note.$key);
-    });
+
+    if (this._authData != null) {
+      this.notes.forEach(function (result) {
+        doneInLoopArray = result;
+      });
+
+      doneInLoopArray.forEach(function (note) {
+        arrayOfKeys.push(note.$key);
+      });
+    } else {
+      let notesInGroup = this._ls.getNotesInGroup(this.group.name);
+      for (let content of notesInGroup) {
+        arrayOfKeys.push(content.$key);
+      }
+    }
+
     return arrayOfKeys;
   }
 
@@ -120,28 +194,38 @@ export class MenuGroupComponent implements OnInit {
       document.getElementById(this.group.$key).focus();
       this.editSrc = 'icon_save.png';
     } else {
-      document.getElementById(this.group.$key).setAttribute("readonly", "true");
       if (this._authData != null) {
         let content = this.getContent();
         // changes notes in the group to the new group
         for (let key of content) {
           this._ds.changeNoteGroup(key, this.group.name);
         }
-      } else { //if not logged in
+      } else {
         for (let note of this.notes) {
           this._ls.changeNoteGroup(note.$key, this.group.name);
-
         }
       }
+      document.getElementById(this.group.$key).setAttribute("readonly", "true");
+      this.updateTX();
+      this.editGroup();
       for (var i = 0; i < this._tx._groupNames.length; i++) {
         if (this._tx._groupNames[i] == this.group.name) {
-          this._tx._groupNames.splice(i, 1);
-          this._tx._groupExpandeds.splice(i, 1);
+          this._tx._groupExpandeds[i] = "true";
         }
       }
-      this.editSrc = 'icon_edit.png';
-      this.editGroup();
+      //console.log(this._tx._groupNames.length);
       this.getNotes();
+      this.editSrc = 'icon_edit.png';
+    }
+  }
+
+  // sets the groupname and status to new name with status = true. 
+  updateTX() {
+    for (var i = 0; i < this._tx._groupNames.length; i++) {
+      if (this._tx._groupNames[i] == this.group.name) {
+        this._tx._groupNames[i] = this.group.name;
+        this._tx._groupExpandeds[i] = "true";
+      }
     }
   }
 
@@ -167,29 +251,32 @@ export class MenuGroupComponent implements OnInit {
     for (let booleans of this._tx._groupExpandeds) {
       console.log(booleans);
     }
-    console.log("=============");
+    console.log("*===*");
   }
 
   jumpToNote(note: string) {
-    this.jumpToGroup(this.group.name);
-    setTimeout(function() {
-      var element = document.getElementById(note).offsetTop - (window.innerHeight / 11);
-      window.scrollTo(0, element);
-    }, 100);
-    
+    if (this.editSrc == "icon_edit.png") {
+      this.jumpToGroup(this.group.name);
+      setTimeout(function () {
+        var element = document.getElementById(note).offsetTop - (window.innerHeight / 11);
+        window.scrollTo(0, element);
+      }, 100);
+    }
   }
 
   jumpToGroup(group: string) {
-    for (var i = 0; i < this._tx._groupNames.length; i++) {
-      if (this.group.name == this._tx._groupNames[i]) {
-        this._tx._groupExpandeds[i] = "true";
-        console.log("this works?!");
-        this.groupsChanged.emit('');
+    if (this.editSrc == "icon_edit.png") {
+      for (var i = 0; i < this._tx._groupNames.length; i++) {
+        if (this.group.name == this._tx._groupNames[i]) {
+          this._tx._groupExpandeds[i] = "true";
+          console.log("this works?!");
+          this.groupsChanged.emit('');
+        }
       }
+      this._tx._clickedGroup = this.group.name;//Saves the clicked group
+      var element = document.getElementById(group).offsetTop - (window.innerHeight / 11);
+      window.scrollTo(0, element);
+      this.closeMenu.emit('');
     }
-    this._tx._clickedGroup = this.group.name;//Saves the clicked group
-    var element = document.getElementById(group).offsetTop - (window.innerHeight / 11);
-    window.scrollTo(0, element);
-    this.closeMenu.emit('');
   }
 }
