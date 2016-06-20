@@ -127,13 +127,20 @@ export class GroupComponent {
     let doneInLoopArray;
     let arrayOfKeys: any[] = [];
 
-    this.notes.forEach(function (result) {
-      doneInLoopArray = result;
-    });
+    if (this._authData != null) {
+      this.notes.forEach(function (result) {
+        doneInLoopArray = result;
+      });
 
-    doneInLoopArray.forEach(function (note) {
-      arrayOfKeys.push(note.$key);
-    });
+      doneInLoopArray.forEach(function (note) {
+        arrayOfKeys.push(note.$key);
+      });
+    } else {
+      let notesInGroup = this._ls.getNotesInGroup(this.groupName);
+      for(let content of notesInGroup){
+        arrayOfKeys.push(content.$key);
+      }
+    }
 
     return arrayOfKeys;
   }
@@ -186,7 +193,7 @@ export class GroupComponent {
       //location.reload();
     }
     this.clickedDelete.emit(''); //Also works for edits!
-    this.toastr.success('Group name updated!');
+    // this.toastr.success('Group name updated!');
     this._tx._toggleDelete = false;
   }
 
@@ -262,6 +269,14 @@ export class GroupComponent {
   }
   emitNotes(groups: any) {
     this.notesChanged.emit('');
+  }
+
+  //Checks if this is the group that was jumped to,
+  //in that case calls ngOnInit (refreshes)
+  maybeExpand() {
+    if(this.group.name === this._tx._clickedGroup){
+      this.ngOnInit();
+    }
   }
 
 }

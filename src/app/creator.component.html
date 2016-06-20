@@ -35,7 +35,7 @@
 
     <div *ngIf='_authData == null && categoriesVisible' id="categoryButtonContainer"
         (click)="hideCategoryButtons()">
-        <div class="hintButtonContainer" *ngFor="let group of groups">
+        <div class="hintButtonContainer" *ngFor="let group of groups | reverse">
             <button class="categoryButton" (click)="save(group.name)" *ngIf="categoriesVisible">{{group.name | uppercase | firstLetter }}</button>
             <p class="categoryHint" *ngIf="categoriesVisible">{{group.name}}</p>
         </div>

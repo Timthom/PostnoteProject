@@ -10,6 +10,9 @@ import { Observable } from 'rxjs/Observable';
 import {ValueService} from './value.service';
 import {LocalStorageService} from './localstorage.service';
 import { Dragula } from 'ng2-dragula/ng2-dragula';
+import {SortNotes} from './sort-notes.pipe';
+import {Default} from './default.pipe';
+
 
 @Component({
   moduleId: module.id,
@@ -17,7 +20,7 @@ import { Dragula } from 'ng2-dragula/ng2-dragula';
   providers: [LocalStorageService, Dragula],
   templateUrl: 'menugroup.component.html',
   styleUrls: ['menugroup.component.css'],
-  pipes: []
+  pipes: [SortNotes, Default]
 })
 
 
@@ -36,6 +39,7 @@ export class MenuGroupComponent implements OnInit {
   editSrc: string = 'icon_edit.png';
 
   @Output() groupsChanged = new EventEmitter();
+  @Output() closeMenu = new EventEmitter();
 
   constructor( @Inject(FirebaseRef) private _ref: Firebase, private _ds: DataService, private _tx: ValueService, private _ls: LocalStorageService) {
 
@@ -167,19 +171,25 @@ export class MenuGroupComponent implements OnInit {
   }
 
   jumpToNote(note: string) {
-    var element = document.getElementById(note).offsetTop - (window.innerHeight / 12);
-    window.scrollTo(0, element);
+    this.jumpToGroup(this.group.name);
+    setTimeout(function() {
+      var element = document.getElementById(note).offsetTop - (window.innerHeight / 11);
+      window.scrollTo(0, element);
+    }, 100);
+    
   }
 
   jumpToGroup(group: string) {
-    this._tx._showSideBar = false;
     for (var i = 0; i < this._tx._groupNames.length; i++) {
       if (this.group.name == this._tx._groupNames[i]) {
         this._tx._groupExpandeds[i] = "true";
         console.log("this works?!");
+        this.groupsChanged.emit('');
       }
     }
-    var element = document.getElementById(group).offsetTop - (window.innerHeight / 12);
+    this._tx._clickedGroup = this.group.name;//Saves the clicked group
+    var element = document.getElementById(group).offsetTop - (window.innerHeight / 11);
     window.scrollTo(0, element);
+    this.closeMenu.emit('');
   }
 }

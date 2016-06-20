@@ -37,7 +37,7 @@ export class LocalStorageService {
     }
 
     saveGroup(group: Group) {
-        this.groups.push(group);
+        this.groups.unshift(group);
         localStorage.setItem("savedGroups", JSON.stringify(this.groups));
         //this.printAll();
     }

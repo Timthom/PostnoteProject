@@ -152,7 +152,7 @@ export class DragulaHelperService {
         this._ls.changeNoteGroup(id, group);
       }
 
-      this.toastr.success('Note moved', 'Yippie');
+      // this.toastr.success('The note was moved');
     });
 
     dragulaService.over.subscribe((value) => {

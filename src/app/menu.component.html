@@ -2,13 +2,13 @@
     <!-- Sidebar -->
     <br/>
     <div *ngIf='_authData == null'>
-      <p *ngFor="let note of titles | reverse" (click)="jumpToNote(note.$key)">
-        {{note.title}}
+      <p *ngFor="let note of titles | sortNotes" (click)="jumpToNote(note.$key)">
+        {{note.title | default: "untitled"}}
       </p>
     </div>
     <div *ngIf='_authData != null'>
-      <p *ngFor="let note of titles | async | reverse" (click)="jumpToNote(note.$key)">
-        {{note.title}}
+      <p *ngFor="let note of titles | async | sortNotes" (click)="jumpToNote(note.$key)">
+        {{note.title | default: "untitled"}}
       </p>
     </div>
     <hr>
@@ -25,11 +25,11 @@
     </form>
     <hr class="invisibleLine">
     <div *ngIf='_authData == null'>
-      <menuGroup *ngFor="let group of myGroups" [group]="group" (groupsChanged)="groupsChanged(groups)"></menuGroup>
+      <menuGroup *ngFor="let group of myGroups | reverse" [group]="group" (groupsChanged)="groupsChanged(groups)" (closeMenu)="closeMenuMethod()"></menuGroup>
     </div>
     <div *ngIf='_authData != null'>
       <menuGroup *ngFor="let group of myGroups | async" [group]="group"
-        (groupsChanged)="groupsChanged(groups)">
+        (groupsChanged)="groupsChanged(groups)" (closeMenu)="closeMenuMethod()">
       </menuGroup>
     </div>
     <!--</div>-->
