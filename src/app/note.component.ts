@@ -124,9 +124,8 @@ export class NoteComponent implements OnInit {
         // this._ds.changeNoteGroup(this.noteInNote.$key, this.noteSelectedGroup);
       });
     } else {
-      this._ls.changeNoteGroup(this.noteInNote.$key, this.noteSelectedGroup);
-      //TEMPORARY
-      //location.reload();
+      this._dragulaHelper.groupChangedByDropDown(this.group, this.noteSelectedGroup, this._ls.getPositionFromId(this.noteInNote.$key), this.noteInNote.$key);
+      // this._ls.changeNoteGroup(this.noteInNote.$key, this.noteSelectedGroup);
     }
     //this.noteChanged.emit(''); uppdateras m.h.a. editclick??
   }
@@ -187,8 +186,7 @@ export class NoteComponent implements OnInit {
       let getIdInfo: any = o._ds.getPositionFromId(o.noteInNote.$key);
       getIdInfo.then(prevPos => o._dragulaHelper.updatePositionsInGroupAndThenDeleteNoteWhenPressingDelete(o.group, prevPos, o.noteInNote));   
     } else {
-      o._ls.deleteNote(o.noteInNote.$key);
-
+      o._dragulaHelper.updatePositionsInGroupAndThenDeleteNoteWhenPressingDelete(o.group, o._ls.getPositionFromId(o.noteInNote.$key), o.noteInNote);   
     };
 
     o.noteChanged.emit('');
