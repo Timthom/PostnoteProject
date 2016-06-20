@@ -12,6 +12,7 @@ import {LocalStorageService} from './localstorage.service';
 import {Reverse} from './reverse.pipe';
 import {ToastsManager} from 'ng2-toastr/ng2-toastr';
 import {SortNotes} from './sort-notes.pipe';
+import {Default} from './default.pipe';
 
 @Component({
   moduleId: module.id,
@@ -20,7 +21,7 @@ import {SortNotes} from './sort-notes.pipe';
   templateUrl: 'menu.component.html',
   styleUrls: ['menu.component.css'],
   directives: [ROUTER_DIRECTIVES, MenuGroupComponent],
-  pipes: [Reverse, SortNotes]
+  pipes: [Reverse, SortNotes, Default]
 })
 
 export class MenuComponent implements OnInit, CanReuse {

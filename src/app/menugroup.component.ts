@@ -11,6 +11,8 @@ import {ValueService} from './value.service';
 import {LocalStorageService} from './localstorage.service';
 import { Dragula } from 'ng2-dragula/ng2-dragula';
 import {SortNotes} from './sort-notes.pipe';
+import {Default} from './default.pipe';
+
 
 @Component({
   moduleId: module.id,
@@ -18,7 +20,7 @@ import {SortNotes} from './sort-notes.pipe';
   providers: [LocalStorageService, Dragula],
   templateUrl: 'menugroup.component.html',
   styleUrls: ['menugroup.component.css'],
-  pipes: [SortNotes]
+  pipes: [SortNotes, Default]
 })
 
 
