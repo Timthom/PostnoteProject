@@ -36,7 +36,7 @@ export class MenuComponent implements OnInit, CanReuse {
   adding: boolean = false;
   groupName: string = "";
   titles: any;
-  buttonText: string = "Add category";
+  buttonText: string = "Add group";
 
   checkSideBar: boolean = this._vs._showSideBar;
   _authData;
@@ -93,7 +93,7 @@ export class MenuComponent implements OnInit, CanReuse {
     if (this.adding) {
       this.buttonText = "Cancel";
     } else {
-      this.buttonText = "Add category";
+      this.buttonText = "Add group";
     }
   }
 

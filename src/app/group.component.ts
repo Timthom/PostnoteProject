@@ -184,7 +184,7 @@ export class GroupComponent {
       //location.reload();
     }
     this.clickedDelete.emit(''); //Also works for edits!
-    this.toastr.success('Group name updated!');
+    // this.toastr.success('Group name updated!');
     this._tx._toggleDelete = false;
   }
 
