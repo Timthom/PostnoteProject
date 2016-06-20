@@ -171,8 +171,12 @@ export class MenuGroupComponent implements OnInit {
   }
 
   jumpToNote(note: string) {
-    var element = document.getElementById(note).offsetTop - (window.innerHeight / 12);
-    window.scrollTo(0, element);
+    this.jumpToGroup(this.group.name);
+    setTimeout(function() {
+      var element = document.getElementById(note).offsetTop - (window.innerHeight / 11);
+      window.scrollTo(0, element);
+    }, 100);
+    
   }
 
   jumpToGroup(group: string) {
@@ -184,7 +188,7 @@ export class MenuGroupComponent implements OnInit {
       }
     }
     this._tx._clickedGroup = this.group.name;//Saves the clicked group
-    var element = document.getElementById(group).offsetTop - (window.innerHeight / 12);
+    var element = document.getElementById(group).offsetTop - (window.innerHeight / 11);
     window.scrollTo(0, element);
     this.closeMenu.emit('');
   }
