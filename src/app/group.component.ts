@@ -42,6 +42,8 @@ export class GroupComponent {
   editingName: boolean = false;
   enableEditIfNull: string = '';
   editSrc: string = 'icon_edit.png';
+  line1: boolean = false;
+  hr: string;
   _authData;
   groupId;
 
@@ -98,6 +100,13 @@ export class GroupComponent {
         }
       }
     }
+           //Add an hr div above first groups
+       
+         if (this.group.name == this._tx._groupNames[0]) {
+            this.line1 = true;
+            this.hr = "hr";
+          }
+    
   }
 
   saveId() {

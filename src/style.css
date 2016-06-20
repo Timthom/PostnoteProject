@@ -33,12 +33,13 @@ a {
 input{
     -moz-appearance: none !important;
     -webkit-appearance: none !important;
-    -webkit-text-fill-color: #404040; /* Override iOS / Android font color change */
-    -webkit-opacity:1; /* Override iOS opacity change affecting text & background color */
+    -webkit-text-fill-color: #404040!important; /* Override iOS / Android font color change */
+    -webkit-opacity:1!important; /* Override iOS opacity change affecting text & background color */
+    opacity: 1;
     color: #404040; /* Override IE font color change */   
 }
  @-moz-document url-prefix() { 
-   .title { 
+   .title, .group_name { 
      padding-bottom: 0!important;
      padding-top: 0!important;
      }
@@ -50,13 +51,13 @@ input{
 @-webkit-keyframes fadeInLeft {
   0% {
     opacity: 1;
-    -webkit-transform: translate3d(-100%, 0, 0);
+    -webkit-transform: translate3d(-100%, 0, 0)!important;
             transform: translate3d(-100%, 0, 0);
   }
 
   100% {
     opacity: 1;
-    -webkit-transform: none;
+    -webkit-transform: none!important;
             transform: none;
   }
 }
@@ -64,19 +65,19 @@ input{
 @keyframes fadeInLeft {
   0% {
     opacity: 1;
-    -webkit-transform: translate3d(-100%, 0, 0);
+    -webkit-transform: translate3d(-100%, 0, 0)!important;
             transform: translate3d(-100%, 0, 0);
   }
 
   100% {
     opacity: 1;
-    -webkit-transform: none;
+    -webkit-transform: none!important;
             transform: none;
   }
 }
 
 .fadeInLeft {
-  -webkit-animation-name: fadeInLeft;
+  -webkit-animation-name: fadeInLeft!important;
           animation-name: fadeInLeft;
 }
 /*END-------------------*/

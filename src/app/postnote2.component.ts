@@ -50,6 +50,7 @@ export class Postnote2App implements OnInit, AfterViewInit{
     navbarColor: string  = this.randomColor();
     btnImage: string = 'icon_menu.png';
     statusCheckSideBar: boolean = this._vs._showSideBar;
+   
 
     constructor( @Inject(FirebaseRef) private _ref: Firebase, private _ds: DataService, private _vs: ValueService, private _ls: LocalStorageService, private _menuGroup: MenuGroupComponent) {
         this._authData = this._ref.getAuth();
@@ -60,6 +61,7 @@ export class Postnote2App implements OnInit, AfterViewInit{
     ngOnInit() {
         this.getGroups();
         this.getNotes();
+
     }
 
     getGroups() {
@@ -69,7 +71,8 @@ export class Postnote2App implements OnInit, AfterViewInit{
         } else {
             this.allGroups = this._ls.getAllGroups();
         }
-        
+       
+
     }
     
     getNotes() {
