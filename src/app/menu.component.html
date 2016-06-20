@@ -2,12 +2,12 @@
     <!-- Sidebar -->
     <br/>
     <div *ngIf='_authData == null'>
-      <p *ngFor="let note of titles | reverse" (click)="jumpToNote(note.$key)">
+      <p *ngFor="let note of titles | sortNotes" (click)="jumpToNote(note.$key)">
         {{note.title}}
       </p>
     </div>
     <div *ngIf='_authData != null'>
-      <p *ngFor="let note of titles | async | reverse" (click)="jumpToNote(note.$key)">
+      <p *ngFor="let note of titles | async | sortNotes" (click)="jumpToNote(note.$key)">
         {{note.title}}
       </p>
     </div>
