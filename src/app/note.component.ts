@@ -45,19 +45,17 @@ export class NoteComponent implements OnInit {
   color;
 
   @Input()
-  position;
-
-  @Input()
   groups: any;
 
   @Output()
   noteChanged = new EventEmitter();
 
   _authData;
-  test: any;
+  // test: any;
 
   ngOnInit() {
     this.colorInit(this.color);
+    // console.log("INIT " + this.title + this.position);
   }
 
   constructor(@Inject(FirebaseRef) private _ref: Firebase, private _ds: DataService, private _ls: LocalStorageService, private _dragulaHelper: DragulaHelperService) {
@@ -94,15 +92,20 @@ export class NoteComponent implements OnInit {
         this._ds.updateNoteColor(this.noteInNote.$key, this.colorString);//moved
       }
     } else {
+      this._ls.getAllNotes();
       this._ls.updateNoteTitle(this.noteInNote.$key, this.title);
       this._ls.updateNoteText(this.noteInNote.$key, this.text);
       this._ls.changeNoteGroup(this.noteInNote.$key, this.noteSelectedGroup);//moved
       if (this.colorString != undefined) { //If new color has been chosen
         this._ls.updateNoteColor(this.noteInNote.$key, this.colorString);//moved
       }
+
+      // this._ls.getAllNotes();
       // console.log("old pos " + this.noteInNote.position);
       // console.log("new position " + this.position);
-      // this._ls.updateNotePosition(this.noteInNote.$key, this.position);
+      // var newPOS = this._ls.getPositionFromId(this.noteInNote.$key);
+      // console.log(newPOS);
+      // this._ls.updateNotePosition(this.noteInNote.$key, newPOS);
 
         // console.log('SAVE: här kommer alla i noGroup');
         // let tempNotes = this._ls.getNotesInGroup('noGroup');

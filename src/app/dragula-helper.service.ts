@@ -306,11 +306,12 @@ export class DragulaHelperService {
     } else {
       notesInGroup = this._ls.getNotesInGroup(oldGroup);
       for (var note of notesInGroup) {
-        // console.log("inne i for");
         if (note.position > prevPos) {
-          // console.log(`inne i decrease IF note.position = ${note.position}, prepos = ${prevPos}, oldgroup = ${note.group}`)
+          console.log("test * " + note.position);
           this._ls.updateNotePosition(note.$key, (note.position - 1));
+          console.log("test ** " + note.position);
         }
+        console.log("test *** " + note.title + " " + note.position);
       }
       this.updateAndIncreasePositionOnEverySiblingOnRightOnDrop(oldGroup, newGroup, droppedNote, siblingNote);
     }
