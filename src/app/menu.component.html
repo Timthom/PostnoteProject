@@ -16,8 +16,7 @@
          {{buttonText}}
        </button>
   <form *ngIf="adding">
-    <input class="inputCategory" [(ngModel)]="groupName" type="text" id="categoryInput" placeholder="Name..." (keyup.enter)="addGroup()"
-      maxlength="12">
+    <input [(ngModel)]="groupName" type="text" id="categoryInput" placeholder="Name..." (keyup.enter)="addGroup()" maxlength="12">
     <button id="plusBtn" type="button" (click)="addGroup()">
         +
       </button>
