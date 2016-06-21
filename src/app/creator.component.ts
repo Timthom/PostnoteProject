@@ -34,17 +34,13 @@ export class CreatorComponent {
     private noteComponents: QueryList<NoteComponent>;
 
     groups: any;
-
     notes: any;
 
     @Output()
     notesChanged = new EventEmitter();
 
-
     title: string = "";
     text: string = "";
-
-
     selectedGroup: string = "noGroup";
     _authData;
     categoriesVisible: boolean = false;
@@ -72,24 +68,19 @@ export class CreatorComponent {
             this._ds.getAllGroups().then(groups => this.groups = groups);
         } else {
             this.groups = this._ls.getAllGroups();
-
         }
     }
-
 
     getNotes() {
         const token = localStorage.getItem('token');
         if (this._authData != null && token != null) {
-            this._ds.getAllNotesInGroup('noGroup').then(notes => this.notes = notes);
-          
+            this._ds.getAllNotesInGroup('noGroup').then(notes => this.notes = notes); 
         } else {
             this.notes = this._ls.getNotesInGroup('noGroup');
         }
     }
 
-    //Emitted from dropdown?
     groupChanged(event) {
-        //Causes a bug where the creators dropdown changes when you change a notes group?
         this.selectedGroup = event;
     }
 
@@ -100,13 +91,11 @@ export class CreatorComponent {
         if (this._authData != null) {
             console.log(`inne i save med group = ${group}`);
             this._ds.addNoteToNotes("", "", group, time, this.randomColor(), -1);
-
         } else {
             let newNote = new Note("", "", group, time.toString(), this.randomColor(), -1);
             this._ls.addNoteToNotes(newNote);
             this.notesChanged.emit('');
         }
-
         this._dragulaHelper.updatePositionsInGroup(group);
         this.categoriesVisible = false;
 
@@ -123,7 +112,7 @@ export class CreatorComponent {
 
     randomColor() {
         var colors = ["blue", "magenta", "yellow", "green", "pink", "orange"];
-        // if we want to pick a random color.......
+        // if we want to pick a random color instead.......
         //var color = colors[Math.floor(Math.random()*colors.length)];
         var color = colors[this.colorCount];
         this.colorCount++;
@@ -137,7 +126,6 @@ export class CreatorComponent {
         this.categoriesVisible = false;
     }
 
-
     noteChanged() {
         this.notesChanged.emit('');
         this.getNotes();
@@ -146,7 +134,6 @@ export class CreatorComponent {
     groupsChanged() {
         this.noteComponents.toArray().forEach((child) => child.groupsChanged());
         this.getGroups();
-
     }    
 
     visits() {

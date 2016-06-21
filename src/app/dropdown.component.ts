@@ -48,7 +48,7 @@ export class DropdownComponent implements OnInit {
 
     constructor( @Inject(FirebaseRef) private _ref: Firebase, private _ds: DataService, private _ls: LocalStorageService, private _menu: MenuComponent, private _menuGroup: MenuGroupComponent, public toastr: ToastsManager) {
         this._authData = this._ref.getAuth();
-      
+
     }
 
     ngOnInit() {
@@ -64,11 +64,8 @@ export class DropdownComponent implements OnInit {
     }
 
     selectGroup(group: string) {
-        //Emits to creator?
         this.changeGroup.emit(group);
-        //Emits to note component and group component?
         this.changeNoteGroup.emit(group);
         this.toastr.success('Moved note to ' + group);
-        
     }
 }

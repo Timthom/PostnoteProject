@@ -18,5 +18,3 @@ var wow = new WOW({
 });
 wow.init();
 
-
-//alert("Hej");

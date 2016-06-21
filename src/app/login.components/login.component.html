@@ -1,15 +1,11 @@
 <div class="login ">
     <button class="createAccountText" (click)="createAccountWindow()">Create Account</button>
     <form [ngFormModel]="myForm" (ngSubmit)="onLoggedIn()">
-
         <div class="input-group">
-
-            <input class="input"[ngFormControl]="myForm.find('email')" type="email" placeholder="Email"
-                id="email">
+            <input class="input" [ngFormControl]="myForm.find('email')" type="email" placeholder="Email" id="email">
         </div>
         <div class="input-group">
-            <input class="input" [ngFormControl]="myForm.find('password')" type="password"
-                placeholder="Password" id="password">
+            <input class="input" [ngFormControl]="myForm.find('password')" type="password" placeholder="Password" id="password">
         </div>
         <button class="button" type="submit" [disabled]="!myForm.valid">Sign in</button>
     </form>
@@ -19,16 +15,9 @@
         </span>
     </div>
     <div class="row">
-        <button class="imageButtons  col-xs-3" 
-            (click)="loginWithFacebook()"><img src="Facebook-color.png" alt="Facebook logo button"></button>
-            
-        <button class="imageButtons  col-xs-3"  
-            (click)="loginWithGoogle()"><img src="Google-color.png" alt="Google logo button"></button>
-            
-        <button class="imageButtons  col-xs-3"   
-            (click)="loginWithGitHub()"><img src="Github-color.png" alt="Github logoi button"></button>
-            
-        <button class="imageButtons  col-xs-3"   
-            (click)="loginWithTwitter()"><img src="Twitter-color.png" alt="Twitter logo button"></button>
+        <button class="imageButtons  col-xs-3" (click)="loginWithFacebook()"><img src="Facebook-color.png" alt="Facebook logo button"></button>
+        <button class="imageButtons  col-xs-3" (click)="loginWithGoogle()"><img src="Google-color.png" alt="Google logo button"></button>
+        <button class="imageButtons  col-xs-3" (click)="loginWithGitHub()"><img src="Github-color.png" alt="Github logoi button"></button>
+        <button class="imageButtons  col-xs-3" (click)="loginWithTwitter()"><img src="Twitter-color.png" alt="Twitter logo button"></button>
     </div>
 </div>

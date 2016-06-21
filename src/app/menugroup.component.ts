@@ -49,10 +49,8 @@ export class MenuGroupComponent implements OnInit {
     this.getNotes();
 
     if (this._tx._toggleDelete == true) {
-      console.log("uffe working in toggleDelete == true");
       this.initialAddOfGroups();
     } else {
-      console.log("uffe working in toggleDelete == false");
       this.addAnotherGroup();
       this._tx._toggleDelete = true;
     }
@@ -61,8 +59,6 @@ export class MenuGroupComponent implements OnInit {
   }
 
   initialAddOfGroups() {
-    // checks if name already exists, if not then adds it to array of group names.
-    // also adds a new "false" status of the groups expand.
     let toPush = true;
     for (let content of this._tx._menuNames) {
       if (this.group.name == content) {
@@ -70,9 +66,7 @@ export class MenuGroupComponent implements OnInit {
       }
     }
     if (toPush == true) {
-      console.log("Adding group");
       this._tx._menuNames.push(this.group.name);
-      console.log(this._tx._menuNames.length);
       if (this._tx._menuNames.length > this._tx._groupCount) {
         this._tx._menuExpandeds.push("false");
       }
@@ -81,19 +75,15 @@ export class MenuGroupComponent implements OnInit {
 
   addAnotherGroup() {
     if (this._tx._toggleCreate == true) {
-      console.log("inside toggleCreate method == true");
       this._tx._menuNames.unshift(this.group.name);
       if (this._tx._menuNames.length > this._tx._groupCount) {
         this._tx._menuExpandeds.unshift("false");
       }
-      console.log("uffe working in toggleCreate == true");
       this._tx._toggleCreate = false;
     }
   }
 
   updateGroupStatuses() {
-    // updates each group with what status of expand it had before the re-rendering.
-    // console.log(this._tx._menuNames.length);
     for (var i = 0; i < this._tx._menuNames.length; i++) {
       if (this.group.name == this._tx._menuNames[i]) {
         if (this._tx._menuExpandeds[i] == "true") {
@@ -121,33 +111,7 @@ export class MenuGroupComponent implements OnInit {
     }
   }
 
-  //WILL NOT BE USED
-  // deleteGroup() {
-  //   console.log("DELETE GROUP");
-  //   //remove from shared model
-  //   // for (var item in this.groups) {
-  //   //   console.log("CHECKING " + this.groups[item].$key);
-  //   //         if (this.group.$key == this.groups[item].$key) {
-  //   //             console.log("REMOVING no " + item);
-  //   //             this.groups.splice(item, 1);
-  //   //             break;
-  //   //         }
-  //   // }
-  //   //remove from firebase
-  //   if (this._authData != null) {
-  //     this._ds.deleteGroup(this._tx._focusedId);
-  //   } else {//remove from local storage
-  //     this._ls.deleteGroup(this._tx._focusedId);
-  //     //TEMPORARY
-  //     //location.reload();
-  //   }
-  //   this._tx._toggleExpand = false;
-  //   this.groupsChanged.emit(this.groups);
-  // }
-
-
   editGroup() {
-    //change name in shared model
     for (var index in this.groups) {
       if (this.group.$key == this.groups[index].$key) {
         this.groups[index].name = this.group.name;
@@ -158,12 +122,9 @@ export class MenuGroupComponent implements OnInit {
       this._ds.updateGroupName(this.group.$key, this.group.name);
     } else {
       this._ls.updateGroupName(this.group.$key, this.group.name);
-      //TEMPORARY
-      //location.reload();
     }
     this._tx._toggleDelete = false;
-    this.groupsChanged.emit(''); //Also works for edits!
-    // this.toastr.success('Group name updated!');
+    this.groupsChanged.emit(''); 
   }
 
   getContent() {
@@ -187,8 +148,6 @@ export class MenuGroupComponent implements OnInit {
 
     return arrayOfKeys;
   }
-
-  //When pressing the edit button, it enables editing on the input field
   editing() {
     this.saveId();
     this.editingName = !this.editingName;
@@ -199,7 +158,6 @@ export class MenuGroupComponent implements OnInit {
     } else {
       if (this._authData != null) {
         let content = this.getContent();
-        // changes notes in the group to the new group
         for (let key of content) {
           this._ds.changeNoteGroup(key, this.group.name);
         }
@@ -216,7 +174,6 @@ export class MenuGroupComponent implements OnInit {
           this._tx._menuExpandeds[i] = "true";
         }
       }
-      //console.log(this._tx._menuNames.length);
       this.getNotes();
       this.editSrc = 'icon_edit.png';
     }
@@ -224,11 +181,8 @@ export class MenuGroupComponent implements OnInit {
 
   // sets the groupname and status to new name with status = true. 
   updateTX() {
-    console.log(this.group.name);
     for (var i = 0; i < this._tx._menuNames.length; i++) {
-      console.log(i);
       if (this._tx._menuNames[i] == this.group.name) {
-        console.log(this.group.name);
         this._tx._menuNames[i] = this.group.name;
         this._tx._menuExpandeds[i] = "true";
       }
@@ -257,9 +211,7 @@ export class MenuGroupComponent implements OnInit {
       }
     }
     for (let booleans of this._tx._menuExpandeds) {
-      console.log(booleans);
     }
-    console.log("*===*");
   }
 
   jumpToNote(note: string) {
@@ -277,11 +229,10 @@ export class MenuGroupComponent implements OnInit {
       for (var i = 0; i < this._tx._menuNames.length; i++) {
         if (this.group.name == this._tx._menuNames[i]) {
           this._tx._menuExpandeds[i] = "true";
-          console.log("this works?!");
           this.groupsChanged.emit('');
         }
       }
-      this._tx._clickedGroup = this.group.name;//Saves the clicked group
+      this._tx._clickedGroup = this.group.name;
       var element = document.getElementById(group).offsetTop - (window.innerHeight / 11);
       window.scrollTo(0, element);
       this.closeMenu.emit('');

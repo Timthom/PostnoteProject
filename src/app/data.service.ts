@@ -17,27 +17,22 @@ export class DataService {
         if (this._ref.getAuth() == null) {
             return;
         }
-        
-        //Varför sker det här?
+
         if (localStorage.getItem('token') == null) {
-            // console.log('return#2');
             return;
         }
-        
+
         const token = localStorage.getItem('token');
         this._ref.authWithCustomToken(token, function (error, authData) {
 
-
             if (error) {
-                //console.log("Authentication Failed!", error);
             } else {
-                //console.log("Authenticated successfully with payload:", authData);
             }
         }, {
-            remember: "default"
+                remember: "default"
             });
 
-        
+
     }
 
     //returns all notes in the DB...
@@ -56,7 +51,7 @@ export class DataService {
 
             }
         }, {
-            remember: "default"
+                remember: "default"
             });
 
         return Promise.resolve(this._afNotes);
@@ -78,13 +73,9 @@ export class DataService {
 
             }
         }, {
-            remember: "default"
-            }); console.log(token);
-
-
-
+                remember: "default"
+            });
         this._notes.push({ 'title': title, 'text': text, 'group': group, 'timeStamp': (time * -1), 'color': color, 'position': position });
-
     }
 
     //updates the notes title with the chosen id...
@@ -103,7 +94,7 @@ export class DataService {
 
             }
         }, {
-            remember: "default"
+                remember: "default"
             });
         this._notes.child(id).update({ 'title': newTitle });
     }
@@ -121,10 +112,9 @@ export class DataService {
             if (error) {
 
             } else {
-                //console.log("Authenticated successfully with payload:", authData);
             }
         }, {
-            remember: "default"
+                remember: "default"
             });
         this._notes.child(id).update({ 'text': newText });
     }
@@ -132,7 +122,6 @@ export class DataService {
     //updates notes backgroundcolor...
     updateNoteColor(id: string, color: string) {
         this.refresh();
-
         this._notes.child(id).update({ 'color': color });
     }
 
@@ -140,19 +129,16 @@ export class DataService {
     deleteNote(id: string) {
 
         this.refresh();
-
         if (this._ref.getAuth() == null) return;
 
         const token = localStorage.getItem('token');
         this._notes.authWithCustomToken(token, function (error, authData) {
 
             if (error) {
-                //console.log("Authentication Failed!", error);
             } else {
-                //console.log("Authenticated successfully with payload:", authData);
             }
         }, {
-            remember: "default"
+                remember: "default"
             });
         this._notes.child(id).remove();
     }
@@ -161,22 +147,18 @@ export class DataService {
     getAllNotesInGroup(groupName: string) {
 
         this.refresh();
-
         if (this._ref.getAuth() == null) return;
 
         const token = localStorage.getItem('token');
         this._ref.authWithCustomToken(token, function (error, authData) {
 
             if (error) {
-                //console.log("Authentication Failed!", error);
             } else {
-                //console.log("Authenticated successfully with payload:", authData);
             }
         }, {
-            remember: "default"
+                remember: "default"
             });
         var authData = this._ref.getAuth();
-        //console.log(authData);
         let tempObservable: FirebaseListObservable<any[]> = this._af.database.list('/users/' + authData.uid + '/notes', {
             query: {
                 orderByChild: 'group',
@@ -203,7 +185,7 @@ export class DataService {
                 //console.log("Authenticated successfully with payload:", authData);
             }
         }, {
-            remember: "default"
+                remember: "default"
             });
         return Promise.resolve(this._afGroups);
     }
@@ -213,19 +195,16 @@ export class DataService {
     addGroupToGroups(name: string, time: number) {
 
         this.refresh();
-
         if (this._ref.getAuth() == null) return;
 
         const token = localStorage.getItem('token');
         this._ref.authWithCustomToken(token, function (error, authData) {
 
             if (error) {
-                //console.log("Authentication Failed!", error);
             } else {
-                //console.log("Authenticated successfully with payload:", authData);
             }
         }, {
-            remember: "default"
+                remember: "default"
             });
         this._groups.push({ 'name': name, 'timeStamp': (time * -1) });
     }
@@ -239,12 +218,10 @@ export class DataService {
         this._ref.authWithCustomToken(token, function (error, authData) {
 
             if (error) {
-                //console.log("Authentication Failed!", error);
             } else {
-                //console.log("Authenticated successfully with payload:", authData);
             }
         }, {
-            remember: "default"
+                remember: "default"
             });
         this._groups.child(id).update({ 'name': name });
     }
@@ -258,12 +235,10 @@ export class DataService {
         this._ref.authWithCustomToken(token, function (error, authData) {
 
             if (error) {
-                //console.log("Authentication Failed!", error);
             } else {
-                //console.log("Authenticated successfully with payload:", authData);
             }
         }, {
-            remember: "default"
+                remember: "default"
             });
         this._groups.child(id).remove();
     }
@@ -276,48 +251,45 @@ export class DataService {
         const token = localStorage.getItem('token');
         this._notes.authWithCustomToken(token, function (error, authData) {
             if (error) {
-                //console.log("Authentication Failed!", error);
             } else {
-                //console.log("Authenticated successfully with payload:", authData);
             }
         }, {
-            remember: "default"
+                remember: "default"
             });
         this._notes.child(id).update({ 'group': group });
     }
 
-    /* Vill göra denna med promises om jag hinner //Marcus... */    
     getGroupNameFromId(id: string) {
 
         this.refresh();
 
         let notes = this._notes;
-        return new Promise(function(resolve){
-        notes.child(id).child('group').on('value', (s) => resolve(s.val()))
-        });      
+        return new Promise(function (resolve) {
+            notes.child(id).child('group').on('value', (s) => resolve(s.val()))
+        });
     }
-    
+
     getPositionFromId(id: string) {
 
         this.refresh();
 
         let notes = this._notes;
-        return new Promise(function(resolve){
-        notes.child(id).child('position').on('value', (s) => resolve(s.val()))
-        });      
-    }    
-    
+        return new Promise(function (resolve) {
+            notes.child(id).child('position').on('value', (s) => resolve(s.val()))
+        });
+    }
+
     updateNotePosition(id: string, position: number) {
 
         this.refresh();
-        
+
         this._notes.child(id).update({ 'position': position });
-    } 
+    }
 
     refresh() {
 
         var authData = this._ref.getAuth();
-        
+
         this._afUserInfo = this._af.database.list('/users/' + authData.uid);
         this._afNotes = this._af.database.list('/users/' + authData.uid + '/notes');
         this._afGroups = this._af.database.list('/users/' + authData.uid + '/groups', {
@@ -325,12 +297,7 @@ export class DataService {
                 orderByChild: 'timeStamp'
             }
         });
-
-
         this._notes = this._ref.child('/users/' + authData.uid + '/notes');
-
         this._groups = this._ref.child('/users/' + authData.uid + '/groups');
-
     }
-    
 }

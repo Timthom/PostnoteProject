@@ -77,7 +77,6 @@ export class GroupComponent {
       }
     }
     if (toPush == true) {
-      console.log("Adding group");
       this._tx._groupNames.push(this.group.name);
       if (this._tx._groupNames.length > this._tx._groupCount) {
         this._tx._groupExpandeds.push("false");
@@ -87,7 +86,6 @@ export class GroupComponent {
 
   addAnotherGroup() {
     if (this._tx._toggleCreate == true) {
-      console.log("inside toPush");
       this._tx._groupNames.unshift(this.group.name);
       if (this._tx._groupNames.length > this._tx._groupCount) {
         this._tx._groupExpandeds.unshift("false");
@@ -98,7 +96,6 @@ export class GroupComponent {
 
   updateGroupStatuses() {
     // updates each group with what status of expand it had before the re-rendering.
-    // console.log(this._tx._groupNames.length);
     for (var i = 0; i < this._tx._groupNames.length; i++) {
       if (this.group.name == this._tx._groupNames[i]) {
         if (this._tx._groupExpandeds[i] == "true") {
@@ -108,11 +105,9 @@ export class GroupComponent {
         } else {
           this.expanded = false;
           this.arrowSrc = 'icon_expand.png';
-
         }
       }
     }
-
   }
 
   saveId() {
@@ -147,7 +142,6 @@ export class GroupComponent {
         arrayOfKeys.push(content.$key);
       }
     }
-
     return arrayOfKeys;
   }
 
@@ -167,14 +161,11 @@ export class GroupComponent {
       }
     }
     if (this._authData != null) {
-      //To be able to iterate through all notes
-      //Remove all notes in group
       for (let key of this._tx._focusedNoteKeys) {
         this._ds.deleteNote(key);
       }
       this._ds.deleteGroup(this._tx._focusedId);
-    } else {//if not logged in
-      //Removes notes of the group
+    } else {
       for (let note of this._tx._focusedNoteKeys) {
         this._ls.deleteNote(note);
       }
@@ -184,7 +175,6 @@ export class GroupComponent {
   }
 
   editGroupName() {
-    //change name in shared model
     for (var index in this.groups) {
       if (this.group.$key == this.groups[index].$key) {
         this.groups[index].name = this.groupName;
@@ -195,11 +185,8 @@ export class GroupComponent {
       this._ds.updateGroupName(this.group.$key, this.groupName);
     } else {
       this._ls.updateGroupName(this.group.$key, this.groupName);
-      //TEMPORARY
-      //location.reload();
     }
-    this.clickedDelete.emit(''); //Also works for edits!
-    // this.toastr.success('Group name updated!');
+    this.clickedDelete.emit(''); 
     this._tx._toggleDelete = false;
   }
 
@@ -212,7 +199,6 @@ export class GroupComponent {
     } else {
       if (this._authData != null) {
         let content = this.getContent();
-        // changes notes in the group to the new group
         for (let key of content) {
           this._ds.changeNoteGroup(key, this.groupName);
         }
@@ -229,7 +215,6 @@ export class GroupComponent {
           this._tx._groupExpandeds[i] = "true";
         }
       }
-      console.log(this._tx._groupNames.length);
       this.getNotes();
       this.editSrc = 'icon_edit.png';
     }
@@ -245,9 +230,7 @@ export class GroupComponent {
     }
   }
 
-  // Expand category on click arrowBtn
   groupExpand() {
-    // Uffes idea:
     if (!this.editingName) {
       this.expanded = !this.expanded;
       if (this.expanded) {
@@ -256,9 +239,6 @@ export class GroupComponent {
         this.arrowSrc = 'icon_expand.png';
       }
     }
-    // for (let content of this._tx._groupNames) {
-    //   console.log(content);
-    // }
     for (var i = 0; i < this._tx._groupNames.length; i++) {
       if (this.group.name == this._tx._groupNames[i]) {
         if (this.expanded == true) {
@@ -269,20 +249,15 @@ export class GroupComponent {
       }
     }
     for (let booleans of this._tx._groupExpandeds) {
-      console.log(booleans);
     }
-    console.log("*===*");
   }
   emitNotes(groups: any) {
     this.notesChanged.emit('');
   }
 
-  //Checks if this is the group that was jumped to,
-  //in that case calls ngOnInit (refreshes)
   maybeExpand() {
     if (this.group.name === this._tx._clickedGroup) {
       this.ngOnInit();
     }
   }
-
 }

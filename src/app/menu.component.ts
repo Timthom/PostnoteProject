@@ -55,8 +55,6 @@ export class MenuComponent implements OnInit, CanReuse {
     private _tx: ValueService) {
 
     this._authData = this._ref.getAuth();
-    //_postNote2.groupChanged.subscribe(this.getGroups);
-
   }
 
   ngOnInit() {
@@ -159,7 +157,6 @@ export class MenuComponent implements OnInit, CanReuse {
       this.adding = false;
       this.showingCancel = !this.showingCancel;
       this.buttonText = "Add category";
-      console.log("something happening in menu");
       this._tx._toggleDelete = false;
       this._tx._toggleCreate = true;
     }
@@ -169,5 +166,3 @@ export class MenuComponent implements OnInit, CanReuse {
     this.clicked.emit('');
   }
 }
-
-

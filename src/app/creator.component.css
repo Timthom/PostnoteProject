@@ -3,8 +3,6 @@
   padding-top: 10px;
 }
 
-
-
 .inputTitle {
    height: 36px;
    font-size: 28px;
@@ -117,21 +115,11 @@ p {
    overflow: auto;
 }
 
-
 .inputText::-webkit-input-placeholder {
     color: #505050;
 }
 
-
-/*note {
-    margin: 10px;
-    width: 300px;
-    height: 300px;
-}*/
-
 .noteContainer {
- /*max-height: 300px;
- max-width: 300px;*/
  display: table-cell;
  position: relative;
  float: left;

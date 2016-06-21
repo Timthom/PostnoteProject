@@ -325,7 +325,6 @@ export class AuthorizationService {
         }
 
         if(this._ref.getAuth() != null && this.user == null) {
-            console.log(this.user);
             this.getLoggedInUser().then(res => this.user = res);
         }
          

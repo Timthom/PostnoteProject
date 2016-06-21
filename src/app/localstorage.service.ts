@@ -39,18 +39,15 @@ export class LocalStorageService {
     saveGroup(group: Group) {
         this.groups.unshift(group);
         localStorage.setItem("savedGroups", JSON.stringify(this.groups));
-        //this.printAll();
     }
 
 
 
     deleteGroup(groupkey: string) {
-        //The notes in group are removed in the components before this method is called
         for (var item in this.groups) {
             if (groupkey == this.groups[item].$key) {
                 this.groups.splice(item, 1);
                 localStorage.setItem("savedGroups", JSON.stringify(this.groups));
-                //this.printAll();
                 return;
             }
         }
@@ -59,23 +56,20 @@ export class LocalStorageService {
     updateGroupName(groupkey: string, newName: string) {
         var oldGroupName;
         for (var item in this.groups) {
-            if (groupkey == this.groups[item].$key) { //Find group with key
+            if (groupkey == this.groups[item].$key) { 
                 this.getAllGroups();
                 oldGroupName = this.groups[item].name;
                 this.groups[item].name = newName;
                 localStorage.setItem("savedGroups", JSON.stringify(this.groups));
-
             }
         }
         for (var item in this.notes) {
-            if (oldGroupName == this.notes[item].group) { //If it has the old groupname
+            if (oldGroupName == this.notes[item].group) { 
                 this.getAllGroups();
-                this.changeNoteGroup(this.notes[item].$key, newName);//change to new
+                this.changeNoteGroup(this.notes[item].$key, newName);
             }
         }
         localStorage.setItem("savedNotes", JSON.stringify(this.notes));
-        //this.printAll();
-
     }
 
     getAllNotes() {
@@ -96,7 +90,6 @@ export class LocalStorageService {
         } else {
             return [];
         }
-
     }
 
     changeNoteGroup(key: string, newGroup: string) {
@@ -105,7 +98,6 @@ export class LocalStorageService {
                 this.getAllNotes();
                 this.notes[item].group = newGroup;
                 localStorage.setItem("savedNotes", JSON.stringify(this.notes));
-                //this.printAll();
                 return;
             }
         }
@@ -115,7 +107,6 @@ export class LocalStorageService {
     addNoteToNotes(note: Note) {
         this.notes.push(note);
         localStorage.setItem("savedNotes", JSON.stringify(this.notes));
-        //this.printAll();
     }
 
     deleteNote(key: string) {
@@ -124,7 +115,6 @@ export class LocalStorageService {
                 this.getAllNotes();
                 this.notes.splice(item, 1);
                 localStorage.setItem("savedNotes", JSON.stringify(this.notes));
-                //this.printAll();
                 return;
             }
         }
@@ -137,7 +127,6 @@ export class LocalStorageService {
                 this.getAllNotes();
                 this.notes[item].title = newTitle;
                 localStorage.setItem("savedNotes", JSON.stringify(this.notes));
-                //this.printAll();
                 return;
             }
         }
@@ -149,7 +138,6 @@ export class LocalStorageService {
                 this.getAllNotes();
                 this.notes[item].text = newText;
                 localStorage.setItem("savedNotes", JSON.stringify(this.notes));
-                //this.printAll();
                 return;
             }
         }
@@ -161,29 +149,12 @@ export class LocalStorageService {
                 this.getAllNotes();
                 this.notes[item].color = color;
                 localStorage.setItem("savedNotes", JSON.stringify(this.notes));
-                //this.printAll();
                 return;
             }
         }
     }
 
-
-    //For testing.... 
-    clearing() {
-        this.groups = [];
-        localStorage.setItem("savedGroups", JSON.stringify(this.groups));
-        this.notes = [];
-        localStorage.setItem("savedNotes", JSON.stringify(this.notes));
-    }
-
-    printAll() {
-        console.log("Notes in local: ");
-        console.log(this.notes);
-        console.log("Groups in local: ");
-        console.log(this.groups);
-    }
-
-    getGroupNameFromId(id: string) {
+     getGroupNameFromId(id: string) {
         for (var item in this.notes) {
             if (id == this.notes[item].$key) {
                 this.getAllNotes();
@@ -210,6 +181,21 @@ export class LocalStorageService {
                 return;
             }
         }
+    }
+
+    //For testing.... 
+    clearing() {
+        this.groups = [];
+        localStorage.setItem("savedGroups", JSON.stringify(this.groups));
+        this.notes = [];
+        localStorage.setItem("savedNotes", JSON.stringify(this.notes));
+    }
+
+    printAll() {
+        console.log("Notes in local: ");
+        console.log(this.notes);
+        console.log("Groups in local: ");
+        console.log(this.groups);
     }
 }
 

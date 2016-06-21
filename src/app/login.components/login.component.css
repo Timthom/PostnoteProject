@@ -106,7 +106,6 @@ button:not([disabled]):hover {
     font-size: 1.3em;
     cursor: pointer;
     outline: none;
-    /* padding: 2px 8px; */
     width: 90%;
     height: 45px;
     border: none;
@@ -114,12 +113,6 @@ button:not([disabled]):hover {
     float: right;
     z-index: 1000;
  }
-
- /*
- *  Thomas shit!!! media-querys
- */
-
-
 
 @media all and (min-width: 600px) {
   .login {
@@ -136,10 +129,3 @@ button:not([disabled]):hover {
   width: 320px;
 }
 }
-
-
-
-
-  
-
-

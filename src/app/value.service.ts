@@ -14,7 +14,7 @@ export class ValueService {
   _groupExpandeds: string[] = [];
   _menuExpandeds: string[] = [];
   _groupCount: number = 0;
-  _clickedGroup: string = ''; //Group that was jumped to
+  _clickedGroup: string = '';
 
   constructor() { }
 
@@ -26,7 +26,6 @@ export class ValueService {
     this._showSideBar = b;
   }
 
-  // getters and setter for the toggle arrow
   get toggleDelete() {
     return this._toggleDelete;
   }
@@ -50,7 +49,6 @@ export class ValueService {
   set focusedId(id: string) {
     this._focusedId = id;
   }
-  // Getting and settting focused Name
   get focusedName() {
     return this._focusedName;
   }
@@ -90,7 +88,6 @@ export class ValueService {
     this._groupCount = savedNumber;
   }
 
-  // for menu!
   get menuNames() {
     return this._menuNames;
   }
@@ -107,4 +104,3 @@ export class ValueService {
     this._menuExpandeds = names;
   }
 }
-

@@ -9,14 +9,11 @@ import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 export class DragulaHelperService {
   _notes: any;
   _authData: any;
-  // _canSaveSibling: boolean = true;
   _savedSibling: any;
 
   constructor(private _dataservice: DataService, @Inject(FirebaseRef) private _ref: Firebase, private _ls: LocalStorageService, public toastr: ToastsManager) {
     this._authData = this._ref.getAuth();
-    /***** This is only because I dont know how to return the promise from dataservice *****/
     let authData = this._ref.getAuth();
-    // this._notes = this._ref.child('/users/' + authData.uid + '/notes');
   }
 
   /***********************************************************
@@ -31,7 +28,7 @@ export class DragulaHelperService {
         return false; // only elements in drake.containers will be taken into account
       },
       moves: function (el, source, handle, sibling) {
- 
+
         if (self.checkMobileUser()) {
           return false;
         } else {
@@ -83,7 +80,7 @@ export class DragulaHelperService {
     });
 
     dragulaService.out.subscribe((value) => {
-    
+
     });
 
   }
@@ -141,7 +138,7 @@ export class DragulaHelperService {
           tempPos++;
         }
       } else {
-        this._ls.updateNotePosition(droppedNote.id, (this._ls.getPositionFromId(droppedNote.previousElementSibling.id) +1));
+        this._ls.updateNotePosition(droppedNote.id, (this._ls.getPositionFromId(droppedNote.previousElementSibling.id) + 1));
       }
     }
   }
@@ -180,9 +177,7 @@ export class DragulaHelperService {
 
   updatePositionsInGroupAndThenDeleteNoteWhenPressingDelete(group: string, prevPos: number, noteInNote: any) {
     this.checkconnection();
-    console.log('inne i delete dragula');
     if (this._authData != null) {
-      console.log('inne i delete dragula online');
       this._dataservice.deleteNote(noteInNote.$key);
       let notesInGroup: any = this._dataservice.getAllNotesInGroup(group);
 
@@ -196,22 +191,17 @@ export class DragulaHelperService {
 
         doneInLoopArray.forEach(function (note) {
           if (note.position > prevPos) {
-            console.log('inne i delete dragula online if');
             self._dataservice.updateNotePosition(note.$key, (note.position - 1));
           }
         });
       });
     } else {
       this._ls.deleteNote(noteInNote.$key);
-      console.log('inne i delete dragula offline');
       let notesInGroup: any = this._ls.getNotesInGroup(group);
 
       for (var note of notesInGroup) {
-        console.log(`inne i for och note:`);
-        console.log(note);
         if (note.position > prevPos) {
-          console.log('inne i delete dragula offline if');
-          this._ls.updateNotePosition(note.$key, ((note.position)-1));
+          this._ls.updateNotePosition(note.$key, ((note.position) - 1));
         }
       }
     }
@@ -303,9 +293,8 @@ export class DragulaHelperService {
     }
   }
 
-//This is essential because if you start offline and the n log in authData is still null... Well not anymore...
-  checkconnection () {
-    console.log('inne i checkconnection');
+  //This is essential because if you start offline and the n log in authData is still null... Well not anymore...
+  checkconnection() {
     if (this._authData != this._ref.getAuth()) {
       this._dataservice.refresh();
       this._authData = this._ref.getAuth();

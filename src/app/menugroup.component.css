@@ -17,11 +17,9 @@ ul {
 }
 
 #container{
-  /*  padding-left: 10px;
-    padding-right: 10px;*/
     margin: 1% 0 1% 0;
 }
-/*My try*/
+
 .groupContainer{
     position: absolute;
     width: 100%;
@@ -32,7 +30,6 @@ ul {
     border: none;
     cursor: pointer;
 }
-
 
 #editBtn{
   position: absolute;
@@ -48,6 +45,7 @@ ul {
   cursor: pointer;
   background-color: transparent;
 }
+
 #deleteBtn {
   position: absolute;
   right: 0;
@@ -77,8 +75,6 @@ ul {
     transition: box-shadow 150ms ease-in-out, background-color 150ms ease-in-out;
     background-color: transparent;
 }
-
-
 
 .title{
     background: none;
