@@ -57,34 +57,46 @@ export class GroupComponent {
   ngOnInit() {
     this.getNotes();
 
-    // checks if name already exists, if not then adds it to array of group names.
-    // also adds a new "false" status of the groups expand.
     if (this._tx._toggleDelete == true) {
-      let toPush = true;
-      for (let content of this._tx._groupNames) {
-        if (this.group.name == content) {
-          toPush = false;
-        }
-      }
-      if (toPush == true) {
-        console.log("Adding group");
-        this._tx._groupNames.push(this.group.name);
-        if (this._tx._groupNames.length > this._tx._groupCount) {
-          this._tx._groupExpandeds.push("false");
-        }
-      }
+      this.initialAddOfGroups();
     } else {
-      if (this._tx._toggleCreate == true) {
-        console.log("inside toPush");
-        this._tx._groupNames.unshift(this.group.name);
-        if (this._tx._groupNames.length > this._tx._groupCount) {
-          this._tx._groupExpandeds.unshift("false");
-        }
-        this._tx._toggleCreate = false;
-      }
+      this.addAnotherGroup();
       this._tx._toggleDelete = true;
     }
 
+    this.updateGroupStatuses();
+  }
+
+  initialAddOfGroups() {
+    // checks if name already exists, if not then adds it to array of group names.
+    // also adds a new "false" status of the groups expand.
+    let toPush = true;
+    for (let content of this._tx._groupNames) {
+      if (this.group.name == content) {
+        toPush = false;
+      }
+    }
+    if (toPush == true) {
+      console.log("Adding group");
+      this._tx._groupNames.push(this.group.name);
+      if (this._tx._groupNames.length > this._tx._groupCount) {
+        this._tx._groupExpandeds.push("false");
+      }
+    }
+  }
+
+  addAnotherGroup() {
+    if (this._tx._toggleCreate == true) {
+      console.log("inside toPush");
+      this._tx._groupNames.unshift(this.group.name);
+      if (this._tx._groupNames.length > this._tx._groupCount) {
+        this._tx._groupExpandeds.unshift("false");
+      }
+      this._tx._toggleCreate = false;
+    }
+  }
+
+  updateGroupStatuses() {
     // updates each group with what status of expand it had before the re-rendering.
     // console.log(this._tx._groupNames.length);
     for (var i = 0; i < this._tx._groupNames.length; i++) {
@@ -244,9 +256,9 @@ export class GroupComponent {
         this.arrowSrc = 'icon_expand.png';
       }
     }
-    for (let content of this._tx._groupNames) {
-      console.log(content);
-    }
+    // for (let content of this._tx._groupNames) {
+    //   console.log(content);
+    // }
     for (var i = 0; i < this._tx._groupNames.length; i++) {
       if (this.group.name == this._tx._groupNames[i]) {
         if (this.expanded == true) {
