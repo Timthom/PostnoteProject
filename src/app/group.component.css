@@ -15,13 +15,18 @@
     background-color: transparent;
     text-align: left;
     cursor: pointer;
-    z-index: -1;
+
 }
 
 
 .groupContainer{
     width: 100%;
-    
+    background: none;
+    border-radius: 2px;
+    height: 45px;
+    outline: none;
+    border: none;
+    cursor: pointer;
 }
 
 .delete_button {
@@ -101,14 +106,7 @@ input{
     display: inline-block;
 }
 
- @-moz-document url-prefix() { 
-   input{
-    height: 40px!important;
-    columns: 12!important;
-    display: inline-block!important;
-}
-    }
-
+ 
 .editingName{
     cursor: text;
     border: 1px solid black;
@@ -148,3 +146,31 @@ input{
 .col-xs-offset-1 {
     margin-left:  10.333%;
 }
+.col-lg-9 {
+    padding: 0;
+    margin: 0 1% 0 1%;
+    width: 20%;                    
+}
+.col-lg-offset-1 {
+    margin-left:  10.333%;
+}
+@-moz-document url-prefix() { 
+        input{
+            height: 40px!important;
+            -moz-columns: 12!important;
+            columns: 12!important;
+            display: inline-block!important;
+            cursor: pointer!important;
+        }
+        .group_name {
+                z-index: -1;
+            }
+            
+           @media all and (min-width: 1200px) {
+
+                .group_name {
+                    z-index: 0;
+                 }
+                
+            }
+    }

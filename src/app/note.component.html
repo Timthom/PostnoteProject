@@ -8,14 +8,14 @@
         (click)="deleteClick()">
     </button>
 
-      <button class="saveButton" [class.saveButtonVisible]="isEditable" 
-      (click)="save()">  
+      <button class="saveButton" [class.saveButtonVisible]="isEditable"
+        (click)="save()">  
       </button>
       <input type="text" (click)="editClick()" [class.selectedNoteTitle]="isEditable"
         [(ngModel)]="title" class="title col-xs-10 col-xs-offset-1"
         maxlength="12" placeholder="Title ...">
 
-      </div>
+    </div>
 
     <div class="row box">
 

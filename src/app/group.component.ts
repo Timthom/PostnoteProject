@@ -42,8 +42,6 @@ export class GroupComponent {
   editingName: boolean = false;
   enableEditIfNull: string = '';
   editSrc: string = 'icon_edit.png';
-  line1: boolean = false;
-  hr: string;
   _authData;
   groupId;
 
@@ -94,19 +92,15 @@ export class GroupComponent {
         if (this._tx._groupExpandeds[i] == "true") {
           this.expanded = true;
           this.arrowSrc = 'icon_hide.png';
+
         } else {
           this.expanded = false;
           this.arrowSrc = 'icon_expand.png';
+
         }
       }
     }
-           //Add an hr div above first groups
-       
-         if (this.group.name == this._tx._groupNames[0]) {
-            this.line1 = true;
-            this.hr = "hr";
-          }
-    
+
   }
 
   saveId() {
@@ -137,7 +131,7 @@ export class GroupComponent {
       });
     } else {
       let notesInGroup = this._ls.getNotesInGroup(this.groupName);
-      for(let content of notesInGroup){
+      for (let content of notesInGroup) {
         arrayOfKeys.push(content.$key);
       }
     }
@@ -274,7 +268,7 @@ export class GroupComponent {
   //Checks if this is the group that was jumped to,
   //in that case calls ngOnInit (refreshes)
   maybeExpand() {
-    if(this.group.name === this._tx._clickedGroup){
+    if (this.group.name === this._tx._clickedGroup) {
       this.ngOnInit();
     }
   }
