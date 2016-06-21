@@ -10,6 +10,7 @@ export class DragulaHelperService {
   _notes: any;
   _authData: any;
   _savedSibling: any;
+  _firstCall = true;
 
   constructor(private _dataservice: DataService, @Inject(FirebaseRef) private _ref: Firebase, private _ls: LocalStorageService, public toastr: ToastsManager) {
     this._authData = this._ref.getAuth();
@@ -196,6 +197,18 @@ export class DragulaHelperService {
         });
       });
     } else {
+      if(this._firstCall) {
+        this._firstCall = false;
+
+        this._ls.deleteNote(noteInNote.$key);
+        let notesInGroup: any = this._ls.getNotesInGroup(group);
+
+      for (var note of notesInGroup) {
+        if (note.position > prevPos) {
+          this._ls.updateNotePosition(note.$key, ((note.position) - 1));
+        }
+      }
+    }
       this._ls.deleteNote(noteInNote.$key);
       let notesInGroup: any = this._ls.getNotesInGroup(group);
 
