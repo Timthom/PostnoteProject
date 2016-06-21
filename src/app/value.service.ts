@@ -10,9 +10,11 @@ export class ValueService {
   _focusedName: string = '';
   _focusedNoteKeys: string[] = [];
   _groupNames: string[] = [];
+  _menuNames: string[] = [];
   _groupExpandeds: string[] = [];
+  _menuExpandeds: string[] = [];
   _groupCount: number = 0;
-  _clickedGroup: string =''; //Group that was jumped to
+  _clickedGroup: string = ''; //Group that was jumped to
 
   constructor() { }
 
@@ -87,4 +89,22 @@ export class ValueService {
   set groupCount(savedNumber: number) {
     this._groupCount = savedNumber;
   }
+
+  // for menu!
+  get menuNames() {
+    return this._menuNames;
+  }
+
+  set menuNames(names: string[]) {
+    this._menuNames = names;
+  }
+
+  get menuExpandeds() {
+    return this._menuExpandeds;
+  }
+
+  set menuExpandeds(names: string[]) {
+    this._menuExpandeds = names;
+  }
 }
+

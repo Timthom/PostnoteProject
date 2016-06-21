@@ -33,11 +33,12 @@ export class MenuGroupComponent implements OnInit {
 
   @Input()
   group;
-  _authData;
-  editSrc: string = 'icon_edit.png';
-
+  
   @Output() groupsChanged = new EventEmitter();
   @Output() closeMenu = new EventEmitter();
+
+  _authData;
+  editSrc: string = 'icon_edit.png';
 
   constructor( @Inject(FirebaseRef) private _ref: Firebase, private _ds: DataService, private _tx: ValueService, private _ls: LocalStorageService) {
 
@@ -63,26 +64,27 @@ export class MenuGroupComponent implements OnInit {
     // checks if name already exists, if not then adds it to array of group names.
     // also adds a new "false" status of the groups expand.
     let toPush = true;
-    for (let content of this._tx._groupNames) {
+    for (let content of this._tx._menuNames) {
       if (this.group.name == content) {
         toPush = false;
       }
     }
     if (toPush == true) {
       console.log("Adding group");
-      this._tx._groupNames.push(this.group.name);
-      if (this._tx._groupNames.length > this._tx._groupCount) {
-        this._tx._groupExpandeds.push("false");
+      this._tx._menuNames.push(this.group.name);
+      console.log(this._tx._menuNames.length);
+      if (this._tx._menuNames.length > this._tx._groupCount) {
+        this._tx._menuExpandeds.push("false");
       }
     }
   }
 
   addAnotherGroup() {
     if (this._tx._toggleCreate == true) {
-      console.log("inside toPush");
-      this._tx._groupNames.unshift(this.group.name);
-      if (this._tx._groupNames.length > this._tx._groupCount) {
-        this._tx._groupExpandeds.unshift("false");
+      console.log("inside toggleCreate method == true");
+      this._tx._menuNames.unshift(this.group.name);
+      if (this._tx._menuNames.length > this._tx._groupCount) {
+        this._tx._menuExpandeds.unshift("false");
       }
       console.log("uffe working in toggleCreate == true");
       this._tx._toggleCreate = false;
@@ -91,10 +93,10 @@ export class MenuGroupComponent implements OnInit {
 
   updateGroupStatuses() {
     // updates each group with what status of expand it had before the re-rendering.
-    // console.log(this._tx._groupNames.length);
-    for (var i = 0; i < this._tx._groupNames.length; i++) {
-      if (this.group.name == this._tx._groupNames[i]) {
-        if (this._tx._groupExpandeds[i] == "true") {
+    // console.log(this._tx._menuNames.length);
+    for (var i = 0; i < this._tx._menuNames.length; i++) {
+      if (this.group.name == this._tx._menuNames[i]) {
+        if (this._tx._menuExpandeds[i] == "true") {
           this.expanded = true;
           this.arrowSrc = 'icon_hide.png';
         } else {
@@ -159,9 +161,9 @@ export class MenuGroupComponent implements OnInit {
       //TEMPORARY
       //location.reload();
     }
+    this._tx._toggleDelete = false;
     this.groupsChanged.emit(''); //Also works for edits!
     // this.toastr.success('Group name updated!');
-    this._tx._toggleDelete = false;
   }
 
   getContent() {
@@ -188,6 +190,7 @@ export class MenuGroupComponent implements OnInit {
 
   //When pressing the edit button, it enables editing on the input field
   editing() {
+    this.saveId();
     this.editingName = !this.editingName;
     if (this.editingName) {
       document.getElementById(this.group.$key).removeAttribute("readonly");
@@ -205,15 +208,15 @@ export class MenuGroupComponent implements OnInit {
           this._ls.changeNoteGroup(note.$key, this.group.name);
         }
       }
-      document.getElementById(this.group.$key).setAttribute("readonly", "true");
       this.updateTX();
+      document.getElementById(this.group.$key).setAttribute("readonly", "true");
       this.editGroup();
-      for (var i = 0; i < this._tx._groupNames.length; i++) {
-        if (this._tx._groupNames[i] == this.group.name) {
-          this._tx._groupExpandeds[i] = "true";
+      for (var i = 0; i < this._tx._menuNames.length; i++) {
+        if (this._tx._menuNames[i] == this.group.name) {
+          this._tx._menuExpandeds[i] = "true";
         }
       }
-      //console.log(this._tx._groupNames.length);
+      //console.log(this._tx._menuNames.length);
       this.getNotes();
       this.editSrc = 'icon_edit.png';
     }
@@ -221,10 +224,13 @@ export class MenuGroupComponent implements OnInit {
 
   // sets the groupname and status to new name with status = true. 
   updateTX() {
-    for (var i = 0; i < this._tx._groupNames.length; i++) {
-      if (this._tx._groupNames[i] == this.group.name) {
-        this._tx._groupNames[i] = this.group.name;
-        this._tx._groupExpandeds[i] = "true";
+    console.log(this.group.name);
+    for (var i = 0; i < this._tx._menuNames.length; i++) {
+      console.log(i);
+      if (this._tx._menuNames[i] == this.group.name) {
+        console.log(this.group.name);
+        this._tx._menuNames[i] = this.group.name;
+        this._tx._menuExpandeds[i] = "true";
       }
     }
   }
@@ -239,18 +245,18 @@ export class MenuGroupComponent implements OnInit {
         this.arrowSrc = 'icon_expand.png';
       }
     }
-    for (var i = 0; i < this._tx._groupNames.length; i++) {
-      if (this.group.name == this._tx._groupNames[i]) {
+    for (var i = 0; i < this._tx._menuNames.length; i++) {
+      if (this.group.name == this._tx._menuNames[i]) {
         if (this._authData != null) {
           if (this.expanded == true) {
-            this._tx._groupExpandeds[i] = "true";
+            this._tx._menuExpandeds[i] = "true";
           } else {
-            this._tx._groupExpandeds[i] = "false";
+            this._tx._menuExpandeds[i] = "false";
           }
         }
       }
     }
-    for (let booleans of this._tx._groupExpandeds) {
+    for (let booleans of this._tx._menuExpandeds) {
       console.log(booleans);
     }
     console.log("*===*");
@@ -268,9 +274,9 @@ export class MenuGroupComponent implements OnInit {
 
   jumpToGroup(group: string) {
     if (this.editSrc == "icon_edit.png") {
-      for (var i = 0; i < this._tx._groupNames.length; i++) {
-        if (this.group.name == this._tx._groupNames[i]) {
-          this._tx._groupExpandeds[i] = "true";
+      for (var i = 0; i < this._tx._menuNames.length; i++) {
+        if (this.group.name == this._tx._menuNames[i]) {
+          this._tx._menuExpandeds[i] = "true";
           console.log("this works?!");
           this.groupsChanged.emit('');
         }
