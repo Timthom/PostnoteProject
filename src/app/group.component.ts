@@ -104,12 +104,15 @@ export class GroupComponent {
         if (this._tx._groupExpandeds[i] == "true") {
           this.expanded = true;
           this.arrowSrc = 'icon_hide.png';
+
         } else {
           this.expanded = false;
           this.arrowSrc = 'icon_expand.png';
+
         }
       }
     }
+
   }
 
   saveId() {

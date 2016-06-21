@@ -89,8 +89,12 @@ export class MenuComponent implements OnInit, CanReuse {
 
 
   jumpToNote(note: string) {
-    var element = document.getElementById(note).offsetTop - (window.innerHeight / 11);
-    window.scrollTo(0, element);
+    this.closeMenu.emit('');
+    setTimeout(function (){
+      var element = document.getElementById(note).offsetTop - (window.innerHeight / 11);
+      window.scrollTo(0, element);
+    },100);
+
   }
 
   toggleInput() {

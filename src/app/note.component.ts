@@ -3,7 +3,6 @@ import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from '@angular/router-
 import {AngularFire} from 'angularfire2';
 import {FirebaseListObservable} from 'angularfire2';
 import {DataService} from './data.service';
-//added
 import {Input, Inject, Injectable} from '@angular/core';
 import {Note} from './note';
 import {DropdownComponent} from './dropdown.component';
@@ -51,7 +50,6 @@ export class NoteComponent implements OnInit {
   noteChanged = new EventEmitter();
 
   _authData;
-  test: any;
 
   ngOnInit() {
     this.colorInit(this.color);
@@ -71,7 +69,7 @@ export class NoteComponent implements OnInit {
   isBlue: boolean = false;
   isYellow: boolean = true;
   isGreen: boolean = false;
-  colorString: string; //for saving event from colorPicker
+  colorString: string;
 
   editClick() {
     this.isEditable = true;
@@ -79,26 +77,24 @@ export class NoteComponent implements OnInit {
   }
 
   save() {
-    if (this.noteSelectedGroup == undefined) { //If no group selected
-      this.noteSelectedGroup = this.group; //use the same one
+    if (this.noteSelectedGroup == undefined) { 
+      this.noteSelectedGroup = this.group; 
     }
     if (this._authData != null) {
       this._ds.updateNoteTitle(this.noteInNote.$key, this.title);
       this._ds.updateNoteText(this.noteInNote.$key, this.text);
-      this._ds.changeNoteGroup(this.noteInNote.$key, this.noteSelectedGroup);//moved
-      if (this.colorString != undefined) { //If new color has been chosen
-        this._ds.updateNoteColor(this.noteInNote.$key, this.colorString);//moved
+      this._ds.changeNoteGroup(this.noteInNote.$key, this.noteSelectedGroup);
+      if (this.colorString != undefined) {
+        this._ds.updateNoteColor(this.noteInNote.$key, this.colorString);
       }
-
-
     } else {
+      this._ls.getAllNotes();
       this._ls.updateNoteTitle(this.noteInNote.$key, this.title);
       this._ls.updateNoteText(this.noteInNote.$key, this.text);
-      this._ls.changeNoteGroup(this.noteInNote.$key, this.noteSelectedGroup);//moved
-      if (this.colorString != undefined) { //If new color has been chosen
-        this._ls.updateNoteColor(this.noteInNote.$key, this.colorString);//moved
+      this._ls.changeNoteGroup(this.noteInNote.$key, this.noteSelectedGroup);
+      if (this.colorString != undefined) { 
+        this._ls.updateNoteColor(this.noteInNote.$key, this.colorString);
       }
-
     }
 
     this.noteChanged.emit('');
@@ -107,10 +103,7 @@ export class NoteComponent implements OnInit {
 
   }
 
-  //Emitted from dropdown
   noteGroupChanged(event) {
-    console.log(`här kommer event ${event}`);
-
     this.noteSelectedGroup = event;
 
     if (this._authData != null) {
@@ -119,15 +112,11 @@ export class NoteComponent implements OnInit {
       Promise.all([getPosInfo, getOldGroupInfo]).then((result) => {
         let prevPos = result[0];
         let oldGroup = result[1];
-        console.log(`prevPos = ${prevPos}, oldGroup = ${oldGroup}, newGroup = ${this.noteSelectedGroup}`);
         this._dragulaHelper.groupChangedByDropDown(oldGroup, this.noteSelectedGroup, prevPos, this.noteInNote.$key);
-        // this._ds.changeNoteGroup(this.noteInNote.$key, this.noteSelectedGroup);
       });
     } else {
       this._dragulaHelper.groupChangedByDropDown(this.group, this.noteSelectedGroup, this._ls.getPositionFromId(this.noteInNote.$key), this.noteInNote.$key);
-      // this._ls.changeNoteGroup(this.noteInNote.$key, this.noteSelectedGroup);
     }
-    //this.noteChanged.emit(''); uppdateras m.h.a. editclick??
   }
 
   colorChanged(event) {
@@ -188,7 +177,6 @@ export class NoteComponent implements OnInit {
     } else {
       o._dragulaHelper.updatePositionsInGroupAndThenDeleteNoteWhenPressingDelete(o.group, o._ls.getPositionFromId(o.noteInNote.$key), o.noteInNote);   
     };
-
     o.noteChanged.emit('');
     this.delete_button = !this.delete_button;
   }

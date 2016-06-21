@@ -180,7 +180,7 @@ export class LocalStorageService {
     getGroupNameFromId(id: string) {
         for (var item in this.notes) {
             if (id == this.notes[item].$key) {
-                return this.notes[item].name;
+                return this.notes[item].group;
             }
         }
     }
@@ -188,18 +188,21 @@ export class LocalStorageService {
     getPositionFromId(id: string) {
           for (var item in this.notes) {
             if (id == this.notes[item].$key) {
+                this.getAllNotes();
                 return this.notes[item].position;
             }
         }
     }
 
     updateNotePosition(id: string, position: number) {
-        for (var item in this.notes) {
+     for (var item in this.notes) {
             if (id == this.notes[item].$key) {
                 this.notes[item].position = position;
                 localStorage.setItem("savedNotes", JSON.stringify(this.notes));
+                this.printAll();
                 return;
             }
         }
     }
 }
+

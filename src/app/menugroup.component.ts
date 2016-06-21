@@ -241,10 +241,12 @@ export class MenuGroupComponent implements OnInit {
     }
     for (var i = 0; i < this._tx._groupNames.length; i++) {
       if (this.group.name == this._tx._groupNames[i]) {
-        if (this.expanded == true) {
-          this._tx._groupExpandeds[i] = "true";
-        } else {
-          this._tx._groupExpandeds[i] = "false";
+        if (this._authData != null) {
+          if (this.expanded == true) {
+            this._tx._groupExpandeds[i] = "true";
+          } else {
+            this._tx._groupExpandeds[i] = "false";
+          }
         }
       }
     }
