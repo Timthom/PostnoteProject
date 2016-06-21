@@ -146,6 +146,7 @@ export class GroupComponent {
   }
 
   deleteGroup() {
+    
     for (var i = 0; i < this._tx._groupNames.length; i++) {
       if (this._tx._focusedName == this._tx._groupNames[i]) {
         this._tx._groupNames.splice(i, 1);
@@ -166,6 +167,7 @@ export class GroupComponent {
       }
       this._ds.deleteGroup(this._tx._focusedId);
     } else {
+      console.log("this could be working");
       for (let note of this._tx._focusedNoteKeys) {
         this._ls.deleteNote(note);
       }

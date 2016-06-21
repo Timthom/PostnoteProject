@@ -148,6 +148,36 @@ export class MenuGroupComponent implements OnInit {
 
     return arrayOfKeys;
   }
+
+  deleteGroup() {
+    for (var i = 0; i < this._tx._groupNames.length; i++) {
+      if (this._tx._focusedName == this._tx._groupNames[i]) {
+        this._tx._groupNames.splice(i, 1);
+        this._tx._groupExpandeds.splice(i, 1);
+        this._tx._toggleDelete = false;
+      }
+    }
+    this._tx._groupCount = this._tx._groupNames.length;
+    for (var item in this.groups) {
+      if (this._tx._focusedId == this.groups[item].$key) {
+        this.groups.splice(item, 1);
+        break;
+      }
+    }
+    if (this._authData != null) {
+      for (let key of this._tx._focusedNoteKeys) {
+        this._ds.deleteNote(key);
+      }
+      this._ds.deleteGroup(this._tx._focusedId);
+    } else {
+      for (let note of this._tx._focusedNoteKeys) {
+        this._ls.deleteNote(note);
+      }
+      this._ls.deleteGroup(this._tx._focusedId);
+    }
+    this.groupsChanged.emit('');
+  }
+
   editing() {
     this.saveId();
     this.editingName = !this.editingName;
