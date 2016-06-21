@@ -168,13 +168,14 @@ export class NoteComponent implements OnInit {
   }
 
   deleteClick() {
+    console.log('inne i delete');
     var o = this;
-
     if (o._authData != null) {
-     
+      console.log('inne i delete online');
       let getIdInfo: any = o._ds.getPositionFromId(o.noteInNote.$key);
       getIdInfo.then(prevPos => o._dragulaHelper.updatePositionsInGroupAndThenDeleteNoteWhenPressingDelete(o.group, prevPos, o.noteInNote));   
     } else {
+      console.log('inne i delete online');
       o._dragulaHelper.updatePositionsInGroupAndThenDeleteNoteWhenPressingDelete(o.group, o._ls.getPositionFromId(o.noteInNote.$key), o.noteInNote);   
     };
     o.noteChanged.emit('');
