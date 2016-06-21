@@ -59,6 +59,7 @@ export class DragulaHelperService {
     });
 
     dragulaService.drop.subscribe((value) => {
+      this.checkconnection();
       let id: string = value[1].attributes[3].nodeValue;
       let group: string;
       if (!value[2].parentElement.parentElement.parentElement.children[2]) {
@@ -178,7 +179,10 @@ export class DragulaHelperService {
   }
 
   updatePositionsInGroupAndThenDeleteNoteWhenPressingDelete(group: string, prevPos: number, noteInNote: any) {
+    this.checkconnection();
+    console.log('inne i delete dragula');
     if (this._authData != null) {
+      console.log('inne i delete dragula online');
       this._dataservice.deleteNote(noteInNote.$key);
       let notesInGroup: any = this._dataservice.getAllNotesInGroup(group);
 
@@ -192,16 +196,21 @@ export class DragulaHelperService {
 
         doneInLoopArray.forEach(function (note) {
           if (note.position > prevPos) {
+            console.log('inne i delete dragula online if');
             self._dataservice.updateNotePosition(note.$key, (note.position - 1));
           }
         });
       });
     } else {
       this._ls.deleteNote(noteInNote.$key);
+      console.log('inne i delete dragula offline');
       let notesInGroup: any = this._ls.getNotesInGroup(group);
 
       for (var note of notesInGroup) {
+        console.log(`inne i for och note:`);
+        console.log(note);
         if (note.position > prevPos) {
+          console.log('inne i delete dragula offline if');
           this._ls.updateNotePosition(note.$key, ((note.position)-1));
         }
       }
@@ -235,6 +244,7 @@ export class DragulaHelperService {
   }
 
   groupChangedByDropDown(oldGroup: string, newgroup: string, prevPos: number, id: string) {
+    this.checkconnection();
     if (this._authData != null) {
       this._dataservice.changeNoteGroup(id, newgroup);
       this._dataservice.updateNotePosition(id, -1);
@@ -290,6 +300,15 @@ export class DragulaHelperService {
     }
     else {
       return false;
+    }
+  }
+
+//This is essential because if you start offline and the n log in authData is still null... Well not anymore...
+  checkconnection () {
+    console.log('inne i checkconnection');
+    if (this._authData != this._ref.getAuth()) {
+      this._dataservice.refresh();
+      this._authData = this._ref.getAuth();
     }
   }
 }
