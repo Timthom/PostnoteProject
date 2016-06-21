@@ -38,12 +38,8 @@ input{
     opacity: 1;
     color: #404040; /* Override IE font color change */   
 }
- @-moz-document url-prefix() { 
-   .title, .group_name { 
-     padding-bottom: 0!important;
-     padding-top: 0!important;
-     }
-    }
+
+  
 
 /*
 * Animation class menu aside
@@ -183,3 +179,24 @@ input{
 	height: 50px;
 	opacity: 0.8;
 }
+
+
+
+/*Gecko mozilla specific pointer*/
+  
+    @-moz-document url-prefix() { 
+       .title, .group_name { 
+          padding-bottom: 0!important;
+          padding-top: 0!important;
+          }
+        input{
+            height: 40px!important;
+            -moz-columns: 12!important;
+            columns: 12!important;
+            display: inline-block!important;
+            cursor: pointer!important;
+        }
+        .group_name {
+                z-index: -1;
+            }
+    }

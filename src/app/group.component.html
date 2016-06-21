@@ -11,7 +11,7 @@
         <button class="collapse_button" [ngClass]="{expandedClass : expanded}">
            <img class="button_image" src="{{arrowSrc}}" alt="submit">
            </button>
-            <input type="text" class="group_name  col-xs-9 col-xs-offset-1 col-lg-9 col-lg-offset-1"
+            <input type="text" class="group_name col-xs-9 col-xs-offset-1 smallInput"
             maxlength="12" [(ngModel)]="groupName" [attr.disabled]="enableEditIfNull"
             [class.editingName]="editingName" (keyup.enter)="editClick()">
     </div>
