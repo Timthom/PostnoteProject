@@ -17,14 +17,16 @@
          {{buttonText}}
        </button>
     <form *ngIf="adding">
-      <input [(ngModel)]="groupName" type="text" id="categoryInput" placeholder="Name"
+      <input class="inputCategory" [(ngModel)]="groupName" type="text" id="categoryInput" placeholder="Name..."
         (keyup.enter)="addGroup()" maxlength="12">
       <button id="plusBtn" type="button" (click)="addGroup()">
         +
       </button>
     </form>
     <hr class="invisibleLine">
+    
     <div *ngIf='_authData == null'>
+     
       <menuGroup *ngFor="let group of myGroups | reverse" [group]="group" (groupsChanged)="groupsChanged(groups)" (closeMenu)="closeMenuMethod()"></menuGroup>
     </div>
     <div *ngIf='_authData != null'>

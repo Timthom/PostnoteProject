@@ -1,21 +1,38 @@
-<div class="groupButtons" *ngIf="expanded">
-    <button id="editBtn" (click)="editing()"><img class="button_image" src="{{editSrc}}" alt="submit"></button>
-    <button id="deleteBtn" (click)="saveId()" data-toggle="modal" data-target="#myModal"><img class="button_image" src="icon_delete.png" alt="submit"></button>
-</div>
-<div id="container">
-    <button id="arrowBtn" [ngClass]="{expandedClass : expanded}" (click)="toggleExpand()"><img class="button_image" src="{{arrowSrc}}" alt="submit"></button>
-    <input readonly class="title" id={{group.$key}} [(ngModel)]="group.name" (keyup.enter)="editing()"
-        [class.editing]="editingName" maxlength="12" (click)="jumpToGroup(group.name)">
-    <ul *ngIf="expanded">
-        <div *ngIf="_authData == null">
-            <p *ngFor="let note of notes | sortNotes" [hidden]="!expanded" (click)="jumpToNote(note.$key)">
-                {{note.title | default: "untitled"}}
-            </p>
+<div style="clear:both">
+    <div *ngIf="expanded">
+        <button id="editBtn" class="col-xs-1" (click)="editing()">
+        <img class="button_image" src="{{editSrc}}" alt="submit">
+        </button>
+        <button id="deleteBtn" class="col-xs-1" (click)="saveId()" data-toggle="modal"
+            data-target="#myModal">
+        <img class="button_image" src="icon_delete.png" alt="submit">
+        </button>
+    </div>
+    <!--1-->
+    <div id="container" class="row">
+        <button id="arrowBtn" class="groupContainer" [ngClass]="{expandedClass : expanded}"
+            (click)="toggleExpand()">
+        <img class="button_image" src="{{arrowSrc}}" alt="submit">
+        </button>
+
+        <input type="text" readonly class=" title col-xs-9 col-xs-offset-1"
+            id={{group.$key}} [(ngModel)]="group.name" (keyup.enter)="editing()"
+            [class.editing]="editingName" maxlength="12" (click)="jumpToGroup(group.name)">
+
+        <div style="clear:both">
+
+            <ul  *ngIf="expanded">
+                <div *ngIf="_authData == null">
+                    <li class="list" *ngFor="let note of notes | sortNotes" [hidden]="!expanded" (click)="jumpToNote(note.$key)">
+                        {{note.title | default: "untitled"}}
+                    </li>
+                </div>
+                <div *ngIf="_authData != null">
+                    <li class="list" *ngFor="let note of notes | async | sortNotes" [hidden]="!expanded"
+                        (click)="jumpToNote(note.$key)">
+                        {{note.title | default: "untitled"}}
+                    </li>
+                </div>
+            </ul>
         </div>
-        <div *ngIf="_authData != null">
-            <p *ngFor="let note of notes | async | sortNotes" [hidden]="!expanded" (click)="jumpToNote(note.$key)">
-                {{note.title | default: "untitled"}}
-            </p>
-        </div>
-    </ul>
-</div>
+        <div style="clear:both">

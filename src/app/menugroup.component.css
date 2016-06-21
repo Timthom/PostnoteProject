@@ -2,45 +2,96 @@ input {
     outline: none;
 }
 
-p {
+ul {
+    -webkit-padding-start: 80px!important;
+    -moz-box-pack: 80px!important;
+    padding-left: 80px!important;
+}
+.list {
+    margin: 4% 0;
+    padding: 4% 0;
     color: #404040;
     cursor: pointer;
+    list-style: none;
+    font-size: 1.4em;
 }
 
 #container{
-    padding-left: 10px;
-    padding-right: 10px;
+  /*  padding-left: 10px;
+    padding-right: 10px;*/
+    margin: 1% 0 1% 0;
 }
-
-#editBtn, #deleteBtn{
-    border: none;
-    outline: none;
-    background-color: transparent;
-}
-
-#arrowBtn{
-    outline: none;
-    background-color: transparent;
-    border: none;
-}
-
-.groupButtons{
-    float: right;
-    display: inline-block;
-}
-
-#editBtn,#deleteBtn{
+/*My try*/
+.groupContainer{
+    position: absolute;
+    width: 100%;
+    background: none;
     border-radius: 2px;
-    transition: background-color 150ms ease-in-out;
+    height: 45px;
+    outline: none;
+    border: none;
+    cursor: pointer;
 }
+
+
+#editBtn{
+  position: absolute;
+  right: 45px;
+  background: none;
+  border-radius: 2px;
+  background-size: 100%;
+  background-position: center; 
+  width: 45px;
+  height: 45px;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+}
+#deleteBtn {
+  position: absolute;
+  right: 0;
+  background: none;
+  border-radius: 2px;
+  background-size: 100%;
+  background-position: center; 
+  width: 45px;
+  height: 45px;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+}
+
+#arrowBtn{  
+    border-radius: 2px;
+    left: -3px;
+    background: none;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: center; 
+    width: 45px;
+    height: 45px;
+    outline: none;
+    border: none;
+    transition: box-shadow 150ms ease-in-out, background-color 150ms ease-in-out;
+    background-color: transparent;
+}
+
+
 
 .title{
     background: none;
     border: none;
     color: #404040;
     cursor: pointer;
-    width: 55%;
-    font-size: large;
+    outline: none;
+    font-size:  1.6em;
+    height: 45px;
+    display: inline-block;
+    color: #404040;
+    background-color: transparent;
+    text-align: left;
 }
 
 .editing {
@@ -52,7 +103,16 @@ p {
 }
 
 .button_image{
-    width: 22px;
-    height: 22px;
+   height: 35px;
+   width: 35px;
 }
 
+.col-xs-9 {
+    padding: 0;
+    margin: 0 1% 0 1%;
+    width: 50%;
+}
+.col-xs-offset-1 {
+    padding: 0;
+    margin: 0 1% 0 15.333333%;
+}
