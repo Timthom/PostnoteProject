@@ -189,7 +189,6 @@ export class LocalStorageService {
           for (var item in this.notes) {
             if (id == this.notes[item].$key) {
                 this.getAllNotes();
-                console.log("IF OCH POSITION ÄR : " + this.notes[item].title + " " + this.notes[item].position);
                 return this.notes[item].position;
             }
         }
@@ -198,20 +197,12 @@ export class LocalStorageService {
     updateNotePosition(id: string, position: number) {
      for (var item in this.notes) {
             if (id == this.notes[item].$key) {
-                console.log("update position for " + this.notes[item].title);
-                console.log(this.notes[item].title + this.notes[item].position);
                 this.notes[item].position = position;
-                console.log(this.notes[item].title + this.notes[item].position);
                 localStorage.setItem("savedNotes", JSON.stringify(this.notes));
                 this.printAll();
                 return;
             }
         }
     }
-
-    // saveNotes (){
-    //     localStorage.setItem("savedNotes", JSON.stringify(this.notes));
-    // }
-
 }
 

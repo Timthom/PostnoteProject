@@ -108,7 +108,6 @@ export class CreatorComponent {
         }
 
         this._dragulaHelper.updatePositionsInGroup(group);
-        // this.getNotes(); //Update view // dont need it since calles fix...
         this.categoriesVisible = false;
 
         if (group == "noGroup") {
@@ -116,12 +115,6 @@ export class CreatorComponent {
         } else {
             this.toastr.success('A new note was created in ' + group);
         }
-
-        //         console.log('ADD: här kommer alla i noGroup');
-        // let tempNotes = this._ls.getNotesInGroup('noGroup');
-        // for (let note of tempNotes) {
-        //   console.log(`note.title = ${note.title}, note.position = ${note.position}`);
-        // }
     }
 
     open() {
