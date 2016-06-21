@@ -114,6 +114,14 @@ input{
     border-radius: 2px;
     z-index: 10;
 }
+.col-xs-9 {
+    padding: 0;
+    margin: 0 1% 0 1%;
+    width: 64%;
+}
+.col-xs-offset-1 {
+    margin-left:  10.333%;
+}
 
 /*Modal css*/
 #rigth-button{
@@ -138,23 +146,14 @@ input{
     float: right;
 }
 
-.col-xs-9 {
-    padding: 0;
-    margin: 0 1% 0 1%;
-    width: 64%;
-}
-.col-xs-offset-1 {
-    margin-left:  10.333%;
-}
-.col-lg-9 {
-    padding: 0;
-    margin: 0 1% 0 1%;
-    width: 20%;                    
-}
-.col-lg-offset-1 {
-    margin-left:  10.333%;
-}
-@-moz-document url-prefix() { 
+
+/*Gecko mozilla specific pointer*/
+  
+    @-moz-document url-prefix() { 
+       .title, .group_name { 
+          padding-bottom: 0!important;
+          padding-top: 0!important;
+          }
         input{
             height: 40px!important;
             -moz-columns: 12!important;
@@ -163,14 +162,19 @@ input{
             cursor: pointer!important;
         }
         .group_name {
-                z-index: -1;
+                z-index: -1!important;
             }
-            
-           @media all and (min-width: 1200px) {
-
-                .group_name {
-                    z-index: 0;
-                 }
-                
-            }
+    }
+           @media all and (min-width: 1200px) { 
+                    @-moz-document url-prefix() { 
+                                .group_name {
+                                    z-index: 0!important;
+                                }
+                                .smallInput {
+                                    padding: 0!important;
+                                    margin: 0 1% 0 10.333%!important;
+                                    width: 20%!important;                    
+                                }
+                        
+                        }
     }
