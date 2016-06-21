@@ -90,7 +90,7 @@ export class Postnote2App implements OnInit, AfterViewInit{
             this.menuComponent.getGroups();
         }
         
-       
+       console.log("testing testing!");
     }
     addGroup() {
         this.getGroups();
@@ -126,6 +126,12 @@ export class Postnote2App implements OnInit, AfterViewInit{
         var color = colors[Math.floor(Math.random()*colors.length)];
 
         return color;
+    }
+
+    scrollEmit(group : any) {
+        this.toggleSideBar();
+        this.groupComponents.toArray().forEach((child)=>child.maybeExpand());
+
     }
 
 }

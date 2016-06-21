@@ -23,7 +23,7 @@ export class AuthorizationService {
             password: user.password
         }, function(error, userData) {
             if (error) {
-                that.toastr.error("The email address is already exists. Choose another one!", "Error!");
+                that.toastr.error("This email address already exists. Choose another one.");
                 that.userExists = false;
             } else {
                 that.toastr.success("Your account has been successfully created!", "Success!");
@@ -45,12 +45,12 @@ export class AuthorizationService {
         },  function(error, authData) {
             
             if (error) {
-                that.toastr.warning("Wrong username or password. Please try again!", "Alert!");
+                that.toastr.warning("Wrong username or password. Please try again.");
             
             } else {
                 localStorage.setItem('token', authData.token);
                   
-                that.toastr.info("Welcome, you are now logged in to your account!");
+                that.toastr.info("You are now signed in to your account!", "Welcome");
                 
                 var d = new Date();
                 var n = d.getTime();
@@ -85,7 +85,7 @@ export class AuthorizationService {
                     // automatically when we come back to the origin page
                     ref.authWithOAuthRedirect("facebook", function(error) {
 
-                    that.toastr.info("Welcome, you are now logged in with " + authData.provider + "!");
+                    that.toastr.info("You are now signed in with " + authData.provider, "Welcome");
                              
                     localStorage.setItem('token', authData.token);
                 
@@ -109,7 +109,7 @@ export class AuthorizationService {
             
             else if(authData) {
 
-                that.toastr.info("Welcome, you are now logged in with " + authData.provider + "!");
+                that.toastr.info("You are now logged in with " + authData.provider, "Welcome");
 
                 localStorage.setItem('token', authData.token);
                 
@@ -147,7 +147,7 @@ export class AuthorizationService {
                     // automatically when we come back to the origin page
                     ref.authWithOAuthRedirect("google", function(error) {
 
-                    that.toastr.info("Welcome, you are now logged in with " + authData.provider + "!");
+                    that.toastr.info("You are now logged in with " + authData.provider, "Welcome");
                              
                     localStorage.setItem('token', authData.token);
                 
@@ -171,7 +171,7 @@ export class AuthorizationService {
             
             else if(authData) {
 
-                that.toastr.info("Welcome, you are now logged in with " + authData.provider + "!");
+                that.toastr.info("You are now logged in with " + authData.provider, "Welcome");
 
                 localStorage.setItem('token', authData.token);
                 
@@ -209,7 +209,7 @@ export class AuthorizationService {
                     // automatically when we come back to the origin page
                     ref.authWithOAuthRedirect("twitter", function(error) {
 
-                    that.toastr.info("Welcome, you are now logged in with " + authData.provider + "!");
+                    that.toastr.info("You are now logged in with " + authData.provider, "Welcome");
                              
                     localStorage.setItem('token', authData.token);
                 
@@ -233,7 +233,7 @@ export class AuthorizationService {
             
             else if(authData) {
 
-                that.toastr.info("Welcome, you are now logged in with " + authData.provider + "!");
+                that.toastr.info("You are now logged in with " + authData.provider, "Welcome");
 
                 localStorage.setItem('token', authData.token);
                 
@@ -271,7 +271,7 @@ export class AuthorizationService {
                     // automatically when we come back to the origin page
                     ref.authWithOAuthRedirect("github", function(error) {
 
-                    that.toastr.info("Welcome, you are now logged in with " + authData.provider + "!");
+                    that.toastr.info("You are now logged in with " + authData.provider, "Welcome");
                              
                     localStorage.setItem('token', authData.token);
                 
@@ -295,7 +295,7 @@ export class AuthorizationService {
             
             else if(authData) {
 
-                that.toastr.info("Welcome, you are now logged in with " + authData.provider + "!");
+                that.toastr.info("You are now logged in with " + authData.provider, "Welcome");
 
                 localStorage.setItem('token', authData.token);
                 

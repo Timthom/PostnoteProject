@@ -12,6 +12,7 @@ export class ValueService {
   _groupNames: string[] = [];
   _groupExpandeds: string[] = [];
   _groupCount: number = 0;
+  _clickedGroup: string =''; //Group that was jumped to
 
   constructor() { }
 

@@ -99,10 +99,10 @@ export class CreatorComponent {
 
         if (this._authData != null) {
             console.log(`inne i save med group = ${group}`);
-            this._ds.addNoteToNotes("new note", "", group, time, this.randomColor(), -1);
+            this._ds.addNoteToNotes("", "", group, time, this.randomColor(), -1);
 
         } else {
-            let newNote = new Note("new note", "", group, time.toString(), this.randomColor(), -1);
+            let newNote = new Note("", "", group, time.toString(), this.randomColor(), -1);
             this._ls.addNoteToNotes(newNote);
             this.notesChanged.emit('');
         }
