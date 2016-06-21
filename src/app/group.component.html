@@ -2,7 +2,8 @@
     <button [hidden]="!expanded" class="edit_button col-xs-1" id="{{editBtn}}" (click)="editClick()" (click)="saveId()">
            <img class="button_image" src="{{editSrc}}" alt="submit">
            </button>
-    <button [hidden]="!expanded" class="delete_button col-xs-1" id="{{deleteBtn}}" *ngIf="groupName" (click)="saveId()">
+    <button [hidden]="!expanded" class="delete_button col-xs-1" id="{{deleteBtn}}"
+        *ngIf="groupName" (click)='saveId()'>
            <img class="button_image" src="icon_delete.png" alt="submit" data-toggle="modal" data-target="#myModal">
            </button>
     <div class="groupContainer row" id={{groupName}} (click)="groupExpand()">
