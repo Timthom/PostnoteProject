@@ -57,13 +57,14 @@ export class DragulaHelperService {
     });
 
     dragulaService.drop.subscribe((value) => {
+
       this.checkconnection();
       let id: string = value[1].attributes[3].nodeValue;
       let group: string;
-      if (!value[2].parentElement.parentElement.parentElement.children[2]) {
+      if (value[2].parentElement.parentElement.parentElement.parentElement.parentElement.children[2].id === "") {
         group = 'noGroup'
       } else {
-        group = value[2].parentElement.parentElement.parentElement.children[2].firstElementChild.id;
+        group = value[2].parentElement.parentElement.parentElement.parentElement.parentElement.children[2].id;
       }
 
       if (this._authData != null) {
