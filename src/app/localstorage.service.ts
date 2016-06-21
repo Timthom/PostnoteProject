@@ -199,7 +199,6 @@ export class LocalStorageService {
             if (id == this.notes[item].$key) {
                 this.notes[item].position = position;
                 localStorage.setItem("savedNotes", JSON.stringify(this.notes));
-                this.printAll();
                 return;
             }
         }
