@@ -1,7 +1,5 @@
-.line {
-   
+.line { 
     border: 0;
-    margin-top: 8px;
     margin-left: 10px;
     margin-right: 10px;
     height: 1px;
@@ -11,27 +9,41 @@
 .group_name {
     border: none;
     outline: none;
-    font-size: 25px;
+    font-size:  1.6em;
     display: inline-block;
     color: #404040;
     background-color: transparent;
     text-align: left;
     cursor: pointer;
+
 }
 
 
 .groupContainer{
     width: 100%;
+    background: none;
+    border-radius: 2px;
+    height: 45px;
+    outline: none;
+    border: none;
+    cursor: pointer;
 }
 
 .delete_button {
-    border: none;
-    outline: none;
-    /*visibility: hidden;*/
-    background-color: transparent;
-    margin-left: 0em;
-    float: right;
+  position: absolute;
+  right: 0;
+  background: none;
+  border-radius: 2px;
+  background-size: 100%;
+  background-position: center; 
+  width: 45px;
+  height: 45px;
+  outline: none;
+  border: none;
+  cursor: pointer;
 }
+
+
 
 /*.ifButtons{
     float: right;
@@ -40,11 +52,17 @@
 }*/
 
 .edit_button{
-    border: none;
-    outline: none;
-    /*visibility: hidden;*/
-    background-color: transparent;
-    float: right;
+  position: absolute;
+  right: 45px;
+  background: none;
+  border-radius: 2px;
+  background-size: 100%;
+  background-position: center; 
+  width: 45px;
+  height: 45px;
+  outline: none;
+  border: none;
+  cursor: pointer;
 }
 
 /*.col-xs-4 {
@@ -63,28 +81,38 @@ note .noteContainer {
  float: left;
 }
 .collapse_button{
-    float: left;
-    border: none;
+    border-radius: 2px;
+    position: absolute;
+    left: -3px;
+    background: none;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: center; 
+    width: 45px;
+    height: 45px;
     outline: none;
+    border: none;
+    transition: box-shadow 150ms ease-in-out, background-color 150ms ease-in-out;
     background-color: transparent;
 }
+
 .button_image{
-    margin-top: 10px;
-    height: 30px;
-    width: 30px;
+   height: 35px;
+   width: 35px; 
 }
 
 input{
     height: 40px;
-    columns: 12;
     display: inline-block;
 }
 
+ 
 .editingName{
     cursor: text;
     border: 1px solid black;
     background-color: white;
     border-radius: 2px;
+    z-index: 10;
 }
 
 /*Modal css*/
@@ -110,3 +138,39 @@ input{
     float: right;
 }
 
+.col-xs-9 {
+    padding: 0;
+    margin: 0 1% 0 1%;
+    width: 64%;
+}
+.col-xs-offset-1 {
+    margin-left:  10.333%;
+}
+.col-lg-9 {
+    padding: 0;
+    margin: 0 1% 0 1%;
+    width: 20%;                    
+}
+.col-lg-offset-1 {
+    margin-left:  10.333%;
+}
+@-moz-document url-prefix() { 
+        input{
+            height: 40px!important;
+            -moz-columns: 12!important;
+            columns: 12!important;
+            display: inline-block!important;
+            cursor: pointer!important;
+        }
+        .group_name {
+                z-index: -1;
+            }
+            
+           @media all and (min-width: 1200px) {
+
+                .group_name {
+                    z-index: 0;
+                 }
+                
+            }
+    }
